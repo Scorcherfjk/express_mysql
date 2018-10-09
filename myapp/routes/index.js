@@ -17,6 +17,10 @@ var con = mysql.createConnection(config());
 /********************************************             INDEX              ****************************************************************************/
 
 router.get('/', function(req, res, next) {
+    if (con){
+        con.destroy();
+        console.log("conexion destruida");
+    }
     req.session.destroy( function (err) {
       if(err){
         console.log(err);
@@ -275,6 +279,8 @@ router.post('/editar-proyecto' ,function(req, res, next) {
 
 router.post('/validation', function(req, res) {
 
+    var con = mysql.createConnection(config());
+
     var user = req.body.user;
     var passwd = req.body.passwd;
     
@@ -289,7 +295,7 @@ router.post('/validation', function(req, res) {
 
         var sql = 'SELECT id_usuario, nombres, apellido_paterno, usuario, clave from usuario';
 
-        con.query(sql, function (err, result, fields) {
+        con.query(sql, function (err, result) {
             if (err) {
                 console.log("linea 289: query... " + err);
                 return;
@@ -321,6 +327,8 @@ router.post('/validation', function(req, res) {
 /* REGISTRO DE NUEVO USUARIO *******************************************************************************************************************************/
 
 router.post("/validation/new-user", function (req,res) {
+
+    var con = mysql.createConnection(config());
 
     var tipo_documento = req.body.tipo_documento;
     var documento_identidad = req.body.documento_identidad;
@@ -367,7 +375,6 @@ router.post("/validation/new-user", function (req,res) {
         con.end();
     });
 });
-
 
 /* CARGA DEL PROYECTO NUEVO *******************************************************************************************************************************/
 
@@ -1281,7 +1288,7 @@ router.post('/validation/editar-proyecto', function(req, res) {
 /*******************************************             FILTERING          ****************************************************/
 
 router.get('/validation', function(req,res){
-  res.redirect("/");
+    res.redirect("/");
 });
 
 router.get('/validation/cargar-proyecto', function(req,res){
