@@ -1,13 +1,10 @@
 exports.config = function () {
     var config = {
-        userName: 'sa',
-        password: 'rockwell',
-        server: 'W2K12XPOC',
-        
-        options: {
-            encrypt: false,
-            database: 'unjfsc'
-        }
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "unjfsc",
+        port: 3306
     };
     return config;
 };
