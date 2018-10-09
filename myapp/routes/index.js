@@ -4,13 +4,6 @@ var config = require('../models/database').config;
 var bcrypt = require('bcrypt');
 var mysql = require('mysql');
 
-function conexion(con) {
-    con.connect(function(err) {
-        if (err) throw err;
-        console.log("Connected!");
-    });
-}
-
 var con = mysql.createConnection(config());
 
 
@@ -76,11 +69,12 @@ router.get('/change-password' ,function(req, res, next) {
   }
 });
 
+/*** MODIFICAR ***/
 router.post('/validation/change-password' ,function(req, res, next) {
     if(req.session.user){
 
-        var sql = `UPDATE [unjfsc].[dbo].[usuario]
-                SET [clave] = @clave
+        var sql = `UPDATE usuario
+                SET clave = @clave
                 WHERE id_usuario = @id_usuario`;
 
         var request = new Request(sql, function(err) {
@@ -104,42 +98,39 @@ router.post('/validation/change-password' ,function(req, res, next) {
 router.get('/change-data' ,function(req, res, next) {
     if(req.session.user){
         
-        var sql = 'SELECT TOP 1 * from unjfsc.dbo.usuario WHERE id_usuario = @id_usuario';
-        var result = {};
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
 
-        var request = new Request(sql, function(err) {
-            if (err) {
-                console.log(err);
-            }
-            if(!req.session.user){
-                console.log(req.session.user);
-                res.redirect("/");
-            } else {
-                res.render('changeData', { 
-                    title: "Cambio de Datos", 
-                    usuario: req.session.user,
-                    lista: result
-                });
-            }
+        con.connect(function(err) {
+            if (err) console.log(err);
+            else console.log("CONECTADO!");
+
+            var sql = 'SELECT  * from usuario WHERE id_usuario = ? LIMIT 1';
+    
+            con.query(sql, [req.session.user.id], function (err, result) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                if(!req.session.user){
+                    console.log(req.session.user);
+                    res.redirect("/");
+                } else {
+                    res.render('changeData', { 
+                        title: "Cambio de Datos", 
+                        usuario: req.session.user,
+                        lista: result[0]
+                    });
+                }
+            });
+            con.end();
         });
-
-        request.addParameter("id_usuario" ,    TYPES.Int,    req.session.user.id);
-
-        request.on("row", function (columns) { 
-            var item = {}; 
-            columns.forEach(function (column) { 
-                item[column.metadata.colName] = column.value; 
-            }); 
-            result = item;
-        });
-
-        conn.execSql(request);
-
     } else {
         res.redirect("/");
     }
 });
 
+/*** MODIFICAR ***/
 router.post('/validation/change-data' ,function(req, res, next) {
     if(req.session.user){
         
@@ -180,7 +171,7 @@ router.post('/validation/change-data' ,function(req, res, next) {
 });
 
 /* ADMINISTRACION DE LOS PROYECTOS **************************************************************************************************************************** */
-
+/*** MODIFICAR ***/
 router.get('/administrar' ,function(req, res, next) {
     if(req.session.user){
 
@@ -221,7 +212,7 @@ router.get('/administrar' ,function(req, res, next) {
 });
 
 /* CREACION DE UN NUEVO PROYECTO ********************************************************************************************************************************** */
-
+/*** MODIFICAR ***/
 router.post('/editar-proyecto' ,function(req, res, next) {
     if(req.session.user){
         
@@ -285,19 +276,14 @@ router.post('/validation', function(req, res) {
     var passwd = req.body.passwd;
     
     con.connect(function(err) {
-        if (err) {
-            console.log("linea 282: conexion... " + err);
-            return;
-        }else{
-            console.log("CONECTADO!");
-        }
-        
-
+        if (err) console.log(err);
+        else console.log("CONECTADO!");
+    
         var sql = 'SELECT id_usuario, nombres, apellido_paterno, usuario, clave from usuario';
 
         con.query(sql, function (err, result) {
             if (err) {
-                console.log("linea 289: query... " + err);
+                console.log(err);
                 return;
             }else{
                 var resultado = result;
@@ -309,15 +295,13 @@ router.post('/validation', function(req, res) {
                             console.log("Acceso concedido");
                         }
                     }
-                }else{
-                   console.log('usuario no encontrado');
                 }
-            }
-            if(!req.session.user){
-                console.log(req.session.user);
-                res.redirect("/");
-            } else {
-                res.redirect('/inicio');
+                if(!req.session.user){
+                    console.log(req.session.user);
+                    res.redirect("/");
+                } else {
+                    res.redirect('/inicio');
+                }
             }
         });
         con.end();
@@ -352,7 +336,7 @@ router.post("/validation/new-user", function (req,res) {
     
     con.connect(function(err) {
         if (err) throw err;
-        console.log("CONECTADO!");
+        else console.log("CONECTADO!");
 
         var sql = "INSERT INTO usuario (tipo_documento, documento_identidad, nombres, apellido_paterno, apellido_materno, genero, pais, departamento, provincia, distrito, direccion, fecha_nacimiento, telefono_movil, telefono_fijo, email, email2, estatus, usuario, clave) VALUES (?)";
         
@@ -377,7 +361,7 @@ router.post("/validation/new-user", function (req,res) {
 });
 
 /* CARGA DEL PROYECTO NUEVO *******************************************************************************************************************************/
-
+/*** MODIFICAR ***/
 router.post('/validation/nuevo', function(req, res) {
 
     
@@ -420,7 +404,7 @@ router.post('/validation/nuevo', function(req, res) {
 });
 
 /* CARGA DEL PROYECTO NUEVO *********************************************************************************************************************/
-
+/*** MODIFICAR ***/
 router.post('/validation/editar-proyecto', function(req, res) {
 
     var sql = `UPDATE [unjfsc].[dbo].[proyectos] 
@@ -1300,7 +1284,7 @@ router.get('/validation/new-user', function(req,res){
 });
 
 /*******************************************************************************************************************************/
-
+/*** MODIFICAR ***/
 router.post('/visualizar', function(req, res, next) {
     var conversion = require("phantom-html-to-pdf")();
     var pdf = require('../models/pdf').pdf;
