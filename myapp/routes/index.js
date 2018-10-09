@@ -277,36 +277,45 @@ router.post('/validation', function(req, res) {
 
     var user = req.body.user;
     var passwd = req.body.passwd;
-    var sql = 'SELECT id_usuario, nombres, apellido_paterno, usuario, clave from unjfsc.dbo.usuario';
-    var result = [];
-
-    var request = new Request(sql, function(err) {
+    
+    con.connect(function(err) {
         if (err) {
-            console.log(err);
+            console.log("linea 282: conexion... " + err);
+            return;
+        }else{
+            console.log("CONECTADO!");
         }
-        for (let i = 0; i < result.length; i++) {
-            var valor = result[i];
-            if( user == valor.usuario && bcrypt.compareSync(passwd, valor.clave)){
-                req.session.user = { nombre: valor.nombres , apellido: valor.apellido_paterno , id: valor.id_usuario };
-                console.log("Acceso concedido");
-            }
-        }
-        if(!req.session.user){
-            console.log(req.session.user);
-            res.redirect("/");
-        } else {
-            res.redirect('/inicio');
-        }
-    });
-    request.on("row", function (columns) { 
-        var item = {}; 
-        columns.forEach(function (column) { 
-            item[column.metadata.colName] = column.value; 
-        }); 
-        result.push(item);
-    });
+        
 
-    conn.execSql(request);
+        var sql = 'SELECT id_usuario, nombres, apellido_paterno, usuario, clave from usuario';
+
+        con.query(sql, function (err, result, fields) {
+            if (err) {
+                console.log("linea 289: query... " + err);
+                return;
+            }else{
+                var resultado = result;
+                if(resultado.length > 0){
+                    for (let i = 0; i < resultado.length; i++) {
+                        var valor = resultado[i];
+                        if( user == valor.usuario && bcrypt.compareSync(passwd, valor.clave)){
+                            req.session.user = { nombre: valor.nombres , apellido: valor.apellido_paterno , id: valor.id_usuario };
+                            console.log("Acceso concedido");
+                        }
+                    }
+                }else{
+                   console.log('usuario no encontrado');
+                }
+            }
+            if(!req.session.user){
+                console.log(req.session.user);
+                res.redirect("/");
+            } else {
+                res.redirect('/inicio');
+            }
+        });
+        con.end();
+    });
 });
 
 /* REGISTRO DE NUEVO USUARIO *******************************************************************************************************************************/
@@ -333,30 +342,30 @@ router.post("/validation/new-user", function (req,res) {
     var usuario = req.body.email;
     var clave = bcrypt.hashSync(req.body.clave,10);
     
-   con.connect(function(err) {
-    if (err) throw err;
-    console.log("CONECTADO!");
+    con.connect(function(err) {
+        if (err) throw err;
+        console.log("CONECTADO!");
 
-    var sql = "INSERT INTO usuario (tipo_documento, documento_identidad, nombres, apellido_paterno, apellido_materno, genero, pais, departamento, provincia, distrito, direccion, fecha_nacimiento, telefono_movil, telefono_fijo, email, email2, estatus, usuario, clave) VALUES (?)";
-    
-    var values = [tipo_documento, documento_identidad, nombres, apellido_paterno, apellido_materno, genero, pais, departamento, provincia, distrito, direccion, fecha_nacimiento, telefono_movil, telefono_fijo, email, email2, estatus, usuario, clave];
+        var sql = "INSERT INTO usuario (tipo_documento, documento_identidad, nombres, apellido_paterno, apellido_materno, genero, pais, departamento, provincia, distrito, direccion, fecha_nacimiento, telefono_movil, telefono_fijo, email, email2, estatus, usuario, clave) VALUES (?)";
+        
+        var values = [tipo_documento, documento_identidad, nombres, apellido_paterno, apellido_materno, genero, pais, departamento, provincia, distrito, direccion, fecha_nacimiento, telefono_movil, telefono_fijo, email, email2, estatus, usuario, clave];
 
-    con.query(sql, [values], function (err, result) {
-        if (err) {
-            console.log(err);
-        }else{
-            req.session.user = usuario;
-            console.log("Acceso concedido");
-        }
-        if(!req.session.user){
-            console.log(req.session.user);
-            res.redirect("/");
-        } else {
-            res.redirect('/inicio');
-        }
+        con.query(sql, [values], function (err, result) {
+            if (err) {
+                console.log(err);
+            }else{
+                req.session.user = usuario;
+                console.log("Acceso concedido");
+            }
+            if(!req.session.user){
+                console.log(req.session.user);
+                res.redirect("/");
+            } else {
+                res.redirect('/inicio');
+            }
+        });
+        con.end();
     });
-    con.end();
-  });
 });
 
 
