@@ -1,0 +1,1680 @@
+extends tabs
+
+block A
+  - function addZero(i) { if (i < 10) { i = '0' + i; } return i; }
+  - function fecha(i){ if (i != null) { var dd = i.getDate(); var mm = i.getMonth()+1; var yyyy = i.getFullYear(); dd = addZero(dd); mm = addZero(mm); return yyyy+'-'+mm+'-'+dd; }else { return i;} }
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | A.1 - Datos generales del proyecto
+    .card-body
+      .form-group
+        label.h6(for='titulo') A.1.1 - Titulo
+          span.text-danger  (*)
+        textarea#titulo.form-control(rows='3' name="titulo") #{lista.titulo}
+        input(type="hidden", name="id_proyecto" value=lista.id_proyecto)
+      .form-group
+        label.h6(for='palabrasClave') A.1.2 - Palabras clave
+          span.text-danger  (*)
+        textarea#palabrasClave.form-control(rows='3' name="palabrasClave") #{lista.palabras_clave}
+      h6 A.1.3 - Area de innovacion
+      .table-responsive
+        table.table.table-bordered.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th Area
+              th Sub-area
+              th Area tematica
+          tbody
+            tr
+              td: input#area_innovacion_area.form-control(type="text" name="area_innovacion_area" value=lista.area_innovacion_area)
+              td: input#area_innovacion_subarea.form-control(type="text" name="area_innovacion_subarea" value=lista.area_innovacion_subarea)
+              td: input#area_innovacion_tematica.form-control(type="text" name="area_innovacion_tematica" value=lista.area_innovacion_tematica)
+      h6 A.1.4 - actividad economica en la que se aplicara la innovacion
+      .table-responsive
+        table.table.table-bordered.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th Area de aplicacion
+              th Sub-area de aplicacion
+          tbody
+            tr
+              td: input#aplicacion_area.form-control(type="text" name="aplicacion_area" value=lista.aplicacion_area)
+              td: input#aplicacion_subarea.form-control(type="text" name="aplicacion_subarea" value=lista.aplicacion_subarea)
+      h6 A.1.5 - localizacion del proyecto
+      .table-responsive
+        table.table.table-bordered.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th Departamento
+              th Provincia
+              th Distrito
+              th Ubigeo
+          tbody
+            tr
+              td: input#localizacion_departamento.form-control(type="text" name="localizacion_departamento" value=lista.localizacion_departamento)
+              td: input#localizacion_provincia.form-control(type="text" name="localizacion_provincia" value=lista.localizacion_provincia)
+              td: input#localizacion_distrito.form-control(type="text" name="localizacion_distrito" value=lista.localizacion_distrito)
+              td: input#localizacion_ubigeo.form-control(type="number" name="localizacion_ubigeo" value=lista.localizacion_ubigeo)
+      .form-group
+        label.h6(for='duracionDelProyecto') A.1.6 - Duracion del proyecto
+          span.text-danger  (*)
+        input#duracionDelProyecto.form-control(type='number' name="duracionDelProyecto" value=lista.duracion_proyecto)
+      .form-group
+        label.h6(for='fechaEstimadaDeInicioDelProyecto')
+          | A.1.7 - Fecha estimada de inicio del proyecto
+          span.text-danger  (*)
+        input#fechaEstimadaDeInicioDelProyecto.form-control(type='date' name="fechaEstimadaDeInicioDelProyecto" value=fecha(lista.fecha_estimada_inicio))
+      h6 A.1.8 - Datos del coordinador general del proyecto
+      .row
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='cgptipoDeDocumento') Tipo de documento
+              span.text-danger  (*)
+            select#cgptipoDeDocumento.form-control(name="cgptipoDeDocumento" value=lista.cgp_tipo_documento)
+              option(value="0") -----
+              option(value='1') CARNET DE EXTRANJERIA
+              option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+              option(value='3') PASAPORTE
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='cgpnumeroDeDocumento') Numero de documento
+              span.text-danger  (*)
+            input#cgpnumeroDeDocumento.form-control(type='number' name="cgpnumeroDeDocumento" value=lista.cgp_nro_documento)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='cgpruc') RUC
+            input#cgpruc.form-control(type='number' name="cgpruc" value=lista.cgp_ruc)
+      .row
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='cgpnombresYApellidos') Nombres y Apellidos
+              span.text-danger  (*)
+            input#cgpnombresYApellidos.form-control(type='text' name="cgpnombresYApellidos" value=lista.cgp_nombre)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='cgpfechaDeNacimiento') fecha de nacimiento
+              span.text-danger  (*)
+            input#cgpfechaDeNacimiento.form-control(type='date' name="cgpfechaDeNacimiento" value=fecha(lista.cgp_fecha_nac))
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='cgpsexo') sexo
+              span.text-danger  (*)
+            select#cgpsexo.form-control(name="cgpsexo" value=lista.cgp_sexo)
+              option(value="0" selected) -----
+              option(value='1') Femenino
+              option(value='2') Masculino
+      .row
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='cgpemail') Correo electronico
+              span.text-danger  (*)
+            input#cgpemail.form-control(type='email' name="cgpemail" value=lista.cgp_email)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='cgptelefono') Telefono
+            input#cgptelefono.form-control(type='number' name="cgptelefono" value=lista.cgp_telefono)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='cgpcelular') Celular
+              span.text-danger  (*)
+            input#cgpcelular.form-control(type='number' name="cgpcelular" value=lista.cgp_celular)
+      h6 A.1.9 - Datos del coordinador administrativo del proyecto
+      .row
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='captipoDeDocumento') Tipo de documento
+              span.text-danger  (*)
+            select#captipoDeDocumento.form-control(name="captipoDeDocumento" value=lista.cap_tipo_documento)
+              option(value="0" selected) -----
+              option(value='1') CARNET DE EXTRANJERIA
+              option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+              option(value='3') PASAPORTE
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='capnumeroDeDocumento') Numero de documento
+              span.text-danger  (*)
+            input#capnumeroDeDocumento.form-control(type='number' name="capnumeroDeDocumento" value=lista.cap_nro_documento)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='capruc') RUC
+            input#capruc.form-control(type='number' name="capruc" value=lista.cap_ruc)
+      .row
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='capnombresYApellidos') Nombres y Apellidos
+              span.text-danger  (*)
+            input#capnombresYApellidos.form-control(type='text' name="capnombresYApellidos" value=lista.cap_nombre)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='capfechaDeNacimiento') fecha de nacimiento
+              span.text-danger  (*)
+            input#capfechaDeNacimiento.form-control(type='date' name="capfechaDeNacimiento" value=fecha(lista.cap_fecha_nac))
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='capsexo') sexo
+              span.text-danger  (*)
+            select#capsexo.form-control(name="capsexo" value=lista.cap_sexo)
+              option(value="0" selected) -----
+              option(value='1') Femenino
+              option(value='2') Masculino
+      .row
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='capemail') Correo electronico
+              span.text-danger  (*)
+            input#capemail.form-control(type='email' name="capemail" value=lista.cap_email)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='captelefono') Telefono
+            input#captelefono.form-control(type='number' name="captelefono" value=lista.cap_telefono)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='capcelular') Celular
+              span.text-danger  (*)
+            input#capcelular.form-control(type='number' name="capcelular" value=lista.cap_celular)
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | A.2 - Datos de las entidades participantes
+    .card-body
+      h6 A.2.1 - Entidad solicitante
+      .row
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='estipoDeEntidad') Tipo de entidad
+              span.text-danger  (*)
+            select#estipoDeEntidad.form-control(name="estipoDeEntidad" value=lista.es_tipo)
+              option(value="0" selected) -----
+              option(value='1') ASOCIACI&OacuteN CIVIL DE PRODUCTORES
+              option(value='2') EMPRESA
+              option(value='3') PERSONA NATURAL CON NEGOCIO
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='estamanoDeLaEmpresa') Tamaño de la empresa
+              span.text-danger  (*)
+            input#estamanoDeLaEmpresa.form-control(type='text' name="estamañoDeLaEmpresa" value=lista.es_tamano)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='esnroDeTrabajadores') Numero de Trabajadores
+              span.text-danger  (*)
+            input#esnroDeTrabajadores.form-control(type='number' name="esnroDeTrabajadores" value=lista.es_nro_trabajadores)
+      .form-group
+        label(for='esrucRazonSocial') RUC y Razon social
+          span.text-danger  (*)
+        textarea#esrucRazonSocial.form-control(name="esrucRazonSocial" style="height: 38px;") #{lista.es_ruc}
+      .form-group
+        label(for='esciiu') CIIU
+          span.text-danger  (*)
+        input#esciiu.form-control(type='text' name="esciiu" value=lista.es_ciiu)
+      .form-group
+        label(for='esdireccion') Direccion
+          span.text-danger  (*)
+        input#esdireccion.form-control(type='text' name="esdireccion" value=lista.es_direccion)
+      .row
+        .col-sm-6.col-md-6
+          .form-group
+            label(for='esfechaDeConstitucion') Fecha de Constitucion
+              span.text-danger  (*)
+            input#esfechaDeConstitucion.form-control(type='date' name="esfechaDeConstitucion" value=fecha(lista.es_fecha_constitucion))
+        .col-sm-6.col-md-6
+          .form-group
+            label(for='esinicioDeActividades') Inicio de actividades
+              span.text-danger  (*)
+            input#esinicioDeActividades.form-control(type='date' name="esinicioDeActividades" value=fecha(lista.es_inicio_actividades))
+      .row
+        .col-sm-6.col-md-6
+          .form-group
+            label(for='esnumeroDePartida') Numero de partida
+            input#esnumeroDePartida.form-control(type='number' name="esnumeroDePartida" value=lista.es_nro_partida)
+        .col-sm-6.col-md-6
+          .form-group
+            label(for='esoficinaRegistral') Oficina registral
+            input#esoficinaRegistral.form-control(type='text' name="esoficinaRegistral" value=lista.es_oficina_registral)
+      .row
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='estelefonoCelular') Telefono / Celular
+              span.text-danger  (*)
+            input#estelefonoCelular.form-control(type='number' name="estelefonoCelular" value=lista.es_telefono)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='esemail') Correo electronico
+              span.text-danger  (*)
+            input#esemail.form-control(type='email' name="esemail" value=lista.es_correo)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='espaginaWeb') Pagina Web
+            input#espaginaWeb.form-control(type='text' name="espaginaWeb" value=lista.es_pagina_web)
+      .row
+        .col-sm-6.col-md-6
+          .form-group
+            label(for='esventas2016') Ventas del año 2016
+              span.text-danger  (*)
+            input#esventas2016.form-control(type='number' name="esventas2016" value=lista.es_ventas2016)
+        .col-sm-6.col-md-6
+          .form-group
+            label(for='esventas2017') Ventas del año 2017
+              span.text-danger  (*)
+            input#esventas2017.form-control(type='number' name="esventas2017" value=lista.es_ventas2017)
+      h6 Representante legal
+      .row
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='rptipoDeDocumento') Tipo de documento
+              span.text-danger  (*)
+            select#rptipoDeDocumento.form-control(name="rptipoDeDocumento" value=lista.rl_tipo_documento)
+              option(value="0" selected) -----
+              option(value='1') CARNET DE EXTRANJERIA
+              option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+              option(value='3') PASAPORTE
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='rpnumeroDeDocumento') Numero de documento
+              span.text-danger  (*)
+            input#rpnumeroDeDocumento.form-control(type='number' name="rpnumeroDeDocumento" value=lista.rl_nro_documento)
+        .col-sm-6.col-md-4
+          .form-group
+            label(for='rpruc') RUC
+            input#rpruc.form-control(type='number' name="rpruc" value=lista.rl_ruc)
+      .row
+        .col-sm-8
+          .form-group
+            label(for='rpnombresYApellidos') Nombres y Apellidos
+              span.text-danger  (*)
+            input#rpnombresYApellidos.form-control(type='text' name="rpnombresYApellidos" value=lista.rl_nombre)
+        .col-sm-4
+          .form-group
+            label(for='rpsexo') sexo
+              span.text-danger  (*)
+            select#rpsexo.form-control(name="rpsexo" value=lista.rl_sexo)
+              option(value="0" selected) -----
+              option(value='1') Femenino
+              option(value='2') Masculino
+      .row
+        .col-sm-6.col-md-6
+          .form-group
+            label(for='rpemail') Correo electronico
+              span.text-danger  (*)
+            input#rpemail.form-control(type='email' name="rpemail" value=lista.rl_email)
+        .col-sm-6.col-md-6
+          .form-group
+            label(for='rptelefono') Telefonos
+              span.text-danger  (*)
+            input#rptelefono.form-control(type='number' name="rptelefono" value=lista.rl_telefono)
+      .form-group
+        label(for='rpproductosComerciales') Indicar los productos ( Bienes y Servicios ) que en en la actualidad comercializa
+          span.text-danger  (*)
+        textarea#rpproductosComerciales.form-control(rows='3' name="rpproductosComerciales") #{lista.rl_productos_comercializados}
+      .form-group
+        label(for='rpactividadesRelacionadas') Principales actividades, investigaciones, tecnologias relacionadas con el proyecto
+          span.text-danger  (*)
+        textarea#rpactividadesRelacionadas.form-control(rows='3' name="rpactividadesRelacionadas") #{lista.rl_actividades_relacionadas}
+      .form-group
+        label(for='rpinfraestructuraDelSolicitante') Infraestructura fisica, equipamiento, tecnologias y procesos de la entidad solicitante
+          span.text-danger  (*)
+        textarea#rpinfraestructuraDelSolicitante.form-control(rows='3' name="rpinfraestructuraDelSolicitante") #{lista.rl_infraestructura_es}
+      h6 A.2.2 - entidades asociadas
+      .table-responsive
+        table.table.table-bordered.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th ruc
+              th nombre de la entidad
+              th tipo de entidad
+              th tipo de relacion
+              th nombre completo
+          tbody
+            tr
+              td: input#a22_1_1.form-control(type="text" name="a22_1_1" value=lista.a22_1_1)
+              td: input#a22_2_1.form-control(type="text" name="a22_2_1" value=lista.a22_2_1)
+              td: input#a22_3_1.form-control(type="text" name="a22_3_1" value=lista.a22_3_1)
+              td: input#a22_4_1.form-control(type="text" name="a22_4_1" value=lista.a22_4_1)
+              td: input#a22_5_1.form-control(type="text" name="a22_5_1" value=lista.a22_5_1)
+            tr
+              td: input#a22_1_2.form-control(type="text" name="a22_1_2" value=lista.a22_1_2)
+              td: input#a22_2_2.form-control(type="text" name="a22_2_2" value=lista.a22_2_2)
+              td: input#a22_3_2.form-control(type="text" name="a22_3_2" value=lista.a22_3_2)
+              td: input#a22_4_2.form-control(type="text" name="a22_4_2" value=lista.a22_4_2)
+              td: input#a22_5_2.form-control(type="text" name="a22_5_2" value=lista.a22_5_2)
+            tr
+              td: input#a22_1_3.form-control(type="text" name="a22_1_3" value=lista.a22_1_3)
+              td: input#a22_2_3.form-control(type="text" name="a22_2_3" value=lista.a22_2_3)
+              td: input#a22_3_3.form-control(type="text" name="a22_3_3" value=lista.a22_3_3)
+              td: input#a22_4_3.form-control(type="text" name="a22_4_3" value=lista.a22_4_3)
+              td: input#a22_5_3.form-control(type="text" name="a22_5_3" value=lista.a22_5_3)
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | A.3 - antecedentes de las entidades participantes
+    .card-body
+      h6 A.3.1 - Principales actividades, investigaciones, tecnologias relacionadas con el proyecto
+      .table-responsive
+        table.table.table-bordered.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th(style="width: 30%;") nombre de la entidad
+              th principales actividades y experiencia
+          tbody
+            tr
+              td: input#a31_1_1.form-control(type="text" name="a31_1_1" value=lista.a31_1_1)
+              td: textarea#a31_2_1.form-control(name="a31_2_1" style="height: 38px;") #{lista.a31_2_1}
+            tr
+              td: input#a31_1_2.form-control(type="text" name="a31_1_2" value=lista.a31_1_2)
+              td: textarea#a31_2_2.form-control(name="a31_2_2" style="height: 38px;") #{lista.a31_2_2}
+            tr
+              td: input#a31_1_3.form-control(type="text" name="a31_1_3" value=lista.a31_1_3)
+              td: textarea#a31_2_3.form-control( name="a31_2_3" style="height: 38px;") #{lista.a31_2_3}
+      h6 A.3.2 - Principal infraestructura, equipamiento, tecnologias y procesos que se aportaran al proyecto
+      .table-responsive
+        table.table.table-bordered.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th(style="width: 30%;") nombre de la entidad
+              th principal infraestructura fisica
+          tbody
+            tr
+              td: input#a32_1_1.form-control(type="text" name="a32_1_1" value=lista.a32_1_1)
+              td: textarea#a32_2_1.form-control(name="a32_2_1" style="height: 38px;") #{lista.a32_2_1}
+            tr
+              td: input#a32_1_2.form-control(type="text" name="a32_1_2" value=lista.a32_1_2)
+              td: textarea#a32_2_2.form-control(name="a32_2_2" style="height: 38px;") #{lista.a32_2_2}
+            tr
+              td: input#a32_1_3.form-control(type="text" name="a32_1_3" value=lista.a32_1_3)
+              td: textarea#a32_2_3.form-control(name="a32_2_3" style="height: 38px;") #{lista.a32_2_3}
+      h6 A.3.3 - Principales aspectos que evidencien que la entidad se beneficiara con los resultados
+      .table-responsive
+        table.table.table-bordered.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th(style="width: 30%;") nombre de la entidad
+              th justificacion para contar con la entidad
+          tbody
+            tr
+              td: input#a33_1_1.form-control(type="text" name="a33_1_1" value=lista.a33_1_1)
+              td: textarea#a33_2_1.form-control(name="a33_2_1" style="height: 38px;") #{lista.a33_2_1}
+            tr
+              td: input#a33_1_2.form-control(type="text" name="a33_1_2" value=lista.a33_1_2)
+              td: textarea#a33_2_2.form-control(name="a33_2_2" style="height: 38px;") #{lista.a33_2_2}
+            tr
+              td: input#a33_1_3.form-control(type="text" name="a33_1_3" value=lista.a33_1_3)
+              td: textarea#a33_2_3.form-control(name="a33_2_3" style="height: 38px;") #{lista.a33_2_3}
+      h6 A.3.4 - Fondos recibidos por alguna entidad del estado hacia la entidad solicitante
+      .table-responsive
+        table.table.table-bordered.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th nombre del otorgante
+              th nombre del proyecto
+              th monto
+              th fecha de reposicion
+              th fecha de finalizacion
+          tbody
+            tr
+              td: input#a34_1_1.form-control(type="text" name="a34_1_1" value=lista.a34_1_1)
+              td: input#a34_2_1.form-control(type="text" name="a34_2_1" value=lista.a34_2_1)
+              td: input#a34_3_1.form-control(type="text" name="a34_3_1" value=lista.a34_3_1)
+              td: input#a34_4_1.form-control(type="date" name="a34_4_1" value=fecha(lista.a34_4_1))
+              td: input#a34_5_1.form-control(type="date" name="a34_5_1" value=fecha(lista.a34_5_1))
+            tr
+              td: input#a34_1_2.form-control(type="text" name="a34_1_2" value=lista.a34_1_2)
+              td: input#a34_2_2.form-control(type="text" name="a34_2_2" value=lista.a34_2_2)
+              td: input#a34_3_2.form-control(type="text" name="a34_3_2" value=lista.a34_3_2)
+              td: input#a34_4_2.form-control(type="date" name="a34_4_2" value=fecha(lista.a34_4_2))
+              td: input#a34_5_2.form-control(type="date" name="a34_5_2" value=fecha(lista.a34_5_2))
+            tr
+              td: input#a34_1_3.form-control(type="text" name="a34_1_3" value=lista.a34_1_3)
+              td: input#a34_2_3.form-control(type="text" name="a34_2_3" value=lista.a34_2_3)
+              td: input#a34_3_3.form-control(type="text" name="a34_3_3" value=lista.a34_3_3)
+              td: input#a34_4_3.form-control(type="date" name="a34_4_3" value=fecha(lista.a34_4_3))
+              td: input#a34_5_3.form-control(type="date" name="a34_5_3" value=fecha(lista.a34_5_3))
+      h6 A.3.5 - Situacion de los proyectos financiados por innovate peru ( PIMEN, PIPEI, PITEI, PIPEA )
+      .table-responsive
+        table.table.table-bordered.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th contrato
+              th titulo
+              th aporte RNR
+              th fecha inicio
+              th fecha fin
+              th estado
+              th situacion actual
+          tbody
+            tr
+              td: input#a35_1_1.form-control(type="text" name="a35_1_1" value=lista.a35_1_1)
+              td: input#a35_2_1.form-control(type="text" name="a35_2_1" value=lista.a35_2_1)
+              td: input#a35_3_1.form-control(type="text" name="a35_3_1" value=lista.a35_3_1)
+              td: input#a35_4_1.form-control(type="date" name="a35_4_1" value=fecha(lista.a35_4_1))
+              td: input#a35_5_1.form-control(type="date" name="a35_5_1" value=fecha(lista.a35_5_1))
+              td: input#a35_6_1.form-control(type="text" name="a35_6_1" value=lista.a35_6_1)
+              td: input#a35_7_1.form-control(type="text" name="a35_7_1" value=lista.a35_7_1)
+            tr
+              td: input#a35_1_2.form-control(type="text" name="a35_1_2" value=lista.a35_1_2)
+              td: input#a35_2_2.form-control(type="text" name="a35_2_2" value=lista.a35_2_2)
+              td: input#a35_3_2.form-control(type="text" name="a35_3_2" value=lista.a35_3_2)
+              td: input#a35_4_2.form-control(type="date" name="a35_4_2" value=fecha(lista.a35_4_2))
+              td: input#a35_5_2.form-control(type="date" name="a35_5_2" value=fecha(lista.a35_5_2))
+              td: input#a35_6_2.form-control(type="text" name="a35_6_2" value=lista.a35_6_2)
+              td: input#a35_7_2.form-control(type="text" name="a35_7_2" value=lista.a35_7_2)
+            tr
+              td: input#a35_1_3.form-control(type="text" name="a35_1_3" value=lista.a35_1_3)
+              td: input#a35_2_3.form-control(type="text" name="a35_2_3" value=lista.a35_2_3)
+              td: input#a35_3_3.form-control(type="text" name="a35_3_3" value=lista.a35_3_3)
+              td: input#a35_4_3.form-control(type="date" name="a35_4_3" value=fecha(lista.a35_4_3))
+              td: input#a35_5_3.form-control(type="date" name="a35_5_3" value=fecha(lista.a35_5_3))
+              td: input#a35_6_3.form-control(type="text" name="a35_6_3" value=lista.a35_6_3)
+              td: input#a35_7_3.form-control(type="text" name="a35_7_3" value=lista.a35_7_3)
+      br
+block B
+  - function addZero(i) { if (i < 10) { i = '0' + i; } return i; }
+  - function fecha(i){ if (i != null) { var dd = i.getDate(); var mm = i.getMonth()+1; var yyyy = i.getFullYear(); dd = addZero(dd); mm = addZero(mm); return yyyy+'-'+mm+'-'+dd; }else { return i;} }
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | B.1 - situacion actual de mercado del producto y/o servicio y de la empresarial
+    .card-body
+      .form-group
+        label(for='entornoEmpresarial')
+          | B.1.1 - situacion del entorno empresarial
+          span.text-danger  (*)
+        textarea#entornoEmpresarial.form-control(rows='3' name="entornoEmpresarial") #{lista.entorno_empresarial}
+      .form-group
+        label(for='situacionActual')
+          | B.1.2 - situacion actual de la empresa respecto a su negocio y participacion en el mercado
+          span.text-danger  (*)
+        textarea#situacionActual.form-control(rows='3'  name="situacionActual") #{lista.situacion_actual}
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | B.2 - Identificación del mercado potencial de la innovación y sustentación de la oportunidad comercial
+    .card-body
+      .form-group
+        label(for='identificacionDelMercado')
+          | B.2.1 Identificación del mercado potencial, donde se implementará a escala comercial los resultados del proyecto
+          span.text-danger  (*)
+        textarea#identificacionDelMercado.form-control(rows='3' name="identificacionDelMercado") #{lista.identificacion_mercado}
+      .form-group
+        label(for='competidores')
+          | B.2.2 Competidores
+          span.text-danger  (*)
+        textarea#competidores.form-control(rows='3' name="competidores") #{lista.competidores}
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | B.3 Modelo de negocio y la estrategia empresarial para el ingreso de la innovación al mercado
+    .card-body
+      .form-group
+        label(for='modeloDeNegocio')
+          | B.3.1 Modelo de negocio y la estrategia empresarial para el ingreso de la innovación al mercado
+          span.text-danger  (*)
+        textarea#modeloDeNegocio.form-control(rows='3' name="modeloDeNegocio") #{lista.modelo_negocio}
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | B.4 Capacidad financiera para el escalamiento de los resultados esperados y la implantación
+    .card-body
+      .form-group
+        label(for='capacidadFinanciera')
+          | B.4.1 Capacidad financiera para el escalamiento de los resultados esperados y la implantación
+          span.text-danger  (*)
+        textarea#capacidadFinanciera.form-control(rows='3' name="capacidadFinanciera") #{lista.capacidad_financiera}
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | B.5 Rentabilidad Económica y Financiera
+    .card-body
+      .form-group
+        label(for='rentabilidadEconomica')
+          | B.5.1 Rentabilidad Económica y Financiera
+          span.text-danger  (*)
+        textarea#rentabilidadEconomica.form-control(rows='3' name="rentabilidadEconomica") #{lista.rentabilidad_econimica}
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | B.6 Archivos Adjuntos para la Sección B: Mercado
+    .card-body
+      .form-group
+        label(for='flujoDeCaja')
+          | B.6.1 Adjuntar un archivo obligatorio con el flujo de caja proyectado
+          span.text-danger  (*)
+        br
+        .custom-file
+          input#flujoDeCaja.custom-file-input(type='file', name='flujoDeCaja')
+          label.custom-file-label(for='flujoDeCaja') Elige Un Archivo
+block C
+  - function addZero(i) { if (i < 10) { i = '0' + i; } return i; }
+  - function fecha(i){ if (i != null) { var dd = i.getDate(); var mm = i.getMonth()+1; var yyyy = i.getFullYear(); dd = addZero(dd); mm = addZero(mm); return yyyy+'-'+mm+'-'+dd; }else { return i;} }
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white C.1 Diagnóstico
+    .card-body
+      .form-group
+        label(for='problemaIdentificado')
+          | C.1.1 Problema identificado que limita la competitividad de la empresa u oportunidad de mercado
+          span.text-danger  (*)
+        textarea#problemaIdentificado.form-control(rows='3' name="problemaIdentificado") #{lista.problemas_identificados}
+      .form-group
+        label(for='consecuenciasEfectos')
+          | C.1.2 Consecuencias o efectos
+          span.text-danger  (*)
+        textarea#consecuenciasEfectos.form-control(rows='3' name="consecuenciasEfectos") #{lista.consecuencias_efectos}
+      .form-group
+        label(for='causas')
+          | C.1.3 Causas
+          span.text-danger  (*)
+        textarea#causas.form-control(rows='3' name="causas") #{lista.causas}
+      h6 C.1.4. Tipo de innovación y descripción
+      .form-group
+        label(for='tipoDeInnovación') Tipo de Innovación
+          span.text-danger  (*)
+        select#tipoDeInnovacion.form-control(name="tipoDeInnovacion" value=lista.tipo_innovacion)
+          option(value="0" selected) ----
+          option(value='1') UN NUEVO PROCESO
+          option(value='2') UN NUEVO PRODUCTO (BIEN O SERVICIO)
+          option(value='3') UN PROCESO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+          option(value='4') UN PRODUCTO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+      .form-group
+        label(for='describirFuncion')
+          | 1. Describir la función que realizará la innovación
+          span.text-danger  (*)
+        textarea#describirFuncion.form-control(rows='3' name="describirFuncion") #{lista.funcion_innovacion}
+      .form-group
+        label(for='describirTecnologia')
+          | 2. Describir la tecnología que se empleará para construir la innovación
+          span.text-danger  (*)
+        textarea#describirTecnologia.form-control(rows='3'  name="describirTecnologia") #{lista.tecnologia}
+      .form-group
+        label(for='describirForma')
+          | 3. Describa la forma en que se entregará el resultado
+          span.text-danger  (*)
+        textarea#describirForma.form-control(rows='3' name="describirForma") #{lista.forma_resultado}
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | C.2 Descripción de las características de producto o proceso de la innovación presentada
+    .card-body 
+      .table-responsive
+        table.table.table-bordered.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th atributo
+              th competidor 1
+              th competidor 2
+              th competidor 3
+              th propuesta de proyecto
+          tbody
+            tr
+              td: textarea#c2_1_1.form-control(name="c2_1_1" style="height: 38px;") #{lista.c2_1_1}
+              td: textarea#c2_2_1.form-control(name="c2_2_1" style="height: 38px;") #{lista.c2_2_1}
+              td: textarea#c2_3_1.form-control(name="c2_3_1" style="height: 38px;") #{lista.c2_3_1}
+              td: textarea#c2_4_1.form-control(name="c2_4_1" style="height: 38px;") #{lista.c2_4_1}
+              td: textarea#c2_5_1.form-control(name="c2_5_1" style="height: 38px;") #{lista.c2_5_1}
+            tr
+              td: textarea#c2_1_2.form-control(name="c2_1_2" style="height: 38px;") #{lista.c2_1_2}
+              td: textarea#c2_2_2.form-control(name="c2_2_2" style="height: 38px;") #{lista.c2_2_2}
+              td: textarea#c2_3_2.form-control(name="c2_3_2" style="height: 38px;") #{lista.c2_3_2}
+              td: textarea#c2_4_2.form-control(name="c2_4_2" style="height: 38px;") #{lista.c2_4_2}
+              td: textarea#c2_5_2.form-control(name="c2_5_2" style="height: 38px;") #{lista.c2_5_2}
+            tr
+              td: textarea#c2_1_3.form-control(name="c2_1_3" style="height: 38px;") #{lista.c2_1_3}
+              td: textarea#c2_2_3.form-control(name="c2_2_3" style="height: 38px;") #{lista.c2_2_3}
+              td: textarea#c2_3_3.form-control(name="c2_3_3" style="height: 38px;") #{lista.c2_3_3}
+              td: textarea#c2_4_3.form-control(name="c2_4_3" style="height: 38px;") #{lista.c2_4_3}
+              td: textarea#c2_5_3.form-control(name="c2_5_3" style="height: 38px;") #{lista.c2_5_3}
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | C.3 Antecedentes e Investigaciones recientes sobre la innovación a desarrollar
+    .card-body
+      .form-group
+        label(for='antecedentes')
+          | C.3.1 Antecedentes e investigaciones recientes sobre el problema a resolver
+          span.text-danger  (*)
+        textarea#antecedentes.form-control(rows='3' name="antecedentes") #{lista.antecedentes}
+      .form-group
+        label(for='libreRestrigido')
+          | C.3.2 Indicar si el conocimiento o la tecnología que se utilizará son de uso libre o restringido
+          span.text-danger  (*)
+        textarea#libreRestrigido.form-control(rows='3' name="libreRestrigido") #{lista.tipo_conocimiento}
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white C.4 Objetivos
+    .card-body
+      h6 C.4.1 Objetivo general, específicos y resultados del proyecto
+      label(for='objetivoGeneral') Objetivo General
+      .table-responsive
+        table#objetivoGeneral.table.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th objetivo general - proposito del proyecto
+              th resultados finales
+              th medios de verificacion
+          tbody
+            tr
+              td: textarea#c41og_1.form-control( name="c41og_1" style="height: 38px;") #{lista.c41og_1}
+              td: textarea#c41og_2.form-control( name="c41og_2" style="height: 38px;") #{lista.c41og_2}
+              td: textarea#c41og_3.form-control( name="c41og_3" style="height: 38px;") #{lista.c41og_3}
+      label(for='objetivoEspecifico') Objetivo Especifico
+      .table-responsive
+        table#objetivoEspecifico.table.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th objetivo específico - componentes
+              th resultados intermedios
+              th medios de verificacion
+          tbody
+            tr
+              td: textarea#c41oe_1_1.form-control(name="c41oe_1_1" style="height: 38px;") #{lista.c41oe_1_1}
+              td: textarea#c41oe_2_1.form-control(name="c41oe_2_1" style="height: 38px;") #{lista.c41oe_2_1}
+              td: textarea#c41oe_3_1.form-control(name="c41oe_3_1" style="height: 38px;") #{lista.c41oe_3_1}
+            tr
+              td: textarea#c41oe_1_2.form-control(name="c41oe_1_2" style="height: 38px;") #{lista.c41oe_1_2}
+              td: textarea#c41oe_2_2.form-control(name="c41oe_2_2" style="height: 38px;") #{lista.c41oe_2_2}
+              td: textarea#c41oe_3_2.form-control(name="c41oe_3_2" style="height: 38px;") #{lista.c41oe_3_2}
+            tr
+              td: textarea#c41oe_1_3.form-control(name="c41oe_1_3" style="height: 38px;") #{lista.c41oe_1_3}
+              td: textarea#c41oe_2_3.form-control(name="c41oe_2_3" style="height: 38px;") #{lista.c41oe_2_3}
+              td: textarea#c41oe_3_3.form-control(name="c41oe_3_3" style="height: 38px;") #{lista.c41oe_3_3}
+            tr
+              td: textarea#c41oe_1_4.form-control(name="c41oe_1_4" style="height: 38px;") #{lista.c41oe_1_4}
+              td: textarea#c41oe_2_4.form-control(name="c41oe_2_4" style="height: 38px;") #{lista.c41oe_2_4}
+              td: textarea#c41oe_3_4.form-control(name="c41oe_3_4" style="height: 38px;") #{lista.c41oe_3_4}
+            tr
+              td: textarea#c41oe_1_5.form-control(name="c41oe_1_5" style="height: 38px;") #{lista.c41oe_1_5}
+              td: textarea#c41oe_2_5.form-control(name="c41oe_2_5" style="height: 38px;") #{lista.c41oe_2_5}
+              td: textarea#c41oe_3_5.form-control(name="c41oe_3_5" style="height: 38px;") #{lista.c41oe_3_5}
+      
+      h6 C.4.2.Cronograma de actividades
+      .table-responsive
+        table.table.table-bordered.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th(rowspan="2") actividad
+              th(rowspan="2") unidad de medida
+              th(rowspan="2") meta fisica
+              th(colspan="6") año 1
+            tr
+              th.check 1
+              th.check 2
+              th.check 3
+              th.check 4
+              th.check 5
+              th.check 6
+          tbody
+            tr
+              td(colspan="9") #{lista.c41oe_3_5}
+            tr
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+            tr
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+            tr
+              td(colspan="9") #{lista.c41oe_3_5}
+            tr
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td.check: input.form-control(type="checkbox" )
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+            tr
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+            tr
+              td(colspan="9") #{lista.c41oe_3_5}
+            tr
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+            tr
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+            tr
+              td(colspan="9") #{lista.c41oe_3_5}
+            tr
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+            tr
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+            tr
+              td(colspan="9") #{lista.c41oe_3_5}
+            tr
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+            tr
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td: textarea.form-control()
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+              td.check: input.form-control(type="checkbox")
+
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white C.5 Descripción de la Metodología
+    .card-body
+      .form-group
+        label(for='planMetodologico')
+          | C.5.1. Plan Metodológico del proyecto
+          span.text-danger  (*)
+        textarea#planMetodologico.form-control(rows='3' name="planMetodologico") #{lista.plan_metodologico}
+      .form-group
+        label(for='planAdjunto')
+          | Adjunto Plan Metodológico
+          span.text-danger  (*)
+        br
+        .custom-file
+          input#planAdjunto.custom-file-input(type='file', name='planAdjunto')
+          //- label.custom-file-label(for='planAdjunto') Elige Un Archivo
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white C.6. Propiedad Intelectual
+    .card-body
+      .form-group
+        label(for='propiedadIntelectual')
+          | C.6.1 Propiedad Intelectual
+          span.text-danger  (*)
+        textarea#propiedadIntelectual.form-control(rows='3' name="propiedadIntelectual") #{lista.propiedad_intelectual}
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white C.7 Impactos Esperados
+    .card-body
+      .form-group
+        label(for='impactosEconomicos')
+          | C.7.1 Impactos económicos
+          span.text-danger  (*)
+        textarea#impactosEconomicos.form-control(rows='3' name="impactosEconomicos") #{lista.impactos_economicos}
+      .form-group
+        label(for='impactosSociales')
+          | C.7.2 Impactos sociales
+          span.text-danger  (*)
+        textarea#impactosSociales.form-control(rows='3' name="impactosSociales") #{lista.impactos_sociales}
+      .form-group
+        label(for='impactosEnLaFormacion')
+          | C.7.3 Impactos en la formación de cadenas productivas o clústeres
+          | y otras externalidades
+          span.text-danger  (*)
+        textarea#impactosEnLaFormacion.form-control(rows='3' name="impactosEnLaFormacion") #{lista.impactos_formacion}
+      .form-group
+        label(for='pontencialidad')
+          | C.7.4 Potencialidad de ser replicado por empresas similares
+          span.text-danger  (*)
+        textarea#pontencialidad.form-control(rows='3' name="pontencialidad") #{lista.potencialidad}
+      .form-group
+        label(for='impactosDeLaTecnologia')
+          | C.7.5 Impactos en Tecnología
+          span.text-danger  (*)
+        textarea#impactosDeLaTecnologia.form-control(rows='3' name="impactosDeLaTecnologia") #{lista.impactos_tecnologico}
+      .form-group
+        label(for='impactosAmbientales')
+          | C.7.6 Impactos ambientales
+          span.text-danger  (*)
+        textarea#impactosAmbientales.form-control(rows='3' name="impactosAmbientales") #{lista.impactos_ambientales}
+      .form-group
+        label(for='medidasDeMitigacion')
+          | C.7.7 Medidas de mitigación para los impactos ambientales identificados
+          | como negativos y permanentes (o temporales)
+          span.text-danger  (*)
+        textarea#medidasDeMitigacion.form-control(rows='3' name="medidasDeMitigacion") #{lista.medidas_mitigacion}
+      .form-group
+        label(for='impactosEnLaEmpresa')
+          | C.7.8 Impactos en la capacidad interna de innovación de la empresa
+          span.text-danger  (*)
+        textarea#impactosEnLaEmpresa.form-control(rows='3' name="impactosEnLaEmpresa") #{lista.impactos_empresa}
+  br
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white C.8. Recursos Necesarios
+    .card-body
+      label(for='datosDelEquipoTecnico') datos del equipo tecnico
+      .table-responsive
+        table#datosDelEquipoTecnico.table.table-hover
+          thead.thead-light.text-capitalize
+            tr
+              th Es Investigador
+              th Nombre
+              th Ap. Paterno
+              th Ap. Materno
+              th Especialidad
+              th Función Técnica
+              th Porcentaje de Dedicación
+              th Investigador Principal
+              th Coordinador General
+              th Coordinador Administrativo
+              th Entidad a la que pertenecen
+          tbody
+            tr
+              td: input#c8_1_1.form-control(type="text" name="c8_1_1" value=lista.c8_1_1)
+              td: input#c8_2_1.form-control(type="text" name="c8_2_1" value=lista.c8_2_1)
+              td: input#c8_3_1.form-control(type="text" name="c8_3_1" value=lista.c8_3_1)
+              td: input#c8_4_1.form-control(type="text" name="c8_4_1" value=lista.c8_4_1)
+              td: input#c8_5_1.form-control(type="text" name="c8_5_1" value=lista.c8_5_1)
+              td: input#c8_6_1.form-control(type="text" name="c8_6_1" value=lista.c8_6_1)
+              td: input#c8_7_1.form-control(type="text" name="c8_7_1" value=lista.c8_7_1)
+              td: input#c8_8_1.form-control(type="text" name="c8_8_1" value=lista.c8_8_1)
+              td: input#c8_9_1.form-control(type="text" name="c8_9_1" value=lista.c8_9_1)
+              td: input#c8_10_1.form-control(type="text" name="c8_10_1" value=lista.c8_10_1)
+              td: input#c8_11_1.form-control(type="text" name="c8_11_1" value=lista.c8_11_1)
+            tr
+              td: input#c8_1_2.form-control(type="text" name="c8_1_2" value=lista.c8_1_2 )
+              td: input#c8_2_2.form-control(type="text" name="c8_2_2" value=lista.c8_2_2 )
+              td: input#c8_3_2.form-control(type="text" name="c8_3_2" value=lista.c8_3_2 )
+              td: input#c8_4_2.form-control(type="text" name="c8_4_2" value=lista.c8_4_2 )
+              td: input#c8_5_2.form-control(type="text" name="c8_5_2" value=lista.c8_5_2 )
+              td: input#c8_6_2.form-control(type="text" name="c8_6_2" value=lista.c8_6_2 )
+              td: input#c8_7_2.form-control(type="text" name="c8_7_2" value=lista.c8_7_2 )
+              td: input#c8_8_2.form-control(type="text" name="c8_8_2" value=lista.c8_8_2 )
+              td: input#c8_9_2.form-control(type="text" name="c8_9_2" value=lista.c8_9_2 )
+              td: input#c8_10_2.form-control(type="text" name="c8_10_2" value=lista.c8_10_2 )
+              td: input#c8_11_2.form-control(type="text" name="c8_11_2" value=lista.c8_11_2 )
+            tr
+              td: input#c8_1_3.form-control(type="text" name="c8_1_3" value=lista.c8_1_3 )
+              td: input#c8_2_3.form-control(type="text" name="c8_2_3" value=lista.c8_2_3 )
+              td: input#c8_3_3.form-control(type="text" name="c8_3_3" value=lista.c8_3_3 )
+              td: input#c8_4_3.form-control(type="text" name="c8_4_3" value=lista.c8_4_3 )
+              td: input#c8_5_3.form-control(type="text" name="c8_5_3" value=lista.c8_5_3 )
+              td: input#c8_6_3.form-control(type="text" name="c8_6_3" value=lista.c8_6_3 )
+              td: input#c8_7_3.form-control(type="text" name="c8_7_3" value=lista.c8_7_3 )
+              td: input#c8_8_3.form-control(type="text" name="c8_8_3" value=lista.c8_8_3 )
+              td: input#c8_9_3.form-control(type="text" name="c8_9_3" value=lista.c8_9_3 )
+              td: input#c8_10_3.form-control(type="text" name="c8_10_3" value=lista.c8_10_3 )
+              td: input#c8_11_3.form-control(type="text" name="c8_11_3" value=lista.c8_11_3 )
+            tr
+              td: input#c8_1_4.form-control(type="text" name="c8_1_4" value=lista.c8_1_4 )
+              td: input#c8_2_4.form-control(type="text" name="c8_2_4" value=lista.c8_2_4 )
+              td: input#c8_3_4.form-control(type="text" name="c8_3_4" value=lista.c8_3_4 )
+              td: input#c8_4_4.form-control(type="text" name="c8_4_4" value=lista.c8_4_4 )
+              td: input#c8_5_4.form-control(type="text" name="c8_5_4" value=lista.c8_5_4 )
+              td: input#c8_6_4.form-control(type="text" name="c8_6_4" value=lista.c8_6_4 )
+              td: input#c8_7_4.form-control(type="text" name="c8_7_4" value=lista.c8_7_4 )
+              td: input#c8_8_4.form-control(type="text" name="c8_8_4" value=lista.c8_8_4 )
+              td: input#c8_9_4.form-control(type="text" name="c8_9_4" value=lista.c8_9_4 )
+              td: input#c8_10_4.form-control(type="text" name="c8_10_4" value=lista.c8_10_4 )
+              td: input#c8_11_4.form-control(type="text" name="c8_11_4" value=lista.c8_11_4 )
+            tr
+              td: input#c8_1_5.form-control(type="text" name="c8_1_5" value=lista.c8_1_5 )
+              td: input#c8_2_5.form-control(type="text" name="c8_2_5" value=lista.c8_2_5 )
+              td: input#c8_3_5.form-control(type="text" name="c8_3_5" value=lista.c8_3_5 )
+              td: input#c8_4_5.form-control(type="text" name="c8_4_5" value=lista.c8_4_5 )
+              td: input#c8_5_5.form-control(type="text" name="c8_5_5" value=lista.c8_5_5 )
+              td: input#c8_6_5.form-control(type="text" name="c8_6_5" value=lista.c8_6_5 )
+              td: input#c8_7_5.form-control(type="text" name="c8_7_5" value=lista.c8_7_5 )
+              td: input#c8_8_5.form-control(type="text" name="c8_8_5" value=lista.c8_8_5 )
+              td: input#c8_9_5.form-control(type="text" name="c8_9_5" value=lista.c8_9_5 )
+              td: input#c8_10_5.form-control(type="text" name="c8_10_5" value=lista.c8_10_5 )
+              td: input#c8_11_5.form-control(type="text" name="c8_11_5" value=lista.c8_11_5 )
+
+block D
+  - function addZero(i) { if (i < 10) { i = '0' + i; } return i; }
+  - function fecha(i){ if (i != null) { var dd = i.getDate(); var mm = i.getMonth()+1; var yyyy = i.getFullYear(); dd = addZero(dd); mm = addZero(mm); return yyyy+'-'+mm+'-'+dd; }else { return i;} }
+  .card.rounded.border-secondary
+    h5.card-header.text-capitalize.bg-danger.text-white
+      | D.1 Moneda y Presupuesto del Proyecto
+    .card-body
+      .form-group
+        label(for='monedaDelProyecto')
+          | Moneda del Proyecto
+          span.text-danger  (*)
+        select#monedaDelProyecto.form-control(name="monedaDelProyecto" value=lista.tipo_moneda)
+          option(value='0') Soles
+          option(value='1') Dolares
+      #accordion.accordion
+        .card
+          #headingd11.card-header
+            h5.mb-0
+              button.btn.btn-link(type='button', data-toggle='collapse', data-target='#collapsed11', aria-expanded='true', aria-controls='collapsed11')
+                | D.1.1 CUADRO Nº 1: Equipos y Bienes duraderos
+          #collapsed11.collapse.show(aria-labelledby='headingd11', data-parent='#accordion')
+            .card-body
+              .table-responsive
+                table.table.table-bordered.table-hover
+                  thead.thead-light.text-capitalize
+                    tr
+                      th Valorizable 
+                      th Equipos y Bienes duraderos 
+                      th Especificación técnica 
+                      th Proforma 
+                      th Unidad de medida 
+                      th Costo Unitario 
+                      th Cantidad 
+                      th Costo Total 
+                      th RNR 
+                      th Cofinanciamiento monetario 
+                      th Cofinanciamiento NO monetario 
+                      th Entidad Aportante 
+                  tbody
+                    tr
+                      td: input#d11_1_1.form-control(type="text" name="d11_1_1" value=lista.d11_1_1) 
+                      td: input#d11_2_1.form-control(type="text" name="d11_2_1" value=lista.d11_2_1)
+                      td: input#d11_3_1.form-control(type="text" name="d11_3_1" value=lista.d11_3_1) 
+                      td: input#d11_4_1.form-control(type="text" name="d11_4_1" value=lista.d11_4_1)
+                      td: input#d11_5_1.form-control(type="text" name="d11_5_1" value=lista.d11_5_1)
+                      td: input#d11_6_1.form-control(type="text" name="d11_6_1" value=lista.d11_6_1) 
+                      td: input#d11_7_1.form-control(type="text" name="d11_7_1" value=lista.d11_7_1)
+                      td: input#d11_8_1.form-control(type="text" name="d11_8_1" value=lista.d11_8_1)
+                      td: input#d11_9_1.form-control(type="text" name="d11_9_1" value=lista.d11_9_1) 
+                      td: input#d11_10_1.form-control(type="text" name="d11_10_1" value=lista.d11_10_1)
+                      td: input#d11_11_1.form-control(type="text" name="d11_11_1" value=lista.d11_11_1)
+                      td: input#d11_12_1.form-control(type="text" name="d11_12_1" value=lista.d11_12_1)
+                    tr
+                      td: input#d11_1_2.form-control(type="text" name="d11_1_2" value=lista.d11_1_2) 
+                      td: input#d11_2_2.form-control(type="text" name="d11_2_2" value=lista.d11_2_2)
+                      td: input#d11_3_2.form-control(type="text" name="d11_3_2" value=lista.d11_3_2) 
+                      td: input#d11_4_2.form-control(type="text" name="d11_4_2" value=lista.d11_4_2)
+                      td: input#d11_5_2.form-control(type="text" name="d11_5_2" value=lista.d11_5_2)
+                      td: input#d11_6_2.form-control(type="text" name="d11_6_2" value=lista.d11_6_2) 
+                      td: input#d11_7_2.form-control(type="text" name="d11_7_2" value=lista.d11_7_2)
+                      td: input#d11_8_2.form-control(type="text" name="d11_8_2" value=lista.d11_8_2)
+                      td: input#d11_9_2.form-control(type="text" name="d11_9_2" value=lista.d11_9_2) 
+                      td: input#d11_10_2.form-control(type="text" name="d11_10_2" value=lista.d11_10_2)
+                      td: input#d11_11_2.form-control(type="text" name="d11_11_2" value=lista.d11_11_2)
+                      td: input#d11_12_2.form-control(type="text" name="d11_12_2" value=lista.d11_12_2)
+                    tr
+                      td: input#d11_1_3.form-control(type="text" name="d11_1_3" value=lista.d11_1_3 )
+                      td: input#d11_2_3.form-control(type="text" name="d11_2_3" value=lista.d11_2_3 )
+                      td: input#d11_3_3.form-control(type="text" name="d11_3_3" value=lista.d11_3_3 )
+                      td: input#d11_4_3.form-control(type="text" name="d11_4_3" value=lista.d11_4_3 )
+                      td: input#d11_5_3.form-control(type="text" name="d11_5_3" value=lista.d11_5_3 )
+                      td: input#d11_6_3.form-control(type="text" name="d11_6_3" value=lista.d11_6_3 )
+                      td: input#d11_7_3.form-control(type="text" name="d11_7_3" value=lista.d11_7_3 )
+                      td: input#d11_8_3.form-control(type="text" name="d11_8_3" value=lista.d11_8_3 )
+                      td: input#d11_9_3.form-control(type="text" name="d11_9_3" value=lista.d11_9_3 )
+                      td: input#d11_10_3.form-control(type="text" name="d11_10_3" value=lista.d11_10_3 )
+                      td: input#d11_11_3.form-control(type="text" name="d11_11_3" value=lista.d11_11_3 )
+                      td: input#d11_12_3.form-control(type="text" name="d11_12_3" value=lista.d11_12_3 )
+                    tr
+                      td: input#d11_1_4.form-control(type="text" name="d11_1_4" value=lista.d11_1_4) 
+                      td: input#d11_2_4.form-control(type="text" name="d11_2_4" value=lista.d11_2_4)
+                      td: input#d11_3_4.form-control(type="text" name="d11_3_4" value=lista.d11_3_4) 
+                      td: input#d11_4_4.form-control(type="text" name="d11_4_4" value=lista.d11_4_4)
+                      td: input#d11_5_4.form-control(type="text" name="d11_5_4" value=lista.d11_5_4)
+                      td: input#d11_6_4.form-control(type="text" name="d11_6_4" value=lista.d11_6_4) 
+                      td: input#d11_7_4.form-control(type="text" name="d11_7_4" value=lista.d11_7_4)
+                      td: input#d11_8_4.form-control(type="text" name="d11_8_4" value=lista.d11_8_4)
+                      td: input#d11_9_4.form-control(type="text" name="d11_9_4" value=lista.d11_9_4) 
+                      td: input#d11_10_4.form-control(type="text" name="d11_10_4" value=lista.d11_10_4)
+                      td: input#d11_11_4.form-control(type="text" name="d11_11_4" value=lista.d11_11_4)
+                      td: input#d11_12_4.form-control(type="text" name="d11_12_4" value=lista.d11_12_4)
+                    tr
+                      td: input#d11_1_5.form-control(type="text" name="d11_1_5" value=lista.d11_1_5 ) 
+                      td: input#d11_2_5.form-control(type="text" name="d11_2_5" value=lista.d11_2_5 )
+                      td: input#d11_3_5.form-control(type="text" name="d11_3_5" value=lista.d11_3_5 ) 
+                      td: input#d11_4_5.form-control(type="text" name="d11_4_5" value=lista.d11_4_5 )
+                      td: input#d11_5_5.form-control(type="text" name="d11_5_5" value=lista.d11_5_5 )
+                      td: input#d11_6_5.form-control(type="text" name="d11_6_5" value=lista.d11_6_5 ) 
+                      td: input#d11_7_5.form-control(type="text" name="d11_7_5" value=lista.d11_7_5 )
+                      td: input#d11_8_5.form-control(type="text" name="d11_8_5" value=lista.d11_8_5 )
+                      td: input#d11_9_5.form-control(type="text" name="d11_9_5" value=lista.d11_9_5 ) 
+                      td: input#d11_10_5.form-control(type="text" name="d11_10_5" value=lista.d11_10_5 )
+                      td: input#d11_11_5.form-control(type="text" name="d11_11_5" value=lista.d11_11_5 )
+                      td: input#d11_12_5.form-control(type="text" name="d11_12_5" value=lista.d11_12_5 )
+        .card
+          #headingd12.card-header
+            h5.mb-0
+              button.btn.btn-link.collapsed(type='button', data-toggle='collapse', data-target='#collapsed12', aria-expanded='true', aria-controls='collapsed12')
+                | D.1.2 CUADRO Nº 2: Honorarios de los Recursos Humanos - Valorización del equipo Técnico
+          #collapsed12.collapse(aria-labelledby='headingd12', data-parent='#accordion')
+            .card-body
+              .table-responsive
+                table.table.table-bordered.table-hover
+                  thead.thead-light.text-capitalize
+                    tr
+                      th Nombre 
+                      th Entidad 
+                      th Porcentaje de dedicación 
+                      th Honorario mensual 
+                      th No. Meses 
+                      th Costo Total 
+                      th RNR 
+                      th Cofinanciamiento monetario 
+                      th Cofinanciamiento no monetario 
+                      th Entidad Aportante
+                  tbody
+                    tr
+                      td: input#d12_1_1.form-control(type="text" name="d12_1_1" value=lista.d12_1_1) 
+                      td: input#d12_2_1.form-control(type="text" name="d12_2_1" value=lista.d12_2_1)
+                      td: input#d12_3_1.form-control(type="text" name="d12_3_1" value=lista.d12_3_1) 
+                      td: input#d12_4_1.form-control(type="text" name="d12_4_1" value=lista.d12_4_1)
+                      td: input#d12_5_1.form-control(type="text" name="d12_5_1" value=lista.d12_5_1)
+                      td: input#d12_6_1.form-control(type="text" name="d12_6_1" value=lista.d12_6_1) 
+                      td: input#d12_7_1.form-control(type="text" name="d12_7_1" value=lista.d12_7_1)
+                      td: input#d12_8_1.form-control(type="text" name="d12_8_1" value=lista.d12_8_1)
+                      td: input#d12_9_1.form-control(type="text" name="d12_9_1" value=lista.d12_9_1) 
+                      td: input#d12_10_1.form-control(type="text" name="d12_10_1" value=lista.d12_10_1)
+                    tr
+                      td: input#d12_1_2.form-control(type="text" name="d12_1_2" value=lista.d12_1_2) 
+                      td: input#d12_2_2.form-control(type="text" name="d12_2_2" value=lista.d12_2_2)
+                      td: input#d12_3_2.form-control(type="text" name="d12_3_2" value=lista.d12_3_2) 
+                      td: input#d12_4_2.form-control(type="text" name="d12_4_2" value=lista.d12_4_2)
+                      td: input#d12_5_2.form-control(type="text" name="d12_5_2" value=lista.d12_5_2)
+                      td: input#d12_6_2.form-control(type="text" name="d12_6_2" value=lista.d12_6_2) 
+                      td: input#d12_7_2.form-control(type="text" name="d12_7_2" value=lista.d12_7_2)
+                      td: input#d12_8_2.form-control(type="text" name="d12_8_2" value=lista.d12_8_2)
+                      td: input#d12_9_2.form-control(type="text" name="d12_9_2" value=lista.d12_9_2) 
+                      td: input#d12_10_2.form-control(type="text" name="d12_10_2" value=lista.d12_10_2)
+                    tr
+                      td: input#d12_1_3.form-control(type="text" name="d12_1_3" value=lista.d12_1_3 )
+                      td: input#d12_2_3.form-control(type="text" name="d12_2_3" value=lista.d12_2_3 )
+                      td: input#d12_3_3.form-control(type="text" name="d12_3_3" value=lista.d12_3_3 )
+                      td: input#d12_4_3.form-control(type="text" name="d12_4_3" value=lista.d12_4_3 )
+                      td: input#d12_5_3.form-control(type="text" name="d12_5_3" value=lista.d12_5_3 )
+                      td: input#d12_6_3.form-control(type="text" name="d12_6_3" value=lista.d12_6_3 )
+                      td: input#d12_7_3.form-control(type="text" name="d12_7_3" value=lista.d12_7_3 )
+                      td: input#d12_8_3.form-control(type="text" name="d12_8_3" value=lista.d12_8_3 )
+                      td: input#d12_9_3.form-control(type="text" name="d12_9_3" value=lista.d12_9_3 )
+                      td: input#d12_10_3.form-control(type="text" name="d12_10_3" value=lista.d12_10_3 )
+                    tr
+                      td: input#d12_1_4.form-control(type="text" name="d12_1_4" value=lista.d12_1_4) 
+                      td: input#d12_2_4.form-control(type="text" name="d12_2_4" value=lista.d12_2_4)
+                      td: input#d12_3_4.form-control(type="text" name="d12_3_4" value=lista.d12_3_4) 
+                      td: input#d12_4_4.form-control(type="text" name="d12_4_4" value=lista.d12_4_4)
+                      td: input#d12_5_4.form-control(type="text" name="d12_5_4" value=lista.d12_5_4)
+                      td: input#d12_6_4.form-control(type="text" name="d12_6_4" value=lista.d12_6_4) 
+                      td: input#d12_7_4.form-control(type="text" name="d12_7_4" value=lista.d12_7_4)
+                      td: input#d12_8_4.form-control(type="text" name="d12_8_4" value=lista.d12_8_4)
+                      td: input#d12_9_4.form-control(type="text" name="d12_9_4" value=lista.d12_9_4) 
+                      td: input#d12_10_4.form-control(type="text" name="d12_10_4" value=lista.d12_10_4)
+                    tr
+                      td: input#d12_1_5.form-control(type="text" name="d12_1_5" value=lista.d12_1_5 ) 
+                      td: input#d12_2_5.form-control(type="text" name="d12_2_5" value=lista.d12_2_5 )
+                      td: input#d12_3_5.form-control(type="text" name="d12_3_5" value=lista.d12_3_5 ) 
+                      td: input#d12_4_5.form-control(type="text" name="d12_4_5" value=lista.d12_4_5 )
+                      td: input#d12_5_5.form-control(type="text" name="d12_5_5" value=lista.d12_5_5 )
+                      td: input#d12_6_5.form-control(type="text" name="d12_6_5" value=lista.d12_6_5 ) 
+                      td: input#d12_7_5.form-control(type="text" name="d12_7_5" value=lista.d12_7_5 )
+                      td: input#d12_8_5.form-control(type="text" name="d12_8_5" value=lista.d12_8_5 )
+                      td: input#d12_9_5.form-control(type="text" name="d12_9_5" value=lista.d12_9_5 ) 
+                      td: input#d12_10_5.form-control(type="text" name="d12_10_5" value=lista.d12_10_5 )
+        .card
+          #headingd13.card-header
+            h5.mb-0
+              button.btn.btn-link.collapsed(type='button', data-toggle='collapse', data-target='#collapsed13', aria-expanded='true', aria-controls='collapsed13')
+                | D.1.3 CUADRO Nº 3: Consultorías
+          #collapsed13.collapse(aria-labelledby='headingd13', data-parent='#accordion')
+            .card-body
+              .table-responsive
+                table.table.table-bordered.table-hover
+                  thead.thead-light.text-capitalize
+                    tr
+                      th Descripción 
+                      th Unidad Medida 
+                      th Costo unitario 
+                      th Cantidad 
+                      th Costo Total 
+                      th RNR 
+                      th Cofinanciamiento monetario 
+                      th Cofinanciamiento no monetario 
+                      th Entidad Aportante
+                  tbody
+                    tr
+                      td: input#d13_1_1.form-control(type="text" name="d13_1_1" value=lista.d13_1_1) 
+                      td: input#d13_2_1.form-control(type="text" name="d13_2_1" value=lista.d13_2_1)
+                      td: input#d13_3_1.form-control(type="text" name="d13_3_1" value=lista.d13_3_1) 
+                      td: input#d13_4_1.form-control(type="text" name="d13_4_1" value=lista.d13_4_1)
+                      td: input#d13_5_1.form-control(type="text" name="d13_5_1" value=lista.d13_5_1)
+                      td: input#d13_6_1.form-control(type="text" name="d13_6_1" value=lista.d13_6_1) 
+                      td: input#d13_7_1.form-control(type="text" name="d13_7_1" value=lista.d13_7_1)
+                      td: input#d13_8_1.form-control(type="text" name="d13_8_1" value=lista.d13_8_1)
+                      td: input#d13_9_1.form-control(type="text" name="d13_9_1" value=lista.d13_9_1) 
+                    tr
+                      td: input#d13_1_2.form-control(type="text" name="d13_1_2" value=lista.d13_1_2) 
+                      td: input#d13_2_2.form-control(type="text" name="d13_2_2" value=lista.d13_2_2)
+                      td: input#d13_3_2.form-control(type="text" name="d13_3_2" value=lista.d13_3_2) 
+                      td: input#d13_4_2.form-control(type="text" name="d13_4_2" value=lista.d13_4_2)
+                      td: input#d13_5_2.form-control(type="text" name="d13_5_2" value=lista.d13_5_2)
+                      td: input#d13_6_2.form-control(type="text" name="d13_6_2" value=lista.d13_6_2) 
+                      td: input#d13_7_2.form-control(type="text" name="d13_7_2" value=lista.d13_7_2)
+                      td: input#d13_8_2.form-control(type="text" name="d13_8_2" value=lista.d13_8_2)
+                      td: input#d13_9_2.form-control(type="text" name="d13_9_2" value=lista.d13_9_2) 
+                    tr
+                      td: input#d13_1_3.form-control(type="text" name="d13_1_3" value=lista.d13_1_3 )
+                      td: input#d13_2_3.form-control(type="text" name="d13_2_3" value=lista.d13_2_3 )
+                      td: input#d13_3_3.form-control(type="text" name="d13_3_3" value=lista.d13_3_3 )
+                      td: input#d13_4_3.form-control(type="text" name="d13_4_3" value=lista.d13_4_3 )
+                      td: input#d13_5_3.form-control(type="text" name="d13_5_3" value=lista.d13_5_3 )
+                      td: input#d13_6_3.form-control(type="text" name="d13_6_3" value=lista.d13_6_3 )
+                      td: input#d13_7_3.form-control(type="text" name="d13_7_3" value=lista.d13_7_3 )
+                      td: input#d13_8_3.form-control(type="text" name="d13_8_3" value=lista.d13_8_3 )
+                      td: input#d13_9_3.form-control(type="text" name="d13_9_3" value=lista.d13_9_3 )
+                    tr
+                      td: input#d13_1_4.form-control(type="text" name="d13_1_4" value=lista.d13_1_4) 
+                      td: input#d13_2_4.form-control(type="text" name="d13_2_4" value=lista.d13_2_4)
+                      td: input#d13_3_4.form-control(type="text" name="d13_3_4" value=lista.d13_3_4) 
+                      td: input#d13_4_4.form-control(type="text" name="d13_4_4" value=lista.d13_4_4)
+                      td: input#d13_5_4.form-control(type="text" name="d13_5_4" value=lista.d13_5_4)
+                      td: input#d13_6_4.form-control(type="text" name="d13_6_4" value=lista.d13_6_4) 
+                      td: input#d13_7_4.form-control(type="text" name="d13_7_4" value=lista.d13_7_4)
+                      td: input#d13_8_4.form-control(type="text" name="d13_8_4" value=lista.d13_8_4)
+                      td: input#d13_9_4.form-control(type="text" name="d13_9_4" value=lista.d13_9_4)
+                    tr
+                      td: input#d13_1_5.form-control(type="text" name="d13_1_5" value=lista.d13_1_5 )
+                      td: input#d13_2_5.form-control(type="text" name="d13_2_5" value=lista.d13_2_5 )
+                      td: input#d13_3_5.form-control(type="text" name="d13_3_5" value=lista.d13_3_5 ) 
+                      td: input#d13_4_5.form-control(type="text" name="d13_4_5" value=lista.d13_4_5 )
+                      td: input#d13_5_5.form-control(type="text" name="d13_5_5" value=lista.d13_5_5 )
+                      td: input#d13_6_5.form-control(type="text" name="d13_6_5" value=lista.d13_6_5 ) 
+                      td: input#d13_7_5.form-control(type="text" name="d13_7_5" value=lista.d13_7_5 )
+                      td: input#d13_8_5.form-control(type="text" name="d13_8_5" value=lista.d13_8_5 )
+                      td: input#d13_9_5.form-control(type="text" name="d13_9_5" value=lista.d13_9_5 ) 
+          .card
+            #headingd14.card-header
+              h5.mb-0
+                button.btn.btn-link.collapsed(type='button', data-toggle='collapse', data-target='#collapsed14', aria-expanded='true', aria-controls='collapsed14')
+                  | D.1.4 CUADRO Nº 4: Servicios de terceros
+            #collapsed14.collapse(aria-labelledby='headingd14', data-parent='#accordion')
+              .card-body
+                .table-responsive
+                  table.table.table-bordered.table-hover
+                    thead.thead-light.text-capitalize
+                      tr
+                        th Descripción 
+                        th Unidad de medida 
+                        th Costo Unitario 
+                        th Cantidad 
+                        th Costo Total 
+                        th RNR 
+                        th Cofinanciamiento monetario 
+                        th Cofinanciamiento NO monetario 
+                        th Entidad Aportante
+                    tbody
+                      tr
+                        td: input#d14_1_1.form-control(type="text" name="d14_1_1" value=lista.d14_1_1) 
+                        td: input#d14_2_1.form-control(type="text" name="d14_2_1" value=lista.d14_2_1)
+                        td: input#d14_3_1.form-control(type="text" name="d14_3_1" value=lista.d14_3_1) 
+                        td: input#d14_4_1.form-control(type="text" name="d14_4_1" value=lista.d14_4_1)
+                        td: input#d14_5_1.form-control(type="text" name="d14_5_1" value=lista.d14_5_1)
+                        td: input#d14_6_1.form-control(type="text" name="d14_6_1" value=lista.d14_6_1) 
+                        td: input#d14_7_1.form-control(type="text" name="d14_7_1" value=lista.d14_7_1)
+                        td: input#d14_8_1.form-control(type="text" name="d14_8_1" value=lista.d14_8_1)
+                        td: input#d14_9_1.form-control(type="text" name="d14_9_1" value=lista.d14_9_1) 
+                      tr
+                        td: input#d14_1_2.form-control(type="text" name="d14_1_2" value=lista.d14_1_2) 
+                        td: input#d14_2_2.form-control(type="text" name="d14_2_2" value=lista.d14_2_2)
+                        td: input#d14_3_2.form-control(type="text" name="d14_3_2" value=lista.d14_3_2) 
+                        td: input#d14_4_2.form-control(type="text" name="d14_4_2" value=lista.d14_4_2)
+                        td: input#d14_5_2.form-control(type="text" name="d14_5_2" value=lista.d14_5_2)
+                        td: input#d14_6_2.form-control(type="text" name="d14_6_2" value=lista.d14_6_2) 
+                        td: input#d14_7_2.form-control(type="text" name="d14_7_2" value=lista.d14_7_2)
+                        td: input#d14_8_2.form-control(type="text" name="d14_8_2" value=lista.d14_8_2)
+                        td: input#d14_9_2.form-control(type="text" name="d14_9_2" value=lista.d14_9_2) 
+                      tr
+                        td: input#d14_1_3.form-control(type="text" name="d14_1_3" value=lista.d14_1_3)
+                        td: input#d14_2_3.form-control(type="text" name="d14_2_3" value=lista.d14_2_3)
+                        td: input#d14_3_3.form-control(type="text" name="d14_3_3" value=lista.d14_3_3)
+                        td: input#d14_4_3.form-control(type="text" name="d14_4_3" value=lista.d14_4_3)
+                        td: input#d14_5_3.form-control(type="text" name="d14_5_3" value=lista.d14_5_3)
+                        td: input#d14_6_3.form-control(type="text" name="d14_6_3" value=lista.d14_6_3)
+                        td: input#d14_7_3.form-control(type="text" name="d14_7_3" value=lista.d14_7_3)
+                        td: input#d14_8_3.form-control(type="text" name="d14_8_3" value=lista.d14_8_3)
+                        td: input#d14_9_3.form-control(type="text" name="d14_9_3" value=lista.d14_9_3)
+                      tr
+                        td: input#d14_1_4.form-control(type="text" name="d14_1_4" value=lista.d14_1_4) 
+                        td: input#d14_2_4.form-control(type="text" name="d14_2_4" value=lista.d14_2_4)
+                        td: input#d14_3_4.form-control(type="text" name="d14_3_4" value=lista.d14_3_4) 
+                        td: input#d14_4_4.form-control(type="text" name="d14_4_4" value=lista.d14_4_4)
+                        td: input#d14_5_4.form-control(type="text" name="d14_5_4" value=lista.d14_5_4)
+                        td: input#d14_6_4.form-control(type="text" name="d14_6_4" value=lista.d14_6_4) 
+                        td: input#d14_7_4.form-control(type="text" name="d14_7_4" value=lista.d14_7_4)
+                        td: input#d14_8_4.form-control(type="text" name="d14_8_4" value=lista.d14_8_4)
+                        td: input#d14_9_4.form-control(type="text" name="d14_9_4" value=lista.d14_9_4)
+                      tr
+                        td: input#d14_1_5.form-control(type="text" name="d14_1_5" value=lista.d14_1_5)
+                        td: input#d14_2_5.form-control(type="text" name="d14_2_5" value=lista.d14_2_5)
+                        td: input#d14_3_5.form-control(type="text" name="d14_3_5" value=lista.d14_3_5) 
+                        td: input#d14_4_5.form-control(type="text" name="d14_4_5" value=lista.d14_4_5)
+                        td: input#d14_5_5.form-control(type="text" name="d14_5_5" value=lista.d14_5_5)
+                        td: input#d14_6_5.form-control(type="text" name="d14_6_5" value=lista.d14_6_5) 
+                        td: input#d14_7_5.form-control(type="text" name="d14_7_5" value=lista.d14_7_5)
+                        td: input#d14_8_5.form-control(type="text" name="d14_8_5" value=lista.d14_8_5)
+                        td: input#d14_9_5.form-control(type="text" name="d14_9_5" value=lista.d14_9_5)
+          .card
+            #headingd15.card-header
+              h5.mb-0
+                button.btn.btn-link.collapsed(type='button', data-toggle='collapse', data-target='#collapsed15', aria-expanded='true', aria-controls='collapseThree')
+                  | D.1.5 CUADRO Nº 5: Pasajes y viáticos
+            #collapsed15.collapse(aria-labelledby='headingd15', data-parent='#accordion')
+              .card-body 
+                .table-responsive
+                  table.table.table-bordered.table-hover
+                    thead.thead-light.text-capitalize
+                      tr
+                        th Tipo 
+                        th Tipo de viático 
+                        th Tipo de Actividad 
+                        th Destino 
+                        th Descripción 
+                        th Unidad de medida 
+                        th Costo Unitario 
+                        th Cantidad 
+                        th Costo Total 
+                        th RNR 
+                        th Cofinanciamiento monetario 
+                        th Cofinanciamiento NO monetario 
+                        th Entidad Aportante
+                    tbody
+                      tr
+                        td: input#d15_1_1.form-control(type="text" name="d15_1_1" value=lista.d15_1_1) 
+                        td: input#d15_2_1.form-control(type="text" name="d15_2_1" value=lista.d15_2_1)
+                        td: input#d15_3_1.form-control(type="text" name="d15_3_1" value=lista.d15_3_1) 
+                        td: input#d15_4_1.form-control(type="text" name="d15_4_1" value=lista.d15_4_1)
+                        td: input#d15_5_1.form-control(type="text" name="d15_5_1" value=lista.d15_5_1)
+                        td: input#d15_6_1.form-control(type="text" name="d15_6_1" value=lista.d15_6_1) 
+                        td: input#d15_7_1.form-control(type="text" name="d15_7_1" value=lista.d15_7_1)
+                        td: input#d15_8_1.form-control(type="text" name="d15_8_1" value=lista.d15_8_1)
+                        td: input#d15_9_1.form-control(type="text" name="d15_9_1" value=lista.d15_9_1) 
+                        td: input#d15_10_1.form-control(type="text" name="d15_10_1" value=lista.d15_10_1)
+                        td: input#d15_11_1.form-control(type="text" name="d15_11_1" value=lista.d15_11_1)
+                        td: input#d15_12_1.form-control(type="text" name="d15_12_1" value=lista.d15_12_1)
+                        td: input#d15_13_1.form-control(type="text" name="d15_13_1" value=lista.d15_13_1)
+                      tr
+                        td: input#d15_1_2.form-control(type="text" name="d15_1_2" value=lista.d15_1_2) 
+                        td: input#d15_2_2.form-control(type="text" name="d15_2_2" value=lista.d15_2_2)
+                        td: input#d15_3_2.form-control(type="text" name="d15_3_2" value=lista.d15_3_2) 
+                        td: input#d15_4_2.form-control(type="text" name="d15_4_2" value=lista.d15_4_2)
+                        td: input#d15_5_2.form-control(type="text" name="d15_5_2" value=lista.d15_5_2)
+                        td: input#d15_6_2.form-control(type="text" name="d15_6_2" value=lista.d15_6_2) 
+                        td: input#d15_7_2.form-control(type="text" name="d15_7_2" value=lista.d15_7_2)
+                        td: input#d15_8_2.form-control(type="text" name="d15_8_2" value=lista.d15_8_2)
+                        td: input#d15_9_2.form-control(type="text" name="d15_9_2" value=lista.d15_9_2) 
+                        td: input#d15_10_2.form-control(type="text" name="d15_10_2" value=lista.d15_10_2)
+                        td: input#d15_11_2.form-control(type="text" name="d15_11_2" value=lista.d15_11_2)
+                        td: input#d15_12_2.form-control(type="text" name="d15_12_2" value=lista.d15_12_2)
+                        td: input#d15_13_2.form-control(type="text" name="d15_13_2" value=lista.d15_13_2)
+                      tr
+                        td: input#d15_1_3.form-control(type="text" name="d15_1_3" value=lista.d15_1_3 )
+                        td: input#d15_2_3.form-control(type="text" name="d15_2_3" value=lista.d15_2_3 )
+                        td: input#d15_3_3.form-control(type="text" name="d15_3_3" value=lista.d15_3_3 )
+                        td: input#d15_4_3.form-control(type="text" name="d15_4_3" value=lista.d15_4_3 )
+                        td: input#d15_5_3.form-control(type="text" name="d15_5_3" value=lista.d15_5_3 )
+                        td: input#d15_6_3.form-control(type="text" name="d15_6_3" value=lista.d15_6_3 )
+                        td: input#d15_7_3.form-control(type="text" name="d15_7_3" value=lista.d15_7_3 )
+                        td: input#d15_8_3.form-control(type="text" name="d15_8_3" value=lista.d15_8_3 )
+                        td: input#d15_9_3.form-control(type="text" name="d15_9_3" value=lista.d15_9_3 )
+                        td: input#d15_10_3.form-control(type="text" name="d15_10_3" value=lista.d15_10_3 )
+                        td: input#d15_11_3.form-control(type="text" name="d15_11_3" value=lista.d15_11_3 )
+                        td: input#d15_12_3.form-control(type="text" name="d15_12_3" value=lista.d15_12_3 )
+                        td: input#d15_13_3.form-control(type="text" name="d15_13_3" value=lista.d15_13_3)
+                      tr
+                        td: input#d15_1_4.form-control(type="text" name="d15_1_4" value=lista.d15_1_4) 
+                        td: input#d15_2_4.form-control(type="text" name="d15_2_4" value=lista.d15_2_4)
+                        td: input#d15_3_4.form-control(type="text" name="d15_3_4" value=lista.d15_3_4) 
+                        td: input#d15_4_4.form-control(type="text" name="d15_4_4" value=lista.d15_4_4)
+                        td: input#d15_5_4.form-control(type="text" name="d15_5_4" value=lista.d15_5_4)
+                        td: input#d15_6_4.form-control(type="text" name="d15_6_4" value=lista.d15_6_4) 
+                        td: input#d15_7_4.form-control(type="text" name="d15_7_4" value=lista.d15_7_4)
+                        td: input#d15_8_4.form-control(type="text" name="d15_8_4" value=lista.d15_8_4)
+                        td: input#d15_9_4.form-control(type="text" name="d15_9_4" value=lista.d15_9_4) 
+                        td: input#d15_10_4.form-control(type="text" name="d15_10_4" value=lista.d15_10_4)
+                        td: input#d15_11_4.form-control(type="text" name="d15_11_4" value=lista.d15_11_4)
+                        td: input#d15_12_4.form-control(type="text" name="d15_12_4" value=lista.d15_12_4)
+                        td: input#d15_13_4.form-control(type="text" name="d15_13_4" value=lista.d15_13_4)
+                      tr
+                        td: input#d15_1_5.form-control(type="text" name="d15_1_5" value=lista.d15_1_5 ) 
+                        td: input#d15_2_5.form-control(type="text" name="d15_2_5" value=lista.d15_2_5 )
+                        td: input#d15_3_5.form-control(type="text" name="d15_3_5" value=lista.d15_3_5 ) 
+                        td: input#d15_4_5.form-control(type="text" name="d15_4_5" value=lista.d15_4_5 )
+                        td: input#d15_5_5.form-control(type="text" name="d15_5_5" value=lista.d15_5_5 )
+                        td: input#d15_6_5.form-control(type="text" name="d15_6_5" value=lista.d15_6_5 ) 
+                        td: input#d15_7_5.form-control(type="text" name="d15_7_5" value=lista.d15_7_5 )
+                        td: input#d15_8_5.form-control(type="text" name="d15_8_5" value=lista.d15_8_5 )
+                        td: input#d15_9_5.form-control(type="text" name="d15_9_5" value=lista.d15_9_5 ) 
+                        td: input#d15_10_5.form-control(type="text" name="d15_10_5" value=lista.d15_10_5 )
+                        td: input#d15_11_5.form-control(type="text" name="d15_11_5" value=lista.d15_11_5 )
+                        td: input#d15_12_5.form-control(type="text" name="d15_12_5" value=lista.d15_12_5 )
+                        td: input#d15_13_5.form-control(type="text" name="d15_13_5" value=lista.d15_13_5)
+          .card
+            #headingd16.card-header
+              h5.mb-0
+                button.btn.btn-link.collapsed(type='button', data-toggle='collapse', data-target='#collapsed16', aria-expanded='true', aria-controls='collapseThree')
+                  | D.1.6 CUADRO Nº 6: Materiales e insumos
+            #collapsed16.collapse(aria-labelledby='headingd16', data-parent='#accordion')
+              .card-body 
+                .table-responsive
+                  table.table.table-bordered.table-hover
+                    thead.thead-light.text-capitalize
+                      tr
+                        th Valorizable 
+                        th Descripción 
+                        th Especificación técnica 
+                        th Proforma 
+                        th Unidad Medida 
+                        th Costo unitario 
+                        th Cantidad 
+                        th Costo Total 
+                        th RNR 
+                        th Cofinanciamiento monetario 
+                        th Cofinanciamiento no monetario 
+                        th Entidad Aportante
+                    tbody
+                      tr
+                        td: input#d16_1_1.form-control(type="text" name="d16_1_1" value=lista.d16_1_1) 
+                        td: input#d16_2_1.form-control(type="text" name="d16_2_1" value=lista.d16_2_1)
+                        td: input#d16_3_1.form-control(type="text" name="d16_3_1" value=lista.d16_3_1) 
+                        td: input#d16_4_1.form-control(type="text" name="d16_4_1" value=lista.d16_4_1)
+                        td: input#d16_5_1.form-control(type="text" name="d16_5_1" value=lista.d16_5_1)
+                        td: input#d16_6_1.form-control(type="text" name="d16_6_1" value=lista.d16_6_1) 
+                        td: input#d16_7_1.form-control(type="text" name="d16_7_1" value=lista.d16_7_1)
+                        td: input#d16_8_1.form-control(type="text" name="d16_8_1" value=lista.d16_8_1)
+                        td: input#d16_9_1.form-control(type="text" name="d16_9_1" value=lista.d16_9_1) 
+                        td: input#d16_10_1.form-control(type="text" name="d16_10_1" value=lista.d16_10_1)
+                        td: input#d16_11_1.form-control(type="text" name="d16_11_1" value=lista.d16_11_1)
+                        td: input#d16_12_1.form-control(type="text" name="d16_12_1" value=lista.d16_12_1)
+                      tr
+                        td: input#d16_1_2.form-control(type="text" name="d16_1_2" value=lista.d16_1_2) 
+                        td: input#d16_2_2.form-control(type="text" name="d16_2_2" value=lista.d16_2_2)
+                        td: input#d16_3_2.form-control(type="text" name="d16_3_2" value=lista.d16_3_2) 
+                        td: input#d16_4_2.form-control(type="text" name="d16_4_2" value=lista.d16_4_2)
+                        td: input#d16_5_2.form-control(type="text" name="d16_5_2" value=lista.d16_5_2)
+                        td: input#d16_6_2.form-control(type="text" name="d16_6_2" value=lista.d16_6_2) 
+                        td: input#d16_7_2.form-control(type="text" name="d16_7_2" value=lista.d16_7_2)
+                        td: input#d16_8_2.form-control(type="text" name="d16_8_2" value=lista.d16_8_2)
+                        td: input#d16_9_2.form-control(type="text" name="d16_9_2" value=lista.d16_9_2) 
+                        td: input#d16_10_2.form-control(type="text" name="d16_10_2" value=lista.d16_10_2)
+                        td: input#d16_11_2.form-control(type="text" name="d16_11_2" value=lista.d16_11_2)
+                        td: input#d16_12_2.form-control(type="text" name="d16_12_2" value=lista.d16_12_2)
+                      tr
+                        td: input#d16_1_3.form-control(type="text" name="d16_1_3" value=lista.d16_1_3 )
+                        td: input#d16_2_3.form-control(type="text" name="d16_2_3" value=lista.d16_2_3 )
+                        td: input#d16_3_3.form-control(type="text" name="d16_3_3" value=lista.d16_3_3 )
+                        td: input#d16_4_3.form-control(type="text" name="d16_4_3" value=lista.d16_4_3 )
+                        td: input#d16_5_3.form-control(type="text" name="d16_5_3" value=lista.d16_5_3 )
+                        td: input#d16_6_3.form-control(type="text" name="d16_6_3" value=lista.d16_6_3 )
+                        td: input#d16_7_3.form-control(type="text" name="d16_7_3" value=lista.d16_7_3 )
+                        td: input#d16_8_3.form-control(type="text" name="d16_8_3" value=lista.d16_8_3 )
+                        td: input#d16_9_3.form-control(type="text" name="d16_9_3" value=lista.d16_9_3 )
+                        td: input#d16_10_3.form-control(type="text" name="d16_10_3" value=lista.d16_10_3 )
+                        td: input#d16_11_3.form-control(type="text" name="d16_11_3" value=lista.d16_11_3 )
+                        td: input#d16_12_3.form-control(type="text" name="d16_12_3" value=lista.d16_12_3 )
+                      tr
+                        td: input#d16_1_4.form-control(type="text" name="d16_1_4" value=lista.d16_1_4) 
+                        td: input#d16_2_4.form-control(type="text" name="d16_2_4" value=lista.d16_2_4)
+                        td: input#d16_3_4.form-control(type="text" name="d16_3_4" value=lista.d16_3_4) 
+                        td: input#d16_4_4.form-control(type="text" name="d16_4_4" value=lista.d16_4_4)
+                        td: input#d16_5_4.form-control(type="text" name="d16_5_4" value=lista.d16_5_4)
+                        td: input#d16_6_4.form-control(type="text" name="d16_6_4" value=lista.d16_6_4) 
+                        td: input#d16_7_4.form-control(type="text" name="d16_7_4" value=lista.d16_7_4)
+                        td: input#d16_8_4.form-control(type="text" name="d16_8_4" value=lista.d16_8_4)
+                        td: input#d16_9_4.form-control(type="text" name="d16_9_4" value=lista.d16_9_4) 
+                        td: input#d16_10_4.form-control(type="text" name="d16_10_4" value=lista.d16_10_4)
+                        td: input#d16_11_4.form-control(type="text" name="d16_11_4" value=lista.d16_11_4)
+                        td: input#d16_12_4.form-control(type="text" name="d16_12_4" value=lista.d16_12_4)
+                      tr
+                        td: input#d16_1_5.form-control(type="text" name="d16_1_5" value=lista.d16_1_5 ) 
+                        td: input#d16_2_5.form-control(type="text" name="d16_2_5" value=lista.d16_2_5 )
+                        td: input#d16_3_5.form-control(type="text" name="d16_3_5" value=lista.d16_3_5 ) 
+                        td: input#d16_4_5.form-control(type="text" name="d16_4_5" value=lista.d16_4_5 )
+                        td: input#d16_5_5.form-control(type="text" name="d16_5_5" value=lista.d16_5_5 )
+                        td: input#d16_6_5.form-control(type="text" name="d16_6_5" value=lista.d16_6_5 ) 
+                        td: input#d16_7_5.form-control(type="text" name="d16_7_5" value=lista.d16_7_5 )
+                        td: input#d16_8_5.form-control(type="text" name="d16_8_5" value=lista.d16_8_5 )
+                        td: input#d16_9_5.form-control(type="text" name="d16_9_5" value=lista.d16_9_5 ) 
+                        td: input#d16_10_5.form-control(type="text" name="d16_10_5" value=lista.d16_10_5 )
+                        td: input#d16_11_5.form-control(type="text" name="d16_11_5" value=lista.d16_11_5 )
+                        td: input#d16_12_5.form-control(type="text" name="d16_12_5" value=lista.d16_12_5 )
+          .card
+            #headingd17.card-header
+              h5.mb-0
+                button.btn.btn-link.collapsed(type='button', data-toggle='collapse', data-target='#collapsed17', aria-expanded='true', aria-controls='collapseThree')
+                  | D.1.7 CUADRO Nº 7: Otros gastos elegibles
+            #collapsed17.collapse(aria-labelledby='headingd17', data-parent='#accordion')
+              .card-body 
+                .table-responsive
+                  table.table.table-bordered.table-hover
+                    thead.thead-light.text-capitalize
+                      tr
+                        th Valorizable 
+                        th Descripción 
+                        th Unidad Medida 
+                        th Costo unitario 
+                        th Cantidad 
+                        th Costo Total 
+                        th RNR 
+                        th Cofinanciamiento monetario 
+                        th Cofinanciamiento no monetario 
+                        th Entidad Aportante
+                    tbody
+                      tr
+                        td: input#d17_1_1.form-control(type="text" name="d17_1_1" value=lista.d17_1_1) 
+                        td: input#d17_2_1.form-control(type="text" name="d17_2_1" value=lista.d17_2_1)
+                        td: input#d17_3_1.form-control(type="text" name="d17_3_1" value=lista.d17_3_1) 
+                        td: input#d17_4_1.form-control(type="text" name="d17_4_1" value=lista.d17_4_1)
+                        td: input#d17_5_1.form-control(type="text" name="d17_5_1" value=lista.d17_5_1)
+                        td: input#d17_6_1.form-control(type="text" name="d17_6_1" value=lista.d17_6_1) 
+                        td: input#d17_7_1.form-control(type="text" name="d17_7_1" value=lista.d17_7_1)
+                        td: input#d17_8_1.form-control(type="text" name="d17_8_1" value=lista.d17_8_1)
+                        td: input#d17_9_1.form-control(type="text" name="d17_9_1" value=lista.d17_9_1) 
+                        td: input#d17_10_1.form-control(type="text" name="d17_10_1" value=lista.d17_10_1)
+                      tr
+                        td: input#d17_1_2.form-control(type="text" name="d17_1_2" value=lista.d17_1_2) 
+                        td: input#d17_2_2.form-control(type="text" name="d17_2_2" value=lista.d17_2_2)
+                        td: input#d17_3_2.form-control(type="text" name="d17_3_2" value=lista.d17_3_2) 
+                        td: input#d17_4_2.form-control(type="text" name="d17_4_2" value=lista.d17_4_2)
+                        td: input#d17_5_2.form-control(type="text" name="d17_5_2" value=lista.d17_5_2)
+                        td: input#d17_6_2.form-control(type="text" name="d17_6_2" value=lista.d17_6_2) 
+                        td: input#d17_7_2.form-control(type="text" name="d17_7_2" value=lista.d17_7_2)
+                        td: input#d17_8_2.form-control(type="text" name="d17_8_2" value=lista.d17_8_2)
+                        td: input#d17_9_2.form-control(type="text" name="d17_9_2" value=lista.d17_9_2) 
+                        td: input#d17_10_2.form-control(type="text" name="d17_10_2" value=lista.d17_10_2)
+                      tr
+                        td: input#d17_1_3.form-control(type="text" name="d17_1_3" value=lista.d17_1_3 )
+                        td: input#d17_2_3.form-control(type="text" name="d17_2_3" value=lista.d17_2_3 )
+                        td: input#d17_3_3.form-control(type="text" name="d17_3_3" value=lista.d17_3_3 )
+                        td: input#d17_4_3.form-control(type="text" name="d17_4_3" value=lista.d17_4_3 )
+                        td: input#d17_5_3.form-control(type="text" name="d17_5_3" value=lista.d17_5_3 )
+                        td: input#d17_6_3.form-control(type="text" name="d17_6_3" value=lista.d17_6_3 )
+                        td: input#d17_7_3.form-control(type="text" name="d17_7_3" value=lista.d17_7_3 )
+                        td: input#d17_8_3.form-control(type="text" name="d17_8_3" value=lista.d17_8_3 )
+                        td: input#d17_9_3.form-control(type="text" name="d17_9_3" value=lista.d17_9_3 )
+                        td: input#d17_10_3.form-control(type="text" name="d17_10_3" value=lista.d17_10_3 )
+                      tr
+                        td: input#d17_1_4.form-control(type="text" name="d17_1_4" value=lista.d17_1_4) 
+                        td: input#d17_2_4.form-control(type="text" name="d17_2_4" value=lista.d17_2_4)
+                        td: input#d17_3_4.form-control(type="text" name="d17_3_4" value=lista.d17_3_4) 
+                        td: input#d17_4_4.form-control(type="text" name="d17_4_4" value=lista.d17_4_4)
+                        td: input#d17_5_4.form-control(type="text" name="d17_5_4" value=lista.d17_5_4)
+                        td: input#d17_6_4.form-control(type="text" name="d17_6_4" value=lista.d17_6_4) 
+                        td: input#d17_7_4.form-control(type="text" name="d17_7_4" value=lista.d17_7_4)
+                        td: input#d17_8_4.form-control(type="text" name="d17_8_4" value=lista.d17_8_4)
+                        td: input#d17_9_4.form-control(type="text" name="d17_9_4" value=lista.d17_9_4) 
+                        td: input#d17_10_4.form-control(type="text" name="d17_10_4" value=lista.d17_10_4)
+                      tr
+                        td: input#d17_1_5.form-control(type="text" name="d17_1_5" value=lista.d17_1_5 ) 
+                        td: input#d17_2_5.form-control(type="text" name="d17_2_5" value=lista.d17_2_5 )
+                        td: input#d17_3_5.form-control(type="text" name="d17_3_5" value=lista.d17_3_5 ) 
+                        td: input#d17_4_5.form-control(type="text" name="d17_4_5" value=lista.d17_4_5 )
+                        td: input#d17_5_5.form-control(type="text" name="d17_5_5" value=lista.d17_5_5 )
+                        td: input#d17_6_5.form-control(type="text" name="d17_6_5" value=lista.d17_6_5 ) 
+                        td: input#d17_7_5.form-control(type="text" name="d17_7_5" value=lista.d17_7_5 )
+                        td: input#d17_8_5.form-control(type="text" name="d17_8_5" value=lista.d17_8_5 )
+                        td: input#d17_9_5.form-control(type="text" name="d17_9_5" value=lista.d17_9_5 ) 
+                        td: input#d17_10_5.form-control(type="text" name="d17_10_5" value=lista.d17_10_5 )
+          .card
+            #headingd18.card-header
+              h5.mb-0
+                button.btn.btn-link.collapsed(type='button', data-toggle='collapse', data-target='#collapsed18', aria-expanded='true', aria-controls='collapseThree')
+                  | D.1.8 CUADRO Nº8: Gastos de gestión
+            #collapsed18.collapse(aria-labelledby='headingd18', data-parent='#accordion')
+              .card-body
+                .table-responsive
+                  table.table.table-bordered.table-hover
+                    thead.thead-light.text-capitalize
+                      tr
+                        th Descripción 
+                        th Unidad Medida 
+                        th Costo unitario 
+                        th Cantidad 
+                        th Costo Total 
+                        th RNR 
+                        th Cofinanciamiento monetario 
+                        th Cofinanciamiento no monetario 
+                        th Entidad Aportante 
+                    tbody
+                      tr
+                        td: input#d18_1_1.form-control(type="text" name="d18_1_1" value=lista.d18_1_1) 
+                        td: input#d18_2_1.form-control(type="text" name="d18_2_1" value=lista.d18_2_1)
+                        td: input#d18_3_1.form-control(type="text" name="d18_3_1" value=lista.d18_3_1) 
+                        td: input#d18_4_1.form-control(type="text" name="d18_4_1" value=lista.d18_4_1)
+                        td: input#d18_5_1.form-control(type="text" name="d18_5_1" value=lista.d18_5_1)
+                        td: input#d18_6_1.form-control(type="text" name="d18_6_1" value=lista.d18_6_1) 
+                        td: input#d18_7_1.form-control(type="text" name="d18_7_1" value=lista.d18_7_1)
+                        td: input#d18_8_1.form-control(type="text" name="d18_8_1" value=lista.d18_8_1)
+                        td: input#d18_9_1.form-control(type="text" name="d18_9_1" value=lista.d18_9_1) 
+                      tr
+                        td: input#d18_1_2.form-control(type="text" name="d18_1_2" value=lista.d18_1_2) 
+                        td: input#d18_2_2.form-control(type="text" name="d18_2_2" value=lista.d18_2_2)
+                        td: input#d18_3_2.form-control(type="text" name="d18_3_2" value=lista.d18_3_2) 
+                        td: input#d18_4_2.form-control(type="text" name="d18_4_2" value=lista.d18_4_2)
+                        td: input#d18_5_2.form-control(type="text" name="d18_5_2" value=lista.d18_5_2)
+                        td: input#d18_6_2.form-control(type="text" name="d18_6_2" value=lista.d18_6_2) 
+                        td: input#d18_7_2.form-control(type="text" name="d18_7_2" value=lista.d18_7_2)
+                        td: input#d18_8_2.form-control(type="text" name="d18_8_2" value=lista.d18_8_2)
+                        td: input#d18_9_2.form-control(type="text" name="d18_9_2" value=lista.d18_9_2) 
+                      tr
+                        td: input#d18_1_3.form-control(type="text" name="d18_1_3" value=lista.d18_1_3)
+                        td: input#d18_2_3.form-control(type="text" name="d18_2_3" value=lista.d18_2_3)
+                        td: input#d18_3_3.form-control(type="text" name="d18_3_3" value=lista.d18_3_3)
+                        td: input#d18_4_3.form-control(type="text" name="d18_4_3" value=lista.d18_4_3)
+                        td: input#d18_5_3.form-control(type="text" name="d18_5_3" value=lista.d18_5_3)
+                        td: input#d18_6_3.form-control(type="text" name="d18_6_3" value=lista.d18_6_3)
+                        td: input#d18_7_3.form-control(type="text" name="d18_7_3" value=lista.d18_7_3)
+                        td: input#d18_8_3.form-control(type="text" name="d18_8_3" value=lista.d18_8_3)
+                        td: input#d18_9_3.form-control(type="text" name="d18_9_3" value=lista.d18_9_3)
+                      tr
+                        td: input#d18_1_4.form-control(type="text" name="d18_1_4" value=lista.d18_1_4) 
+                        td: input#d18_2_4.form-control(type="text" name="d18_2_4" value=lista.d18_2_4)
+                        td: input#d18_3_4.form-control(type="text" name="d18_3_4" value=lista.d18_3_4) 
+                        td: input#d18_4_4.form-control(type="text" name="d18_4_4" value=lista.d18_4_4)
+                        td: input#d18_5_4.form-control(type="text" name="d18_5_4" value=lista.d18_5_4)
+                        td: input#d18_6_4.form-control(type="text" name="d18_6_4" value=lista.d18_6_4) 
+                        td: input#d18_7_4.form-control(type="text" name="d18_7_4" value=lista.d18_7_4)
+                        td: input#d18_8_4.form-control(type="text" name="d18_8_4" value=lista.d18_8_4)
+                        td: input#d18_9_4.form-control(type="text" name="d18_9_4" value=lista.d18_9_4)
+                      tr
+                        td: input#d18_1_5.form-control(type="text" name="d18_1_5" value=lista.d18_1_5)
+                        td: input#d18_2_5.form-control(type="text" name="d18_2_5" value=lista.d18_2_5)
+                        td: input#d18_3_5.form-control(type="text" name="d18_3_5" value=lista.d18_3_5) 
+                        td: input#d18_4_5.form-control(type="text" name="d18_4_5" value=lista.d18_4_5)
+                        td: input#d18_5_5.form-control(type="text" name="d18_5_5" value=lista.d18_5_5)
+                        td: input#d18_6_5.form-control(type="text" name="d18_6_5" value=lista.d18_6_5) 
+                        td: input#d18_7_5.form-control(type="text" name="d18_7_5" value=lista.d18_7_5)
+                        td: input#d18_8_5.form-control(type="text" name="d18_8_5" value=lista.d18_8_5)
+                        td: input#d18_9_5.form-control(type="text" name="d18_9_5" value=lista.d18_9_5)
+          .card
+            #headingd19.card-header
+              h5.mb-0
+                button.btn.btn-link.collapsed(type='button', data-toggle='collapse', data-target='#collapsed19', aria-expanded='true', aria-controls='collapseThree')
+                  | D.1.9 Equipo Formulador del Proyecto
+            #collapsed19.collapse(aria-labelledby='headingd19', data-parent='#accordion')
+              .card-body
+                .table-responsive
+                  table.table.table-bordered.table-hover
+                    thead.thead-light.text-capitalize
+                      tr
+                        th Tipo de Documento 
+                        th Número de Documento 
+                        th Nombres 
+                        th Apellidos 
+                        th Correo 
+                        th Teléfono 
+                        th Celular 
+                    tbody
+                      tr
+                        td: input#d19_1_1.form-control(type="text" name="d19_1_1" value=lista.d19_1_1) 
+                        td: input#d19_2_1.form-control(type="text" name="d19_2_1" value=lista.d19_2_1)
+                        td: input#d19_3_1.form-control(type="text" name="d19_3_1" value=lista.d19_3_1) 
+                        td: input#d19_4_1.form-control(type="text" name="d19_4_1" value=lista.d19_4_1)
+                        td: input#d19_5_1.form-control(type="text" name="d19_5_1" value=lista.d19_5_1)
+                        td: input#d19_6_1.form-control(type="text" name="d19_6_1" value=lista.d19_6_1) 
+                        td: input#d19_7_1.form-control(type="text" name="d19_7_1" value=lista.d19_7_1) 
+                      tr
+                        td: input#d19_1_2.form-control(type="text" name="d19_1_2" value=lista.d19_1_2) 
+                        td: input#d19_2_2.form-control(type="text" name="d19_2_2" value=lista.d19_2_2)
+                        td: input#d19_3_2.form-control(type="text" name="d19_3_2" value=lista.d19_3_2) 
+                        td: input#d19_4_2.form-control(type="text" name="d19_4_2" value=lista.d19_4_2)
+                        td: input#d19_5_2.form-control(type="text" name="d19_5_2" value=lista.d19_5_2)
+                        td: input#d19_6_2.form-control(type="text" name="d19_6_2" value=lista.d19_6_2) 
+                        td: input#d19_7_2.form-control(type="text" name="d19_7_2" value=lista.d19_7_2) 
+                      tr
+                        td: input#d19_1_3.form-control(type="text" name="d19_1_3" value=lista.d19_1_3)
+                        td: input#d19_2_3.form-control(type="text" name="d19_2_3" value=lista.d19_2_3)
+                        td: input#d19_3_3.form-control(type="text" name="d19_3_3" value=lista.d19_3_3)
+                        td: input#d19_4_3.form-control(type="text" name="d19_4_3" value=lista.d19_4_3)
+                        td: input#d19_5_3.form-control(type="text" name="d19_5_3" value=lista.d19_5_3)
+                        td: input#d19_6_3.form-control(type="text" name="d19_6_3" value=lista.d19_6_3)
+                        td: input#d19_7_3.form-control(type="text" name="d19_7_3" value=lista.d19_7_3)
+                      tr
+                        td: input#d19_1_4.form-control(type="text" name="d19_1_4" value=lista.d19_1_4) 
+                        td: input#d19_2_4.form-control(type="text" name="d19_2_4" value=lista.d19_2_4)
+                        td: input#d19_3_4.form-control(type="text" name="d19_3_4" value=lista.d19_3_4) 
+                        td: input#d19_4_4.form-control(type="text" name="d19_4_4" value=lista.d19_4_4)
+                        td: input#d19_5_4.form-control(type="text" name="d19_5_4" value=lista.d19_5_4)
+                        td: input#d19_6_4.form-control(type="text" name="d19_6_4" value=lista.d19_6_4) 
+                        td: input#d19_7_4.form-control(type="text" name="d19_7_4" value=lista.d19_7_4)
+                      tr
+                        td: input#d19_1_5.form-control(type="text" name="d19_1_5" value=lista.d19_1_5)
+                        td: input#d19_2_5.form-control(type="text" name="d19_2_5" value=lista.d19_2_5)
+                        td: input#d19_3_5.form-control(type="text" name="d19_3_5" value=lista.d19_3_5) 
+                        td: input#d19_4_5.form-control(type="text" name="d19_4_5" value=lista.d19_4_5)
+                        td: input#d19_5_5.form-control(type="text" name="d19_5_5" value=lista.d19_5_5)
+                        td: input#d19_6_5.form-control(type="text" name="d19_6_5" value=lista.d19_6_5) 
+                        td: input#d19_7_5.form-control(type="text" name="d19_7_5" value=lista.d19_7_5)

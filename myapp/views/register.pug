@@ -1,0 +1,144 @@
+extends layout
+
+block content
+  .container
+    form(action="/validation/new-user", method="post")
+      .card.rounded.border-secondary
+        h5.card-header.text-capitalize.bg-danger.text-white
+          | Registro Persona Natural
+        .card-body
+          .row
+            .col-sm-6
+              .form-group
+                label.h6(for='tipo_documento') Tipo Documento
+                  span.text-danger  (*)
+                select#tipo_documento.form-control(name="tipo_documento" required)
+                  option(selected) -----
+                  option(value='0') CARNET DE EXTRANJERIA
+                  option(value='1') DOCUMENTO NACIONAL DE IDENTIDAD
+                  option(value='2') PASAPORTE
+            .col-sm-6
+              .form-group
+                label.h6(for='documento_identidad') Documento de Identidad
+                  span.text-danger  (*)
+                input#documento_identidad.form-control(type='text' name="documento_identidad" required)
+          .row
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='nombres') Nombres
+                  span.text-danger  (*)
+                input#nombres.form-control(type='text' name="nombres" required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='apellido_paterno') Apellido Paterno
+                  span.text-danger  (*)
+                input#apellidoPaterno.form-control(type='text' name="apellido_paterno" required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='apellido_materno') Apellido Materno
+                input#apellidoMaterno.form-control(type='text' name="apellido_materno")
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='genero') G&eacutenero
+                  span.text-danger  (*)
+                select#genero.form-control(name="genero" required)
+                  option(selected) -----
+                  option(value='0') Femenino
+                  option(value='1') Masculino
+          .row
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='pais') Pa&iacutes
+                  span.text-danger  (*)
+                input#pais.form-control(type='text' name="pais" required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='departamento') Departamento
+                  span.text-danger  (*)
+                input#departamento.form-control(type='text' name="departamento" required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='provincia') Provincia
+                  span.text-danger  (*)
+                input#provincia.form-control(type='text' name="provincia" required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='distrito') Distrito
+                  span.text-danger  (*)
+                input#distrito.form-control(type='text' name="distrito" required)
+          .row
+            .col
+              .form-group
+                label.h6(for='direccion') Direcci&oacuten
+                  span.text-danger  (*)
+                input#direccion.form-control(type='text' name="direccion" required)
+          .row
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='fecha_nacimiento') Fecha de Nacimiento
+                  span.text-danger  (*)
+                input#fechaNacimiento.form-control(type='date' name="fecha_nacimiento" required)
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='telefono_movil') Tel&eacutefono M&oacutevil
+                  span.text-danger  (*)
+                input#telefonoMovil.form-control(type='number' name="telefono_movil" required)
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='telefono_fijo') Tel&eacutefono  Fijo
+                  span.text-danger  (*)
+                input#telefonoFijo.form-control(type='number' name="telefono_fijo" required)
+          .row
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='email') Correo Electr&oacutenico
+                  span.text-danger  (*)
+                input#email.form-control(type='email' name="email" required)
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='email2') Correo Electr&oacutenico Alternativo
+                  span.text-danger  (*)
+                input#email2.form-control(type='email' name="email2" required)
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='estatus') Estatus Actual
+                  span.text-danger  (*)
+                br
+                .custom-control.custom-radio.custom-control-inline                
+                  input#profesor.custom-control-input(type='radio' name="docente" value="0")
+                  label.custom-control-label(for="profesor") PROFESOR
+                .custom-control.custom-radio.custom-control-inline
+                  input#estudiante.custom-control-input(type='radio' name="docente" value="1" checked)
+                  label.custom-control-label(for="estudiante") ESTUDIANTE
+                .custom-control.custom-radio.custom-control-inline
+                  input#egresado.custom-control-input(type='radio' name="docente" value="2")
+                  label.custom-control-label(for="egresado") EGRESADO
+                .custom-control.custom-radio.custom-control-inline
+                  input#externo.custom-control-input(type='radio' name="docente" value="3")
+                  label.custom-control-label(for="externo") INVG. EXTERNO
+      .card.rounded.border-secondary
+        h5.card-header.text-capitalize.bg-danger.text-white
+          | Datos de Acceso
+        .card-body
+          .row
+            .col-sm-4
+              .form-group
+                label.h6(for='usuario') Usuario
+                input#usuario.form-control(type='text' name="usuario" disabled)
+            .col-sm-4
+              .form-group
+                label.h6(for='clave') Contrase&ntildea
+                  span.text-danger  (*)
+                input#clave.form-control(type='password' name="clave" required)
+            .col-sm-4
+              .form-group
+                label.h6(for='confirmarClave') Confirmar Contrase&ntildea
+                  span.text-danger  (*)
+                input#confirmarClave.form-control(type='password' name="confirmarClave" required)
+          .row
+            .col-sm-12.col-md-6
+              input#carga.btn.btn-outline-primary.float-right.btn-lg.btn-block(type="submit", value="Guardar")
+            .col-sm-12.col-md-6
+              a.btn.btn-outline-danger.float-right.btn-lg.btn-block(href="/" role="button") Cancelar
+  script(src="/javascripts/jquery-3.3.1.min.js")
+  script(src="/javascripts/valida.js")

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/pesk_style.css">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <title>PESKPROJECT</title>
+</head>
+
+<body id="fondo1"><br><br>
+
+<div class="container">
+  <form action="/validation" method="post">
+    <div class="card mx-auto rounded border-secondary" style="max-width:500px;">
+      <h5 class="card-header text-capitalize bg-danger text-white">Iniciar de Sesi&oacuten</h5>
+      <div class="card-body">
+        <div class="form-group">
+          <label class="h6" for="user">Usuario <span class="text-danger"> (*)</span></label>
+          <input class="form-control" id="titulo" type="textarea" name="user" required="required" />
+        </div>
+        <div class="form-group">
+          <label class="h6" for="passwd">Clave<span class="text-danger"> (*)</span></label>
+          <input class="form-control" id="palabrasClave" type="password" name="passwd" required="required" />
+        </div>
+        <div class="row"><a class="col text-center" href="/register" style="color:gray; font-size: .7em;">Registrarse</a></div>
+      </div>
+      <input class="btn btn-primary" type="" value="Iniciar Sesión" />
+    </div>
+  </form>
+</div>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

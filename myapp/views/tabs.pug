@@ -1,0 +1,54 @@
+extends navbar
+
+block content
+  .container-fluid
+    form(action="/validation/editar-proyecto", method="post")      
+      ul.nav.nav-pills.nav-fill
+        li.nav-item
+          a.nav-link.active.show(href='#A', data-toggle='tab') SECCIÓN A: IDENTIFICACIÓN DE LAS ENTIDADES PARTICIPANTES
+        li.nav-item
+          a.nav-link(href='#B', data-toggle='tab') SECCIÓN B: MERCADO - COMPETITIVIDAD EMPRESARIAL
+        li.nav-item
+          a.nav-link(href='#C', data-toggle='tab') SECCIÓN C: MEMORIA TÉCNICA
+        li.nav-item
+          a.nav-link(href='#D', data-toggle='tab') SECCIÓN D: PRESUPUESTO DEL PROYECTO
+      .tab-content
+        #A.tab-pane.fade.active.show
+          block A
+        #B.tab-pane.fade
+          block B
+        #C.tab-pane.fade
+          block C
+        #D.tab-pane.fade
+          block D
+        nav.navbar.navbar-expand-lg.navbar-light.bg-mine.fixed-bottom
+          .btn-group(role="group" style="margin:auto")
+            //- button.btn.btn-success(type='button', data-toggle='modal', data-target='#Validar') Validar
+            button.btn.btn-success(type="submit") Guardar 
+            a.btn.btn-success(href='/administrar') Cancelar 
+            //- button.btn.btn-success(type='button', data-toggle='modal', data-target='#guardarEnviar')  Guardar y Enviar 
+            //- form(action="/visualizar", method="post")
+            //-   input(type="hidden", name="idproyecto" value=lista.id_proyecto)
+            //-   button.btn.btn-success(type="submit") Visualizar
+  #Validar.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          h5#exampleModalLabel.modal-title Avance del Proyecto
+          button.close(type='button', data-dismiss='modal', aria-label='Cerrar')
+            span(aria-hidden='true') x
+        .modal-body
+          | Proyecto avanzado al 0%
+        .modal-footer
+          button.btn.btn-secondary(type='button', data-dismiss='modal') Cerrar
+  #guardarEnviar.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          h5#exampleModalLabel.modal-title Avance del Proyecto
+          button.close(type='button', data-dismiss='modal', aria-label='Cerrar')
+            span(aria-hidden='true') x
+        .modal-body
+          | desea finalizar el proyecto y enviarlo?
+        .modal-footer
+          button.btn.btn-secondary(type='button', data-dismiss='modal') Enviar

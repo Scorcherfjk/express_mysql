@@ -1,0 +1,60 @@
+body {
+  padding: 50px;
+}
+.nav-tabs .nav-link{
+  background-color: #016FC6;
+  color: #ffffff;
+}
+.bg-danger {
+  background-color: #016FC6!important;
+}
+thead{
+  font-size: 0.7em;
+}
+tbody{
+  font-size: 0.7em;
+}
+.nav-item .nav-link{
+  font-size: 0.7em;
+}
+.barra{
+  font-size: 1.5em;
+}
+
+.nav-pills .nav-link{
+    color: #016FC6!important
+}
+.nav-pills .nav-link.active,
+.show>.nav-pills .nav-link{
+  color: #fff!important;
+  background: #016FC6!important;
+    
+}
+#fondo {
+  background-color:rgba(177, 173, 173, 0.541);
+}
+
+.bg-mine{
+  color: black;
+  background-color:rgba(177, 173, 173, 0);
+}
+label, h6, th{
+    text-transform: capitalize;
+}
+th{
+  text-align: center;
+  min-width: 150px;
+}
+td{
+  vertical-align:center ;
+}
+#fondo1 {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/m1.jpg') fixed center center;
+  background-size: cover;
+  padding: 110px;
+}
+
+.check{
+  max-width: 30px!important;
+  min-width: 30px!important;
+}
