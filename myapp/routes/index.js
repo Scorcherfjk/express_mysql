@@ -1,23 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var Conn = require('tedious').Connection;
-var Request = require('tedious').Request;
-var TYPES = require('tedious').TYPES;  
 var config = require('../models/database').config;
 var bcrypt = require('bcrypt');
+var mysql = require('mysql');
 
-function conexion(conn) {
-    conn.on('connect', function(err) {
-        if(err){
-            console.log(err)
-        }else{
-            console.log("Connected"); 
-        }
+function conexion(con) {
+    con.connect(function(err) {
+        if (err) throw err;
+        console.log("Connected!");
     });
 }
 
-var conn = new Conn(config());
-conexion(conn);
+var con = mysql.createConnection(config());
 
 
 /********************************************             INDEX              ****************************************************************************/
@@ -339,54 +333,32 @@ router.post("/validation/new-user", function (req,res) {
     var usuario = req.body.email;
     var clave = bcrypt.hashSync(req.body.clave,10);
     
-   var sql = "INSERT INTO [unjfsc].[dbo].[usuario] ([tipo_documento], [documento_identidad], [nombres], [apellido_paterno], [apellido_materno], [genero], [pais], [departamento], [provincia], [distrito], [direccion], [fecha_nacimiento], [telefono_movil], [telefono_fijo], [email], [email2], [estatus], [usuario], [clave]) OUTPUT INSERTED.id_usuario VALUES ( @tipo_documento, @documento_identidad, @nombres, @apellido_paterno, @apellido_materno, @genero, @pais, @departamento, @provincia, @distrito, @direccion, @fecha_nacimiento, @telefono_movil, @telefono_fijo, @email, @email2, @estatus, @usuario, @clave)";
+   con.connect(function(err) {
+    if (err) throw err;
+    console.log("CONECTADO!");
+
+    var sql = "INSERT INTO usuario (tipo_documento, documento_identidad, nombres, apellido_paterno, apellido_materno, genero, pais, departamento, provincia, distrito, direccion, fecha_nacimiento, telefono_movil, telefono_fijo, email, email2, estatus, usuario, clave) VALUES (?)";
     
-    request = new Request(sql, function(err) {  
-        if (err) {  
-           console.log(err);
+    var values = [tipo_documento, documento_identidad, nombres, apellido_paterno, apellido_materno, genero, pais, departamento, provincia, distrito, direccion, fecha_nacimiento, telefono_movil, telefono_fijo, email, email2, estatus, usuario, clave];
+
+    con.query(sql, [values], function (err, result) {
+        if (err) {
+            console.log(err);
+        }else{
+            req.session.user = usuario;
+            console.log("Acceso concedido");
         }
-        req.session.user = usuario;
-        console.log("Acceso concedido");
         if(!req.session.user){
             console.log(req.session.user);
             res.redirect("/");
         } else {
             res.redirect('/inicio');
         }
-
     });
-
-    request.addParameter("tipo_documento" ,         TYPES.Int           , tipo_documento);
-    request.addParameter("documento_identidad" ,    TYPES.Int           , documento_identidad);
-    request.addParameter("nombres" ,                TYPES.VarChar       , nombres);
-    request.addParameter("apellido_paterno" ,       TYPES.VarChar       , apellido_paterno);
-    request.addParameter("apellido_materno" ,       TYPES.VarChar       , apellido_materno);
-    request.addParameter("genero" ,                 TYPES.Int           , genero);
-    request.addParameter("pais" ,                   TYPES.VarChar       , pais);
-    request.addParameter("departamento" ,           TYPES.VarChar       , departamento);
-    request.addParameter("provincia" ,              TYPES.VarChar       , provincia);
-    request.addParameter("distrito" ,               TYPES.VarChar       , distrito);
-    request.addParameter("direccion" ,              TYPES.VarChar       , direccion);
-    request.addParameter("fecha_nacimiento" ,       TYPES.Date          , fecha_nacimiento);
-    request.addParameter("telefono_movil" ,         TYPES.Int           , telefono_movil);
-    request.addParameter("telefono_fijo" ,          TYPES.Int           , telefono_fijo);
-    request.addParameter("email" ,                  TYPES.VarChar       , email);
-    request.addParameter("email2" ,                 TYPES.VarChar       , email2);
-    request.addParameter("estatus" ,                TYPES.Int           , estatus);
-    request.addParameter("usuario" ,                TYPES.VarChar       , usuario);
-    request.addParameter("clave" ,                  TYPES.VarChar       , clave);
-        
-    request.on('row', function(columns) {  
-        columns.forEach(function(column) {  
-            if (column.value === null) {  
-                console.log('NULL');  
-            } else {  
-                console.log("Ha sido creado el usuario nro: " + column.value);  
-            }  
-        });  
-    });       
-    conn.execSql(request);
+    con.end();
+  });
 });
+
 
 /* CARGA DEL PROYECTO NUEVO *******************************************************************************************************************************/
 
