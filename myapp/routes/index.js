@@ -69,25 +69,25 @@ router.get('/change-password' ,function(req, res, next) {
   }
 });
 
-/*** MODIFICAR ***/
 router.post('/validation/change-password' ,function(req, res, next) {
     if(req.session.user){
+        con.connect(function(err) {
+            if (err) throw err;
+            else console.log("CONECTADO!");
+    
+            var sql = `UPDATE usuario SET clave = ? WHERE id_usuario = ?`;
+            var clave = bcrypt.hashSync(req.body.clave,10)
+            var usuario = req.session.user.id
 
-        var sql = `UPDATE usuario
-                SET clave = @clave
-                WHERE id_usuario = @id_usuario`;
-
-        var request = new Request(sql, function(err) {
-            if (err) {
-                console.log(err);
-            }
-            res.redirect('/inicio');
+            con.query(sql, [clave, usuario], function (err, result) {
+                if (err) {
+                    console.log(err);
+                }else{
+                    res.redirect('/inicio');
+                }
+            });
+            con.end();
         });
-
-        request.addParameter("id_usuario" ,         TYPES.Int,              req.session.user.id);
-        request.addParameter("clave" ,             TYPES.VarChar,          bcrypt.hashSync(req.body.clave,10));
-
-        conn.execSql(request);
     } else {
         res.redirect("/");
     }
