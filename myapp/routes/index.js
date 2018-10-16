@@ -9,6 +9,7 @@ var con = mysql.createConnection(config());
 
 /********************************************             INDEX              ****************************************************************************/
 
+/*** LISTO ***/
 router.get('/', function(req, res, next) {
     if (con){
         con.destroy();
@@ -23,7 +24,8 @@ router.get('/', function(req, res, next) {
     });
     res.render('index', { title: 'Universidad jfsc' });
 });
-  
+
+/*** LISTO ***/
 router.get('/register', function(req, res, next) {
     res.render('register', { title: 'Registro de usuario' });
 });
@@ -32,6 +34,7 @@ router.get('/register', function(req, res, next) {
 
 /*****************************************             ACTIVE SESSION          *********************************************************************************/
 
+/*** LISTO ***/
 router.get('/inicio' ,function(req, res, next) {
     if(req.session.user){
         res.render('inicio', { 
@@ -45,6 +48,7 @@ router.get('/inicio' ,function(req, res, next) {
 
 /* CREACION DE UN NUEVO PROYECTO ********************************************************************************************************************** */
 
+/*** LISTO ***/
 router.get('/nuevo' ,function(req, res, next) {
     if(req.session.user){
         res.render('nuevo', { 
@@ -58,6 +62,7 @@ router.get('/nuevo' ,function(req, res, next) {
 
 /* CAMBIAR LA CLAVE DE ACCESO *************************************************************************************************************************** */
 
+/*** LISTO ***/
 router.get('/change-password' ,function(req, res, next) {
     if(req.session.user){
         res.render('changePassword', { 
@@ -69,8 +74,13 @@ router.get('/change-password' ,function(req, res, next) {
   }
 });
 
+/*** LISTO ***/
 router.post('/validation/change-password' ,function(req, res, next) {
     if(req.session.user){
+
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
+
         con.connect(function(err) {
             if (err) throw err;
             else console.log("CONECTADO!");
@@ -95,6 +105,7 @@ router.post('/validation/change-password' ,function(req, res, next) {
 
 /* CAMBIAR LOS DATOS PERSONALES  ******************************************************************************************************************* */
 
+/*** LISTO ***/
 router.get('/change-data' ,function(req, res, next) {
     if(req.session.user){
         
@@ -130,41 +141,29 @@ router.get('/change-data' ,function(req, res, next) {
     }
 });
 
-/*** MODIFICAR ***/
+/*** LISTO ***/
 router.post('/validation/change-data' ,function(req, res, next) {
     if(req.session.user){
-        
 
-        var sql = `UPDATE [unjfsc].[dbo].[usuario]
-            SET [pais] = @pais
-                ,[departamento] =  @departamento
-                ,[provincia] = @provincia
-                ,[distrito] = @distrito
-                ,[direccion] =  @direccion
-                ,[telefono_movil] = @telefono_movil
-                ,[telefono_fijo] =  @telefono_fijo
-                ,[email2] =  @email2
-                WHERE id_usuario = @id_usuario`;
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
 
-        var request = new Request(sql, function(err) {
-            if (err) {
-                console.log(err);
-            }
-            res.redirect('/change-data');
+        con.connect(function(err) {
+            if (err) throw err;
+            else console.log("CONECTADO!");
+    
+            var sql = `UPDATE usuario SET pais = ? ,departamento =  ? ,provincia = ? ,distrito = ? ,direccion =  ? ,telefono_movil = ? ,telefono_fijo =  ? ,email2 =  ? WHERE id_usuario = ?`;
+            var campos = [ req.body.pais, req.body.departamento, req.body.provincia, req.body.distrito, req.body.direccion, req.body.telefono_movil, req.body.telefono_fijo, req.body.email2, req.session.user.id ]
+
+            con.query(sql, campos, function (err, result) {
+                if (err) {
+                    console.log(err);
+                }else{
+                    res.redirect('/inicio');
+                }
+            });
+            con.end();
         });
-
-        request.addParameter("id_usuario" ,         TYPES.Int,              req.session.user.id);
-        request.addParameter("pais" ,               TYPES.VarChar,          req.body.pais);
-        request.addParameter("departamento" ,       TYPES.VarChar,          req.body.departamento);
-        request.addParameter("provincia" ,          TYPES.VarChar,          req.body.provincia);
-        request.addParameter("distrito" ,           TYPES.VarChar,          req.body.distrito);
-        request.addParameter("direccion" ,          TYPES.VarChar,          req.body.direccion);
-        request.addParameter("telefono_movil" ,     TYPES.Int,              req.body.telefono_movil);
-        request.addParameter("telefono_fijo" ,      TYPES.Int,              req.body.telefono_fijo);
-        request.addParameter("email2" ,             TYPES.VarChar,          req.body.email2);
-
-        conn.execSql(request);
-
     } else {
         res.redirect("/");
     }
@@ -175,7 +174,7 @@ router.post('/validation/change-data' ,function(req, res, next) {
 router.get('/administrar' ,function(req, res, next) {
     if(req.session.user){
 
-        var sql = 'SELECT id_proyecto, titulo, fecha_creacion from unjfsc.dbo.proyectos WHERE id_usuario = @id_usuario';
+        var sql = 'SELECT id_proyecto, titulo, fecha_creacion from unjfsc.dbo.proyectos WHERE id_usuario = ?';
         var result = [];
 
         var request = new Request(sql, function(err) {
@@ -183,7 +182,6 @@ router.get('/administrar' ,function(req, res, next) {
                 console.log(err);
             }
             if(!req.session.user){
-                console.log(req.session.user);
                 res.redirect("/");
             } else {
                 res.render('administrar', { 
@@ -268,6 +266,7 @@ router.post('/editar-proyecto' ,function(req, res, next) {
 
 /* INICIO DE SESION *******************************************************************************************************************************/
 
+/*** LISTO ***/
 router.post('/validation', function(req, res) {
 
     var con = mysql.createConnection(config());
@@ -310,6 +309,7 @@ router.post('/validation', function(req, res) {
 
 /* REGISTRO DE NUEVO USUARIO *******************************************************************************************************************************/
 
+/*** LISTO ***/
 router.post("/validation/new-user", function (req,res) {
 
     var con = mysql.createConnection(config());
@@ -1270,15 +1270,15 @@ router.post('/validation/editar-proyecto', function(req, res) {
 });
 
 /*******************************************             FILTERING          ****************************************************/
-
+/*** LISTO ***/
 router.get('/validation', function(req,res){
     res.redirect("/");
 });
-
+/*** LISTO ***/
 router.get('/validation/cargar-proyecto', function(req,res){
     res.redirect("/");
 });
-
+/*** LISTO ***/
 router.get('/validation/new-user', function(req,res){
     res.redirect("/");
 });
