@@ -6,7 +6,6 @@ var mysql = require('mysql');
 
 var con = mysql.createConnection(config());
 
-
 /********************************************             INDEX              ****************************************************************************/
 
 /*** LISTO ***/
@@ -170,40 +169,36 @@ router.post('/validation/change-data' ,function(req, res, next) {
 });
 
 /* ADMINISTRACION DE LOS PROYECTOS **************************************************************************************************************************** */
-/*** MODIFICAR ***/
+/*** LISTO ***/
 router.get('/administrar' ,function(req, res, next) {
     if(req.session.user){
 
-        var sql = 'SELECT id_proyecto, titulo, fecha_creacion from unjfsc.dbo.proyectos WHERE id_usuario = ?';
-        var result = [];
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
 
-        var request = new Request(sql, function(err) {
-            if (err) {
-                console.log(err);
-            }
-            if(!req.session.user){
-                res.redirect("/");
-            } else {
-                res.render('administrar', { 
-                    title: "Administrar Proyectos", 
-                    usuario: req.session.user,
-                    lista: result
-                });
-            }
+        con.connect(function(err) {
+            if (err) console.log(err);
+            else console.log("CONECTADO!");
+
+            var sql = 'SELECT id_proyecto, titulo, fecha_creacion from proyecto WHERE id_usuario = ?';
+            var id = [req.session.user.id];
+
+            con.query(sql, id, function (err, result) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                if(!req.session.user){
+                    res.redirect("/");
+                } else {
+                    res.render('administrar', { 
+                        title: "Administrar Proyectos", 
+                        usuario: req.session.user,
+                        lista: result
+                    });
+                }
+            });
         });
-
-        request.addParameter("id_usuario" ,    TYPES.Int,    req.session.user.id);
-
-        request.on("row", function (columns) { 
-            var item = {}; 
-            columns.forEach(function (column) { 
-                item[column.metadata.colName] = column.value; 
-            }); 
-            result.push(item);
-        });
-
-        conn.execSql(request);
-
     } else {
         res.redirect("/");
     }
@@ -216,14 +211,12 @@ router.post('/editar-proyecto' ,function(req, res, next) {
         
         var sql = `SELECT usuario.*, proyectos.*, 
         tabla1.*, tabla2.*, 
-        tabla3.*, tabla4.*, tabla5.* from unjfsc.dbo.proyectos 
-        INNER JOIN unjfsc.dbo.usuario 
-        ON usuario.id_usuario = @id_usuario and proyectos.id_proyecto = @idproyecto
-        INNER JOIN unjfsc.dbo.tabla1 ON tabla1.id_proyecto = @idproyecto
-        INNER JOIN unjfsc.dbo.tabla2 ON tabla2.id_proyecto = @idproyecto
-        INNER JOIN unjfsc.dbo.tabla3 ON tabla3.id_proyecto = @idproyecto
-        INNER JOIN unjfsc.dbo.tabla4 ON tabla4.id_proyecto = @idproyecto
-        INNER JOIN unjfsc.dbo.tabla5 ON tabla5.id_proyecto = @idproyecto`;
+        tabla3.*, tabla4.*, tabla5.* from proyecto
+        INNER JOIN usuario 
+        ON usuario.id_usuario = ? and proyectos.id_proyecto = ?`;
+        
+        var values = [ req.session.user.id, req.body.idproyecto];
+        
         var result = {};
 
         var request = new Request(sql, function(err) {
@@ -241,9 +234,6 @@ router.post('/editar-proyecto' ,function(req, res, next) {
                 });
             }
         });
-
-        request.addParameter("id_usuario" ,    TYPES.Int,    req.session.user.id);
-        request.addParameter("idproyecto" ,    TYPES.Int,    req.body.idproyecto);
 
         request.on("row", function (columns) { 
             var item = {}; 
@@ -296,7 +286,6 @@ router.post('/validation', function(req, res) {
                     }
                 }
                 if(!req.session.user){
-                    console.log(req.session.user);
                     res.redirect("/");
                 } else {
                     res.redirect('/inicio');
@@ -361,46 +350,31 @@ router.post("/validation/new-user", function (req,res) {
 });
 
 /* CARGA DEL PROYECTO NUEVO *******************************************************************************************************************************/
-/*** MODIFICAR ***/
+/*** LISTO ***/
 router.post('/validation/nuevo', function(req, res) {
+    if(req.session.user){
 
-    
-    var sql = `
-    INSERT INTO [unjfsc].[dbo].[proyectos] ([id_usuario], [titulo]) 
-    OUTPUT INSERTED.id_proyecto VALUES ( @id_usuario, @titulo)
-    INSERT INTO [unjfsc].[dbo].[tabla1] ([id_proyecto]) VALUES 
-    ((SELECT max(id_proyecto) from dbo.proyectos))
-    INSERT INTO [unjfsc].[dbo].[tabla2] ([id_proyecto]) VALUES 
-    ((SELECT max(id_proyecto) from dbo.proyectos))
-    INSERT INTO [unjfsc].[dbo].[tabla3] ([id_proyecto]) VALUES 
-    ((SELECT max(id_proyecto) from dbo.proyectos))
-    INSERT INTO [unjfsc].[dbo].[tabla4] ([id_proyecto]) VALUES 
-    ((SELECT max(id_proyecto) from dbo.proyectos))
-    INSERT INTO [unjfsc].[dbo].[tabla5] ([id_proyecto]) VALUES 
-    ((SELECT max(id_proyecto) from dbo.proyectos))
-    `;
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
 
-    var request = new Request(sql, function(err) {
-        if (err) {
-            console.log(err);
-        }
-        res.redirect('/administrar');
-    });
+        con.connect(function(err) {
+            if (err) console.log(err);
+            else console.log("CONECTADO!");
+        
+            var sql = "INSERT INTO proyecto (id_usuario, titulo) VALUES ( ? , ? )";
+            var values = [ req.session.user.id , req.body.titulo ];
 
-    request.addParameter("id_usuario" ,         TYPES.Int             ,req.session.user.id);    
-    request.addParameter("titulo" ,             TYPES.Text            ,req.body.titulo);
-
-    request.on('row', function(columns) {
-        columns.forEach(function (column) {
-            if (column.value === null) {  
-                console.log('NULL');  
-            } else {  
-                console.log("Se ha registrado el proyecto nro: " + column.value);
-            }
-        });    
-    });       
-    conn.execSql(request);
-
+            con.query(sql, values, function (err, result) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                res.redirect('/administrar');
+            });
+        });
+    } else {
+        res.redirect("/");
+    }
 });
 
 /* CARGA DEL PROYECTO NUEVO *********************************************************************************************************************/
