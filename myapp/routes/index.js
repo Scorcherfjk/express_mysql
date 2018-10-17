@@ -6,9 +6,7 @@ var mysql = require('mysql');
 
 var con = mysql.createConnection(config());
 
-/********************************************             INDEX              ****************************************************************************/
-
-/*** LISTO ***/
+/*** LISTO NO MODIFICADO ***/
 router.get('/', function(req, res, next) {
     if (con){
         con.destroy();
@@ -24,16 +22,12 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'Universidad jfsc' });
 });
 
-/*** LISTO ***/
+/*** LISTO NO MODIFICADO ***/
 router.get('/register', function(req, res, next) {
     res.render('register', { title: 'Registro de usuario' });
 });
 
-/*******************************************************************************************************************************/
-
-/*****************************************             ACTIVE SESSION          *********************************************************************************/
-
-/*** LISTO ***/
+/*** LISTO NO MODIFICADO ***/
 router.get('/inicio' ,function(req, res, next) {
     if(req.session.user){
         res.render('inicio', { 
@@ -45,9 +39,7 @@ router.get('/inicio' ,function(req, res, next) {
     }
 });
 
-/* CREACION DE UN NUEVO PROYECTO ********************************************************************************************************************** */
-
-/*** LISTO ***/
+/*** LISTO NO MODIFICADO ***/
 router.get('/nuevo' ,function(req, res, next) {
     if(req.session.user){
         res.render('nuevo', { 
@@ -59,9 +51,7 @@ router.get('/nuevo' ,function(req, res, next) {
   }
   });
 
-/* CAMBIAR LA CLAVE DE ACCESO *************************************************************************************************************************** */
-
-/*** LISTO ***/
+/*** LISTO NO MODIFICADO ***/
 router.get('/change-password' ,function(req, res, next) {
     if(req.session.user){
         res.render('changePassword', { 
@@ -101,8 +91,6 @@ router.post('/validation/change-password' ,function(req, res, next) {
         res.redirect("/");
     }
 });
-
-/* CAMBIAR LOS DATOS PERSONALES  ******************************************************************************************************************* */
 
 /*** LISTO ***/
 router.get('/change-data' ,function(req, res, next) {
@@ -168,7 +156,6 @@ router.post('/validation/change-data' ,function(req, res, next) {
     }
 });
 
-/* ADMINISTRACION DE LOS PROYECTOS **************************************************************************************************************************** */
 /*** LISTO ***/
 router.get('/administrar' ,function(req, res, next) {
     if(req.session.user){
@@ -204,57 +191,41 @@ router.get('/administrar' ,function(req, res, next) {
     }
 });
 
-/* CREACION DE UN NUEVO PROYECTO ********************************************************************************************************************************** */
-/*** MODIFICAR ***/
+/*** EN PROCESO ***/
 router.post('/editar-proyecto' ,function(req, res, next) {
     if(req.session.user){
         
-        var sql = `SELECT usuario.*, proyectos.*, 
-        tabla1.*, tabla2.*, 
-        tabla3.*, tabla4.*, tabla5.* from proyecto
-        INNER JOIN usuario 
-        ON usuario.id_usuario = ? and proyectos.id_proyecto = ?`;
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
+
+        var sql = `SELECT usuario.*, proyecto.* from proyecto INNER JOIN usuario ON usuario.id_usuario = ? and proyecto.id_proyecto = ?`;
         
         var values = [ req.session.user.id, req.body.idproyecto];
-        
-        var result = {};
 
-        var request = new Request(sql, function(err) {
-            if (err) {
-                console.log(err);
-            }
-            if(!req.session.user){
-                console.log(req.session.user);
-                res.redirect("/");
-            } else {
-                res.render('editarProyecto', { 
-                    title: "Editar Proyecto", 
-                    usuario: req.session.user,
-                    lista: result 
-                });
-            }
+        con.connect(function(err) {
+            if (err) console.log(err);
+            else console.log("CONECTADO!");
+            con.query(sql, values, function (err, result) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                if(!req.session.user){
+                    console.log(req.session.user);
+                    res.redirect("/");
+                } else {
+                    res.render('editarProyecto', { 
+                        title: "Editar Proyecto", 
+                        usuario: req.session.user,
+                        lista: result[0] 
+                    });
+                }
+            });
         });
-
-        request.on("row", function (columns) { 
-            var item = {}; 
-            columns.forEach(function (column) { 
-                item[column.metadata.colName] = column.value; 
-            }); 
-            result = item;
-        });
-
-        conn.execSql(request);
-
     } else {
         res.redirect("/");
     }
 });
-
-/******************************************************************************************************************************************************/
-
-/**********************************************         DATABASE             ********************************************************************************/
-
-/* INICIO DE SESION *******************************************************************************************************************************/
 
 /*** LISTO ***/
 router.post('/validation', function(req, res) {
@@ -295,8 +266,6 @@ router.post('/validation', function(req, res) {
         con.end();
     });
 });
-
-/* REGISTRO DE NUEVO USUARIO *******************************************************************************************************************************/
 
 /*** LISTO ***/
 router.post("/validation/new-user", function (req,res) {
@@ -349,7 +318,6 @@ router.post("/validation/new-user", function (req,res) {
     });
 });
 
-/* CARGA DEL PROYECTO NUEVO *******************************************************************************************************************************/
 /*** LISTO ***/
 router.post('/validation/nuevo', function(req, res) {
     if(req.session.user){
@@ -377,7 +345,6 @@ router.post('/validation/nuevo', function(req, res) {
     }
 });
 
-/* CARGA DEL PROYECTO NUEVO *********************************************************************************************************************/
 /*** MODIFICAR ***/
 router.post('/validation/editar-proyecto', function(req, res) {
 
@@ -1243,21 +1210,19 @@ router.post('/validation/editar-proyecto', function(req, res) {
 
 });
 
-/*******************************************             FILTERING          ****************************************************/
-/*** LISTO ***/
+/*** LISTO NO MODIFICADO ***/
 router.get('/validation', function(req,res){
     res.redirect("/");
 });
-/*** LISTO ***/
+/*** LISTO NO MODIFICADO ***/
 router.get('/validation/cargar-proyecto', function(req,res){
     res.redirect("/");
 });
-/*** LISTO ***/
+/*** LISTO NO MODIFICADO ***/
 router.get('/validation/new-user', function(req,res){
     res.redirect("/");
 });
 
-/*******************************************************************************************************************************/
 /*** MODIFICAR ***/
 router.post('/visualizar', function(req, res, next) {
     var conversion = require("phantom-html-to-pdf")();
