@@ -44,12 +44,12 @@ router.get('/nuevo' ,function(req, res, next) {
     if(req.session.user){
         res.render('nuevo', { 
             title: "Nuevo", 
-            usuario: req.session.user 
+            usuario: req.session.user
         });
     } else {
         res.redirect("/");
-  }
-  });
+    }
+});
 
 /*** LISTO NO MODIFICADO ***/
 router.get('/change-password' ,function(req, res, next) {
@@ -198,9 +198,12 @@ router.post('/editar-proyecto' ,function(req, res, next) {
         if (con) con.destroy();
         var con = mysql.createConnection(config());
 
-        var sql = `SELECT usuario.*, proyecto.* from proyecto INNER JOIN usuario ON usuario.id_usuario = ? and proyecto.id_proyecto = ?`;
+        var sql = `SELECT usuario.*, proyecto.*, datos_generales.*
+        FROM proyecto INNER JOIN usuario 
+        ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
+        INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto`;
         
-        var values = [ req.session.user.id, req.body.idproyecto];
+        var values = [ req.session.user.id, req.body.idproyecto, req.body.idproyecto];
 
         con.connect(function(err) {
             if (err) console.log(err);
@@ -318,7 +321,7 @@ router.post("/validation/new-user", function (req,res) {
     });
 });
 
-/*** LISTO ***/
+/*** EN PROCESO ***/
 router.post('/validation/nuevo', function(req, res) {
     if(req.session.user){
 
@@ -327,18 +330,19 @@ router.post('/validation/nuevo', function(req, res) {
 
         con.connect(function(err) {
             if (err) console.log(err);
-            else console.log("CONECTADO!");
         
-            var sql = "INSERT INTO proyecto (id_usuario, titulo) VALUES ( ? , ? )";
-            var values = [ req.session.user.id , req.body.titulo ];
+            var sql =  `INSERT INTO proyecto (id_usuario, titulo) VALUES ( ? , ? )`;
+            var sql2 = `INSERT INTO datos_generales (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) as id FROM proyecto) )`;
 
+            var values = [ req.session.user.id , req.body.titulo ];
             con.query(sql, values, function (err, result) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                res.redirect('/administrar');
+                if (err) { console.log(err); return; }
             });
+            con.query(sql2, function (err, result) {
+                if (err) { console.log(err); return; }
+                res.redirect('/administrar');
+            }); 
+            con.end();
         });
     } else {
         res.redirect("/");

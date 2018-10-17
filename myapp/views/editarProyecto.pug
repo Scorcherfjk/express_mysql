@@ -26,9 +26,9 @@ block A
               th Area tematica
           tbody
             tr
-              td: input#area_innovacion_area.form-control(type="text" name="area_innovacion_area" value=lista.area_innovacion_area)
-              td: input#area_innovacion_subarea.form-control(type="text" name="area_innovacion_subarea" value=lista.area_innovacion_subarea)
-              td: input#area_innovacion_tematica.form-control(type="text" name="area_innovacion_tematica" value=lista.area_innovacion_tematica)
+              td: input#area_innovacion_area.form-control(type="text" name="area_innovacion_area" value=lista.ai_area)
+              td: input#area_innovacion_subarea.form-control(type="text" name="area_innovacion_subarea" value=lista.ai_subarea)
+              td: input#area_innovacion_tematica.form-control(type="text" name="area_innovacion_tematica" value=lista.ai_tematica)
       h6 A.1.4 - actividad economica en la que se aplicara la innovacion
       .table-responsive
         table.table.table-bordered.table-hover
@@ -51,10 +51,10 @@ block A
               th Ubigeo
           tbody
             tr
-              td: input#localizacion_departamento.form-control(type="text" name="localizacion_departamento" value=lista.localizacion_departamento)
-              td: input#localizacion_provincia.form-control(type="text" name="localizacion_provincia" value=lista.localizacion_provincia)
-              td: input#localizacion_distrito.form-control(type="text" name="localizacion_distrito" value=lista.localizacion_distrito)
-              td: input#localizacion_ubigeo.form-control(type="number" name="localizacion_ubigeo" value=lista.localizacion_ubigeo)
+              td: input#localizacion_departamento.form-control(type="text" name="localizacion_departamento" value=lista.loc_departamento)
+              td: input#localizacion_provincia.form-control(type="text" name="localizacion_provincia" value=lista.loc_provincia)
+              td: input#localizacion_distrito.form-control(type="text" name="localizacion_distrito" value=lista.loc_distrito)
+              td: input#localizacion_ubigeo.form-control(type="number" name="localizacion_ubigeo" value=lista.loc_ubigeo)
       .form-group
         label.h6(for='duracionDelProyecto') A.1.6 - Duracion del proyecto
           span.text-danger  (*)
