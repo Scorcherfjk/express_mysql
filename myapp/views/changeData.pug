@@ -1,6 +1,8 @@
 extends navbar
 
 block content
+  - function addZero(i) { if (i < 10) { i = '0' + i; } return i; }
+  - function fecha(i){ var dd = i.getDate(); var mm = i.getMonth()+1; var yyyy = i.getFullYear(); dd = addZero(dd); mm = addZero(mm); return yyyy+'-'+mm+'-'+dd; }
   .container
     form(action="/validation/change-data", method="post")
       .card.rounded.border-secondary
@@ -70,7 +72,7 @@ block content
             .col-sm-6.col-md-4
               .form-group
                 label.h6(for='fecha_nacimiento') Fecha de Nacimiento
-                input#fecha_nacimiento.form-control(type='date' name="fecha_nacimiento" disabled value=lista.fecha_nacimiento)
+                input#fecha_nacimiento.form-control(type='date' name="fecha_nacimiento" disabled value=fecha(lista.fecha_nacimiento))
             .col-sm-6.col-md-4
               .form-group
                 label.h6(for='telefono_movil') Tel&eacutefono M&oacutevil
