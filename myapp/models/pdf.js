@@ -13,7 +13,7 @@ function fecha(i){
         mm = addZero(mm); 
         return dd+'-'+mm+'-'+yyyy; 
     }else { 
-        return i;
+        return null;
     } 
 }
   
@@ -92,9 +92,9 @@ html+=`<h2>SECCIÓN A: IDENTIFICACIÓN DE LAS ENTIDADES PARTICIPANTES</h2>
     </thead>
     <tbody>
         <tr>
-            <td> `+   lista.area_innovacion_area  +`  </td>
-            <td> `+   lista.area_innovacion_subarea  +`  </td>
-            <td> `+   lista.area_innovacion_tematica  +`  </td>
+            <td> `+   lista.ai_area  +`  </td>
+            <td> `+   lista.ai_subarea  +`  </td>
+            <td> `+   lista.ai_tematica  +`  </td>
         </tr>
     </tbody>
 </table>
@@ -127,10 +127,10 @@ html+=`<h2>SECCIÓN A: IDENTIFICACIÓN DE LAS ENTIDADES PARTICIPANTES</h2>
     </thead>
     <tbody>
         <tr>
-            <td> `+   lista.localizacion_departamento  +`  </td>
-            <td> `+   lista.localizacion_provincia  +`  </td>
-            <td> `+   lista.localizacion_distrito  +`  </td>
-            <td> `+   lista.localizacion_ubigeo  +`  </td>
+            <td> `+   lista.loc_departamento  +`  </td>
+            <td> `+   lista.loc_provincia  +`  </td>
+            <td> `+   lista.loc_distrito  +`  </td>
+            <td> `+   lista.loc_ubigeo  +`  </td>
         </tr>
     </tbody>
 </table>
@@ -540,7 +540,7 @@ html +=`<h2>SECCIÓN B: MERCADO - COMPETITIVIDAD EMPRESARIAL</h2>
 
 <h3>B.5 Rentabilidad Económica y Financiera</h3>
 <h4>B.5.1 Rentabilidad Económica y Financiera</h4>
-<p>  `+   lista.rentabilidad_econimica  +`   </p>
+<p>  `+   lista.rentabilidad_economica  +`   </p>
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 

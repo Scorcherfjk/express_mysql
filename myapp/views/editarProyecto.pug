@@ -526,7 +526,7 @@ block B
         label(for='rentabilidadEconomica')
           | B.5.1 Rentabilidad Económica y Financiera
           span.text-danger  (*)
-        textarea#rentabilidadEconomica.form-control(rows='3' name="rentabilidadEconomica") #{lista.rentabilidad_econimica}
+        textarea#rentabilidadEconomica.form-control(rows='3' name="rentabilidadEconomica") #{lista.rentabilidad_economica}
   br
   .card.rounded.border-secondary
     h5.card-header.text-capitalize.bg-danger.text-white
@@ -826,7 +826,7 @@ block C
         br
         .custom-file
           input#planAdjunto.custom-file-input(type='file', name='planAdjunto')
-          //- label.custom-file-label(for='planAdjunto') Elige Un Archivo
+          label.custom-file-label(for='planAdjunto') Elige Un Archivo
   br
   .card.rounded.border-secondary
     h5.card-header.text-capitalize.bg-danger.text-white C.6. Propiedad Intelectual
