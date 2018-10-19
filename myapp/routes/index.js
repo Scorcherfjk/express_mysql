@@ -406,9 +406,65 @@ router.post('/validation/nuevo', function(req, res) {
             var objetivos = `INSERT INTO objetivos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
             con.query(objetivos, function (err, result) { if (err) { console.log(err); return; } });
 
+            /* 13 CRONOGRAMA */
+            /*
+            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+
             /* 14 IMPACTOS */
             var impactos = `INSERT INTO impactos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
             con.query(impactos, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 15 RECURSOS NECESARIOS */
+            /*
+            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 16 EQUIPOS Y BIENES */
+            /*
+            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 17 HONORARIOS */
+            /*
+            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 18 CONSULTORIAS */
+            /*
+            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 19 SERVICIOS DE TERCEROS */
+            /*
+            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 20 PASAJES - VIATICOS */
+            /*
+            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 21 MATERIALES */
+            /*
+            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 22 OTROS GASTOS */
+            /*
+            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 23 GASTOS DE GESTION */
+            /*
+            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 24 EQUIPO FORMULADOR */
+            /*
+            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+
 
             /* 25 ADJUNTO */
             var adjunto = `INSERT INTO adjunto (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
@@ -496,10 +552,77 @@ router.post('/validation/editar-proyecto', function(req, res) {
             var objetivos = [ req.body.c41og_1   ? req.body.c41og_1   : null, req.body.c41og_2   ? req.body.c41og_2   : null, req.body.c41og_3   ? req.body.c41og_3   : null, req.body.c41oe_1_1 ? req.body.c41oe_1_1 : null, req.body.c41oe_2_1 ? req.body.c41oe_2_1 : null, req.body.c41oe_3_1 ? req.body.c41oe_3_1 : null, req.body.c41oe_1_2 ? req.body.c41oe_1_2 : null, req.body.c41oe_2_2 ? req.body.c41oe_2_2 : null, req.body.c41oe_3_2 ? req.body.c41oe_3_2 : null, req.body.c41oe_1_3 ? req.body.c41oe_1_3 : null, req.body.c41oe_2_3 ? req.body.c41oe_2_3 : null, req.body.c41oe_3_3 ? req.body.c41oe_3_3 : null, req.body.c41oe_1_4 ? req.body.c41oe_1_4 : null, req.body.c41oe_2_4 ? req.body.c41oe_2_4 : null, req.body.c41oe_3_4 ? req.body.c41oe_3_4 : null, req.body.c41oe_1_5 ? req.body.c41oe_1_5 : null, req.body.c41oe_2_5 ? req.body.c41oe_2_5 : null, req.body.c41oe_3_5 ? req.body.c41oe_3_5 : null, id ];
             con.query(objetivos_sql, objetivos, function (err, result) { if (err) { console.log(err); return; } });
 
+            /* 13 CRONOGRAMA */
+            /* 
+            var _sql = ``;
+            var s = [ id ];
+            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+
             /* 14 IMPACTOS */
             var impactos_sql = `UPDATE impactos SET impactos_economicos = ?, impactos_sociales = ?, impactos_formacion = ?, potencialidad = ?, impactos_tecnologico = ?, impactos_ambientales = ?, medidas_mitigacion = ?, impactos_empresa = ? WHERE id_proyecto = ?`;
             var impactos = [ req.body.impactosEconomicos ? req.body.impactosEconomicos : null, req.body.impactosSociales ? req.body.impactosSociales : null, req.body.impactosEnLaFormacion ? req.body.impactosEnLaFormacion : null, req.body.pontencialidad ? req.body.pontencialidad : null, req.body.impactosDeLaTecnologia ? req.body.impactosDeLaTecnologia : null, req.body.impactosAmbientales ? req.body.impactosAmbientales : null, req.body.medidasDeMitigacion ? req.body.medidasDeMitigacion : null, req.body.impactosEnLaEmpresa ? req.body.impactosEnLaEmpresa : null, id ];
             con.query(impactos_sql, impactos, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 15 RECURSOS NECESARIOS */
+            /* 
+            var _sql = ``;
+            var s = [ id ];
+            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 16 EQUIPOS Y BIENES */
+            /* 
+            var _sql = ``;
+            var s = [ id ];
+            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 17 HONORARIOS */
+            /* 
+            var _sql = ``;
+            var s = [ id ];
+            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 18 CONSULTORIAS */
+            /* 
+            var _sql = ``;
+            var s = [ id ];
+            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 19 SERVICIOS DE TERCEROS */
+            /* 
+            var _sql = ``;
+            var s = [ id ];
+            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 20 PASAJES - VIATICOS */
+            /* 
+            var _sql = ``;
+            var s = [ id ];
+            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 21 MATERIALES */
+            /* 
+            var _sql = ``;
+            var s = [ id ];
+            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 22 OTROS GASTOS */
+            /* 
+            var _sql = ``;
+            var s = [ id ];
+            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 23 GASTOS DE GESTION */
+            /* 
+            var _sql = ``;
+            var s = [ id ];
+            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 24 EQUIPO FORMULADOR */
+            /* 
+            var _sql = ``;
+            var s = [ id ];
+            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+
 
             /* 25 ADJUNTO */
             var adjunto_sql = `UPDATE adjunto SET flujoDeCaja = ? , planAdjunto = ? WHERE id_proyecto = ?`;
