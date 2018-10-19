@@ -213,6 +213,7 @@ router.post('/editar-proyecto' ,function(req, res, next) {
         , antecedentes.*
         , objetivos.*
         , impactos.*
+        , recursos_necesarios.*
         FROM proyecto 
         INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
         INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
@@ -226,7 +227,8 @@ router.post('/editar-proyecto' ,function(req, res, next) {
         INNER JOIN caracateristicas ON caracateristicas.id_proyecto = proyecto.id_proyecto
         INNER JOIN antecedentes ON antecedentes.id_proyecto = proyecto.id_proyecto
         INNER JOIN objetivos ON objetivos.id_proyecto = proyecto.id_proyecto
-        INNER JOIN impactos ON impactos.id_proyecto = proyecto.id_proyecto`;
+        INNER JOIN impactos ON impactos.id_proyecto = proyecto.id_proyecto
+        INNER JOIN recursos_necesarios ON recursos_necesarios.id_proyecto = proyecto.id_proyecto`;
         
         var values = [ req.session.user.id, req.body.idproyecto, req.body.idproyecto];
 
@@ -416,9 +418,8 @@ router.post('/validation/nuevo', function(req, res) {
             con.query(impactos, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 15 RECURSOS NECESARIOS */
-            /*
-            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+            var recursos_necesarios = `INSERT INTO recursos_necesarios (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(recursos_necesarios, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 16 EQUIPOS Y BIENES */
             /*
@@ -564,10 +565,9 @@ router.post('/validation/editar-proyecto', function(req, res) {
             con.query(impactos_sql, impactos, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 15 RECURSOS NECESARIOS */
-            /* 
-            var _sql = ``;
-            var s = [ id ];
-            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+            var recursos_necesarios_sql = `UPDATE recursos_necesarios SET c8_1_1 =  ? , c8_2_1 =  ? , c8_3_1 =  ? , c8_4_1 =  ? , c8_5_1 =  ? , c8_6_1 =  ? , c8_7_1 =  ? , c8_8_1 =  ? , c8_9_1 =  ? , c8_10_1 = ? , c8_11_1 = ? , c8_1_2 =  ? , c8_2_2 =  ? , c8_3_2 =  ? , c8_4_2 =  ? , c8_5_2 =  ? , c8_6_2 =  ? , c8_7_2 =  ? , c8_8_2 =  ? , c8_9_2 =  ? , c8_10_2 = ? , c8_11_2 = ? , c8_1_3 =  ? , c8_2_3 =  ? , c8_3_3 =  ? , c8_4_3 =  ? , c8_5_3 =  ? , c8_6_3 =  ? , c8_7_3 =  ? , c8_8_3 =  ? , c8_9_3 =  ? , c8_10_3 = ? , c8_11_3 = ? , c8_1_4 =  ? , c8_2_4 =  ? , c8_3_4 =  ? , c8_4_4 =  ? , c8_5_4 =  ? , c8_6_4 =  ? , c8_7_4 =  ? , c8_8_4 =  ? , c8_9_4 =  ? , c8_10_4 = ? , c8_11_4 = ? , c8_1_5 =  ? , c8_2_5 =  ? , c8_3_5 =  ? , c8_4_5 =  ? , c8_5_5 =  ? , c8_6_5 =  ? , c8_7_5 =  ? , c8_8_5 =  ? , c8_9_5 =  ? , c8_10_5 = ? , c8_11_5 = ? WHERE id_proyecto = ?`;
+            var recursos_necesarios = [ req.body.c8_1_1 ? req.body.c8_1_1 : null, req.body.c8_2_1 ? req.body.c8_2_1 : null, req.body.c8_3_1 ? req.body.c8_3_1 : null, req.body.c8_4_1 ? req.body.c8_4_1 : null, req.body.c8_5_1 ? req.body.c8_5_1 : null, req.body.c8_6_1 ? req.body.c8_6_1 : null, req.body.c8_7_1 ? req.body.c8_7_1 : null, req.body.c8_8_1 ? req.body.c8_8_1 : null, req.body.c8_9_1 ? req.body.c8_9_1 : null, req.body.c8_10_1 ? req.body.c8_10_1 : null, req.body.c8_11_1 ? req.body.c8_11_1 : null, req.body.c8_1_2 ? req.body.c8_1_2 : null, req.body.c8_2_2 ? req.body.c8_2_2 : null, req.body.c8_3_2 ? req.body.c8_3_2 : null, req.body.c8_4_2 ? req.body.c8_4_2 : null, req.body.c8_5_2 ? req.body.c8_5_2 : null, req.body.c8_6_2 ? req.body.c8_6_2 : null, req.body.c8_7_2 ? req.body.c8_7_2 : null, req.body.c8_8_2 ? req.body.c8_8_2 : null, req.body.c8_9_2 ? req.body.c8_9_2 : null, req.body.c8_10_2 ? req.body.c8_10_2 : null, req.body.c8_11_2 ? req.body.c8_11_2 : null, req.body.c8_1_3 ? req.body.c8_1_3 : null, req.body.c8_2_3 ? req.body.c8_2_3 : null, req.body.c8_3_3 ? req.body.c8_3_3 : null, req.body.c8_4_3 ? req.body.c8_4_3 : null, req.body.c8_5_3 ? req.body.c8_5_3 : null, req.body.c8_6_3 ? req.body.c8_6_3 : null, req.body.c8_7_3 ? req.body.c8_7_3 : null, req.body.c8_8_3 ? req.body.c8_8_3 : null, req.body.c8_9_3 ? req.body.c8_9_3 : null, req.body.c8_10_3 ? req.body.c8_10_3 : null, req.body.c8_11_3 ? req.body.c8_11_3 : null, req.body.c8_1_4 ? req.body.c8_1_4 : null, req.body.c8_2_4 ? req.body.c8_2_4 : null, req.body.c8_3_4 ? req.body.c8_3_4 : null, req.body.c8_4_4 ? req.body.c8_4_4 : null, req.body.c8_5_4 ? req.body.c8_5_4 : null, req.body.c8_6_4 ? req.body.c8_6_4 : null, req.body.c8_7_4 ? req.body.c8_7_4 : null, req.body.c8_8_4 ? req.body.c8_8_4 : null, req.body.c8_9_4 ? req.body.c8_9_4 : null, req.body.c8_10_4 ? req.body.c8_10_4 : null, req.body.c8_11_4 ? req.body.c8_11_4 : null, req.body.c8_1_5 ? req.body.c8_1_5 : null, req.body.c8_2_5 ? req.body.c8_2_5 : null, req.body.c8_3_5 ? req.body.c8_3_5 : null, req.body.c8_4_5 ? req.body.c8_4_5 : null, req.body.c8_5_5 ? req.body.c8_5_5 : null, req.body.c8_6_5 ? req.body.c8_6_5 : null, req.body.c8_7_5 ? req.body.c8_7_5 : null, req.body.c8_8_5 ? req.body.c8_8_5 : null, req.body.c8_9_5 ? req.body.c8_9_5 : null, req.body.c8_10_5 ? req.body.c8_10_5 : null, req.body.c8_11_5 ? req.body.c8_11_5 : null, id ];
+            con.query(recursos_necesarios_sql, recursos_necesarios, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 16 EQUIPOS Y BIENES */
             /* 
@@ -699,6 +699,7 @@ router.post('/visualizar', function(req, res, next) {
       , antecedentes.*
       , objetivos.*
       , impactos.*
+      , recursos_necesarios.*
       FROM proyecto 
       INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
       INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
@@ -712,7 +713,8 @@ router.post('/visualizar', function(req, res, next) {
       INNER JOIN caracateristicas ON caracateristicas.id_proyecto = proyecto.id_proyecto
       INNER JOIN antecedentes ON antecedentes.id_proyecto = proyecto.id_proyecto
       INNER JOIN objetivos ON objetivos.id_proyecto = proyecto.id_proyecto
-      INNER JOIN impactos ON impactos.id_proyecto = proyecto.id_proyecto`;
+      INNER JOIN impactos ON impactos.id_proyecto = proyecto.id_proyecto
+      INNER JOIN recursos_necesarios ON recursos_necesarios.id_proyecto = proyecto.id_proyecto`;
         
         var values = [ req.session.user.id, req.body.idproyecto];
 

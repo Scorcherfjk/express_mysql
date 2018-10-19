@@ -13,5 +13,4 @@ DELETE FROM objetivos;
 DELETE FROM cronograma;
 DELETE FROM impactos;
 DELETE FROM recursos_necesarios;
-
 DELETE FROM adjunto;
