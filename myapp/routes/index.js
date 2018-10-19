@@ -204,13 +204,21 @@ router.post('/editar-proyecto' ,function(req, res, next) {
         , datos_generales.*
         , entidades_participantes.*
         , entidades_asociadas.*
+        , actividades_infraestructura_beneficios.*
+        , fondos_recibidos_del_estado.*
+        , proyectos_financiados_ip.*
         , competitividad_empresarial.*
+        , diagnostico.*
         FROM proyecto 
         INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
         INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
         INNER JOIN entidades_participantes ON entidades_participantes.id_proyecto = proyecto.id_proyecto
         INNER JOIN entidades_asociadas ON entidades_asociadas.id_proyecto = proyecto.id_proyecto
-        INNER JOIN competitividad_empresarial ON competitividad_empresarial.id_proyecto = proyecto.id_proyecto`;
+        INNER JOIN actividades_infraestructura_beneficios ON actividades_infraestructura_beneficios.id_proyecto = proyecto.id_proyecto
+        INNER JOIN fondos_recibidos_del_estado ON fondos_recibidos_del_estado.id_proyecto = proyecto.id_proyecto
+        INNER JOIN proyectos_financiados_ip ON proyectos_financiados_ip.id_proyecto = proyecto.id_proyecto
+        INNER JOIN competitividad_empresarial ON competitividad_empresarial.id_proyecto = proyecto.id_proyecto
+        INNER JOIN diagnostico ON diagnostico.id_proyecto = proyecto.id_proyecto`;
         
         var values = [ req.session.user.id, req.body.idproyecto, req.body.idproyecto];
 
@@ -340,26 +348,43 @@ router.post('/validation/nuevo', function(req, res) {
         con.connect(function(err) {
             if (err) console.log(err);
             
-            /* PROYECTO */
+            /* 1 PROYECTO */
             var proyecto =  `INSERT INTO proyecto (id_usuario, titulo) VALUES ( ? , ? )`;
             var values = [ req.session.user.id , req.body.titulo ];
             con.query(proyecto, values, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* DATOS GENERALES */
+            /* 2 DATOS GENERALES */
             var datos_generales = `INSERT INTO datos_generales (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
             con.query(datos_generales, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* ENTIDADES PARTICIPANTES */
+            /* 3 ENTIDADES PARTICIPANTES */
             var entidades_participantes = `INSERT INTO entidades_participantes (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
             con.query(entidades_participantes, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* ENTIDADES ASOCIADAS */
+            /* 4 ENTIDADES ASOCIADAS */
             var entidades_participantes = `INSERT INTO entidades_asociadas (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
             con.query(entidades_participantes, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* COMPETITIVIDAD EMPRESARIAL */
-            var entidades_participantes = `INSERT INTO competitividad_empresarial (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(entidades_participantes, function (err, result) { if (err) { console.log(err); return; }
+            /* 5 TABLAS ACTIVIDADES - INFRAESTRUCTURA - BENEFICIOS */
+            var actividades_infraestructura_beneficios = `INSERT INTO actividades_infraestructura_beneficios (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(actividades_infraestructura_beneficios, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 6 TABLAS FONDOS RECIBIDOS DEL ESTADO */
+            var fondos_recibidos_del_estado = `INSERT INTO fondos_recibidos_del_estado (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(fondos_recibidos_del_estado, function (err, result) { if (err) { console.log(err); return; } });
+            
+
+            /* 7 TABLA PROYECTO FINANCIADOS INNOVATE PERU */
+            var proyectos_financiados_ip = `INSERT INTO proyectos_financiados_ip (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(proyectos_financiados_ip, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 8 COMPETITIVIDAD EMPRESARIAL */
+            var competitividad_empresarial = `INSERT INTO competitividad_empresarial (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(competitividad_empresarial, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 9 DIAGNOSTICO */
+            var diagnostico = `INSERT INTO diagnostico (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(diagnostico, function (err, result) { if (err) { console.log(err); return; }
                 res.redirect('/administrar');
             });
 
@@ -382,31 +407,53 @@ router.post('/validation/editar-proyecto', function(req, res) {
     
             var id = req.body.id_proyecto;
 
-            /* PROYECTO */
+            /* 1 PROYECTO */
             var proyecto_sql = `UPDATE proyecto SET titulo = ? WHERE id_proyecto = ?`;
             var proyecto = [ req.body.titulo, id ]
             con.query(proyecto_sql, proyecto, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* DATOS GENERALES */
+            /* 2 DATOS GENERALES */
             var datos_generales_sql = `UPDATE datos_generales SET palabras_clave = ?, ai_area = ?, ai_subarea = ?, ai_tematica = ?, aplicacion_area = ?, aplicacion_subarea = ?, loc_departamento = ?, loc_provincia = ?, loc_distrito = ?, loc_ubigeo = ?, duracion_proyecto = ?, fecha_estimada_inicio = ?, cgp_tipo_documento = ?, cgp_nro_documento = ?, cgp_ruc = ?, cgp_nombre = ?, cgp_fecha_nac = ?, cgp_sexo = ?, cgp_email = ?, cgp_telefono = ?, cgp_celular = ?, cap_tipo_documento = ?, cap_nro_documento = ?, cap_ruc = ?, cap_nombre = ?, cap_fecha_nac = ?, cap_sexo = ?, cap_email = ?, cap_telefono = ?, cap_celular = ? WHERE id_proyecto = ?`;
             var datos_generales = [ req.body.palabrasClave ? req.body.palabrasClave : null, req.body.area_innovacion_area ? req.body.area_innovacion_area : null, req.body.area_innovacion_subarea ? req.body.area_innovacion_subarea : null, req.body.area_innovacion_tematica ? req.body.area_innovacion_tematica : null, req.body.aplicacion_area ? req.body.aplicacion_area : null, req.body.aplicacion_subarea ? req.body.aplicacion_subarea : null, req.body.localizacion_departamento ? req.body.localizacion_departamento : null, req.body.localizacion_provincia ? req.body.localizacion_provincia : null, req.body.localizacion_distrito ? req.body.localizacion_distrito : null, req.body.localizacion_ubigeo ? req.body.localizacion_ubigeo : null, req.body.duracionDelProyecto ? req.body.duracionDelProyecto : null, req.body.fechaEstimadaDeInicioDelProyecto ? req.body.fechaEstimadaDeInicioDelProyecto : null, req.body.cgptipoDeDocumento ? req.body.cgptipoDeDocumento : null, req.body.cgpnumeroDeDocumento ? req.body.cgpnumeroDeDocumento : null, req.body.cgpruc ? req.body.cgpruc : null, req.body.cgpnombresYApellidos ? req.body.cgpnombresYApellidos : null, req.body.cgpfechaDeNacimiento ? req.body.cgpfechaDeNacimiento : null, req.body.cgpsexo ? req.body.cgpsexo : null, req.body.cgpemail ? req.body.cgpemail : null, req.body.cgptelefono ? req.body.cgptelefono : null, req.body.cgpcelular ? req.body.cgpcelular : null, req.body.captipoDeDocumento ? req.body.captipoDeDocumento : null, req.body.capnumeroDeDocumento ? req.body.capnumeroDeDocumento : null, req.body.capruc ? req.body.capruc : null, req.body.capnombresYApellidos ? req.body.capnombresYApellidos : null, req.body.capfechaDeNacimiento ? req.body.capfechaDeNacimiento : null, req.body.capsexo ? req.body.capsexo : null, req.body.capemail ? req.body.capemail : null, req.body.captelefono ? req.body.captelefono : null, req.body.capcelular ? req.body.capcelular : null, id ];
             con.query(datos_generales_sql, datos_generales, function (err, result) { if (err) { console.log(err); return; } }); 
 
-            /* ENTIDADES PARTICIPANTES */
+            /* 3 ENTIDADES PARTICIPANTES */
             var entidades_participantes_sql = `UPDATE entidades_participantes SET es_tipo = ?, es_tamano = ?, es_nro_trabajadores = ?, es_ruc = ?, es_ciiu = ?, es_direccion = ?, es_fecha_constitucion = ?, es_inicio_actividades = ?, es_nro_partida = ?, es_oficina_registral = ?, es_telefono = ?, es_correo = ?, es_pagina_web = ?, es_ventas2016 = ?, es_ventas2017 = ?, rl_tipo_documento = ?, rl_nro_documento = ?, rl_ruc = ?, rl_nombre = ?, rl_sexo = ?, rl_email = ?, rl_telefono = ?, rl_productos_comercializados = ?, rl_actividades_relacionadas = ?, rl_infraestructura_es = ? WHERE id_proyecto = ?`;
             var entidades_participantes = [ req.body.estipoDeEntidad ? req.body.estipoDeEntidad : null, req.body.estamañoDeLaEmpresa ? req.body.estamañoDeLaEmpresa : null, req.body.esnroDeTrabajadores ? req.body.esnroDeTrabajadores : null, req.body.esrucRazonSocial ? req.body.esrucRazonSocial : null, req.body.esciiu ? req.body.esciiu : null, req.body.esdireccion ? req.body.esdireccion : null, req.body.esfechaDeConstitucion ? req.body.esfechaDeConstitucion : null, req.body.esinicioDeActividades ? req.body.esinicioDeActividades : null, req.body.esnumeroDePartida ? req.body.esnumeroDePartida : null, req.body.esoficinaRegistral ? req.body.esoficinaRegistral : null, req.body.estelefonoCelular ? req.body.estelefonoCelular : null, req.body.esemail ? req.body.esemail : null, req.body.espaginaWeb ? req.body.espaginaWeb : null, req.body.esventas2016 ? req.body.esventas2016 : null, req.body.esventas2017 ? req.body.esventas2017 : null, req.body.rptipoDeDocumento ? req.body.rptipoDeDocumento : null, req.body.rpnumeroDeDocumento ? req.body.rpnumeroDeDocumento : null, req.body.rpruc ? req.body.rpruc : null, req.body.rpnombresYApellidos ? req.body.rpnombresYApellidos : null, req.body.rpsexo ? req.body.rpsexo : null, req.body.rpemail ? req.body.rpemail : null, req.body.rptelefono ? req.body.rptelefono : null, req.body.rpproductosComerciales ? req.body.rpproductosComerciales : null, req.body.rpactividadesRelacionadas ? req.body.rpactividadesRelacionadas : null, req.body.rpinfraestructuraDelSolicitante ? req.body.rpinfraestructuraDelSolicitante : null, id ];
             con.query(entidades_participantes_sql, entidades_participantes, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* ENTIDADES ASOCIADAS */
+            /* 4 ENTIDADES ASOCIADAS */
             var entidades_asociadas_sql = `UPDATE entidades_asociadas SET a22_1_1 = ?, a22_2_1 = ?, a22_3_1 = ?, a22_4_1 = ?, a22_5_1 = ?, a22_1_2 = ?, a22_2_2 = ?, a22_3_2 = ?, a22_4_2 = ?, a22_5_2 = ?, a22_1_3 = ?, a22_2_3 = ?, a22_3_3 = ?, a22_4_3 = ?, a22_5_3 = ? WHERE id_proyecto = ?`;
             var entidades_asociadas = [ req.body.a22_1_1 ? req.body.a22_1_1 : null , req.body.a22_2_1 ? req.body.a22_2_1 : null , req.body.a22_3_1 ? req.body.a22_3_1 : null , req.body.a22_4_1 ? req.body.a22_4_1 : null , req.body.a22_5_1 ? req.body.a22_5_1 : null , req.body.a22_1_2 ? req.body.a22_1_2 : null , req.body.a22_2_2 ? req.body.a22_2_2 : null , req.body.a22_3_2 ? req.body.a22_3_2 : null , req.body.a22_4_2 ? req.body.a22_4_2 : null , req.body.a22_5_2 ? req.body.a22_5_2 : null , req.body.a22_1_3 ? req.body.a22_1_3 : null , req.body.a22_2_3 ? req.body.a22_2_3 : null , req.body.a22_3_3 ? req.body.a22_3_3 : null , req.body.a22_4_3 ? req.body.a22_4_3 : null , req.body.a22_5_3 ? req.body.a22_5_3 : null , id ];
-             con.query(entidades_asociadas_sql, entidades_asociadas, function (err, result) { if (err) { console.log(err); return; } });
+            con.query(entidades_asociadas_sql, entidades_asociadas, function (err, result) { if (err) { console.log(err); return; } });
+            
+            /* 5 TABLAS ACTIVIDADES - INFRAESTRUCTURA - BENEFICIOS */
+            var actividades_infraestructura_beneficios_sql = `UPDATE actividades_infraestructura_beneficios SET a31_1_1 = ?, a31_2_1 = ?, a31_1_2 = ?, a31_2_2 = ?, a31_1_3 = ?, a31_2_3 = ?, a32_1_1 = ?, a32_2_1 = ?, a32_1_2 = ?, a32_2_2 = ?, a32_1_3 = ?, a32_2_3 = ?, a33_1_1 = ?, a33_2_1 = ?, a33_1_2 = ?, a33_2_2 = ?, a33_1_3 = ?, a33_2_3 = ? WHERE id_proyecto = ?`;
+            var actividades_infraestructura_beneficios  = [ req.body.a31_1_1 ? req.body.a31_1_1 : null, req.body.a31_2_1 ? req.body.a31_2_1 : null, req.body.a31_1_2 ? req.body.a31_1_2 : null, req.body.a31_2_2 ? req.body.a31_2_2 : null, req.body.a31_1_3 ? req.body.a31_1_3 : null, req.body.a31_2_3 ? req.body.a31_2_3 : null, req.body.a32_1_1 ? req.body.a32_1_1 : null, req.body.a32_2_1 ? req.body.a32_2_1 : null, req.body.a32_1_2 ? req.body.a32_1_2 : null, req.body.a32_2_2 ? req.body.a32_2_2 : null, req.body.a32_1_3 ? req.body.a32_1_3 : null, req.body.a32_2_3 ? req.body.a32_2_3 : null, req.body.a33_1_1 ? req.body.a33_1_1 : null, req.body.a33_2_1 ? req.body.a33_2_1 : null, req.body.a33_1_2 ? req.body.a33_1_2 : null, req.body.a33_2_2 ? req.body.a33_2_2 : null, req.body.a33_1_3 ? req.body.a33_1_3 : null, req.body.a33_2_3 ? req.body.a33_2_3 : null, id ];
+            con.query( actividades_infraestructura_beneficios_sql, actividades_infraestructura_beneficios, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* COMPETITIVIDAD EMPRESARIAL */
+            /* 6 TABLAS FONDOS RECIBIDOS DEL ESTADO */
+            var fondos_recibidos_del_estado_sql = `UPDATE fondos_recibidos_del_estado SET a34_1_1 = ?, a34_2_1 = ?, a34_3_1 = ?, a34_4_1 = ?, a34_5_1 = ?, a34_1_2 = ?, a34_2_2 = ?, a34_3_2 = ?, a34_4_2 = ?, a34_5_2 = ?, a34_1_3 = ?, a34_2_3 = ?, a34_3_3 = ?, a34_4_3 = ?, a34_5_3 = ? WHERE id_proyecto = ?`;
+            var fondos_recibidos_del_estado = [ req.body.a34_1_1 ? req.body.a34_1_1 : null,req.body.a34_2_1 ? req.body.a34_2_1 : null,req.body.a34_3_1 ? req.body.a34_3_1 : null,req.body.a34_4_1 ? req.body.a34_4_1 : null,req.body.a34_5_1 ? req.body.a34_5_1 : null,req.body.a34_1_2 ? req.body.a34_1_2 : null,req.body.a34_2_2 ? req.body.a34_2_2 : null,req.body.a34_3_2 ? req.body.a34_3_2 : null,req.body.a34_4_2 ? req.body.a34_4_2 : null,req.body.a34_5_2 ? req.body.a34_5_2 : null,req.body.a34_1_3 ? req.body.a34_1_3 : null,req.body.a34_2_3 ? req.body.a34_2_3 : null,req.body.a34_3_3 ? req.body.a34_3_3 : null,req.body.a34_4_3 ? req.body.a34_4_3 : null,req.body.a34_5_3 ? req.body.a34_5_3 : null,id ];
+            con.query( fondos_recibidos_del_estado_sql, fondos_recibidos_del_estado, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 7 TABLA PROYECTO FINANCIADOS INNOVATE PERU */
+            var proyectos_financiados_ip_sql = `UPDATE proyectos_financiados_ip SET a35_1_1 = ?, a35_2_1 = ?, a35_3_1 = ?, a35_4_1 = ?, a35_5_1 = ?, a35_6_1 = ?, a35_7_1 = ?, a35_1_2 = ?, a35_2_2 = ?, a35_3_2 = ?, a35_4_2 = ?, a35_5_2 = ?, a35_6_2 = ?, a35_7_2 = ?, a35_1_3 = ?, a35_2_3 = ?, a35_3_3 = ?, a35_4_3 = ?, a35_5_3 = ?, a35_6_3 = ?, a35_7_3 = ? WHERE id_proyecto = ?`;
+            var proyectos_financiados_ip =[ req.body.a35_1_1 ? req.body.a35_1_1 : null, req.body.a35_2_1 ? req.body.a35_2_1 : null, req.body.a35_3_1 ? req.body.a35_3_1 : null, req.body.a35_4_1 ? req.body.a35_4_1 : null, req.body.a35_5_1 ? req.body.a35_5_1 : null, req.body.a35_6_1 ? req.body.a35_6_1 : null, req.body.a35_7_1 ? req.body.a35_7_1 : null, req.body.a35_1_2 ? req.body.a35_1_2 : null, req.body.a35_2_2 ? req.body.a35_2_2 : null, req.body.a35_3_2 ? req.body.a35_3_2 : null, req.body.a35_4_2 ? req.body.a35_4_2 : null, req.body.a35_5_2 ? req.body.a35_5_2 : null, req.body.a35_6_2 ? req.body.a35_6_2 : null, req.body.a35_7_2 ? req.body.a35_7_2 : null, req.body.a35_1_3 ? req.body.a35_1_3 : null, req.body.a35_2_3 ? req.body.a35_2_3 : null, req.body.a35_3_3 ? req.body.a35_3_3 : null, req.body.a35_4_3 ? req.body.a35_4_3 : null, req.body.a35_5_3 ? req.body.a35_5_3 : null, req.body.a35_6_3 ? req.body.a35_6_3 : null, req.body.a35_7_3 ? req.body.a35_7_3 : null, id ];
+            con.query( proyectos_financiados_ip_sql, proyectos_financiados_ip, function (err, result) { if (err) { console.log(err); return; } });
+
+
+            /* 8 COMPETITIVIDAD EMPRESARIAL */
             var competitividad_empresarial_sql = `UPDATE competitividad_empresarial SET entorno_empresarial = ?, situacion_actual = ?, identificacion_mercado = ?, competidores = ?, modelo_negocio = ?, capacidad_financiera = ?, rentabilidad_economica = ? WHERE id_proyecto = ?`;
             var competitividad_empresarial = [ req.body.entornoEmpresarial ? req.body.entornoEmpresarial : null, req.body.situacionActual ? req.body.situacionActual : null, req.body.identificacionDelMercado ? req.body.identificacionDelMercado : null, req.body.competidores ? req.body.competidores : null, req.body.modeloDeNegocio ? req.body.modeloDeNegocio : null, req.body.capacidadFinanciera ? req.body.capacidadFinanciera : null, req.body.rentabilidadEconomica ? req.body.rentabilidadEconomica : null, id ];
-                con.query(competitividad_empresarial_sql, competitividad_empresarial, function (err, result) { if (err) { console.log(err); return; }
-                res.redirect('/administrar');
+            con.query(competitividad_empresarial_sql, competitividad_empresarial, function (err, result) {  if (err) { console.log(err); return; } });
+
+            /* 9 DIAGNOSTICO */
+            var diagnostico_sql = `UPDATE diagnostico SET problemas_identificados = ? , consecuencias_efectos = ? , causas = ? , tipo_innovacion = ? , funcion_innovacion = ? , tecnologia = ? , forma_resultado = ? WHERE id_proyecto = ?`;
+            var diagnostico = [ req.body.problemaIdentificado ? req.body.problemaIdentificado : null, req.body.consecuenciasEfectos ? req.body.consecuenciasEfectos : null, req.body.causas ? req.body.causas : null, req.body.tipoDeInnovacion ? req.body.tipoDeInnovacion : null, req.body.describirFuncion ? req.body.describirFuncion : null, req.body.describirTecnologia ? req.body.describirTecnologia : null, req.body.describirForma ? req.body.describirForma : null,  id ];
+            con.query(diagnostico_sql, diagnostico, function (err, result) { 
+                if (err) { console.log(err); return; } 
+                res.redirect('/administrar'); 
             });
 
             con.end();
@@ -461,14 +508,27 @@ router.post('/visualizar', function(req, res, next) {
         if (con) con.destroy();
         var con = mysql.createConnection(config());
 
-        var sql = `SELECT usuario.* , proyecto.* , datos_generales.* , entidades_participantes.* , entidades_asociadas.*
+        var sql = `SELECT 
+            usuario.*
+        , proyecto.*
+        , datos_generales.*
+        , entidades_participantes.*
+        , entidades_asociadas.*
+        , actividades_infraestructura_beneficios.*
+        , fondos_recibidos_del_estado.*
+        , proyectos_financiados_ip.*
         , competitividad_empresarial.*
+        , diagnostico.*
         FROM proyecto 
         INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
         INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
         INNER JOIN entidades_participantes ON entidades_participantes.id_proyecto = proyecto.id_proyecto
         INNER JOIN entidades_asociadas ON entidades_asociadas.id_proyecto = proyecto.id_proyecto
-        INNER JOIN competitividad_empresarial ON competitividad_empresarial.id_proyecto = proyecto.id_proyecto`;
+        INNER JOIN actividades_infraestructura_beneficios ON actividades_infraestructura_beneficios.id_proyecto = proyecto.id_proyecto
+        INNER JOIN fondos_recibidos_del_estado ON fondos_recibidos_del_estado.id_proyecto = proyecto.id_proyecto
+        INNER JOIN proyectos_financiados_ip ON proyectos_financiados_ip.id_proyecto = proyecto.id_proyecto
+        INNER JOIN competitividad_empresarial ON competitividad_empresarial.id_proyecto = proyecto.id_proyecto
+        INNER JOIN diagnostico ON diagnostico.id_proyecto = proyecto.id_proyecto`;
         
         var values = [ req.session.user.id, req.body.idproyecto];
 
