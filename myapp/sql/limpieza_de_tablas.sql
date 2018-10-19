@@ -7,3 +7,11 @@ DELETE FROM fondos_recibidos_del_estado;
 DELETE FROM proyectos_financiados_ip;
 DELETE FROM competitividad_empresarial;
 DELETE FROM diagnostico;
+DELETE FROM caracateristicas;
+DELETE FROM antecedentes;
+DELETE FROM objetivos;
+DELETE FROM cronograma;
+DELETE FROM impactos;
+DELETE FROM recursos_necesarios;
+
+DELETE FROM adjunto;
