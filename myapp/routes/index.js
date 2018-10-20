@@ -209,6 +209,9 @@ router.post('/editar-proyecto' ,function(req, res, next) {
         , proyectos_financiados_ip.*
         , competitividad_empresarial.*
         , diagnostico.*
+        , antecedentes.*
+        , objetivos.*
+        , impactos.*
         FROM proyecto 
         INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
         INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
@@ -218,7 +221,10 @@ router.post('/editar-proyecto' ,function(req, res, next) {
         INNER JOIN fondos_recibidos_del_estado ON fondos_recibidos_del_estado.id_proyecto = proyecto.id_proyecto
         INNER JOIN proyectos_financiados_ip ON proyectos_financiados_ip.id_proyecto = proyecto.id_proyecto
         INNER JOIN competitividad_empresarial ON competitividad_empresarial.id_proyecto = proyecto.id_proyecto
-        INNER JOIN diagnostico ON diagnostico.id_proyecto = proyecto.id_proyecto`;
+        INNER JOIN diagnostico ON diagnostico.id_proyecto = proyecto.id_proyecto
+        INNER JOIN antecedentes ON antecedentes.id_proyecto = proyecto.id_proyecto
+        INNER JOIN objetivos ON objetivos.id_proyecto = proyecto.id_proyecto
+        INNER JOIN impactos ON impactos.id_proyecto = proyecto.id_proyecto`;
         
         var values = [ req.session.user.id, req.body.idproyecto, req.body.idproyecto];
 
@@ -362,8 +368,8 @@ router.post('/validation/nuevo', function(req, res) {
             con.query(entidades_participantes, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 4 ENTIDADES ASOCIADAS */
-            var entidades_participantes = `INSERT INTO entidades_asociadas (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(entidades_participantes, function (err, result) { if (err) { console.log(err); return; } });
+            var entidades_asociadas = `INSERT INTO entidades_asociadas (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(entidades_asociadas, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 5 TABLAS ACTIVIDADES - INFRAESTRUCTURA - BENEFICIOS */
             var actividades_infraestructura_beneficios = `INSERT INTO actividades_infraestructura_beneficios (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
@@ -384,7 +390,19 @@ router.post('/validation/nuevo', function(req, res) {
 
             /* 9 DIAGNOSTICO */
             var diagnostico = `INSERT INTO diagnostico (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(diagnostico, function (err, result) { if (err) { console.log(err); return; }
+            con.query(diagnostico, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 11 ANTECEDENTES */
+            var antecedentes = `INSERT INTO antecedentes (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(antecedentes, function (err, result) { if (err) { console.log(err); return; } });
+            
+            /* 12 OBJETIVOS */
+            var objetivos = `INSERT INTO objetivos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(objetivos, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 14 IMPACTOS */
+            var impactos = `INSERT INTO impactos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(impactos, function (err, result) { if (err) { console.log(err); return; }
                 res.redirect('/administrar');
             });
 
@@ -451,7 +469,22 @@ router.post('/validation/editar-proyecto', function(req, res) {
             /* 9 DIAGNOSTICO */
             var diagnostico_sql = `UPDATE diagnostico SET problemas_identificados = ? , consecuencias_efectos = ? , causas = ? , tipo_innovacion = ? , funcion_innovacion = ? , tecnologia = ? , forma_resultado = ? WHERE id_proyecto = ?`;
             var diagnostico = [ req.body.problemaIdentificado ? req.body.problemaIdentificado : null, req.body.consecuenciasEfectos ? req.body.consecuenciasEfectos : null, req.body.causas ? req.body.causas : null, req.body.tipoDeInnovacion ? req.body.tipoDeInnovacion : null, req.body.describirFuncion ? req.body.describirFuncion : null, req.body.describirTecnologia ? req.body.describirTecnologia : null, req.body.describirForma ? req.body.describirForma : null,  id ];
-            con.query(diagnostico_sql, diagnostico, function (err, result) { 
+            con.query(diagnostico_sql, diagnostico, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 11 ANTECEDENTES */
+            var antecedentes_sql = `UPDATE antecedentes SET id_proyecto = ? , antecedentes = ? , tipo_conocimiento = ? , plan_metodologico = ? , propiedad_intelectual = ? WHERE id_proyecto = ?`;
+            var antecedentes = [ req.body.antecedentes ? req.body.antecedentes : null , req.body.libreRestrigido ? req.body.libreRestrigido : null , req.body.planMetodologico ? req.body.planMetodologico : null , req.body.propiedadIntelectual ? req.body.propiedadIntelectual : null , id ];
+            con.query(antecedentes_sql, antecedentes, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 12 OBJETIVOS */
+            var objetivos_sql = `UPDATE objetivos SET c41og_1   = ? , c41og_2   = ? , c41og_3   = ? , c41oe_1_1 = ? , c41oe_2_1 = ? , c41oe_3_1 = ? , c41oe_1_2 = ? , c41oe_2_2 = ? , c41oe_3_2 = ? , c41oe_1_3 = ? , c41oe_2_3 = ? , c41oe_3_3 = ? , c41oe_1_4 = ? , c41oe_2_4 = ? , c41oe_3_4 = ? , c41oe_1_5 = ? , c41oe_2_5 = ? , c41oe_3_5 = ? WHERE id_proyecto = ?`;
+            var objetivos = [ req.body.c41og_1   ? req.body.c41og_1   : null, req.body.c41og_2   ? req.body.c41og_2   : null, req.body.c41og_3   ? req.body.c41og_3   : null, req.body.c41oe_1_1 ? req.body.c41oe_1_1 : null, req.body.c41oe_2_1 ? req.body.c41oe_2_1 : null, req.body.c41oe_3_1 ? req.body.c41oe_3_1 : null, req.body.c41oe_1_2 ? req.body.c41oe_1_2 : null, req.body.c41oe_2_2 ? req.body.c41oe_2_2 : null, req.body.c41oe_3_2 ? req.body.c41oe_3_2 : null, req.body.c41oe_1_3 ? req.body.c41oe_1_3 : null, req.body.c41oe_2_3 ? req.body.c41oe_2_3 : null, req.body.c41oe_3_3 ? req.body.c41oe_3_3 : null, req.body.c41oe_1_4 ? req.body.c41oe_1_4 : null, req.body.c41oe_2_4 ? req.body.c41oe_2_4 : null, req.body.c41oe_3_4 ? req.body.c41oe_3_4 : null, req.body.c41oe_1_5 ? req.body.c41oe_1_5 : null, req.body.c41oe_2_5 ? req.body.c41oe_2_5 : null, req.body.c41oe_3_5 ? req.body.c41oe_3_5 : null, id ];
+            con.query(objetivos_sql, objetivos, function (err, result) { if (err) { console.log(err); return; } });
+
+            /* 14 IMPACTOS */
+            var impactos_sql = `UPDATE impactos SET impactos_economicos = ?, impactos_sociales = ?, impactos_formacion = ?, potencialidad = ?, impactos_tecnologico = ?, impactos_ambientales = ?, medidas_mitigacion = ?, impactos_empresa = ? WHERE id_proyecto = ?`;
+            var impactos = [ req.body.impactosEconomicos ? req.body.impactosEconomicos : null, req.body.impactosSociales ? req.body.impactosSociales : null, req.body.impactosEnLaFormacion ? req.body.impactosEnLaFormacion : null, req.body.pontencialidad ? req.body.pontencialidad : null, req.body.impactosDeLaTecnologia ? req.body.impactosDeLaTecnologia : null, req.body.impactosAmbientales ? req.body.impactosAmbientales : null, req.body.medidasDeMitigacion ? req.body.medidasDeMitigacion : null, req.body.impactosEnLaEmpresa ? req.body.impactosEnLaEmpresa : null, id ];
+            con.query(impactos_sql, impactos, function (err, result) { 
                 if (err) { console.log(err); return; } 
                 res.redirect('/administrar'); 
             });
@@ -509,26 +542,32 @@ router.post('/visualizar', function(req, res, next) {
         var con = mysql.createConnection(config());
 
         var sql = `SELECT 
-            usuario.*
-        , proyecto.*
-        , datos_generales.*
-        , entidades_participantes.*
-        , entidades_asociadas.*
-        , actividades_infraestructura_beneficios.*
-        , fondos_recibidos_del_estado.*
-        , proyectos_financiados_ip.*
-        , competitividad_empresarial.*
-        , diagnostico.*
-        FROM proyecto 
-        INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
-        INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
-        INNER JOIN entidades_participantes ON entidades_participantes.id_proyecto = proyecto.id_proyecto
-        INNER JOIN entidades_asociadas ON entidades_asociadas.id_proyecto = proyecto.id_proyecto
-        INNER JOIN actividades_infraestructura_beneficios ON actividades_infraestructura_beneficios.id_proyecto = proyecto.id_proyecto
-        INNER JOIN fondos_recibidos_del_estado ON fondos_recibidos_del_estado.id_proyecto = proyecto.id_proyecto
-        INNER JOIN proyectos_financiados_ip ON proyectos_financiados_ip.id_proyecto = proyecto.id_proyecto
-        INNER JOIN competitividad_empresarial ON competitividad_empresarial.id_proyecto = proyecto.id_proyecto
-        INNER JOIN diagnostico ON diagnostico.id_proyecto = proyecto.id_proyecto`;
+        usuario.*
+      , proyecto.*
+      , datos_generales.*
+      , entidades_participantes.*
+      , entidades_asociadas.*
+      , actividades_infraestructura_beneficios.*
+      , fondos_recibidos_del_estado.*
+      , proyectos_financiados_ip.*
+      , competitividad_empresarial.*
+      , diagnostico.*
+      , antecedentes.*
+      , objetivos.*
+      , impactos.*
+      FROM proyecto 
+      INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
+      INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
+      INNER JOIN entidades_participantes ON entidades_participantes.id_proyecto = proyecto.id_proyecto
+      INNER JOIN entidades_asociadas ON entidades_asociadas.id_proyecto = proyecto.id_proyecto
+      INNER JOIN actividades_infraestructura_beneficios ON actividades_infraestructura_beneficios.id_proyecto = proyecto.id_proyecto
+      INNER JOIN fondos_recibidos_del_estado ON fondos_recibidos_del_estado.id_proyecto = proyecto.id_proyecto
+      INNER JOIN proyectos_financiados_ip ON proyectos_financiados_ip.id_proyecto = proyecto.id_proyecto
+      INNER JOIN competitividad_empresarial ON competitividad_empresarial.id_proyecto = proyecto.id_proyecto
+      INNER JOIN diagnostico ON diagnostico.id_proyecto = proyecto.id_proyecto
+      INNER JOIN antecedentes ON antecedentes.id_proyecto = proyecto.id_proyecto
+      INNER JOIN objetivos ON objetivos.id_proyecto = proyecto.id_proyecto
+      INNER JOIN impactos ON impactos.id_proyecto = proyecto.id_proyecto`;
         
         var values = [ req.session.user.id, req.body.idproyecto];
 
