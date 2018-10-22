@@ -1,0 +1,29 @@
+extends navbarAdmin
+
+block content
+    .container
+        .card.mx-auto.rounded.border-secondary
+            h5.card-header.text-capitalize.bg-danger.text-white
+                | Proyectos #{anoProyecto}
+            .card-body
+                .table-responsive#contenido
+                    table.table.table-bordered.table-hover
+                        thead.thead-light.text-capitalize
+                            tr
+                                th Código
+                                th Título Del Proyecto
+                                th Nombre
+                                th status
+                                th fecha
+                                th Descargar
+                        tbody
+                            for proyecto in proyectos
+                                tr
+                                    th #{proyecto.codigo}
+                                    th #{proyecto.titulo}
+                                    th #{proyecto.nombre}
+                                    th #{proyecto.status}
+                                    th #{proyecto.fecha}
+                                    th #{proyecto.descarga}
+    script(src="/javascripts/jquery-3.3.1.min.js")
+    script(src="/javascripts/valida.js")

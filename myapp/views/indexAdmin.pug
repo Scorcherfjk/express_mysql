@@ -1,0 +1,15 @@
+extends layoutAdmin
+
+block content
+    
+    .container
+        form(action="userAdmin/" method="post")
+            div.card.mx-auto.rounded.border-secondary(style="max-width:500px;")
+                h5.card-header.text-capitalize.bg-danger.text-white
+                    | Iniciar Sesi&oacuten
+                .card-body
+                    .form-group
+                        input#titulo.form-control(type='textarea' name="user" placeholder="Usuario" required)
+                    .form-group
+                        input#palabrasClave.form-control(type='password' name="passwd" placeholder="Contraseña" required)
+                input.btn.btn-primary(type="submit" value="Ingresar") 

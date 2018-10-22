@@ -1,0 +1,27 @@
+extends navbarAdmin
+
+block content
+  .container
+    .card.rounded.border-secondary
+      h5.card-header.text-capitalize.bg-danger.text-white Módulo de administración del sistema de investigación
+      .card-body
+        .row
+          .col-sm-12
+            a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/docentes/facultad' role="button") Ingresar Datos de Docente
+        br
+        h5 Visualizar
+        .row
+          .col-sm-12.col-md-4
+            a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/docentes/facultad' role="button") Docentes Facultad
+          .col-sm-12.col-md-4
+            a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/docentes/dina' role="button") Docentes Dina
+          .col-sm-12.col-md-4
+            a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/docentes/regina' role="button") Docentes Regina
+        hr
+        .row
+          .col-sm-12.col-md-4
+            a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/proyectos/2018' role="button") Proyectos 2018
+          .col-sm-12.col-md-4
+            a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/proyectos/2019' role="button") Proyectos 2019
+          .col-sm-12.col-md-4
+            a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/proyectos/2020' role="button") Proyectos 2020

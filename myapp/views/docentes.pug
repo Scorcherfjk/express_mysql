@@ -1,0 +1,25 @@
+extends navbarAdmin
+
+block content
+    .container
+        .card.mx-auto.rounded.border-secondary
+            h5.card-header.text-capitalize.bg-danger.text-white
+                | Docentes #{tipoDocente}
+            .card-body
+                .table-responsive#contenido
+                    table.table.table-bordered.table-hover
+                        thead.thead-light.text-capitalize
+                            tr
+                                th Nombre
+                                th Categoria
+                                th Dedicación
+                                th CV
+                        tbody
+                            for docente in docentes
+                                tr
+                                    th #{docente.nombre}
+                                    th #{docente.categoria}
+                                    th #{docente.dedicacion}
+                                    th #{docente.cv}
+    script(src="/javascripts/jquery-3.3.1.min.js")
+    script(src="/javascripts/valida.js")
