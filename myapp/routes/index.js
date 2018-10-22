@@ -363,7 +363,7 @@ router.post("/validation/new-user", function (req,res) {
 /*** EN PROCESO *******************************************************************************************************/
 router.post('/validation/nuevo', function(req, res) {
     if(req.session.user){
-
+        if (req.body.titulo){
         if (con) con.destroy();
         var con = mysql.createConnection(config());
 
@@ -477,6 +477,9 @@ router.post('/validation/nuevo', function(req, res) {
 
             con.end();
         });
+    }else{
+        res.redirect('/inicio');
+    }
     } else {
         res.redirect("/");
     }
