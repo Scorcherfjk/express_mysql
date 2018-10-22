@@ -54,6 +54,12 @@ td{
   padding: 110px;
 }
 
+#fondo2 {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/m2.jpg') fixed center center;
+  background-size: cover;
+  padding: 110px;
+}
+
 .check{
   max-width: 30px!important;
   min-width: 30px!important;
