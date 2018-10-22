@@ -198,37 +198,55 @@ router.post('/editar-proyecto' ,function(req, res, next) {
         if (con) con.destroy();
         var con = mysql.createConnection(config());
 
-        var sql = `SELECT 
-          usuario.*
-        , proyecto.*
-        , datos_generales.*
-        , entidades_participantes.*
-        , entidades_asociadas.*
-        , actividades_infraestructura_beneficios.*
-        , fondos_recibidos_del_estado.*
-        , proyectos_financiados_ip.*
-        , competitividad_empresarial.*
-        , diagnostico.*
-        , caracateristicas.*
-        , antecedentes.*
-        , objetivos.*
-        , impactos.*
-        , recursos_necesarios.*
-        FROM proyecto 
-        INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
-        INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
-        INNER JOIN entidades_participantes ON entidades_participantes.id_proyecto = proyecto.id_proyecto
-        INNER JOIN entidades_asociadas ON entidades_asociadas.id_proyecto = proyecto.id_proyecto
-        INNER JOIN actividades_infraestructura_beneficios ON actividades_infraestructura_beneficios.id_proyecto = proyecto.id_proyecto
-        INNER JOIN fondos_recibidos_del_estado ON fondos_recibidos_del_estado.id_proyecto = proyecto.id_proyecto
-        INNER JOIN proyectos_financiados_ip ON proyectos_financiados_ip.id_proyecto = proyecto.id_proyecto
-        INNER JOIN competitividad_empresarial ON competitividad_empresarial.id_proyecto = proyecto.id_proyecto
-        INNER JOIN diagnostico ON diagnostico.id_proyecto = proyecto.id_proyecto
-        INNER JOIN caracateristicas ON caracateristicas.id_proyecto = proyecto.id_proyecto
-        INNER JOIN antecedentes ON antecedentes.id_proyecto = proyecto.id_proyecto
-        INNER JOIN objetivos ON objetivos.id_proyecto = proyecto.id_proyecto
-        INNER JOIN impactos ON impactos.id_proyecto = proyecto.id_proyecto
-        INNER JOIN recursos_necesarios ON recursos_necesarios.id_proyecto = proyecto.id_proyecto`;
+        var sql = ` SELECT 
+        usuario.*
+      , proyecto.*
+      , datos_generales.*
+      , entidades_participantes.*
+      , entidades_asociadas.*
+      , actividades_infraestructura_beneficios.*
+      , fondos_recibidos_del_estado.*
+      , proyectos_financiados_ip.*
+      , competitividad_empresarial.*
+      , diagnostico.*
+      , caracateristicas.*
+      , antecedentes.*
+      , objetivos.*
+      , impactos.*
+      , recursos_necesarios.*
+      , equipos_bienes.*
+      , honorarios.*
+      , consultorias.*
+      , servicios_de_terceros.*
+      , pasajes_viaticos.*
+      , materiales.*
+      , otros_gastos.*
+      , gastos_de_gestion.*
+      , equipo_formulador.*
+      FROM proyecto 
+      INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
+      INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
+      INNER JOIN entidades_participantes ON entidades_participantes.id_proyecto = proyecto.id_proyecto
+      INNER JOIN entidades_asociadas ON entidades_asociadas.id_proyecto = proyecto.id_proyecto
+      INNER JOIN actividades_infraestructura_beneficios ON actividades_infraestructura_beneficios.id_proyecto = proyecto.id_proyecto
+      INNER JOIN fondos_recibidos_del_estado ON fondos_recibidos_del_estado.id_proyecto = proyecto.id_proyecto
+      INNER JOIN proyectos_financiados_ip ON proyectos_financiados_ip.id_proyecto = proyecto.id_proyecto
+      INNER JOIN competitividad_empresarial ON competitividad_empresarial.id_proyecto = proyecto.id_proyecto
+      INNER JOIN diagnostico ON diagnostico.id_proyecto = proyecto.id_proyecto
+      INNER JOIN caracateristicas ON caracateristicas.id_proyecto = proyecto.id_proyecto
+      INNER JOIN antecedentes ON antecedentes.id_proyecto = proyecto.id_proyecto
+      INNER JOIN objetivos ON objetivos.id_proyecto = proyecto.id_proyecto
+      INNER JOIN impactos ON impactos.id_proyecto = proyecto.id_proyecto
+      INNER JOIN recursos_necesarios ON recursos_necesarios.id_proyecto = proyecto.id_proyecto
+      INNER JOIN equipos_bienes ON equipos_bienes.id_proyecto = proyecto.id_proyecto
+      INNER JOIN honorarios ON honorarios.id_proyecto = proyecto.id_proyecto
+      INNER JOIN consultorias ON consultorias.id_proyecto = proyecto.id_proyecto
+      INNER JOIN servicios_de_terceros ON servicios_de_terceros.id_proyecto = proyecto.id_proyecto
+      INNER JOIN pasajes_viaticos ON pasajes_viaticos.id_proyecto = proyecto.id_proyecto
+      INNER JOIN materiales ON materiales.id_proyecto = proyecto.id_proyecto
+      INNER JOIN otros_gastos ON otros_gastos.id_proyecto = proyecto.id_proyecto
+      INNER JOIN gastos_de_gestion ON gastos_de_gestion.id_proyecto = proyecto.id_proyecto
+      INNER JOIN equipo_formulador ON equipo_formulador.id_proyecto = proyecto.id_proyecto`;
         
         var values = [ req.session.user.id, req.body.idproyecto, req.body.idproyecto];
 
@@ -422,50 +440,40 @@ router.post('/validation/nuevo', function(req, res) {
             con.query(recursos_necesarios, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 16 EQUIPOS Y BIENES */
-            /*
-            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+            var equipos_bienes = `INSERT INTO equipos_bienes (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(equipos_bienes, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 17 HONORARIOS */
-            /*
-            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+            var honorarios = `INSERT INTO honorarios (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(honorarios, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 18 CONSULTORIAS */
-            /*
-            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+            var consultorias = `INSERT INTO consultorias (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(consultorias, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 19 SERVICIOS DE TERCEROS */
-            /*
-            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+            var servicios_de_terceros = `INSERT INTO servicios_de_terceros (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(servicios_de_terceros, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 20 PASAJES - VIATICOS */
-            /*
-            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+            var pasajes_viaticos = `INSERT INTO pasajes_viaticos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(pasajes_viaticos, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 21 MATERIALES */
-            /*
-            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+            var materiales = `INSERT INTO materiales (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(materiales, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 22 OTROS GASTOS */
-            /*
-            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+            var otros_gastos = `INSERT INTO otros_gastos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(otros_gastos, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 23 GASTOS DE GESTION */
-            /*
-            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+            var gastos_de_gestion = `INSERT INTO gastos_de_gestion (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(gastos_de_gestion, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 24 EQUIPO FORMULADOR */
-            /*
-            var X = `INSERT INTO X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
-
+            var equipo_formulador = `INSERT INTO equipo_formulador (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+            con.query(equipo_formulador, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 25 ADJUNTO */
             var adjunto = `INSERT INTO adjunto (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
@@ -555,9 +563,9 @@ router.post('/validation/editar-proyecto', function(req, res) {
 
             /* 13 CRONOGRAMA */
             /* 
-            var _sql = ``;
-            var s = [ id ];
-            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+            var cronograma_sql = ``;
+            var cronograma = [ id ];
+            con.query(_sql, cronograma, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 14 IMPACTOS */
             var impactos_sql = `UPDATE impactos SET impactos_economicos = ?, impactos_sociales = ?, impactos_formacion = ?, potencialidad = ?, impactos_tecnologico = ?, impactos_ambientales = ?, medidas_mitigacion = ?, impactos_empresa = ? WHERE id_proyecto = ?`;
@@ -569,60 +577,50 @@ router.post('/validation/editar-proyecto', function(req, res) {
             var recursos_necesarios = [ req.body.c8_1_1 ? req.body.c8_1_1 : null, req.body.c8_2_1 ? req.body.c8_2_1 : null, req.body.c8_3_1 ? req.body.c8_3_1 : null, req.body.c8_4_1 ? req.body.c8_4_1 : null, req.body.c8_5_1 ? req.body.c8_5_1 : null, req.body.c8_6_1 ? req.body.c8_6_1 : null, req.body.c8_7_1 ? req.body.c8_7_1 : null, req.body.c8_8_1 ? req.body.c8_8_1 : null, req.body.c8_9_1 ? req.body.c8_9_1 : null, req.body.c8_10_1 ? req.body.c8_10_1 : null, req.body.c8_11_1 ? req.body.c8_11_1 : null, req.body.c8_1_2 ? req.body.c8_1_2 : null, req.body.c8_2_2 ? req.body.c8_2_2 : null, req.body.c8_3_2 ? req.body.c8_3_2 : null, req.body.c8_4_2 ? req.body.c8_4_2 : null, req.body.c8_5_2 ? req.body.c8_5_2 : null, req.body.c8_6_2 ? req.body.c8_6_2 : null, req.body.c8_7_2 ? req.body.c8_7_2 : null, req.body.c8_8_2 ? req.body.c8_8_2 : null, req.body.c8_9_2 ? req.body.c8_9_2 : null, req.body.c8_10_2 ? req.body.c8_10_2 : null, req.body.c8_11_2 ? req.body.c8_11_2 : null, req.body.c8_1_3 ? req.body.c8_1_3 : null, req.body.c8_2_3 ? req.body.c8_2_3 : null, req.body.c8_3_3 ? req.body.c8_3_3 : null, req.body.c8_4_3 ? req.body.c8_4_3 : null, req.body.c8_5_3 ? req.body.c8_5_3 : null, req.body.c8_6_3 ? req.body.c8_6_3 : null, req.body.c8_7_3 ? req.body.c8_7_3 : null, req.body.c8_8_3 ? req.body.c8_8_3 : null, req.body.c8_9_3 ? req.body.c8_9_3 : null, req.body.c8_10_3 ? req.body.c8_10_3 : null, req.body.c8_11_3 ? req.body.c8_11_3 : null, req.body.c8_1_4 ? req.body.c8_1_4 : null, req.body.c8_2_4 ? req.body.c8_2_4 : null, req.body.c8_3_4 ? req.body.c8_3_4 : null, req.body.c8_4_4 ? req.body.c8_4_4 : null, req.body.c8_5_4 ? req.body.c8_5_4 : null, req.body.c8_6_4 ? req.body.c8_6_4 : null, req.body.c8_7_4 ? req.body.c8_7_4 : null, req.body.c8_8_4 ? req.body.c8_8_4 : null, req.body.c8_9_4 ? req.body.c8_9_4 : null, req.body.c8_10_4 ? req.body.c8_10_4 : null, req.body.c8_11_4 ? req.body.c8_11_4 : null, req.body.c8_1_5 ? req.body.c8_1_5 : null, req.body.c8_2_5 ? req.body.c8_2_5 : null, req.body.c8_3_5 ? req.body.c8_3_5 : null, req.body.c8_4_5 ? req.body.c8_4_5 : null, req.body.c8_5_5 ? req.body.c8_5_5 : null, req.body.c8_6_5 ? req.body.c8_6_5 : null, req.body.c8_7_5 ? req.body.c8_7_5 : null, req.body.c8_8_5 ? req.body.c8_8_5 : null, req.body.c8_9_5 ? req.body.c8_9_5 : null, req.body.c8_10_5 ? req.body.c8_10_5 : null, req.body.c8_11_5 ? req.body.c8_11_5 : null, id ];
             con.query(recursos_necesarios_sql, recursos_necesarios, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 16 EQUIPOS Y BIENES */
-            /* 
-            var _sql = ``;
-            var s = [ id ];
-            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+            /* 16 EQUIPOS Y BIENES */ 
+            var equipos_bienes_sql = `UPDATE unjfsc.equipos_bienes SET d11_1_1= ? , d11_3_1= ? , d11_2_1= ? , d11_4_1= ? , d11_5_1= ? , d11_6_1= ? , d11_7_1= ? , d11_8_1= ? , d11_9_1= ? , d11_10_1= ? , d11_11_1= ? , d11_12_1= ? , d11_1_2= ? , d11_2_2= ? , d11_3_2= ? , d11_4_2= ? , d11_5_2= ? , d11_6_2= ? , d11_7_2= ? , d11_8_2= ? , d11_9_2= ? , d11_10_2= ? , d11_11_2= ? , d11_12_2= ? , d11_1_3= ? , d11_2_3= ? , d11_3_3= ? , d11_4_3= ? , d11_5_3= ? , d11_6_3= ? , d11_7_3= ? , d11_8_3= ? , d11_9_3= ? , d11_10_3= ? , d11_11_3= ? , d11_12_3= ? , d11_1_4= ? , d11_2_4= ? , d11_3_4= ? , d11_4_4= ? , d11_5_4= ? , d11_6_4= ? , d11_7_4= ? , d11_8_4= ? , d11_9_4= ? , d11_10_4= ? , d11_11_4= ? , d11_12_4= ? , d11_1_5= ? , d11_2_5= ? , d11_3_5= ? , d11_4_5= ? , d11_5_5= ? , d11_6_5= ? , d11_7_5= ? , d11_8_5= ? , d11_9_5= ? , d11_10_5= ? , d11_11_5= ? , d11_12_5= ? WHERE id_proyecto = ?`;
+            var  equipos_bienes = [ req.body.d11_1_1 ? req.body.d11_1_1 : null ,req.body.d11_2_1 ? req.body.d11_2_1 : null ,req.body.d11_3_1 ? req.body.d11_3_1 : null ,req.body.d11_4_1 ? req.body.d11_4_1 : null ,req.body.d11_5_1 ? req.body.d11_5_1 : null ,req.body.d11_6_1 ? req.body.d11_6_1 : null ,req.body.d11_7_1 ? req.body.d11_7_1 : null ,req.body.d11_8_1 ? req.body.d11_8_1 : null ,req.body.d11_9_1 ? req.body.d11_9_1 : null ,req.body.d11_10_1? req.body.d11_10_1 : null ,req.body.d11_11_1? req.body.d11_11_1 : null ,req.body.d11_12_1? req.body.d11_12_1 : null ,req.body.d11_1_2 ? req.body.d11_1_2 : null ,req.body.d11_2_2 ? req.body.d11_2_2 : null ,req.body.d11_3_2 ? req.body.d11_3_2 : null ,req.body.d11_4_2 ? req.body.d11_4_2 : null ,req.body.d11_5_2 ? req.body.d11_5_2 : null ,req.body.d11_6_2 ? req.body.d11_6_2 : null ,req.body.d11_7_2 ? req.body.d11_7_2 : null ,req.body.d11_8_2 ? req.body.d11_8_2 : null ,req.body.d11_9_2 ? req.body.d11_9_2 : null ,req.body.d11_10_2? req.body.d11_10_2 : null ,req.body.d11_11_2? req.body.d11_11_2 : null ,req.body.d11_12_2? req.body.d11_12_2 : null ,req.body.d11_1_3 ? req.body.d11_1_3 : null ,req.body.d11_2_3 ? req.body.d11_2_3 : null ,req.body.d11_3_3 ? req.body.d11_3_3 : null ,req.body.d11_4_3 ? req.body.d11_4_3 : null ,req.body.d11_5_3 ? req.body.d11_5_3 : null ,req.body.d11_6_3 ? req.body.d11_6_3 : null ,req.body.d11_7_3 ? req.body.d11_7_3 : null ,req.body.d11_8_3 ? req.body.d11_8_3 : null ,req.body.d11_9_3 ? req.body.d11_9_3 : null ,req.body.d11_10_3? req.body.d11_10_3 : null ,req.body.d11_11_3? req.body.d11_11_3 : null ,req.body.d11_12_3? req.body.d11_12_3 : null ,req.body.d11_1_4 ? req.body.d11_1_4 : null ,req.body.d11_2_4 ? req.body.d11_2_4 : null ,req.body.d11_3_4 ? req.body.d11_3_4 : null ,req.body.d11_4_4 ? req.body.d11_4_4 : null ,req.body.d11_5_4 ? req.body.d11_5_4 : null ,req.body.d11_6_4 ? req.body.d11_6_4 : null ,req.body.d11_7_4 ? req.body.d11_7_4 : null ,req.body.d11_8_4 ? req.body.d11_8_4 : null ,req.body.d11_9_4 ? req.body.d11_9_4 : null ,req.body.d11_10_4? req.body.d11_10_4 : null ,req.body.d11_11_4? req.body.d11_11_4 : null ,req.body.d11_12_4? req.body.d11_12_4 : null ,req.body.d11_1_5 ? req.body.d11_1_5 : null ,req.body.d11_2_5 ? req.body.d11_2_5 : null ,req.body.d11_3_5 ? req.body.d11_3_5 : null ,req.body.d11_4_5 ? req.body.d11_4_5 : null ,req.body.d11_5_5 ? req.body.d11_5_5 : null ,req.body.d11_6_5 ? req.body.d11_6_5 : null ,req.body.d11_7_5 ? req.body.d11_7_5 : null ,req.body.d11_8_5 ? req.body.d11_8_5 : null ,req.body.d11_9_5 ? req.body.d11_9_5 : null ,req.body.d11_10_5 ? req.body.d11_10_5 : null ,req.body.d11_11_5 ? req.body.d11_11_5 : null ,req.body.d11_12_5 ? req.body.d11_12_5 : null, id ];
+            con.query(equipos_bienes_sql, equipos_bienes, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 17 HONORARIOS */
-            /* 
-            var _sql = ``;
-            var s = [ id ];
-            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+            /* 17 HONORARIOS */ 
+            var honorarios_sql = `UPDATE unjfsc.honorarios SET d12_1_1= ? , d12_2_1= ? , d12_3_1= ? , d12_4_1= ? , d12_5_1= ? , d12_6_1= ? , d12_7_1= ? , d12_8_1= ? , d12_9_1= ? , d12_10_1= ? , d12_1_2= ? , d12_2_2= ? , d12_3_2= ? , d12_4_2= ? , d12_5_2= ? , d12_6_2= ? , d12_7_2= ? , d12_8_2= ? , d12_9_2= ? , d12_10_2= ? , d12_1_3= ? , d12_2_3= ? , d12_3_3= ? , d12_4_3= ? , d12_5_3= ? , d12_6_3= ? , d12_7_3= ? , d12_8_3= ? , d12_9_3= ? , d12_10_3= ? , d12_1_4= ? , d12_2_4= ? , d12_3_4= ? , d12_4_4= ? , d12_5_4= ? , d12_6_4= ? , d12_7_4= ? , d12_8_4= ? , d12_9_4= ? , d12_10_4= ? , d12_1_5= ? , d12_2_5= ? , d12_3_5= ? , d12_4_5= ? , d12_5_5= ? , d12_6_5= ? , d12_7_5= ? , d12_8_5= ? , d12_9_5= ? , d12_10_5= ? WHERE  id_proyecto= ?;`;
+            var honorarios = [ req.body.d12_1_1 ? req.body.d12_1_1 : null ,req.body.d12_2_1 ? req.body.d12_2_1 : null ,req.body.d12_3_1 ? req.body.d12_3_1 : null ,req.body.d12_4_1 ? req.body.d12_4_1 : null ,req.body.d12_5_1 ? req.body.d12_5_1 : null ,req.body.d12_6_1 ? req.body.d12_6_1 : null ,req.body.d12_7_1 ? req.body.d12_7_1 : null ,req.body.d12_8_1 ? req.body.d12_8_1 : null ,req.body.d12_9_1 ? req.body.d12_9_1 : null ,req.body.d12_10_1? req.body.d12_10_1 : null ,req.body.d12_1_2 ? req.body.d12_1_2 : null ,req.body.d12_2_2 ? req.body.d12_2_2 : null ,req.body.d12_3_2 ? req.body.d12_3_2 : null ,req.body.d12_4_2 ? req.body.d12_4_2 : null ,req.body.d12_5_2 ? req.body.d12_5_2 : null ,req.body.d12_6_2 ? req.body.d12_6_2 : null ,req.body.d12_7_2 ? req.body.d12_7_2 : null ,req.body.d12_8_2 ? req.body.d12_8_2 : null ,req.body.d12_9_2 ? req.body.d12_9_2 : null ,req.body.d12_10_2? req.body.d12_10_2 : null ,req.body.d12_1_3 ? req.body.d12_1_3 : null ,req.body.d12_2_3 ? req.body.d12_2_3 : null ,req.body.d12_3_3 ? req.body.d12_3_3 : null ,req.body.d12_4_3 ? req.body.d12_4_3 : null ,req.body.d12_5_3 ? req.body.d12_5_3 : null ,req.body.d12_6_3 ? req.body.d12_6_3 : null ,req.body.d12_7_3 ? req.body.d12_7_3 : null ,req.body.d12_8_3 ? req.body.d12_8_3 : null ,req.body.d12_9_3 ? req.body.d12_9_3 : null ,req.body.d12_10_3? req.body.d12_10_3 : null ,req.body.d12_1_4 ? req.body.d12_1_4 : null ,req.body.d12_2_4 ? req.body.d12_2_4 : null ,req.body.d12_3_4 ? req.body.d12_3_4 : null ,req.body.d12_4_4 ? req.body.d12_4_4 : null ,req.body.d12_5_4 ? req.body.d12_5_4 : null ,req.body.d12_6_4 ? req.body.d12_6_4 : null ,req.body.d12_7_4 ? req.body.d12_7_4 : null ,req.body.d12_8_4 ? req.body.d12_8_4 : null ,req.body.d12_9_4 ? req.body.d12_9_4 : null ,req.body.d12_10_4? req.body.d12_10_4 : null ,req.body.d12_1_5 ? req.body.d12_1_5 : null ,req.body.d12_2_5 ? req.body.d12_2_5 : null ,req.body.d12_3_5 ? req.body.d12_3_5 : null ,req.body.d12_4_5 ? req.body.d12_4_5 : null ,req.body.d12_5_5 ? req.body.d12_5_5 : null ,req.body.d12_6_5 ? req.body.d12_6_5 : null ,req.body.d12_7_5 ? req.body.d12_7_5 : null ,req.body.d12_8_5 ? req.body.d12_8_5 : null ,req.body.d12_9_5 ? req.body.d12_9_5 : null ,req.body.d12_10_5 ? req.body.d12_10_5 : null, id ];
+            con.query(honorarios_sql, honorarios, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 18 CONSULTORIAS */
-            /* 
-            var _sql = ``;
-            var s = [ id ];
-            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+            /* 18 CONSULTORIAS */ 
+            var consultorias_sql = `UPDATE unjfsc.consultorias SET d13_1_1=? , d13_2_1=? , d13_3_1=? , d13_4_1=? , d13_5_1=? , d13_6_1=? , d13_7_1=? , d13_8_1=? , d13_9_1=? , d13_1_2=? , d13_2_2=? , d13_3_2=? , d13_4_2=? , d13_5_2=? , d13_6_2=? , d13_7_2=? , d13_8_2=? , d13_9_2=? , d13_1_3=? , d13_2_3=? , d13_3_3=? , d13_4_3=? , d13_5_3=? , d13_6_3=? , d13_7_3=? , d13_8_3=? , d13_9_3=? , d13_1_4=? , d13_2_4=? , d13_3_4=? , d13_4_4=? , d13_5_4=? , d13_6_4=? , d13_7_4=? , d13_8_4=? , d13_9_4=? , d13_1_5=? , d13_2_5=? , d13_3_5=? , d13_4_5=? , d13_5_5=? , d13_6_5=? , d13_7_5=? , d13_8_5=? , d13_9_5=? WHERE id_proyecto=?;`;
+            var  consultorias = [ req.body.d13_1_1 ? req.body.d13_1_1 : null ,req.body.d13_2_1 ? req.body.d13_2_1 : null ,req.body.d13_3_1 ? req.body.d13_3_1 : null ,req.body.d13_4_1 ? req.body.d13_4_1 : null ,req.body.d13_5_1 ? req.body.d13_5_1 : null ,req.body.d13_6_1 ? req.body.d13_6_1 : null ,req.body.d13_7_1 ? req.body.d13_7_1 : null ,req.body.d13_8_1 ? req.body.d13_8_1 : null ,req.body.d13_9_1 ? req.body.d13_9_1 : null ,req.body.d13_1_2 ? req.body.d13_1_2 : null ,req.body.d13_2_2 ? req.body.d13_2_2 : null ,req.body.d13_3_2 ? req.body.d13_3_2 : null ,req.body.d13_4_2 ? req.body.d13_4_2 : null ,req.body.d13_5_2 ? req.body.d13_5_2 : null ,req.body.d13_6_2 ? req.body.d13_6_2 : null ,req.body.d13_7_2 ? req.body.d13_7_2 : null ,req.body.d13_8_2 ? req.body.d13_8_2 : null ,req.body.d13_9_2 ? req.body.d13_9_2 : null ,req.body.d13_1_3 ? req.body.d13_1_3 : null ,req.body.d13_2_3 ? req.body.d13_2_3 : null ,req.body.d13_3_3 ? req.body.d13_3_3 : null ,req.body.d13_4_3 ? req.body.d13_4_3 : null ,req.body.d13_5_3 ? req.body.d13_5_3 : null ,req.body.d13_6_3 ? req.body.d13_6_3 : null ,req.body.d13_7_3 ? req.body.d13_7_3 : null ,req.body.d13_8_3 ? req.body.d13_8_3 : null ,req.body.d13_9_3 ? req.body.d13_9_3 : null ,req.body.d13_1_4 ? req.body.d13_1_4 : null ,req.body.d13_2_4 ? req.body.d13_2_4 : null ,req.body.d13_3_4 ? req.body.d13_3_4 : null ,req.body.d13_4_4 ? req.body.d13_4_4 : null ,req.body.d13_5_4 ? req.body.d13_5_4 : null ,req.body.d13_6_4 ? req.body.d13_6_4 : null ,req.body.d13_7_4 ? req.body.d13_7_4 : null ,req.body.d13_8_4 ? req.body.d13_8_4 : null ,req.body.d13_9_4 ? req.body.d13_9_4 : null ,req.body.d13_1_5 ? req.body.d13_1_5 : null ,req.body.d13_2_5 ? req.body.d13_2_5 : null ,req.body.d13_3_5 ? req.body.d13_3_5 : null ,req.body.d13_4_5 ? req.body.d13_4_5 : null ,req.body.d13_5_5 ? req.body.d13_5_5 : null ,req.body.d13_6_5 ? req.body.d13_6_5 : null ,req.body.d13_7_5 ? req.body.d13_7_5 : null ,req.body.d13_8_5 ? req.body.d13_8_5 : null ,req.body.d13_9_5 ? req.body.d13_9_5 : null, id ];
+            con.query(consultorias_sql, consultorias, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 19 SERVICIOS DE TERCEROS */
-            /* 
-            var _sql = ``;
-            var s = [ id ];
-            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+            /* 19 SERVICIOS DE TERCEROS */ 
+            var servicios_de_terceros_sql = `UPDATE unjfsc.servicios_de_terceros SET d14_1_1=? , d14_2_1=? , d14_3_1=? , d14_4_1=? , d14_5_1=? , d14_6_1=? , d14_7_1=? , d14_8_1=? , d14_9_1=? , d14_1_2=? , d14_2_2=? , d14_3_2=? , d14_4_2=? , d14_5_2=? , d14_6_2=? , d14_7_2=? , d14_8_2=? , d14_9_2=? , d14_1_3=? , d14_2_3=? , d14_3_3=? , d14_4_3=? , d14_5_3=? , d14_6_3=? , d14_7_3=? , d14_8_3=? , d14_9_3=? , d14_1_4=? , d14_2_4=? , d14_3_4=? , d14_4_4=? , d14_5_4=? , d14_6_4=? , d14_7_4=? , d14_8_4=? , d14_9_4=? , d14_1_5=? , d14_2_5=? , d14_3_5=? , d14_4_5=? , d14_5_5=? , d14_6_5=? , d14_7_5=? , d14_8_5=? , d14_9_5=? WHERE id_proyecto=?;`;
+            var  servicios_de_terceros = [ req.body.d14_1_1 ? req.body.d14_1_1 : null ,req.body.d14_2_1 ? req.body.d14_2_1 : null ,req.body.d14_3_1 ? req.body.d14_3_1 : null ,req.body.d14_4_1 ? req.body.d14_4_1 : null ,req.body.d14_5_1 ? req.body.d14_5_1 : null ,req.body.d14_6_1 ? req.body.d14_6_1 : null ,req.body.d14_7_1 ? req.body.d14_7_1 : null ,req.body.d14_8_1 ? req.body.d14_8_1 : null ,req.body.d14_9_1 ? req.body.d14_9_1 : null ,req.body.d14_1_2 ? req.body.d14_1_2 : null ,req.body.d14_2_2 ? req.body.d14_2_2 : null ,req.body.d14_3_2 ? req.body.d14_3_2 : null ,req.body.d14_4_2 ? req.body.d14_4_2 : null ,req.body.d14_5_2 ? req.body.d14_5_2 : null ,req.body.d14_6_2 ? req.body.d14_6_2 : null ,req.body.d14_7_2 ? req.body.d14_7_2 : null ,req.body.d14_8_2 ? req.body.d14_8_2 : null ,req.body.d14_9_2 ? req.body.d14_9_2 : null ,req.body.d14_1_3 ? req.body.d14_1_3 : null ,req.body.d14_2_3 ? req.body.d14_2_3 : null ,req.body.d14_3_3 ? req.body.d14_3_3 : null ,req.body.d14_4_3 ? req.body.d14_4_3 : null ,req.body.d14_5_3 ? req.body.d14_5_3 : null ,req.body.d14_6_3 ? req.body.d14_6_3 : null ,req.body.d14_7_3 ? req.body.d14_7_3 : null ,req.body.d14_8_3 ? req.body.d14_8_3 : null ,req.body.d14_9_3 ? req.body.d14_9_3 : null ,req.body.d14_1_4 ? req.body.d14_1_4 : null ,req.body.d14_2_4 ? req.body.d14_2_4 : null ,req.body.d14_3_4 ? req.body.d14_3_4 : null ,req.body.d14_4_4 ? req.body.d14_4_4 : null ,req.body.d14_5_4 ? req.body.d14_5_4 : null ,req.body.d14_6_4 ? req.body.d14_6_4 : null ,req.body.d14_7_4 ? req.body.d14_7_4 : null ,req.body.d14_8_4 ? req.body.d14_8_4 : null ,req.body.d14_9_4 ? req.body.d14_9_4 : null ,req.body.d14_1_5 ? req.body.d14_1_5 : null ,req.body.d14_2_5 ? req.body.d14_2_5 : null ,req.body.d14_3_5 ? req.body.d14_3_5 : null ,req.body.d14_4_5 ? req.body.d14_4_5 : null ,req.body.d14_5_5 ? req.body.d14_5_5 : null ,req.body.d14_6_5 ? req.body.d14_6_5 : null ,req.body.d14_7_5 ? req.body.d14_7_5 : null ,req.body.d14_8_5 ? req.body.d14_8_5 : null ,req.body.d14_9_5 ? req.body.d14_9_5 : null, id ];
+            con.query(servicios_de_terceros_sql, servicios_de_terceros, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 20 PASAJES - VIATICOS */
-            /* 
-            var _sql = ``;
-            var s = [ id ];
-            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+            /* 20 PASAJES - VIATICOS */ 
+            var pasajes_viaticos_sql = `UPDATE unjfsc.pasajes_viaticos SET d15_1_1=? , d15_2_1=? , d15_3_1=? , d15_4_1=? , d15_5_1=? , d15_6_1=? , d15_7_1=? , d15_8_1=? , d15_9_1=? , d15_10_1=? , d15_11_1=? , d15_12_1=? , d15_13_1=? , d15_1_2=? , d15_2_2=? , d15_3_2=? , d15_4_2=? , d15_5_2=? , d15_6_2=? , d15_7_2=? , d15_8_2=? , d15_9_2=? , d15_10_2=? , d15_11_2=? , d15_12_2=? , d15_13_2=? , d15_1_3=? , d15_2_3=? , d15_3_3=? , d15_4_3=? , d15_5_3=? , d15_6_3=? , d15_7_3=? , d15_8_3=? , d15_9_3=? , d15_10_3=? , d15_11_3=? , d15_12_3=? , d15_13_3=? , d15_1_4=? , d15_2_4=? , d15_3_4=? , d15_4_4=? , d15_5_4=? , d15_6_4=? , d15_7_4=? , d15_8_4=? , d15_9_4=? , d15_10_4=? , d15_11_4=? , d15_12_4=? , d15_13_4=? , d15_1_5=? , d15_2_5=? , d15_3_5=? , d15_4_5=? , d15_5_5=? , d15_6_5=? , d15_7_5=? , d15_8_5=? , d15_9_5=? , d15_10_5=? , d15_11_5=? , d15_12_5=? , d15_13_5=? WHERE id_proyecto=?;`;
+            var  pasajes_viaticos = [req.body.d15_1_1 ? req.body.d15_1_1 : null ,req.body.d15_2_1 ? req.body.d15_2_1 : null ,req.body.d15_3_1 ? req.body.d15_3_1 : null ,req.body.d15_4_1 ? req.body.d15_4_1 : null ,req.body.d15_5_1 ? req.body.d15_5_1 : null ,req.body.d15_6_1 ? req.body.d15_6_1 : null ,req.body.d15_7_1 ? req.body.d15_7_1 : null ,req.body.d15_8_1 ? req.body.d15_8_1 : null ,req.body.d15_9_1 ? req.body.d15_9_1 : null ,req.body.d15_10_1 ? req.body.d15_10_1 : null ,req.body.d15_11_1 ? req.body.d15_11_1 : null ,req.body.d15_12_1 ? req.body.d15_12_1 : null ,req.body.d15_13_1 ? req.body.d15_13_1 : null ,req.body.d15_1_2 ? req.body.d15_1_2 : null ,req.body.d15_2_2 ? req.body.d15_2_2 : null ,req.body.d15_3_2 ? req.body.d15_3_2 : null ,req.body.d15_4_2 ? req.body.d15_4_2 : null ,req.body.d15_5_2 ? req.body.d15_5_2 : null ,req.body.d15_6_2 ? req.body.d15_6_2 : null ,req.body.d15_7_2 ? req.body.d15_7_2 : null ,req.body.d15_8_2 ? req.body.d15_8_2 : null ,req.body.d15_9_2 ? req.body.d15_9_2 : null ,req.body.d15_10_2 ? req.body.d15_10_2 : null ,req.body.d15_11_2 ? req.body.d15_11_2 : null ,req.body.d15_12_2 ? req.body.d15_12_2 : null ,req.body.d15_13_2 ? req.body.d15_13_2 : null ,req.body.d15_1_3 ? req.body.d15_1_3 : null ,req.body.d15_2_3 ? req.body.d15_2_3 : null ,req.body.d15_3_3 ? req.body.d15_3_3 : null ,req.body.d15_4_3 ? req.body.d15_4_3 : null ,req.body.d15_5_3 ? req.body.d15_5_3 : null ,req.body.d15_6_3 ? req.body.d15_6_3 : null ,req.body.d15_7_3 ? req.body.d15_7_3 : null ,req.body.d15_8_3 ? req.body.d15_8_3 : null ,req.body.d15_9_3 ? req.body.d15_9_3 : null ,req.body.d15_10_3 ? req.body.d15_10_3 : null ,req.body.d15_11_3 ? req.body.d15_11_3 : null ,req.body.d15_12_3 ? req.body.d15_12_3 : null ,req.body.d15_13_3 ? req.body.d15_13_3 : null ,req.body.d15_1_4 ? req.body.d15_1_4 : null ,req.body.d15_2_4 ? req.body.d15_2_4 : null ,req.body.d15_3_4 ? req.body.d15_3_4 : null ,req.body.d15_4_4 ? req.body.d15_4_4 : null ,req.body.d15_5_4 ? req.body.d15_5_4 : null ,req.body.d15_6_4 ? req.body.d15_6_4 : null ,req.body.d15_7_4 ? req.body.d15_7_4 : null ,req.body.d15_8_4 ? req.body.d15_8_4 : null ,req.body.d15_9_4 ? req.body.d15_9_4 : null ,req.body.d15_10_4 ? req.body.d15_10_4 : null ,req.body.d15_11_4 ? req.body.d15_11_4 : null ,req.body.d15_12_4 ? req.body.d15_12_4 : null ,req.body.d15_13_4 ? req.body.d15_13_4 : null ,req.body.d15_1_5 ? req.body.d15_1_5 : null ,req.body.d15_2_5 ? req.body.d15_2_5 : null ,req.body.d15_3_5 ? req.body.d15_3_5 : null ,req.body.d15_4_5 ? req.body.d15_4_5 : null ,req.body.d15_5_5 ? req.body.d15_5_5 : null ,req.body.d15_6_5 ? req.body.d15_6_5 : null ,req.body.d15_7_5 ? req.body.d15_7_5 : null ,req.body.d15_8_5 ? req.body.d15_8_5 : null ,req.body.d15_9_5 ? req.body.d15_9_5 : null ,req.body.d15_10_5 ? req.body.d15_10_5 : null ,req.body.d15_11_5 ? req.body.d15_11_5 : null ,req.body.d15_12_5 ? req.body.d15_12_5 : null ,req.body.d15_13_5 ? req.body.d15_13_5 : null, id ];
+            con.query(pasajes_viaticos_sql, pasajes_viaticos, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 21 MATERIALES */
-            /* 
-            var _sql = ``;
-            var s = [ id ];
-            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+            /* 21 MATERIALES */ 
+            var materiales_sql = `UPDATE unjfsc.materiales SET d16_1_1=? , d16_2_1=? , d16_3_1=? , d16_4_1=? , d16_5_1=? , d16_6_1=? , d16_7_1=? , d16_8_1=? , d16_9_1=? , d16_10_1=? , d16_11_1=? , d16_12_1=? , d16_1_2=? , d16_2_2=? , d16_3_2=? , d16_4_2=? , d16_5_2=? , d16_6_2=? , d16_7_2=? , d16_8_2=? , d16_9_2=? , d16_10_2=? , d16_11_2=? , d16_12_2=? , d16_1_3=? , d16_2_3=? , d16_3_3=? , d16_4_3=? , d16_5_3=? , d16_6_3=? , d16_7_3=? , d16_8_3=? , d16_9_3=? , d16_10_3=? , d16_11_3=? , d16_12_3=? , d16_1_4=? , d16_2_4=? , d16_3_4=? , d16_4_4=? , d16_5_4=? , d16_6_4=? , d16_7_4=? , d16_8_4=? , d16_9_4=? , d16_10_4=? , d16_11_4=? , d16_12_4=? , d16_1_5=? , d16_2_5=? , d16_3_5=? , d16_4_5=? , d16_5_5=? , d16_6_5=? , d16_7_5=? , d16_8_5=? , d16_9_5=? , d16_10_5=? , d16_11_5=? , d16_12_5=? WHERE id_proyecto=?;`;
+            var materiales = [ req.body.d16_1_1 ? req.body.d16_1_1 : null ,req.body.d16_2_1 ? req.body.d16_2_1 : null ,req.body.d16_3_1 ? req.body.d16_3_1 : null ,req.body.d16_4_1 ? req.body.d16_4_1 : null ,req.body.d16_5_1 ? req.body.d16_5_1 : null ,req.body.d16_6_1 ? req.body.d16_6_1 : null ,req.body.d16_7_1 ? req.body.d16_7_1 : null ,req.body.d16_8_1 ? req.body.d16_8_1 : null ,req.body.d16_9_1 ? req.body.d16_9_1 : null ,req.body.d16_10_1 ? req.body.d16_10_1 : null ,req.body.d16_11_1 ? req.body.d16_11_1 : null ,req.body.d16_12_1 ? req.body.d16_12_1 : null ,req.body.d16_1_2 ? req.body.d16_1_2 : null ,req.body.d16_2_2 ? req.body.d16_2_2 : null ,req.body.d16_3_2 ? req.body.d16_3_2 : null ,req.body.d16_4_2 ? req.body.d16_4_2 : null ,req.body.d16_5_2 ? req.body.d16_5_2 : null ,req.body.d16_6_2 ? req.body.d16_6_2 : null ,req.body.d16_7_2 ? req.body.d16_7_2 : null ,req.body.d16_8_2 ? req.body.d16_8_2 : null ,req.body.d16_9_2 ? req.body.d16_9_2 : null ,req.body.d16_10_2 ? req.body.d16_10_2 : null ,req.body.d16_11_2 ? req.body.d16_11_2 : null ,req.body.d16_12_2 ? req.body.d16_12_2 : null ,req.body.d16_1_3 ? req.body.d16_1_3 : null ,req.body.d16_2_3 ? req.body.d16_2_3 : null ,req.body.d16_3_3 ? req.body.d16_3_3 : null ,req.body.d16_4_3 ? req.body.d16_4_3 : null ,req.body.d16_5_3 ? req.body.d16_5_3 : null ,req.body.d16_6_3 ? req.body.d16_6_3 : null ,req.body.d16_7_3 ? req.body.d16_7_3 : null ,req.body.d16_8_3 ? req.body.d16_8_3 : null ,req.body.d16_9_3 ? req.body.d16_9_3 : null ,req.body.d16_10_3 ? req.body.d16_10_3 : null ,req.body.d16_11_3 ? req.body.d16_11_3 : null ,req.body.d16_12_3 ? req.body.d16_12_3 : null ,req.body.d16_1_4 ? req.body.d16_1_4 : null ,req.body.d16_2_4 ? req.body.d16_2_4 : null ,req.body.d16_3_4 ? req.body.d16_3_4 : null ,req.body.d16_4_4 ? req.body.d16_4_4 : null ,req.body.d16_5_4 ? req.body.d16_5_4 : null ,req.body.d16_6_4 ? req.body.d16_6_4 : null ,req.body.d16_7_4 ? req.body.d16_7_4 : null ,req.body.d16_8_4 ? req.body.d16_8_4 : null ,req.body.d16_9_4 ? req.body.d16_9_4 : null ,req.body.d16_10_4 ? req.body.d16_10_4 : null ,req.body.d16_11_4 ? req.body.d16_11_4 : null ,req.body.d16_12_4 ? req.body.d16_12_4 : null ,req.body.d16_1_5 ? req.body.d16_1_5 : null ,req.body.d16_2_5 ? req.body.d16_2_5 : null ,req.body.d16_3_5 ? req.body.d16_3_5 : null ,req.body.d16_4_5 ? req.body.d16_4_5 : null ,req.body.d16_5_5 ? req.body.d16_5_5 : null ,req.body.d16_6_5 ? req.body.d16_6_5 : null ,req.body.d16_7_5 ? req.body.d16_7_5 : null ,req.body.d16_8_5 ? req.body.d16_8_5 : null ,req.body.d16_9_5 ? req.body.d16_9_5 : null ,req.body.d16_10_5 ? req.body.d16_10_5 : null ,req.body.d16_11_5 ? req.body.d16_11_5 : null ,req.body.d16_12_5 ? req.body.d16_12_5 : null, id ];
+            con.query(materiales_sql, materiales, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 22 OTROS GASTOS */
-            /* 
-            var _sql = ``;
-            var s = [ id ];
-            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+            /* 22 OTROS GASTOS */ 
+            var otros_gastos_sql = `UPDATE unjfsc.otros_gastos SET d17_1_1=? , d17_2_1=? , d17_3_1=? , d17_4_1=? , d17_5_1=? , d17_6_1=? , d17_7_1=? , d17_8_1=? , d17_9_1=? , d17_10_1=? , d17_1_2=? , d17_2_2=? , d17_3_2=? , d17_4_2=? , d17_5_2=? , d17_6_2=? , d17_7_2=? , d17_8_2=? , d17_9_2=? , d17_10_2=? , d17_1_3=? , d17_2_3=? , d17_3_3=? , d17_4_3=? , d17_5_3=? , d17_6_3=? , d17_7_3=? , d17_8_3=? , d17_9_3=? , d17_10_3=? , d17_1_4=? , d17_2_4=? , d17_3_4=? , d17_4_4=? , d17_5_4=? , d17_6_4=? , d17_7_4=? , d17_8_4=? , d17_9_4=? , d17_10_4=? , d17_1_5=? , d17_2_5=? , d17_3_5=? , d17_4_5=? , d17_5_5=? , d17_6_5=? , d17_7_5=? , d17_8_5=? , d17_9_5=? , d17_10_5=? WHERE id_proyecto=?;`;
+            var  otros_gastos = [ req.body.d17_1_1 ? req.body.d17_1_1 : null ,req.body.d17_2_1 ? req.body.d17_2_1 : null ,req.body.d17_3_1 ? req.body.d17_3_1 : null ,req.body.d17_4_1 ? req.body.d17_4_1 : null ,req.body.d17_5_1 ? req.body.d17_5_1 : null ,req.body.d17_6_1 ? req.body.d17_6_1 : null ,req.body.d17_7_1 ? req.body.d17_7_1 : null ,req.body.d17_8_1 ? req.body.d17_8_1 : null ,req.body.d17_9_1 ? req.body.d17_9_1 : null ,req.body.d17_10_1 ? req.body.d17_10_1 : null ,req.body.d17_1_2 ? req.body.d17_1_2 : null ,req.body.d17_2_2 ? req.body.d17_2_2 : null ,req.body.d17_3_2 ? req.body.d17_3_2 : null ,req.body.d17_4_2 ? req.body.d17_4_2 : null ,req.body.d17_5_2 ? req.body.d17_5_2 : null ,req.body.d17_6_2 ? req.body.d17_6_2 : null ,req.body.d17_7_2 ? req.body.d17_7_2 : null ,req.body.d17_8_2 ? req.body.d17_8_2 : null ,req.body.d17_9_2 ? req.body.d17_9_2 : null ,req.body.d17_10_2 ? req.body.d17_10_2 : null ,req.body.d17_1_3 ? req.body.d17_1_3 : null ,req.body.d17_2_3 ? req.body.d17_2_3 : null ,req.body.d17_3_3 ? req.body.d17_3_3 : null ,req.body.d17_4_3 ? req.body.d17_4_3 : null ,req.body.d17_5_3 ? req.body.d17_5_3 : null ,req.body.d17_6_3 ? req.body.d17_6_3 : null ,req.body.d17_7_3 ? req.body.d17_7_3 : null ,req.body.d17_8_3 ? req.body.d17_8_3 : null ,req.body.d17_9_3 ? req.body.d17_9_3 : null ,req.body.d17_10_3 ? req.body.d17_10_3 : null ,req.body.d17_1_4 ? req.body.d17_1_4 : null ,req.body.d17_2_4 ? req.body.d17_2_4 : null ,req.body.d17_3_4 ? req.body.d17_3_4 : null ,req.body.d17_4_4 ? req.body.d17_4_4 : null ,req.body.d17_5_4 ? req.body.d17_5_4 : null ,req.body.d17_6_4 ? req.body.d17_6_4 : null ,req.body.d17_7_4 ? req.body.d17_7_4 : null ,req.body.d17_8_4 ? req.body.d17_8_4 : null ,req.body.d17_9_4 ? req.body.d17_9_4 : null ,req.body.d17_10_4 ? req.body.d17_10_4 : null ,req.body.d17_1_5 ? req.body.d17_1_5 : null ,req.body.d17_2_5 ? req.body.d17_2_5 : null ,req.body.d17_3_5 ? req.body.d17_3_5 : null ,req.body.d17_4_5 ? req.body.d17_4_5 : null ,req.body.d17_5_5 ? req.body.d17_5_5 : null ,req.body.d17_6_5 ? req.body.d17_6_5 : null ,req.body.d17_7_5 ? req.body.d17_7_5 : null ,req.body.d17_8_5 ? req.body.d17_8_5 : null ,req.body.d17_9_5 ? req.body.d17_9_5 : null ,req.body.d17_10_5 ? req.body.d17_10_5 : null, id ];
+            con.query(otros_gastos_sql, otros_gastos, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 23 GASTOS DE GESTION */
-            /* 
-            var _sql = ``;
-            var s = [ id ];
-            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
+            /* 23 GASTOS DE GESTION */ 
+            var gastos_de_gestion_sql = `UPDATE unjfsc.gastos_de_gestion SET d18_1_1=? , d18_2_1=? , d18_3_1=? , d18_4_1=? , d18_5_1=? , d18_6_1=? , d18_7_1=? , d18_8_1=? , d18_9_1=? , d18_1_2=? , d18_2_2=? , d18_3_2=? , d18_4_2=? , d18_5_2=? , d18_6_2=? , d18_7_2=? , d18_8_2=? , d18_9_2=? , d18_1_3=? , d18_2_3=? , d18_3_3=? , d18_4_3=? , d18_5_3=? , d18_6_3=? , d18_7_3=? , d18_8_3=? , d18_9_3=? , d18_1_4=? , d18_2_4=? , d18_3_4=? , d18_4_4=? , d18_5_4=? , d18_6_4=? , d18_7_4=? , d18_8_4=? , d18_9_4=? , d18_1_5=? , d18_2_5=? , d18_3_5=? , d18_4_5=? , d18_5_5=? , d18_6_5=? , d18_7_5=? , d18_8_5=? , d18_9_5=? WHERE id_proyecto=?;`;
+            var  gastos_de_gestion = [ req.body.d18_1_1 ? req.body.d18_1_1 : null ,req.body.d18_3_1 ? req.body.d18_3_1 : null ,req.body.d18_2_1 ? req.body.d18_2_1 : null ,req.body.d18_5_1 ? req.body.d18_5_1 : null ,req.body.d18_4_1 ? req.body.d18_4_1 : null ,req.body.d18_7_1 ? req.body.d18_7_1 : null ,req.body.d18_6_1 ? req.body.d18_6_1 : null ,req.body.d18_9_1 ? req.body.d18_9_1 : null ,req.body.d18_8_1 ? req.body.d18_8_1 : null ,req.body.d18_2_2 ? req.body.d18_2_2 : null ,req.body.d18_1_2 ? req.body.d18_1_2 : null ,req.body.d18_4_2 ? req.body.d18_4_2 : null ,req.body.d18_3_2 ? req.body.d18_3_2 : null ,req.body.d18_6_2 ? req.body.d18_6_2 : null ,req.body.d18_5_2 ? req.body.d18_5_2 : null ,req.body.d18_8_2 ? req.body.d18_8_2 : null ,req.body.d18_7_2 ? req.body.d18_7_2 : null ,req.body.d18_1_3 ? req.body.d18_1_3 : null ,req.body.d18_9_2 ? req.body.d18_9_2 : null ,req.body.d18_3_3 ? req.body.d18_3_3 : null ,req.body.d18_2_3 ? req.body.d18_2_3 : null ,req.body.d18_5_3 ? req.body.d18_5_3 : null ,req.body.d18_4_3 ? req.body.d18_4_3 : null ,req.body.d18_7_3 ? req.body.d18_7_3 : null ,req.body.d18_6_3 ? req.body.d18_6_3 : null ,req.body.d18_9_3 ? req.body.d18_9_3 : null ,req.body.d18_8_3 ? req.body.d18_8_3 : null ,req.body.d18_2_4 ? req.body.d18_2_4 : null ,req.body.d18_1_4 ? req.body.d18_1_4 : null ,req.body.d18_4_4 ? req.body.d18_4_4 : null ,req.body.d18_3_4 ? req.body.d18_3_4 : null ,req.body.d18_6_4 ? req.body.d18_6_4 : null ,req.body.d18_5_4 ? req.body.d18_5_4 : null ,req.body.d18_8_4 ? req.body.d18_8_4 : null ,req.body.d18_7_4 ? req.body.d18_7_4 : null ,req.body.d18_1_5 ? req.body.d18_1_5 : null ,req.body.d18_9_4 ? req.body.d18_9_4 : null ,req.body.d18_3_5 ? req.body.d18_3_5 : null ,req.body.d18_2_5 ? req.body.d18_2_5 : null ,req.body.d18_5_5 ? req.body.d18_5_5 : null ,req.body.d18_4_5 ? req.body.d18_4_5 : null ,req.body.d18_7_5 ? req.body.d18_7_5 : null ,req.body.d18_6_5 ? req.body.d18_6_5 : null ,req.body.d18_9_5 ? req.body.d18_9_5 : null ,req.body.d18_8_5 ? req.body.d18_8_5 : null, id ];
+            con.query(gastos_de_gestion_sql, gastos_de_gestion, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 24 EQUIPO FORMULADOR */
-            /* 
-            var _sql = ``;
-            var s = [ id ];
-            con.query(_sql, s, function (err, result) { if (err) { console.log(err); return; } });
-
+            /* 24 EQUIPO FORMULADOR */ 
+            var equipo_formulador_sql = `UPDATE unjfsc.equipo_formulador SET d19_1_1=? , d19_2_1=? , d19_3_1=? , d19_4_1=? , d19_5_1=? , d19_6_1=? , d19_7_1=? , d19_1_2=? , d19_2_2=? , d19_3_2=? , d19_4_2=? , d19_5_2=? , d19_6_2=? , d19_7_2=? , d19_1_3=? , d19_2_3=? , d19_3_3=? , d19_4_3=? , d19_5_3=? , d19_6_3=? , d19_7_3=? , d19_1_4=? , d19_2_4=? , d19_3_4=? , d19_4_4=? , d19_5_4=? , d19_6_4=? , d19_7_4=? , d19_1_5=? , d19_2_5=? , d19_3_5=? , d19_4_5=? , d19_5_5=? , d19_6_5=? , d19_7_5=? WHERE id_proyecto=?;`;
+            var  equipo_formulador = [ req.body.d19_1_1 ? req.body.d19_1_1 : null ,req.body.d19_2_1 ? req.body.d19_2_1 : null ,req.body.d19_3_1 ? req.body.d19_3_1 : null ,req.body.d19_4_1 ? req.body.d19_4_1 : null ,req.body.d19_5_1 ? req.body.d19_5_1 : null ,req.body.d19_6_1 ? req.body.d19_6_1 : null ,req.body.d19_7_1 ? req.body.d19_7_1 : null ,req.body.d19_1_2 ? req.body.d19_1_2 : null ,req.body.d19_2_2 ? req.body.d19_2_2 : null ,req.body.d19_3_2 ? req.body.d19_3_2 : null ,req.body.d19_4_2 ? req.body.d19_4_2 : null ,req.body.d19_5_2 ? req.body.d19_5_2 : null ,req.body.d19_6_2 ? req.body.d19_6_2 : null ,req.body.d19_7_2 ? req.body.d19_7_2 : null ,req.body.d19_1_3 ? req.body.d19_1_3 : null ,req.body.d19_2_3 ? req.body.d19_2_3 : null ,req.body.d19_3_3 ? req.body.d19_3_3 : null ,req.body.d19_4_3 ? req.body.d19_4_3 : null ,req.body.d19_5_3 ? req.body.d19_5_3 : null ,req.body.d19_6_3 ? req.body.d19_6_3 : null ,req.body.d19_7_3 ? req.body.d19_7_3 : null ,req.body.d19_1_4 ? req.body.d19_1_4 : null ,req.body.d19_2_4 ? req.body.d19_2_4 : null ,req.body.d19_3_4 ? req.body.d19_3_4 : null ,req.body.d19_4_4 ? req.body.d19_4_4 : null ,req.body.d19_5_4 ? req.body.d19_5_4 : null ,req.body.d19_6_4 ? req.body.d19_6_4 : null ,req.body.d19_7_4 ? req.body.d19_7_4 : null ,req.body.d19_1_5 ? req.body.d19_1_5 : null ,req.body.d19_2_5 ? req.body.d19_2_5 : null ,req.body.d19_3_5 ? req.body.d19_3_5 : null ,req.body.d19_4_5 ? req.body.d19_4_5 : null ,req.body.d19_5_5 ? req.body.d19_5_5 : null ,req.body.d19_6_5 ? req.body.d19_6_5 : null ,req.body.d19_7_5 ? req.body.d19_7_5 : null, id ];
+            con.query(equipo_formulador_sql, equipo_formulador, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 25 ADJUNTO */
             var adjunto_sql = `UPDATE adjunto SET flujoDeCaja = ? , planAdjunto = ? WHERE id_proyecto = ?`;
@@ -684,7 +682,7 @@ router.post('/visualizar', function(req, res, next) {
         if (con) con.destroy();
         var con = mysql.createConnection(config());
 
-        var sql = `SELECT 
+        var sql = ` SELECT 
         usuario.*
       , proyecto.*
       , datos_generales.*
@@ -700,6 +698,15 @@ router.post('/visualizar', function(req, res, next) {
       , objetivos.*
       , impactos.*
       , recursos_necesarios.*
+      , equipos_bienes.*
+      , honorarios.*
+      , consultorias.*
+      , servicios_de_terceros.*
+      , pasajes_viaticos.*
+      , materiales.*
+      , otros_gastos.*
+      , gastos_de_gestion.*
+      , equipo_formulador.*
       FROM proyecto 
       INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
       INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
@@ -714,7 +721,16 @@ router.post('/visualizar', function(req, res, next) {
       INNER JOIN antecedentes ON antecedentes.id_proyecto = proyecto.id_proyecto
       INNER JOIN objetivos ON objetivos.id_proyecto = proyecto.id_proyecto
       INNER JOIN impactos ON impactos.id_proyecto = proyecto.id_proyecto
-      INNER JOIN recursos_necesarios ON recursos_necesarios.id_proyecto = proyecto.id_proyecto`;
+      INNER JOIN recursos_necesarios ON recursos_necesarios.id_proyecto = proyecto.id_proyecto
+      INNER JOIN equipos_bienes ON equipos_bienes.id_proyecto = proyecto.id_proyecto
+      INNER JOIN honorarios ON honorarios.id_proyecto = proyecto.id_proyecto
+      INNER JOIN consultorias ON consultorias.id_proyecto = proyecto.id_proyecto
+      INNER JOIN servicios_de_terceros ON servicios_de_terceros.id_proyecto = proyecto.id_proyecto
+      INNER JOIN pasajes_viaticos ON pasajes_viaticos.id_proyecto = proyecto.id_proyecto
+      INNER JOIN materiales ON materiales.id_proyecto = proyecto.id_proyecto
+      INNER JOIN otros_gastos ON otros_gastos.id_proyecto = proyecto.id_proyecto
+      INNER JOIN gastos_de_gestion ON gastos_de_gestion.id_proyecto = proyecto.id_proyecto
+      INNER JOIN equipo_formulador ON equipo_formulador.id_proyecto = proyecto.id_proyecto`;
         
         var values = [ req.session.user.id, req.body.idproyecto];
 
