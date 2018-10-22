@@ -13,11 +13,14 @@ block content
             .col-sm-6
               .form-group
                 label.h6(for='tipo_documento') Tipo Documento
-                select#tipoDocumento.form-control(name="tipo_documento" disabled)
-                  option(selected) -----
-                  option(value='0') CARNET DE EXTRANJERIA
-                  option(value='1') DOCUMENTO NACIONAL DE IDENTIDAD
-                  option(value='2') PASAPORTE
+                if lista.tipo_documento == 0
+                  input#tipoDocumento.form-control(type="text", name="tipo_documento" value="CARNÉ DE EXTRANJERIA" disabled)
+                else if lista.tipo_documento == 1
+                  input#tipoDocumento.form-control(type="text", name="tipo_documento" value="DOCUMENTO NACIONAL DE IDENTIDAD" disabled)
+                else if lista.tipo_documento == 2
+                  input#tipoDocumento.form-control(type="text", name="tipo_documento" value="PASAPORTE" disabled)
+                else
+                  input#tipoDocumento.form-control(type="text", name="tipo_documento" value="----" disabled)
             .col-sm-6
               .form-group
                 label.h6(for='documento_identidad') Documento de Identidad
@@ -38,10 +41,12 @@ block content
             .col-sm-6.col-md-3
               .form-group
                 label.h6(for='genero') G&eacutenero
-                select#genero.form-control(name="genero" disabled)
-                  option(selected) -----
-                  option(value='0') Femenino
-                  option(value='1') Masculino
+                if lista.genero == 0
+                  input#genero.form-control(type="text", name="genero" value="Femenino" disabled)
+                else if lista.genero == 1
+                  input#genero.form-control(type="text", name="genero" value="Masculino" disabled)
+                else
+                  input#genero.form-control(type="text", name="genero" value="----" disabled)
           .row
             .col-sm-6.col-md-3
               .form-group
