@@ -1,4 +1,4 @@
-extends layout
+extends layoutAdmin
 
 block navbar
     nav.navbar.navbar-expand-lg.navbar-dark.bg-danger.fixed-top
@@ -27,5 +27,5 @@ block navbar
                 // input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
                 .btn-group
                     a.btn.btn-light.disabled.text-capitalize #{usuario.nombre} #{usuario.apellido}
-                    a.btn.btn-outline-danger.my-2.my-sm-0(href="/") Salir
+                    a.btn.btn-outline-danger.my-2.my-sm-0(href="/userAdmin") Salir
 block content

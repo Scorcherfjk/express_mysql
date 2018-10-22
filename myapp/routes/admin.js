@@ -146,4 +146,13 @@ router.get('/proyectos/2020', function(req, res) {
     }
 });
 
+router.get('/docentes/ingresar', function(req, res) {
+
+    if(!req.session.user){
+        res.redirect("/useradmin");
+    } else {
+        res.render('ingresarAdmin', { title: 'Universidad jfsc', usuario:req.session.user });
+    }
+});
+
 module.exports = router;

@@ -1,0 +1,97 @@
+extends navbarAdmin
+
+block content
+  .container
+    form(action="/validation/new-user", method="post")
+      .card.rounded.border-secondary
+        h5.card-header.text-capitalize.bg-danger.text-white
+          | Registro de Docente
+        .card-body
+          .row
+            .col-sm-6
+              .form-group
+                label.h6(for='tipo_documento') Tipo Documento
+                  span.text-danger  (*)
+                select#tipo_documento.form-control(name="tipo_documento" required)
+                  option(selected) -----
+                  option(value='0') CARNET DE EXTRANJERIA
+                  option(value='1') DOCUMENTO NACIONAL DE IDENTIDAD
+                  option(value='2') PASAPORTE
+            .col-sm-6
+              .form-group
+                label.h6(for='documento_identidad') Documento de Identidad
+                  span.text-danger  (*)
+                input#documento_identidad.form-control(type='text' name="documento_identidad" required)
+          .row
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='nombres') Nombres
+                  span.text-danger  (*)
+                input#nombres.form-control(type='text' name="nombres" required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='apellido_paterno') Apellidos
+                  span.text-danger  (*)
+                input#apellidoPaterno.form-control(type='text' name="apellido_paterno" required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='genero') G&eacutenero
+                  span.text-danger  (*)
+                select#genero.form-control(name="genero" required)
+                  option(selected) -----
+                  option(value='0') Femenino
+                  option(value='1') Masculino
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='fecha_nacimiento') Fecha de Nacimiento
+                  span.text-danger  (*)
+                input#fechaNacimiento.form-control(type='date' name="fecha_nacimiento" required)
+          .row
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='pais') Pa&iacutes
+                  span.text-danger  (*)
+                input#pais.form-control(type='text' name="pais" required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='departamento') Departamento
+                  span.text-danger  (*)
+                input#departamento.form-control(type='text' name="departamento" required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='provincia') Provincia
+                  span.text-danger  (*)
+                input#provincia.form-control(type='text' name="provincia" required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='distrito') Distrito
+                  span.text-danger  (*)
+                input#distrito.form-control(type='text' name="distrito" required)
+          .row
+            .col
+              .form-group
+                label.h6(for='direccion') Direcci&oacuten
+                  span.text-danger  (*)
+                input#direccion.form-control(type='text' name="direccion" required)
+          .row
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='email') Correo Electr&oacutenico
+                  span.text-danger  (*)
+                input#email.form-control(type='email' name="email" required)
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='telefono_movil') Tel&eacutefono M&oacutevil
+                  span.text-danger  (*)
+                input#telefonoMovil.form-control(type='number' name="telefono_movil" required)
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='telefono_fijo') Tel&eacutefono  Fijo
+                  span.text-danger  (*)
+                input#telefonoFijo.form-control(type='number' name="telefono_fijo" required)
+          .row
+            .col-sm-12.col-md-6
+              input#carga.btn.btn-outline-primary.float-right.btn-lg.btn-block(type="submit", value="Guardar")
+            .col-sm-12.col-md-6
+              a.btn.btn-outline-danger.float-right.btn-lg.btn-block(href="/" role="button") Cancelar
+  script(src="/javascripts/jquery-3.3.1.min.js")

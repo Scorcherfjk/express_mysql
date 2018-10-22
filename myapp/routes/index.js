@@ -364,122 +364,122 @@ router.post("/validation/new-user", function (req,res) {
 router.post('/validation/nuevo', function(req, res) {
     if(req.session.user){
         if (req.body.titulo){
-        if (con) con.destroy();
-        var con = mysql.createConnection(config());
+            if (con) con.destroy();
+            var con = mysql.createConnection(config());
 
-        con.connect(function(err) {
-            if (err) console.log(err);
-            
-            /* 1 PROYECTO */
-            var proyecto =  `INSERT INTO unjfsc.proyecto (id_usuario, titulo) VALUES ( ? , ? )`;
-            var values = [ req.session.user.id , req.body.titulo ];
-            con.query(proyecto, values, function (err, result) { if (err) { console.log(err); return; } });
+            con.connect(function(err) {
+                if (err) console.log(err);
+                
+                /* 1 PROYECTO */
+                var proyecto =  `INSERT INTO unjfsc.proyecto (id_usuario, titulo) VALUES ( ? , ? )`;
+                var values = [ req.session.user.id , req.body.titulo ];
+                con.query(proyecto, values, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 2 DATOS GENERALES */
-            var datos_generales = `INSERT INTO unjfsc.datos_generales (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(datos_generales, function (err, result) { if (err) { console.log(err); return; } });
+                /* 2 DATOS GENERALES */
+                var datos_generales = `INSERT INTO unjfsc.datos_generales (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(datos_generales, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 3 ENTIDADES PARTICIPANTES */
-            var entidades_participantes = `INSERT INTO unjfsc.entidades_participantes (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(entidades_participantes, function (err, result) { if (err) { console.log(err); return; } });
+                /* 3 ENTIDADES PARTICIPANTES */
+                var entidades_participantes = `INSERT INTO unjfsc.entidades_participantes (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(entidades_participantes, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 4 ENTIDADES ASOCIADAS */
-            var entidades_asociadas = `INSERT INTO unjfsc.entidades_asociadas (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(entidades_asociadas, function (err, result) { if (err) { console.log(err); return; } });
+                /* 4 ENTIDADES ASOCIADAS */
+                var entidades_asociadas = `INSERT INTO unjfsc.entidades_asociadas (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(entidades_asociadas, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 5 TABLAS ACTIVIDADES - INFRAESTRUCTURA - BENEFICIOS */
-            var actividades_infraestructura_beneficios = `INSERT INTO unjfsc.actividades_infraestructura_beneficios (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(actividades_infraestructura_beneficios, function (err, result) { if (err) { console.log(err); return; } });
+                /* 5 TABLAS ACTIVIDADES - INFRAESTRUCTURA - BENEFICIOS */
+                var actividades_infraestructura_beneficios = `INSERT INTO unjfsc.actividades_infraestructura_beneficios (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(actividades_infraestructura_beneficios, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 6 TABLAS FONDOS RECIBIDOS DEL ESTADO */
-            var fondos_recibidos_del_estado = `INSERT INTO unjfsc.fondos_recibidos_del_estado (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(fondos_recibidos_del_estado, function (err, result) { if (err) { console.log(err); return; } });
-            
+                /* 6 TABLAS FONDOS RECIBIDOS DEL ESTADO */
+                var fondos_recibidos_del_estado = `INSERT INTO unjfsc.fondos_recibidos_del_estado (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(fondos_recibidos_del_estado, function (err, result) { if (err) { console.log(err); return; } });
+                
 
-            /* 7 TABLA PROYECTO FINANCIADOS INNOVATE PERU */
-            var proyectos_financiados_ip = `INSERT INTO unjfsc.proyectos_financiados_ip (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(proyectos_financiados_ip, function (err, result) { if (err) { console.log(err); return; } });
+                /* 7 TABLA PROYECTO FINANCIADOS INNOVATE PERU */
+                var proyectos_financiados_ip = `INSERT INTO unjfsc.proyectos_financiados_ip (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(proyectos_financiados_ip, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 8 COMPETITIVIDAD EMPRESARIAL */
-            var competitividad_empresarial = `INSERT INTO unjfsc.competitividad_empresarial (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(competitividad_empresarial, function (err, result) { if (err) { console.log(err); return; } });
+                /* 8 COMPETITIVIDAD EMPRESARIAL */
+                var competitividad_empresarial = `INSERT INTO unjfsc.competitividad_empresarial (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(competitividad_empresarial, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 9 DIAGNOSTICO */
-            var diagnostico = `INSERT INTO unjfsc.diagnostico (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(diagnostico, function (err, result) { if (err) { console.log(err); return; } });
+                /* 9 DIAGNOSTICO */
+                var diagnostico = `INSERT INTO unjfsc.diagnostico (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(diagnostico, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 10 CARACTERISTICAS */
-            var caracateristicas = `INSERT INTO unjfsc.caracateristicas (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(caracateristicas, function (err, result) { if (err) { console.log(err); return; } });
+                /* 10 CARACTERISTICAS */
+                var caracateristicas = `INSERT INTO unjfsc.caracateristicas (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(caracateristicas, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 11 ANTECEDENTES */
-            var antecedentes = `INSERT INTO unjfsc.antecedentes (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(antecedentes, function (err, result) { if (err) { console.log(err); return; } });
-            
-            /* 12 OBJETIVOS */
-            var objetivos = `INSERT INTO unjfsc.objetivos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(objetivos, function (err, result) { if (err) { console.log(err); return; } });
+                /* 11 ANTECEDENTES */
+                var antecedentes = `INSERT INTO unjfsc.antecedentes (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(antecedentes, function (err, result) { if (err) { console.log(err); return; } });
+                
+                /* 12 OBJETIVOS */
+                var objetivos = `INSERT INTO unjfsc.objetivos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(objetivos, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 13 CRONOGRAMA */
-            /*
-            var X = `INSERT INTO unjfsc.X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+                /* 13 CRONOGRAMA */
+                /*
+                var X = `INSERT INTO unjfsc.X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(X, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 14 IMPACTOS */
-            var impactos = `INSERT INTO unjfsc.impactos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(impactos, function (err, result) { if (err) { console.log(err); return; } });
+                /* 14 IMPACTOS */
+                var impactos = `INSERT INTO unjfsc.impactos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(impactos, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 15 RECURSOS NECESARIOS */
-            var recursos_necesarios = `INSERT INTO unjfsc.recursos_necesarios (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(recursos_necesarios, function (err, result) { if (err) { console.log(err); return; } });
+                /* 15 RECURSOS NECESARIOS */
+                var recursos_necesarios = `INSERT INTO unjfsc.recursos_necesarios (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(recursos_necesarios, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 16 EQUIPOS Y BIENES */
-            var equipos_bienes = `INSERT INTO unjfsc.equipos_bienes (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(equipos_bienes, function (err, result) { if (err) { console.log(err); return; } });
+                /* 16 EQUIPOS Y BIENES */
+                var equipos_bienes = `INSERT INTO unjfsc.equipos_bienes (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(equipos_bienes, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 17 HONORARIOS */
-            var honorarios = `INSERT INTO unjfsc.honorarios (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(honorarios, function (err, result) { if (err) { console.log(err); return; } });
+                /* 17 HONORARIOS */
+                var honorarios = `INSERT INTO unjfsc.honorarios (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(honorarios, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 18 CONSULTORIAS */
-            var consultorias = `INSERT INTO unjfsc.consultorias (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(consultorias, function (err, result) { if (err) { console.log(err); return; } });
+                /* 18 CONSULTORIAS */
+                var consultorias = `INSERT INTO unjfsc.consultorias (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(consultorias, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 19 SERVICIOS DE TERCEROS */
-            var servicios_de_terceros = `INSERT INTO unjfsc.servicios_de_terceros (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(servicios_de_terceros, function (err, result) { if (err) { console.log(err); return; } });
+                /* 19 SERVICIOS DE TERCEROS */
+                var servicios_de_terceros = `INSERT INTO unjfsc.servicios_de_terceros (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(servicios_de_terceros, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 20 PASAJES - VIATICOS */
-            var pasajes_viaticos = `INSERT INTO unjfsc.pasajes_viaticos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(pasajes_viaticos, function (err, result) { if (err) { console.log(err); return; } });
+                /* 20 PASAJES - VIATICOS */
+                var pasajes_viaticos = `INSERT INTO unjfsc.pasajes_viaticos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(pasajes_viaticos, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 21 MATERIALES */
-            var materiales = `INSERT INTO unjfsc.materiales (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(materiales, function (err, result) { if (err) { console.log(err); return; } });
+                /* 21 MATERIALES */
+                var materiales = `INSERT INTO unjfsc.materiales (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(materiales, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 22 OTROS GASTOS */
-            var otros_gastos = `INSERT INTO unjfsc.otros_gastos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(otros_gastos, function (err, result) { if (err) { console.log(err); return; } });
+                /* 22 OTROS GASTOS */
+                var otros_gastos = `INSERT INTO unjfsc.otros_gastos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(otros_gastos, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 23 GASTOS DE GESTION */
-            var gastos_de_gestion = `INSERT INTO unjfsc.gastos_de_gestion (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(gastos_de_gestion, function (err, result) { if (err) { console.log(err); return; } });
+                /* 23 GASTOS DE GESTION */
+                var gastos_de_gestion = `INSERT INTO unjfsc.gastos_de_gestion (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(gastos_de_gestion, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 24 EQUIPO FORMULADOR */
-            var equipo_formulador = `INSERT INTO unjfsc.equipo_formulador (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(equipo_formulador, function (err, result) { if (err) { console.log(err); return; } });
+                /* 24 EQUIPO FORMULADOR */
+                var equipo_formulador = `INSERT INTO unjfsc.equipo_formulador (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(equipo_formulador, function (err, result) { if (err) { console.log(err); return; } });
 
-            /* 25 ADJUNTO */
-            var adjunto = `INSERT INTO unjfsc.adjunto (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-            con.query(adjunto, function (err, result) { if (err) { console.log(err); return; }
-                res.redirect('/administrar');
+                /* 25 ADJUNTO */
+                var adjunto = `INSERT INTO unjfsc.adjunto (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(adjunto, function (err, result) { if (err) { console.log(err); return; }
+                    res.redirect('/administrar');
+                });
+
+                con.end();
             });
-
-            con.end();
-        });
-    }else{
-        res.redirect('/inicio');
-    }
+        }else{
+            res.redirect('/inicio');
+        }
     } else {
         res.redirect("/");
     }
@@ -498,8 +498,8 @@ router.post('/validation/editar-proyecto', function(req, res) {
             var id = req.body.id_proyecto;
 
             /* 1 PROYECTO */
-            var proyecto_sql = `UPDATE unjfsc.proyecto SET titulo = ? WHERE id_proyecto = ?`;
-            var proyecto = [ req.body.titulo, id ]
+            var proyecto_sql = `UPDATE unjfsc.proyecto SET titulo = ?, tipo_moneda = ? WHERE id_proyecto = ?`;
+            var proyecto = [ req.body.titulo, req.body.monedaDelProyecto, id ]
             con.query(proyecto_sql, proyecto, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 2 DATOS GENERALES */
