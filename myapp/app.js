@@ -8,6 +8,7 @@ var logger = require('morgan');
 /*************************Archivos de rutas*******************************/
 var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');
+var publicRouter = require('./routes/public');
 /*************************************************************************/
 
 
@@ -33,6 +34,7 @@ app.use(session({
 /*****************************uso de las rutas*******************************/
 app.use('/', indexRouter);
 app.use('/useradmin', adminRouter);
+app.use('/public', publicRouter);
 /****************************************************************************/
 
 // catch 404 and forward to error handler
