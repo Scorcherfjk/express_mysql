@@ -56,7 +56,7 @@ block A
               td: input#localizacion_distrito.form-control(type="text" name="localizacion_distrito" value=lista.loc_distrito)
               td: input#localizacion_ubigeo.form-control(type="number" name="localizacion_ubigeo" value=lista.loc_ubigeo)
       .form-group
-        label.h6(for='duracionDelProyecto') A.1.6 - Duracion del proyecto
+        label.h6(for='duracionDelProyecto') A.1.6 - Duracion del proyecto (meses)
           span.text-danger  (*)
         input#duracionDelProyecto.form-control(type='number' name="duracionDelProyecto" value=lista.duracion_proyecto)
       .form-group
@@ -70,11 +70,30 @@ block A
           .form-group
             label(for='cgptipoDeDocumento') Tipo de documento
               span.text-danger  (*)
-            select#cgptipoDeDocumento.form-control(name="cgptipoDeDocumento" value=lista.cgp_tipo_documento)
-              option(value="0") -----
-              option(value='1') CARNET DE EXTRANJERIA
-              option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
-              option(value='3') PASAPORTE
+            if lista.cgp_tipo_documento == 1
+              select#cgptipoDeDocumento.form-control(name="cgptipoDeDocumento")
+                option(value="0") -----
+                option(value='1' selected) CARNÉ DE EXTRANJERIA
+                option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3') PASAPORTE
+            else if lista.cgp_tipo_documento == 2
+              select#cgptipoDeDocumento.form-control(name="cgptipoDeDocumento")
+                option(value="0") -----
+                option(value='1') CARNÉ DE EXTRANJERIA
+                option(value='2' selected) DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3') PASAPORTE
+            else if lista.cgp_tipo_documento == 3
+              select#cgptipoDeDocumento.form-control(name="cgptipoDeDocumento")
+                option(value="0") -----
+                option(value='1') CARNÉ DE EXTRANJERIA
+                option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3' selected) PASAPORTE
+            else
+              select#cgptipoDeDocumento.form-control(name="cgptipoDeDocumento")
+                option(value="0" selected) -----
+                option(value='1') CARNÉ DE EXTRANJERIA
+                option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3') PASAPORTE
         .col-sm-6.col-md-4
           .form-group
             label(for='cgpnumeroDeDocumento') Numero de documento
@@ -99,10 +118,21 @@ block A
           .form-group
             label(for='cgpsexo') sexo
               span.text-danger  (*)
-            select#cgpsexo.form-control(name="cgpsexo" value=lista.cgp_sexo)
-              option(value="0" selected) -----
-              option(value='1') Femenino
-              option(value='2') Masculino
+            if lista.cgp_sexo == 1
+              select#cgpsexo.form-control(name="cgpsexo" value=lista.cgp_sexo)
+                option(value="0") -----
+                option(value='1' selected) Femenino
+                option(value='2') Masculino
+            else if lista.cgp_sexo == 2
+              select#cgpsexo.form-control(name="cgpsexo" value=lista.cgp_sexo)
+                  option(value="0") -----
+                  option(value='1') Femenino
+                  option(value='2' selected) Masculino
+            else
+              select#cgpsexo.form-control(name="cgpsexo" value=lista.cgp_sexo)
+                option(value="0" selected) -----
+                option(value='1') Femenino
+                option(value='2') Masculino
       .row
         .col-sm-6.col-md-4
           .form-group
@@ -124,11 +154,30 @@ block A
           .form-group
             label(for='captipoDeDocumento') Tipo de documento
               span.text-danger  (*)
-            select#captipoDeDocumento.form-control(name="captipoDeDocumento" value=lista.cap_tipo_documento)
-              option(value="0" selected) -----
-              option(value='1') CARNET DE EXTRANJERIA
-              option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
-              option(value='3') PASAPORTE
+            if lista.cap_tipo_documento == 1
+              select#captipoDeDocumento.form-control(name="captipoDeDocumento")
+                option(value="0") -----
+                option(value='1' selected) CARNÉ DE EXTRANJERIA
+                option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3') PASAPORTE
+            else if lista.cap_tipo_documento == 2
+              select#captipoDeDocumento.form-control(name="captipoDeDocumento")
+                option(value="0") -----
+                option(value='1') CARNÉ DE EXTRANJERIA
+                option(value='2' selected) DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3') PASAPORTE
+            else if lista.cap_tipo_documento == 3
+              select#captipoDeDocumento.form-control(name="captipoDeDocumento")
+                option(value="0") -----
+                option(value='1') CARNÉ DE EXTRANJERIA
+                option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3' selected) PASAPORTE
+            else
+              select#captipoDeDocumento.form-control(name="captipoDeDocumento")
+                option(value="0" selected) -----
+                option(value='1') CARNÉ DE EXTRANJERIA
+                option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3') PASAPORTE
         .col-sm-6.col-md-4
           .form-group
             label(for='capnumeroDeDocumento') Numero de documento
@@ -153,10 +202,21 @@ block A
           .form-group
             label(for='capsexo') sexo
               span.text-danger  (*)
-            select#capsexo.form-control(name="capsexo" value=lista.cap_sexo)
-              option(value="0" selected) -----
-              option(value='1') Femenino
-              option(value='2') Masculino
+            if lista.cap_sexo == 1
+              select#capsexo.form-control(name="capsexo" value=lista.cap_sexo)
+                option(value="0") -----
+                option(value='1' selected) Femenino
+                option(value='2') Masculino
+            else if lista.cap_sexo == 2
+              select#capsexo.form-control(name="capsexo" value=lista.cap_sexo)
+                option(value="0") -----
+                option(value='1') Femenino
+                option(value='2' selected) Masculino
+            else
+              select#capsexo.form-control(name="capsexo" value=lista.cap_sexo)
+                option(value="0" selected) -----
+                option(value='1') Femenino
+                option(value='2') Masculino
       .row
         .col-sm-6.col-md-4
           .form-group
@@ -183,11 +243,30 @@ block A
           .form-group
             label(for='estipoDeEntidad') Tipo de entidad
               span.text-danger  (*)
-            select#estipoDeEntidad.form-control(name="estipoDeEntidad" value=lista.es_tipo)
-              option(value="0" selected) -----
-              option(value='1') ASOCIACI&OacuteN CIVIL DE PRODUCTORES
-              option(value='2') EMPRESA
-              option(value='3') PERSONA NATURAL CON NEGOCIO
+            if lista.es_tipo == 1
+              select#estipoDeEntidad.form-control(name="estipoDeEntidad")
+                option(value="0" ) -----
+                option(value='1' selected) ASOCIACI&OacuteN CIVIL DE PRODUCTORES
+                option(value='2') EMPRESA
+                option(value='3') PERSONA NATURAL CON NEGOCIO
+            else if lista.es_tipo == 2
+              select#estipoDeEntidad.form-control(name="estipoDeEntidad")
+                option(value="0" ) -----
+                option(value='1') ASOCIACI&OacuteN CIVIL DE PRODUCTORES
+                option(value='2' selected) EMPRESA
+                option(value='3') PERSONA NATURAL CON NEGOCIO
+            else if lista.es_tipo == 3
+              select#estipoDeEntidad.form-control(name="estipoDeEntidad")
+                option(value="0" ) -----
+                option(value='1') ASOCIACI&OacuteN CIVIL DE PRODUCTORES
+                option(value='2') EMPRESA
+                option(value='3' selected) PERSONA NATURAL CON NEGOCIO
+            else
+              select#estipoDeEntidad.form-control(name="estipoDeEntidad")
+                option(value="0" selected) -----
+                option(value='1') ASOCIACI&OacuteN CIVIL DE PRODUCTORES
+                option(value='2') EMPRESA
+                option(value='3') PERSONA NATURAL CON NEGOCIO
         .col-sm-6.col-md-4
           .form-group
             label(for='estamanoDeLaEmpresa') Tamaño de la empresa
@@ -262,11 +341,30 @@ block A
           .form-group
             label(for='rptipoDeDocumento') Tipo de documento
               span.text-danger  (*)
-            select#rptipoDeDocumento.form-control(name="rptipoDeDocumento" value=lista.rl_tipo_documento)
-              option(value="0" selected) -----
-              option(value='1') CARNET DE EXTRANJERIA
-              option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
-              option(value='3') PASAPORTE
+            if lista.rl_tipo_documento == 1
+              select#rptipoDeDocumento.form-control(name="rptipoDeDocumento")
+                option(value="0" ) -----
+                option(value='1' selected) CARNÉ DE EXTRANJERIA
+                option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3') PASAPORTE
+            else if lista.rl_tipo_documento == 2
+              select#rptipoDeDocumento.form-control(name="rptipoDeDocumento")
+                option(value="0" ) -----
+                option(value='1') CARNÉ DE EXTRANJERIA
+                option(value='2' selected) DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3') PASAPORTE
+            else if lista.rl_tipo_documento == 3
+              select#rptipoDeDocumento.form-control(name="rptipoDeDocumento")
+                option(value="0" ) -----
+                option(value='1') CARNÉ DE EXTRANJERIA
+                option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3' selected) PASAPORTE
+            else
+              select#rptipoDeDocumento.form-control(name="rptipoDeDocumento")
+                option(value="0" selected) -----
+                option(value='1') CARNÉ DE EXTRANJERIA
+                option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                option(value='3') PASAPORTE
         .col-sm-6.col-md-4
           .form-group
             label(for='rpnumeroDeDocumento') Numero de documento
@@ -286,10 +384,21 @@ block A
           .form-group
             label(for='rpsexo') sexo
               span.text-danger  (*)
-            select#rpsexo.form-control(name="rpsexo" value=lista.rl_sexo)
-              option(value="0" selected) -----
-              option(value='1') Femenino
-              option(value='2') Masculino
+            if lista.rl_sexo == 1
+              select#rpsexo.form-control(name="rpsexo")
+                option(value="0" ) -----
+                option(value='1' selected) Femenino
+                option(value='2') Masculino
+            else if lista.rl_sexo == 2
+              select#rpsexo.form-control(name="rpsexo")
+                option(value="0" ) -----
+                option(value='1') Femenino
+                option(value='2' selected) Masculino
+            else
+              select#rpsexo.form-control(name="rpsexo")
+                option(value="0" selected) -----
+                option(value='1') Femenino
+                option(value='2') Masculino
       .row
         .col-sm-6.col-md-6
           .form-group
@@ -565,12 +674,41 @@ block C
       .form-group
         label(for='tipoDeInnovación') Tipo de Innovación
           span.text-danger  (*)
-        select#tipoDeInnovacion.form-control(name="tipoDeInnovacion" value=lista.tipo_innovacion)
-          option(value="0" selected) ----
-          option(value='1') UN NUEVO PROCESO
-          option(value='2') UN NUEVO PRODUCTO (BIEN O SERVICIO)
-          option(value='3') UN PROCESO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
-          option(value='4') UN PRODUCTO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+        if lista.tipo_innovacion == 1
+          select#tipoDeInnovacion.form-control(name="tipoDeInnovacion" value=lista.tipo_innovacion)
+            option(value="0" ) ----
+            option(value='1' selected) UN NUEVO PROCESO
+            option(value='2') UN NUEVO PRODUCTO (BIEN O SERVICIO)
+            option(value='3') UN PROCESO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+            option(value='4') UN PRODUCTO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+        else if lista.tipo_innovacion == 2
+          select#tipoDeInnovacion.form-control(name="tipoDeInnovacion" value=lista.tipo_innovacion)
+            option(value="0" ) ----
+            option(value='1') UN NUEVO PROCESO
+            option(value='2' selected) UN NUEVO PRODUCTO (BIEN O SERVICIO)
+            option(value='3') UN PROCESO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+            option(value='4') UN PRODUCTO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+        else if lista.tipo_innovacion == 3
+          select#tipoDeInnovacion.form-control(name="tipoDeInnovacion" value=lista.tipo_innovacion)
+            option(value="0" ) ----
+            option(value='1') UN NUEVO PROCESO
+            option(value='2') UN NUEVO PRODUCTO (BIEN O SERVICIO)
+            option(value='3' selected) UN PROCESO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+            option(value='4') UN PRODUCTO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+        else if lista.tipo_innovacion == 4
+          select#tipoDeInnovacion.form-control(name="tipoDeInnovacion" value=lista.tipo_innovacion)
+            option(value="0" ) ----
+            option(value='1') UN NUEVO PROCESO
+            option(value='2') UN NUEVO PRODUCTO (BIEN O SERVICIO)
+            option(value='3') UN PROCESO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+            option(value='4' selected) UN PRODUCTO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+        else 
+          select#tipoDeInnovacion.form-control(name="tipoDeInnovacion" value=lista.tipo_innovacion)
+            option(value="0" selected) ----
+            option(value='1') UN NUEVO PROCESO
+            option(value='2') UN NUEVO PRODUCTO (BIEN O SERVICIO)
+            option(value='3') UN PROCESO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
+            option(value='4') UN PRODUCTO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)
       .form-group
         label(for='describirFuncion')
           | 1. Describir la función que realizará la innovación
@@ -975,9 +1113,14 @@ block D
         label(for='monedaDelProyecto')
           | Moneda del Proyecto
           span.text-danger  (*)
-        select#monedaDelProyecto.form-control(name="monedaDelProyecto" value=lista.tipo_moneda)
-          option(value='0') Soles
-          option(value='1') Dolares
+        if lista.tipo_moneda == 1 
+          select#monedaDelProyecto.form-control(name="monedaDelProyecto")
+            option(value='0') Soles
+            option(value='1' selected) Dolares
+        else
+          select#monedaDelProyecto.form-control(name="monedaDelProyecto")
+            option(value='0' selected) Soles
+            option(value='1') Dolares
       #accordion.accordion
         .card
           #headingd11.card-header
