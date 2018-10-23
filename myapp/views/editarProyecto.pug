@@ -646,9 +646,7 @@ block B
           | B.6.1 Adjuntar un archivo obligatorio con el flujo de caja proyectado
           span.text-danger  (*)
         br
-        .custom-file
-          input#flujoDeCaja.custom-file-input(type='file', name='flujoDeCaja')
-          label.custom-file-label(for='flujoDeCaja') Elige Un Archivo
+        input#flujoDeCaja(type='file', name='flujoDeCaja')
 block C
   - function addZero(i) { if (i < 10) { i = '0' + i; } return i; }
   - function fecha(i){ if (i != null) { var dd = i.getDate(); var mm = i.getMonth()+1; var yyyy = i.getFullYear(); dd = addZero(dd); mm = addZero(mm); return yyyy+'-'+mm+'-'+dd; }else { return i;} }
@@ -962,9 +960,7 @@ block C
           | Adjunto Plan Metodológico
           span.text-danger  (*)
         br
-        .custom-file
-          input#planAdjunto.custom-file-input(type='file', name='planAdjunto')
-          label.custom-file-label(for='planAdjunto') Elige Un Archivo
+        input#planAdjunto(type='file', name='planAdjunto')
   br
   .card.rounded.border-secondary
     h5.card-header.text-capitalize.bg-danger.text-white C.6. Propiedad Intelectual

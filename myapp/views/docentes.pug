@@ -14,6 +14,7 @@ block content
                                 th Categoria
                                 th Dedicación
                                 th CV
+                                th Modificar
                         tbody
                             for docente in docentes
                                 tr
@@ -21,5 +22,5 @@ block content
                                     th #{docente.categoria}
                                     th #{docente.dedicacion}
                                     th #{docente.cv}
+                                    th: a(href="http://", target="_blank", rel="noopener noreferrer") modificar datos
     script(src="/javascripts/jquery-3.3.1.min.js")
-    script(src="/javascripts/valida.js")

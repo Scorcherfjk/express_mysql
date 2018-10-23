@@ -3,6 +3,7 @@ var router = express.Router();
 var config = require('../models/database').config;
 var bcrypt = require('bcrypt');
 var mysql = require('mysql');
+var fs=require('fs');
 
 var con = mysql.createConnection(config());
 

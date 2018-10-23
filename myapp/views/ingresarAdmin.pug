@@ -2,7 +2,7 @@ extends navbarAdmin
 
 block content
   .container
-    form(action="/validation/new-user", method="post")
+    form(action="/userAdmin/docentes/ingresar", method="post")
       .card.rounded.border-secondary
         h5.card-header.text-capitalize.bg-danger.text-white
           | Registro de Docente
@@ -30,9 +30,9 @@ block content
                 input#nombres.form-control(type='text' name="nombres" required)
             .col-sm-6.col-md-3
               .form-group
-                label.h6(for='apellido_paterno') Apellidos
+                label.h6(for='apellidos') Apellidos
                   span.text-danger  (*)
-                input#apellidoPaterno.form-control(type='text' name="apellido_paterno" required)
+                input#apellidos.form-control(type='text' name="apellidos" required)
             .col-sm-6.col-md-3
               .form-group
                 label.h6(for='genero') G&eacutenero
@@ -46,6 +46,39 @@ block content
                 label.h6(for='fecha_nacimiento') Fecha de Nacimiento
                   span.text-danger  (*)
                 input#fechaNacimiento.form-control(type='date' name="fecha_nacimiento" required)
+          .row
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='categoria') Categoria
+                  span.text-danger  (*)
+                select#categoria.form-control(name="categoria" required)
+                  option(selected) -----
+                  option(value='0') Pincipal
+                  option(value='1') Auxiliar
+                  option(value='2') Asociado
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='dedicacion') Dedicación
+                  span.text-danger  (*)
+                select#dedicacion.form-control(name="dedicacion" required)
+                  option(selected) -----
+                  option(value='0') Tiempo Completo
+                  option(value='1') Tiempo Parcial
+                  option(value='2') Dedicación Exclusiva
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='registro') Registro
+                  span.text-danger  (*)
+                br
+                .form-check.form-check-inline
+                  input#facultad.form-check-input(type="checkbox", name="facultad" value="1")
+                  label.form-check-label(for='facultad') Facultad
+                .form-check.form-check-inline
+                  input#dina.form-check-input(type="checkbox", name="dina" value="1")
+                  label.form-check-label(for='dina') Dina
+                .form-check.form-check-inline
+                  input#regina.form-check-input(type="checkbox", name="regina" value="1") 
+                  label.form-check-label(for='regina') Regina
           .row
             .col-sm-6.col-md-3
               .form-group
@@ -93,5 +126,5 @@ block content
             .col-sm-12.col-md-6
               input#carga.btn.btn-outline-primary.float-right.btn-lg.btn-block(type="submit", value="Guardar")
             .col-sm-12.col-md-6
-              a.btn.btn-outline-danger.float-right.btn-lg.btn-block(href="/" role="button") Cancelar
+              a.btn.btn-outline-danger.float-right.btn-lg.btn-block(href="/userAdmin/inicio" role="button") Cancelar
   script(src="/javascripts/jquery-3.3.1.min.js")

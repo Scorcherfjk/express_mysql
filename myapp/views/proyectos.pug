@@ -1,6 +1,8 @@
 extends navbarAdmin
 
 block content
+    - function addZero(i) { if (i < 10) { i = '0' + i; } return i; }
+    - function fecha(i){ if (i != null) { var dd = i.getDate(); var mm = i.getMonth()+1; var yyyy = i.getFullYear(); dd = addZero(dd); mm = addZero(mm); return yyyy+'-'+mm+'-'+dd; }else { return i;} }
     .container
         .card.mx-auto.rounded.border-secondary
             h5.card-header.text-capitalize.bg-danger.text-white
@@ -23,7 +25,7 @@ block content
                                     th #{proyecto.titulo}
                                     th #{proyecto.nombre}
                                     th #{proyecto.status}
-                                    th #{proyecto.fecha}
+                                    th #{fecha(proyecto.fecha)}
                                     th #{proyecto.descarga}
     script(src="/javascripts/jquery-3.3.1.min.js")
     script(src="/javascripts/valida.js")
