@@ -50,6 +50,9 @@ router.get('/inicio', function(req, res) {
     }
 });
 
+
+
+
 router.get('/docentes/facultad', function(req, res) {
     if(req.session.user){
         
@@ -124,6 +127,9 @@ router.get('/docentes/regina', function(req, res) {
         res.redirect("/useradmin");
     }
 });
+
+
+
 
 router.get('/proyectos/2018', function(req, res) {
 
@@ -238,6 +244,9 @@ router.get('/proyectos/2020', function(req, res) {
         res.redirect("/useradmin");
     }
 });
+
+
+
 
 router.get('/docentes/ingresar', function(req, res) {
 

@@ -19,8 +19,18 @@ block content
                             for docente in docentes
                                 tr
                                     th #{docente.nombre}
-                                    th #{docente.categoria}
-                                    th #{docente.dedicacion}
+                                    if ( docente.categoria == 0)
+                                        th Principal
+                                    else if ( docente.categoria == 1)
+                                        th Auxiliar
+                                    else if ( docente.categoria == 2)
+                                        th Asociado
+                                    if (docente.dedicacion == 0)
+                                        th Tiempo Completo
+                                    else if (docente.dedicacion == 1)
+                                        th Tiempo Parcial
+                                    else if (docente.dedicacion == 2)
+                                        th Dedicación Exclusiva
                                     th #{docente.cv}
                                     th: a(href="http://", target="_blank", rel="noopener noreferrer") modificar datos
     script(src="/javascripts/jquery-3.3.1.min.js")

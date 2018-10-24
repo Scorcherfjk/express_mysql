@@ -739,8 +739,9 @@ C.4 Objetivos
             <th>Entidad a la que pertenecen</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody>`;
+if ( lista.c8_1_5 || lista.c8_2_5 || lista.c8_3_5 || lista.c8_4_5 || lista.c8_5_5 || lista.c8_6_5 || lista.c8_7_5 || lista.c8_8_5 || lista.c8_9_5 || lista.c8_10_5 || lista.c8_11_5 ){
+html +=`<tr>
             <td>`+ lista.c8_1_1 +`</td>
             <td>`+ lista.c8_2_1 +`</td>
             <td>`+ lista.c8_3_1 +`</td>
@@ -752,8 +753,9 @@ C.4 Objetivos
             <td>`+ lista.c8_9_1 +`</td>
             <td>`+ lista.c8_10_1 +`</td>
             <td>`+ lista.c8_11_1 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if( lista.c8_1_5 || lista.c8_2_5 || lista.c8_3_5 || lista.c8_4_5 || lista.c8_5_5 || lista.c8_6_5 || lista.c8_7_5 || lista.c8_8_5 || lista.c8_9_5 || lista.c8_10_5 || lista.c8_11_5 ){
+html +=`<tr>
             <td>`+ lista.c8_1_2 +`</td>
             <td>`+ lista.c8_2_2 +`</td>
             <td>`+ lista.c8_3_2 +`</td>
@@ -765,8 +767,9 @@ C.4 Objetivos
             <td>`+ lista.c8_9_2 +`</td>
             <td>`+ lista.c8_10_2 +`</td>
             <td>`+ lista.c8_11_2 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+        if ( lista.c8_1_5 || lista.c8_2_5 || lista.c8_3_5 || lista.c8_4_5 || lista.c8_5_5 || lista.c8_6_5 || lista.c8_7_5 || lista.c8_8_5 || lista.c8_9_5 || lista.c8_10_5 || lista.c8_11_5 ){
+        html +=`<tr>
             <td>`+ lista.c8_1_3 +`</td>
             <td>`+ lista.c8_2_3 +`</td>
             <td>`+ lista.c8_3_3 +`</td>
@@ -778,8 +781,9 @@ C.4 Objetivos
             <td>`+ lista.c8_9_3 +`</td>
             <td>`+ lista.c8_10_3 +`</td>
             <td>`+ lista.c8_11_3 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+        if( lista.c8_1_5 || lista.c8_2_5 || lista.c8_3_5 || lista.c8_4_5 || lista.c8_5_5 || lista.c8_6_5 || lista.c8_7_5 || lista.c8_8_5 || lista.c8_9_5 || lista.c8_10_5 || lista.c8_11_5 ){
+        html +=`<tr>
             <td>`+ lista.c8_1_4 +`</td>
             <td>`+ lista.c8_2_4 +`</td>
             <td>`+ lista.c8_3_4 +`</td>
@@ -791,8 +795,9 @@ C.4 Objetivos
             <td>`+ lista.c8_9_4 +`</td>
             <td>`+ lista.c8_10_4 +`</td>
             <td>`+ lista.c8_11_4 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+        if ( lista.c8_1_5 || lista.c8_2_5 || lista.c8_3_5 || lista.c8_4_5 || lista.c8_5_5 || lista.c8_6_5 || lista.c8_7_5 || lista.c8_8_5 || lista.c8_9_5 || lista.c8_10_5 || lista.c8_11_5 ){
+        html +=`<tr>
             <td>`+ lista.c8_1_5 +`</td>
             <td>`+ lista.c8_2_5 +`</td>
             <td>`+ lista.c8_3_5 +`</td>
@@ -804,8 +809,8 @@ C.4 Objetivos
             <td>`+ lista.c8_9_5 +`</td>
             <td>`+ lista.c8_10_5 +`</td>
             <td>`+ lista.c8_11_5 +`</td>
-        </tr>
-    </tbody>
+        </tr>`;}
+html +=`</tbody>
 </table>
 
 <h2>SECCIÓN D: PRESUPUESTO DEL PROYECTO</h2>

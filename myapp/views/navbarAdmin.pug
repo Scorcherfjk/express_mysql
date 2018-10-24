@@ -11,9 +11,13 @@ block navbar
                 li.nav-item.barra
                     a.nav-link(href='/userAdmin/inicio') Inicio 
                 li.nav-item.dropdown.barra
-                    a.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Docentes
+                    a.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Gestión
                     .dropdown-menu(aria-labelledby='navbarDropdown')
                         a.dropdown-item(href='/userAdmin/docentes/ingresar') Ingresar Docente
+                        a.dropdown-item(href='/userAdmin/docentes/modificar') Modificar Docente
+                li.nav-item.dropdown.barra
+                    a.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Docentes
+                    .dropdown-menu(aria-labelledby='navbarDropdown')
                         a.dropdown-item(href='/userAdmin/docentes/facultad') Docentes Facultad
                         a.dropdown-item(href='/userAdmin/docentes/dina') Docentes Dina
                         a.dropdown-item(href='/userAdmin/docentes/regina') Docentes Regina

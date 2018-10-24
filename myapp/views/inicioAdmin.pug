@@ -6,12 +6,12 @@ block content
       h5.card-header.text-capitalize.bg-danger.text-white Módulo de administración del sistema de investigación
       .card-body
         .row
-          .col-sm-12
+          .col-sm-6
             a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/docentes/ingresar' role="button") Ingresar Datos de Docente
-    br
-    .card.rounded.border-secondary
-      .card-body
-        h5.text-center Visualizar
+          .col-sm-6
+            a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/docentes/modificar' role="button") Modificar Datos de Docente
+        br
+        hr
         br
         .row
           .col-sm-12.col-md-4
@@ -20,7 +20,9 @@ block content
             a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/docentes/dina' role="button") Docentes Dina
           .col-sm-12.col-md-4
             a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/docentes/regina' role="button") Docentes Regina
+        br
         hr
+        br
         .row
           .col-sm-12.col-md-4
             a.btn.btn-primary.btn-lg.btn-block(href='/userAdmin/proyectos/2018' role="button") Proyectos 2018

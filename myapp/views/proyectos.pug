@@ -24,7 +24,14 @@ block content
                                     th #{proyecto.codigo}
                                     th #{proyecto.titulo}
                                     th #{proyecto.nombre}
-                                    th #{proyecto.status}
+                                    if (proyecto.status == 0)
+                                        th Profesor
+                                    else if (proyecto.status == 1)
+                                        th Estudiante
+                                    else if (proyecto.status == 2)
+                                        th Egresado
+                                    else if (proyecto.status == 3)
+                                        th Invg. Externo
                                     th #{fecha(proyecto.fecha)}
                                     th #{proyecto.descarga}
     script(src="/javascripts/jquery-3.3.1.min.js")
