@@ -295,14 +295,15 @@ html+=`<h4> A.2.2 - entidades asociadas</h4>
             <th>nombre completo</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody>`;
+if (lista.a22_1_1 || lista.a22_2_1 || lista.a22_3_1 || lista.a22_4_1 || lista.a22_5_1 ){
+html += `<tr>
             <td> `+  lista.a22_1_1 +`  </td>
             <td> `+  lista.a22_2_1 +`  </td>
             <td> `+  lista.a22_3_1 +`  </td>
             <td> `+  lista.a22_4_1 +`  </td>
             <td> `+  lista.a22_5_1 +`  </td>
-        </tr>`;
+        </tr>`;}
 if (lista.a22_1_2 || lista.a22_2_2 || lista.a22_3_2 || lista.a22_4_2 || lista.a22_5_2 ){
     html += `<tr>
             <td> `+  lista.a22_1_2 +`  </td>
@@ -310,8 +311,7 @@ if (lista.a22_1_2 || lista.a22_2_2 || lista.a22_3_2 || lista.a22_4_2 || lista.a2
             <td> `+  lista.a22_3_2 +`  </td>
             <td> `+  lista.a22_4_2 +`  </td>
             <td> `+  lista.a22_5_2 +`  </td>
-        </tr>`;
-}
+        </tr>`;}
 if (lista.a22_1_3 || lista.a22_2_3 || lista.a22_3_3 || lista.a22_4_3 || lista.a22_5_3 ){
     html += `<tr>
             <td> `+  lista.a22_1_3 +`  </td>
@@ -319,8 +319,7 @@ if (lista.a22_1_3 || lista.a22_2_3 || lista.a22_3_3 || lista.a22_4_3 || lista.a2
             <td> `+  lista.a22_3_3 +`  </td>
             <td> `+  lista.a22_4_3 +`  </td>
             <td> `+  lista.a22_5_3 +`  </td>
-        </tr>`;
-}
+        </tr>`;}
 html += `</tbody>
 </table>
 
@@ -334,17 +333,17 @@ html += `</tbody>
             <th>principales actividades y experiencia</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody>`;
+if (lista.a31_1_1 || lista.a31_2_1){
+html += `<tr>
             <td> `+  lista.a31_1_1 +`  </td>
             <td> `+  lista.a31_2_1 +`  </td>
-        </tr>`;
+        </tr>`;}
 if (lista.a31_1_2 || lista.a31_2_2){
     html += `<tr>
             <td> `+  lista.a31_1_2 +`  </td>
             <td> `+  lista.a31_2_2 +`  </td>
-        </tr>`;
-}
+        </tr>`;}
 if (lista.a31_1_3 || lista.a31_2_3){
     html += `<tr>
             <td> `+  lista.a31_1_3 +`  </td>
@@ -364,17 +363,17 @@ html += `</tbody>
             <th>principal infraestructura fisica</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody>`;
+if (lista.a32_1_1 || lista.a32_2_1){
+html += `<tr>
             <td> `+  lista.a32_1_1 +`  </td>
             <td> `+  lista.a32_2_1 +`  </td>
-        </tr>`;
+        </tr>`;}
 if (lista.a32_1_2 || lista.a32_2_2){
     html += `<tr>
             <td> `+  lista.a32_1_2 +`  </td>
             <td> `+  lista.a32_2_2 +`  </td>
-        </tr>`;
-}
+        </tr>`;}
 if (lista.a32_1_3 || lista.a32_2_3){
     html += `<tr>
             <td> `+  lista.a32_1_3 +`  </td>
@@ -394,23 +393,22 @@ html += `</tbody>
             <th>justificacion para contar con la entidad</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody>`;
+if (lista.a33_1_1 || lista.a33_2_1 ){
+        html += `<tr>
         <td> `+  lista.a33_1_1 +`  </td>
         <td> `+  lista.a33_2_1 +`  </td>
-    </tr>`;
+    </tr>`;}
     if (lista.a33_1_2 || lista.a33_2_2){
         html += `<tr>
                 <td> `+  lista.a33_1_2 +`  </td>
                 <td> `+  lista.a33_2_2 +`  </td>
-            </tr>`;
-    }
+            </tr>`;}
     if (lista.a33_1_3 || lista.a33_2_3){
         html += `<tr>
                 <td> `+  lista.a33_1_3 +`  </td>
                 <td> `+  lista.a33_2_3 +`  </td>
-            </tr>`;
-    }
+            </tr>`;}
 html += `</tbody>
 </table>
 
@@ -427,32 +425,31 @@ html += `</tbody>
             <th>fecha de finalizacion</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody>`;
+if (lista.a34_1_1 || lista.a34_2_1 || lista.a34_3_1 || lista.a34_4_1 || lista.a34_5_1 ){
+html += `<tr>
             <td> `+  lista.a34_1_1 +`  </td>
             <td> `+  lista.a34_2_1 +`  </td>
             <td> `+  lista.a34_3_1 +`  </td>
             <td> `+ fecha(lista.a34_4_1) +`  </td>
             <td> `+ fecha(lista.a34_5_1) +`  </td>
-        </tr>`;
-    if (lista.a34_1_2 || lista.a34_2_2 || lista.a34_3_2 || lista.a34_4_2 || lista.a34_5_2 ){
+        </tr>`;}
+if (lista.a34_1_2 || lista.a34_2_2 || lista.a34_3_2 || lista.a34_4_2 || lista.a34_5_2 ){
         html += `<tr>
                 <td> `+  lista.a34_1_2 +`  </td>
                 <td> `+  lista.a34_2_2 +`  </td>
                 <td> `+  lista.a34_3_2 +`  </td>
                 <td> `+ fecha(lista.a34_4_2) +`  </td>
                 <td> `+ fecha(lista.a34_5_2) +`  </td>
-            </tr>`;
-    }
-    if (lista.a34_1_3 || lista.a34_2_3 || lista.a34_3_3 || lista.a34_4_3 || lista.a34_5_3 ){
+        </tr>`;}
+if (lista.a34_1_3 || lista.a34_2_3 || lista.a34_3_3 || lista.a34_4_3 || lista.a34_5_3 ){
         html += `<tr>
                 <td> `+  lista.a34_1_3 +`  </td>
                 <td> `+  lista.a34_2_3 +`  </td>
                 <td> `+  lista.a34_3_3 +`  </td>
                 <td> `+ fecha(lista.a34_4_3) +`  </td>
                 <td> `+ fecha(lista.a34_5_3) +`  </td>
-            </tr>`;
-    }
+        </tr>`;}
 html += `</tbody>
 </table>
 
@@ -471,8 +468,9 @@ html += `</tbody>
             <th>situacion actual</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody>`;
+if (lista.a35_1_1 || lista.a35_2_1 || lista.a35_3_1 || lista.a35_4_1 || lista.a35_5_1 || lista.a35_6_1 || lista.a35_7_1){
+html += `<tr>
         <td> `+ lista.a35_1_1  +` </td>
         <td> `+ lista.a35_2_1  +` </td>
         <td> `+ lista.a35_3_1  +` </td>
@@ -480,7 +478,7 @@ html += `</tbody>
         <td> `+ fecha(lista.a35_5_1)  +` </td>
         <td> `+ lista.a35_6_1  +` </td>
         <td> `+ lista.a35_7_1  +` </td>
-    </tr>`;
+    </tr>`;}
     if (lista.a35_1_2 || lista.a35_2_2 || lista.a35_3_2 || lista.a35_4_2 || lista.a35_5_2 || lista.a35_6_2 || lista.a35_7_2){
     html += `<tr>
             <td> `+ lista.a35_1_2 +` </td>
@@ -490,8 +488,7 @@ html += `</tbody>
             <td> `+ fecha(lista.a35_5_2) +` </td>
             <td> `+ lista.a35_6_2 +` </td>
             <td> `+ lista.a35_7_2 +` </td>
-        </tr>`;
-    }
+        </tr>`;}
     if (lista.a35_1_3 || lista.a35_2_3 || lista.a35_3_3 || lista.a35_4_3 || lista.a35_5_3 || lista.a35_6_3 || lista.a35_7_3){
     html += `<tr>
             <td> `+ lista.a35_1_3 +` </td>
@@ -501,8 +498,7 @@ html += `</tbody>
             <td> `+ fecha(lista.a35_5_3) +` </td>
             <td> `+ lista.a35_6_3 +` </td>
             <td> `+ lista.a35_7_3 +` </td>
-        </tr>`;
-    }
+        </tr>`;}
 html += `</tbody>
 </table>`;
 
@@ -577,17 +573,35 @@ html +=`<h2>SECCIÓN B: MERCADO - COMPETITIVIDAD EMPRESARIAL</h2>
             <th>propuesta de proyecto</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>atributo</td>
-            <td>competidor 1</td>
-            <td>competidor 2</td>
-            <td>competidor 3</td>
-            <td>propuesta de proyecto</td>
-        </tr>
-    </tbody>
+    <tbody>`;
+if( lista.c2_1_1 || lista.c2_2_1 || lista.c2_3_1 || lista.c2_4_1 || lista.c2_5_1 ){
+html +=`<tr>
+            <td>`+ lista.c2_1_1 +`  </td>
+            <td>`+ lista.c2_2_1 +`  </td>
+            <td>`+ lista.c2_3_1 +`  </td>
+            <td>`+ lista.c2_4_1 +`  </td>
+            <td>`+ lista.c2_5_1 +`  </td>
+        </tr>`;}
+if( lista.c2_1_2 || lista.c2_2_2 || lista.c2_3_2 || lista.c2_4_2 || lista.c2_5_2 ){
+html +=`<tr>
+            <td>`+ lista.c2_1_2 +`  </td>
+            <td>`+ lista.c2_2_2 +`  </td>
+            <td>`+ lista.c2_3_2 +`  </td>
+            <td>`+ lista.c2_4_2 +`  </td>
+            <td>`+ lista.c2_5_2 +`  </td>
+        </tr>`;}
+if( lista.c2_1_3 || lista.c2_2_3 || lista.c2_3_3 || lista.c2_4_3 || lista.c2_5_3 ){
+html +=`<tr>
+            <td>`+ lista.c2_1_3 +`  </td>
+            <td>`+ lista.c2_2_3 +`  </td>
+            <td>`+ lista.c2_3_3 +`  </td>
+            <td>`+ lista.c2_4_3 +`  </td>
+            <td>`+ lista.c2_5_3 +`  </td>
+        </tr>`;}
+html +=`</tbody>
 </table>
 
+<br>
 
 
 C.3 Antecedentes e Investigaciones recientes sobre la innovación a desarrollar
@@ -613,13 +627,14 @@ C.4 Objetivos
             <th>medios de verificacion</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>atributo</td>
-            <td>competidor 1</td>
-            <td>competidor 2</td>
-        </tr>
-    </tbody>
+    <tbody>`;
+if( lista.c41og_1 || lista.c41og_2 || lista.c41og_3 ){
+html +=`<tr>
+            <td>`+ lista.c41og_1 +`</td>
+            <td>`+ lista.c41og_2 +`</td>
+            <td>`+ lista.c41og_3 +`</td>
+        </tr>`;}
+html +=`</tbody>
 </table>
 
 
@@ -633,13 +648,38 @@ C.4 Objetivos
             <th>medios de verificacion</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>atributo</td>
-            <td>competidor 1</td>
-            <td>competidor 2</td>
-        </tr>
-    </tbody>
+    <tbody>`;
+if( lista.c8_1_2 || lista.c8_2_2 || lista.c8_3_2 ){
+html +=`<tr>
+            <td>`+ lista.c41oe_1_1 +`</td>
+            <td>`+ lista.c41oe_2_1 +`</td>
+            <td>`+ lista.c41oe_3_1 +`</td>
+        </tr>`;}
+if( lista.c8_1_2 || lista.c8_2_2 || lista.c8_3_2 ){
+html +=`<tr>
+            <td>`+ lista.c41oe_1_2 +`</td>
+            <td>`+ lista.c41oe_2_2 +`</td>
+            <td>`+ lista.c41oe_3_2 +`</td>
+        </tr>`;}
+if( lista.c8_1_2 || lista.c8_2_2 || lista.c8_3_2 ){
+html +=`<tr>
+            <td>`+ lista.c41oe_1_3 +`</td>
+            <td>`+ lista.c41oe_2_3 +`</td>
+            <td>`+ lista.c41oe_3_3 +`</td>
+        </tr>`;}
+if( lista.c8_1_2 || lista.c8_2_2 || lista.c8_3_2 ){
+html +=`<tr>
+            <td>`+ lista.c41oe_1_4 +`</td>
+            <td>`+ lista.c41oe_2_4 +`</td>
+            <td>`+ lista.c41oe_3_4 +`</td>
+        </tr>`;}
+if( lista.c8_1_2 || lista.c8_2_2 || lista.c8_3_2 ){
+html +=`<tr>
+            <td>`+ lista.c41oe_1_5 +`</td>
+            <td>`+ lista.c41oe_2_5 +`</td>
+            <td>`+ lista.c41oe_3_5 +`</td>
+        </tr>`;}
+html +=`</tbody>
 </table>
 
 <h4>C.4.2.Cronograma de actividades</h4>
@@ -666,7 +706,6 @@ C.4 Objetivos
             <td>atributo</td>
             <td>competidor 1</td>
             <td>competidor 2</td>
-            <td>año 1</td>
             <td>X</td>
             <td>X</td>
             <td>X</td>
@@ -740,7 +779,7 @@ C.4 Objetivos
         </tr>
     </thead>
     <tbody>`;
-if ( lista.c8_1_5 || lista.c8_2_5 || lista.c8_3_5 || lista.c8_4_5 || lista.c8_5_5 || lista.c8_6_5 || lista.c8_7_5 || lista.c8_8_5 || lista.c8_9_5 || lista.c8_10_5 || lista.c8_11_5 ){
+if( lista.c8_1_1 || lista.c8_2_1 || lista.c8_3_1 || lista.c8_4_1 || lista.c8_5_1 || lista.c8_6_1 || lista.c8_7_1 || lista.c8_8_1 || lista.c8_9_1 || lista.c8_10_1 || lista.c8_11_1 ){
 html +=`<tr>
             <td>`+ lista.c8_1_1 +`</td>
             <td>`+ lista.c8_2_1 +`</td>
@@ -754,7 +793,7 @@ html +=`<tr>
             <td>`+ lista.c8_10_1 +`</td>
             <td>`+ lista.c8_11_1 +`</td>
         </tr>`;}
-if( lista.c8_1_5 || lista.c8_2_5 || lista.c8_3_5 || lista.c8_4_5 || lista.c8_5_5 || lista.c8_6_5 || lista.c8_7_5 || lista.c8_8_5 || lista.c8_9_5 || lista.c8_10_5 || lista.c8_11_5 ){
+if( lista.c8_1_2 || lista.c8_2_2 || lista.c8_3_2 || lista.c8_4_2 || lista.c8_5_2 || lista.c8_6_2 || lista.c8_7_2 || lista.c8_8_2 || lista.c8_9_2 || lista.c8_10_2 || lista.c8_11_2 ){
 html +=`<tr>
             <td>`+ lista.c8_1_2 +`</td>
             <td>`+ lista.c8_2_2 +`</td>
@@ -768,8 +807,8 @@ html +=`<tr>
             <td>`+ lista.c8_10_2 +`</td>
             <td>`+ lista.c8_11_2 +`</td>
         </tr>`;}
-        if ( lista.c8_1_5 || lista.c8_2_5 || lista.c8_3_5 || lista.c8_4_5 || lista.c8_5_5 || lista.c8_6_5 || lista.c8_7_5 || lista.c8_8_5 || lista.c8_9_5 || lista.c8_10_5 || lista.c8_11_5 ){
-        html +=`<tr>
+if( lista.c8_1_3 || lista.c8_2_3 || lista.c8_3_3 || lista.c8_4_3 || lista.c8_5_3 || lista.c8_6_3 || lista.c8_7_3 || lista.c8_8_3 || lista.c8_9_3 || lista.c8_10_3 || lista.c8_11_3 ){
+html +=`<tr>
             <td>`+ lista.c8_1_3 +`</td>
             <td>`+ lista.c8_2_3 +`</td>
             <td>`+ lista.c8_3_3 +`</td>
@@ -782,8 +821,8 @@ html +=`<tr>
             <td>`+ lista.c8_10_3 +`</td>
             <td>`+ lista.c8_11_3 +`</td>
         </tr>`;}
-        if( lista.c8_1_5 || lista.c8_2_5 || lista.c8_3_5 || lista.c8_4_5 || lista.c8_5_5 || lista.c8_6_5 || lista.c8_7_5 || lista.c8_8_5 || lista.c8_9_5 || lista.c8_10_5 || lista.c8_11_5 ){
-        html +=`<tr>
+if( lista.c8_1_4 || lista.c8_2_4 || lista.c8_3_4 || lista.c8_4_4 || lista.c8_5_4 || lista.c8_6_4 || lista.c8_7_4 || lista.c8_8_4 || lista.c8_9_4 || lista.c8_10_4 || lista.c8_11_4 ){
+html +=`<tr>
             <td>`+ lista.c8_1_4 +`</td>
             <td>`+ lista.c8_2_4 +`</td>
             <td>`+ lista.c8_3_4 +`</td>
@@ -796,8 +835,8 @@ html +=`<tr>
             <td>`+ lista.c8_10_4 +`</td>
             <td>`+ lista.c8_11_4 +`</td>
         </tr>`;}
-        if ( lista.c8_1_5 || lista.c8_2_5 || lista.c8_3_5 || lista.c8_4_5 || lista.c8_5_5 || lista.c8_6_5 || lista.c8_7_5 || lista.c8_8_5 || lista.c8_9_5 || lista.c8_10_5 || lista.c8_11_5 ){
-        html +=`<tr>
+if( lista.c8_1_5 || lista.c8_2_5 || lista.c8_3_5 || lista.c8_4_5 || lista.c8_5_5 || lista.c8_6_5 || lista.c8_7_5 || lista.c8_8_5 || lista.c8_9_5 || lista.c8_10_5 || lista.c8_11_5 ){
+html +=`<tr>
             <td>`+ lista.c8_1_5 +`</td>
             <td>`+ lista.c8_2_5 +`</td>
             <td>`+ lista.c8_3_5 +`</td>
@@ -838,8 +877,9 @@ html +=`</tbody>
             <th>Entidad Aportante </th>
         </tr>
     </thead>
-    <tbody>
-        <tr> 
+    <tbody>`;
+if ( lista.d11_1_1  || lista.d11_2_1  || lista.d11_3_1  || lista.d11_4_1  || lista.d11_5_1  || lista.d11_6_1  || lista.d11_7_1  || lista.d11_8_1  || lista.d11_9_1  || lista.d11_10_1 || lista.d11_11_1 || lista.d11_12_1 ){
+html +=`<tr> 
             <td>`+ lista.d11_1_1 +`</td>
             <td>`+ lista.d11_2_1 +`</td>
             <td>`+ lista.d11_3_1 +`</td>
@@ -852,8 +892,9 @@ html +=`</tbody>
             <td>`+ lista.d11_10_1 +`</td>
             <td>`+ lista.d11_11_1 +`</td>
             <td>`+ lista.d11_12_1 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d11_1_2  || lista.d11_2_2  || lista.d11_3_2  || lista.d11_4_2  || lista.d11_5_2  || lista.d11_6_2  || lista.d11_7_2  || lista.d11_8_2  || lista.d11_9_2  || lista.d11_10_2 || lista.d11_11_2 || lista.d11_12_2 ){
+html +=`<tr>
             <td>`+ lista.d11_1_2 +`</td>
             <td>`+ lista.d11_2_2 +`</td>
             <td>`+ lista.d11_3_2 +`</td>
@@ -866,8 +907,9 @@ html +=`</tbody>
             <td>`+ lista.d11_10_2 +`</td>
             <td>`+ lista.d11_11_2 +`</td>
             <td>`+ lista.d11_12_2 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d11_1_3  || lista.d11_2_3  || lista.d11_3_3  || lista.d11_4_3  || lista.d11_5_3  || lista.d11_6_3  || lista.d11_7_3  || lista.d11_8_3  || lista.d11_9_3  || lista.d11_10_3 || lista.d11_11_3 || lista.d11_12_3 ){
+html +=`<tr>
             <td>`+ lista.d11_1_3 +`</td>
             <td>`+ lista.d11_2_3 +`</td>
             <td>`+ lista.d11_3_3 +`</td>
@@ -880,8 +922,9 @@ html +=`</tbody>
             <td>`+ lista.d11_10_3 +`</td>
             <td>`+ lista.d11_11_3 +`</td>
             <td>`+ lista.d11_12_3 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d11_1_4  || lista.d11_2_4  || lista.d11_3_4  || lista.d11_4_4  || lista.d11_5_4  || lista.d11_6_4  || lista.d11_7_4  || lista.d11_8_4  || lista.d11_9_4  || lista.d11_10_4 || lista.d11_11_4 || lista.d11_12_4 ){
+html +=`<tr>
             <td>`+ lista.d11_1_4 +`</td>
             <td>`+ lista.d11_2_4 +`</td>
             <td>`+ lista.d11_3_4 +`</td>
@@ -894,8 +937,9 @@ html +=`</tbody>
             <td>`+ lista.d11_10_4 +`</td>
             <td>`+ lista.d11_11_4 +`</td>
             <td>`+ lista.d11_12_4 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d11_1_5  || lista.d11_2_5  || lista.d11_3_5  || lista.d11_4_5  || lista.d11_5_5  || lista.d11_6_5  || lista.d11_7_5  || lista.d11_8_5  || lista.d11_9_5  || lista.d11_10_5 || lista.d11_11_5 || lista.d11_12_5 ){
+html +=`<tr>
             <td>`+ lista.d11_1_5 +`</td>
             <td>`+ lista.d11_2_5 +`</td>
             <td>`+ lista.d11_3_5 +`</td>
@@ -908,8 +952,8 @@ html +=`</tbody>
             <td>`+ lista.d11_10_5 +`</td>
             <td>`+ lista.d11_11_5 +`</td>
             <td>`+ lista.d11_12_5 +`</td>
-        </tr>
-    </tbody>
+        </tr>`;}
+html +=`</tbody>
 </table>
 <h4>D.1.2 CUADRO Nº 2: Honorarios de los Recursos Humanos - Valorización del equipo Técnico</h4>
 <br>
@@ -928,8 +972,9 @@ html +=`</tbody>
             <th>Entidad Aportante</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody>`;
+if ( lista.d12_1_1 || lista.d12_2_1 || lista.d12_3_1 || lista.d12_4_1 || lista.d12_5_1 || lista.d12_6_1 || lista.d12_7_1 || lista.d12_8_1 || lista.d12_9_1 || lista.d12_10_1){
+html +=`<tr>
             <td>`+ lista.d12_1_1 +`</td>
             <td>`+ lista.d12_2_1 +`</td>
             <td>`+ lista.d12_3_1 +`</td>
@@ -940,8 +985,9 @@ html +=`</tbody>
             <td>`+ lista.d12_8_1 +`</td>
             <td>`+ lista.d12_9_1 +`</td>
             <td>`+ lista.d12_10_1 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d12_1_2 || lista.d12_2_2 || lista.d12_3_2 || lista.d12_4_2 || lista.d12_5_2 || lista.d12_6_2 || lista.d12_7_2 || lista.d12_8_2 || lista.d12_9_2 || lista.d12_10_2){
+html +=`<tr>
             <td>`+ lista.d12_1_2 +`</td>
             <td>`+ lista.d12_2_2 +`</td>
             <td>`+ lista.d12_3_2 +`</td>
@@ -952,8 +998,9 @@ html +=`</tbody>
             <td>`+ lista.d12_8_2 +`</td>
             <td>`+ lista.d12_9_2 +`</td>
             <td>`+ lista.d12_10_2 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d12_1_3 || lista.d12_2_3 || lista.d12_3_3 || lista.d12_4_3 || lista.d12_5_3 || lista.d12_6_3 || lista.d12_7_3 || lista.d12_8_3 || lista.d12_9_3 || lista.d12_10_3){
+html +=`<tr>
             <td>`+ lista.d12_1_3 +`</td>
             <td>`+ lista.d12_2_3 +`</td>
             <td>`+ lista.d12_3_3 +`</td>
@@ -964,8 +1011,9 @@ html +=`</tbody>
             <td>`+ lista.d12_8_3 +`</td>
             <td>`+ lista.d12_9_3 +`</td>
             <td>`+ lista.d12_10_3 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d12_1_4 || lista.d12_2_4 || lista.d12_3_4 || lista.d12_4_4 || lista.d12_5_4 || lista.d12_6_4 || lista.d12_7_4 || lista.d12_8_4 || lista.d12_9_4 || lista.d12_10_4){
+html +=`<tr>
             <td>`+ lista.d12_1_4 +`</td>
             <td>`+ lista.d12_2_4 +`</td>
             <td>`+ lista.d12_3_4 +`</td>
@@ -976,8 +1024,9 @@ html +=`</tbody>
             <td>`+ lista.d12_8_4 +`</td>
             <td>`+ lista.d12_9_4 +`</td>
             <td>`+ lista.d12_10_4 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d12_1_5 || lista.d12_2_5 || lista.d12_3_5 || lista.d12_4_5 || lista.d12_5_5 || lista.d12_6_5 || lista.d12_7_5 || lista.d12_8_5 || lista.d12_9_5 || lista.d12_10_5){
+html +=`<tr>
             <td>`+ lista.d12_1_5 +`</td>
             <td>`+ lista.d12_2_5 +`</td>
             <td>`+ lista.d12_3_5 +`</td>
@@ -988,8 +1037,8 @@ html +=`</tbody>
             <td>`+ lista.d12_8_5 +`</td>
             <td>`+ lista.d12_9_5 +`</td>
             <td>`+ lista.d12_10_5 +`</td>
-        </tr>
-    </tbody>
+        </tr>`;}
+html +=`</tbody>
 </table>
 <h4>D.1.3 CUADRO Nº 3: Consultorías</h4>
 <br>
@@ -1007,8 +1056,9 @@ html +=`</tbody>
             <th>Entidad Aportante</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody>`;
+if ( lista.d13_1_1 || lista.d13_2_1 || lista.d13_3_1 || lista.d13_4_1 || lista.d13_5_1 || lista.d13_6_1 || lista.d13_7_1 || lista.d13_8_1 || lista.d13_9_1 ){
+html +=`<tr>
             <td>`+ lista.d13_1_1 +`</td>
             <td>`+ lista.d13_2_1 +`</td>
             <td>`+ lista.d13_3_1 +`</td>
@@ -1018,8 +1068,9 @@ html +=`</tbody>
             <td>`+ lista.d13_7_1 +`</td>
             <td>`+ lista.d13_8_1 +`</td>
             <td>`+ lista.d13_9_1 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d13_1_2 || lista.d13_2_2 || lista.d13_3_2 || lista.d13_4_2 || lista.d13_5_2 || lista.d13_6_2 || lista.d13_7_2 || lista.d13_8_2 || lista.d13_9_2 ){
+html +=`<tr>
             <td>`+ lista.d13_1_2 +`</td>
             <td>`+ lista.d13_2_2 +`</td>
             <td>`+ lista.d13_3_2 +`</td>
@@ -1029,8 +1080,9 @@ html +=`</tbody>
             <td>`+ lista.d13_7_2 +`</td>
             <td>`+ lista.d13_8_2 +`</td>
             <td>`+ lista.d13_9_2 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d13_1_3 || lista.d13_2_3 || lista.d13_3_3 || lista.d13_4_3 || lista.d13_5_3 || lista.d13_6_3 || lista.d13_7_3 || lista.d13_8_3 || lista.d13_9_3 ){
+html +=`<tr>
             <td>`+ lista.d13_1_3 +`</td>
             <td>`+ lista.d13_2_3 +`</td>
             <td>`+ lista.d13_3_3 +`</td>
@@ -1040,8 +1092,9 @@ html +=`</tbody>
             <td>`+ lista.d13_7_3 +`</td>
             <td>`+ lista.d13_8_3 +`</td>
             <td>`+ lista.d13_9_3 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d13_1_4 || lista.d13_2_4 || lista.d13_3_4 || lista.d13_4_4 || lista.d13_5_4 || lista.d13_6_4 || lista.d13_7_4 || lista.d13_8_4 || lista.d13_9_4 ){
+html +=`<tr>
             <td>`+ lista.d13_1_4 +`</td>
             <td>`+ lista.d13_2_4 +`</td>
             <td>`+ lista.d13_3_4 +`</td>
@@ -1051,8 +1104,9 @@ html +=`</tbody>
             <td>`+ lista.d13_7_4 +`</td>
             <td>`+ lista.d13_8_4 +`</td>
             <td>`+ lista.d13_9_4 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d13_1_5 || lista.d13_2_5 || lista.d13_3_5 || lista.d13_4_5 || lista.d13_5_5 || lista.d13_6_5 || lista.d13_7_5 || lista.d13_8_5 || lista.d13_9_5 ){
+html +=`<tr>
             <td>`+ lista.d13_1_5 +`</td>
             <td>`+ lista.d13_2_5 +`</td>
             <td>`+ lista.d13_3_5 +`</td>
@@ -1062,8 +1116,8 @@ html +=`</tbody>
             <td>`+ lista.d13_7_5 +`</td>
             <td>`+ lista.d13_8_5 +`</td>
             <td>`+ lista.d13_9_5 +`</td>
-        </tr>
-    </tbody>
+        </tr>`;}
+html +=`</tbody>
 </table>
 <h4>D.1.4 CUADRO Nº 4: Servicios de terceros</h4>
 <br>
@@ -1081,8 +1135,9 @@ html +=`</tbody>
             <th>Entidad Aportante</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody>`;
+if ( lista.d14_1_1 || lista.d14_2_1 || lista.d14_3_1 || lista.d14_4_1 || lista.d14_5_1 || lista.d14_6_1 || lista.d14_7_1 || lista.d14_8_1 || lista.d14_9_1 ){
+html +=`<tr>
             <td>`+ lista.d14_1_1 +`</td>
             <td>`+ lista.d14_2_1 +`</td>
             <td>`+ lista.d14_3_1 +`</td>
@@ -1092,8 +1147,9 @@ html +=`</tbody>
             <td>`+ lista.d14_7_1 +`</td>
             <td>`+ lista.d14_8_1 +`</td>
             <td>`+ lista.d14_9_1 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d14_1_2 || lista.d14_2_2 || lista.d14_3_2 || lista.d14_4_2 || lista.d14_5_2 || lista.d14_6_2 || lista.d14_7_2 || lista.d14_8_2 || lista.d14_9_2 ){
+html +=`<tr>
             <td>`+ lista.d14_1_2 +`</td>
             <td>`+ lista.d14_2_2 +`</td>
             <td>`+ lista.d14_3_2 +`</td>
@@ -1103,8 +1159,9 @@ html +=`</tbody>
             <td>`+ lista.d14_7_2 +`</td>
             <td>`+ lista.d14_8_2 +`</td>
             <td>`+ lista.d14_9_2 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d14_1_3 || lista.d14_2_3 || lista.d14_3_3 || lista.d14_4_3 || lista.d14_5_3 || lista.d14_6_3 || lista.d14_7_3 || lista.d14_8_3 || lista.d14_9_3 ){
+html +=`<tr>
             <td>`+ lista.d14_1_3 +`</td>
             <td>`+ lista.d14_2_3 +`</td>
             <td>`+ lista.d14_3_3 +`</td>
@@ -1114,8 +1171,9 @@ html +=`</tbody>
             <td>`+ lista.d14_7_3 +`</td>
             <td>`+ lista.d14_8_3 +`</td>
             <td>`+ lista.d14_9_3 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d14_1_4 || lista.d14_2_4 || lista.d14_3_4 || lista.d14_4_4 || lista.d14_5_4 || lista.d14_6_4 || lista.d14_7_4 || lista.d14_8_4 || lista.d14_9_4 ){
+html +=`<tr>
             <td>`+ lista.d14_1_4 +`</td>
             <td>`+ lista.d14_2_4 +`</td>
             <td>`+ lista.d14_3_4 +`</td>
@@ -1125,8 +1183,9 @@ html +=`</tbody>
             <td>`+ lista.d14_7_4 +`</td>
             <td>`+ lista.d14_8_4 +`</td>
             <td>`+ lista.d14_9_4 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d14_1_5 || lista.d14_2_5 || lista.d14_3_5 || lista.d14_4_5 || lista.d14_5_5 || lista.d14_6_5 || lista.d14_7_5 || lista.d14_8_5 || lista.d14_9_5 ){
+html +=`<tr>
             <td>`+ lista.d14_1_5 +`</td>
             <td>`+ lista.d14_2_5 +`</td>
             <td>`+ lista.d14_3_5 +`</td>
@@ -1136,8 +1195,8 @@ html +=`</tbody>
             <td>`+ lista.d14_7_5 +`</td>
             <td>`+ lista.d14_8_5 +`</td>
             <td>`+ lista.d14_9_5 +`</td>
-        </tr>
-    </tbody>
+        </tr>`;}
+html +=`</tbody>
 </table>
 <h4>D.1.5 CUADRO Nº 5: Pasajes y viáticos</h4>
 <br>
@@ -1159,8 +1218,9 @@ html +=`</tbody>
             <th>Entidad Aportante</th>
         </tr>
     </thead>
-    <tbody>
-        <tr> 
+    <tbody>`;
+if ( lista.d15_1_1  || lista.d15_2_1  || lista.d15_3_1  || lista.d15_4_1  || lista.d15_5_1  || lista.d15_6_1  || lista.d15_7_1  || lista.d15_8_1  || lista.d15_9_1  || lista.d15_10_1 || lista.d15_11_1 || lista.d15_12_1 || lista.d15_13_1){
+html +=`<tr>
             <td>`+ lista.d15_1_1 +`</td>
             <td>`+ lista.d15_2_1 +`</td>
             <td>`+ lista.d15_3_1 +`</td>
@@ -1174,8 +1234,9 @@ html +=`</tbody>
             <td>`+ lista.d15_11_1 +`</td>
             <td>`+ lista.d15_12_1 +`</td>
             <td>`+ lista.d15_13_1 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d15_1_2  || lista.d15_2_2  || lista.d15_3_2  || lista.d15_4_2  || lista.d15_5_2  || lista.d15_6_2  || lista.d15_7_2  || lista.d15_8_2  || lista.d15_9_2  || lista.d15_10_2 || lista.d15_11_2 || lista.d15_12_2 || lista.d15_13_2){
+html +=`<tr>
             <td>`+ lista.d15_1_2 +`</td>
             <td>`+ lista.d15_2_2 +`</td>
             <td>`+ lista.d15_3_2 +`</td>
@@ -1189,8 +1250,9 @@ html +=`</tbody>
             <td>`+ lista.d15_11_2 +`</td>
             <td>`+ lista.d15_12_2 +`</td>
             <td>`+ lista.d15_13_2 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d15_1_3  || lista.d15_2_3  || lista.d15_3_3  || lista.d15_4_3  || lista.d15_5_3  || lista.d15_6_3  || lista.d15_7_3  || lista.d15_8_3  || lista.d15_9_3  || lista.d15_10_3 || lista.d15_11_3 || lista.d15_12_3 || lista.d15_13_3){
+html +=`<tr>
             <td>`+ lista.d15_1_3 +`</td>
             <td>`+ lista.d15_2_3 +`</td>
             <td>`+ lista.d15_3_3 +`</td>
@@ -1204,8 +1266,9 @@ html +=`</tbody>
             <td>`+ lista.d15_11_3 +`</td>
             <td>`+ lista.d15_12_3 +`</td>
             <td>`+ lista.d15_13_3 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d15_1_4  || lista.d15_2_4  || lista.d15_3_4  || lista.d15_4_4  || lista.d15_5_4  || lista.d15_6_4  || lista.d15_7_4  || lista.d15_8_4  || lista.d15_9_4  || lista.d15_10_4 || lista.d15_11_4 || lista.d15_12_4 || lista.d15_13_4){
+html +=`<tr>
             <td>`+ lista.d15_1_4 +`</td>
             <td>`+ lista.d15_2_4 +`</td>
             <td>`+ lista.d15_3_4 +`</td>
@@ -1219,8 +1282,9 @@ html +=`</tbody>
             <td>`+ lista.d15_11_4 +`</td>
             <td>`+ lista.d15_12_4 +`</td>
             <td>`+ lista.d15_13_4 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d15_1_5  || lista.d15_2_5  || lista.d15_3_5  || lista.d15_4_5  || lista.d15_5_5  || lista.d15_6_5  || lista.d15_7_5  || lista.d15_8_5  || lista.d15_9_5  || lista.d15_10_5 || lista.d15_11_5 || lista.d15_12_5 || lista.d15_13_5){
+html +=`<tr>
             <td>`+ lista.d15_1_5 +`</td>
             <td>`+ lista.d15_2_5 +`</td>
             <td>`+ lista.d15_3_5 +`</td>
@@ -1234,8 +1298,8 @@ html +=`</tbody>
             <td>`+ lista.d15_11_5 +`</td>
             <td>`+ lista.d15_12_5 +`</td>
             <td>`+ lista.d15_13_5 +`</td>
-        </tr>
-    </tbody>
+        </tr>`;}
+html +=`</tbody>
 </table>
 <h4>D.1.6 CUADRO Nº 6: Materiales e insumos</h4>
 <br>
@@ -1256,8 +1320,9 @@ html +=`</tbody>
             <th>Entidad Aportante</th>
         </tr>
     </thead>
-    <tbody>
-        <tr> 
+    <tbody>`;
+if ( lista.d16_1_1  || lista.d16_2_1  || lista.d16_3_1  || lista.d16_4_1  || lista.d16_5_1  || lista.d16_6_1  || lista.d16_7_1  || lista.d16_8_1  || lista.d16_9_1  || lista.d16_10_1 || lista.d16_11_1 || lista.d16_12_1 ){
+html +=`<tr>
             <td>`+ lista.d16_1_1 +`</td>
             <td>`+ lista.d16_2_1 +`</td>
             <td>`+ lista.d16_3_1 +`</td>
@@ -1270,8 +1335,9 @@ html +=`</tbody>
             <td>`+ lista.d16_10_1 +`</td>
             <td>`+ lista.d16_11_1 +`</td>
             <td>`+ lista.d16_12_1 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d16_1_2  || lista.d16_2_2  || lista.d16_3_2  || lista.d16_4_2  || lista.d16_5_2  || lista.d16_6_2  || lista.d16_7_2  || lista.d16_8_2  || lista.d16_9_2  || lista.d16_10_2 || lista.d16_11_2 || lista.d16_12_2 ){
+html +=`<tr>
             <td>`+ lista.d16_1_2 +`</td>
             <td>`+ lista.d16_2_2 +`</td>
             <td>`+ lista.d16_3_2 +`</td>
@@ -1284,8 +1350,9 @@ html +=`</tbody>
             <td>`+ lista.d16_10_2 +`</td>
             <td>`+ lista.d16_11_2 +`</td>
             <td>`+ lista.d16_12_2 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d16_1_3  || lista.d16_2_3  || lista.d16_3_3  || lista.d16_4_3  || lista.d16_5_3  || lista.d16_6_3  || lista.d16_7_3  || lista.d16_8_3  || lista.d16_9_3  || lista.d16_10_3 || lista.d16_11_3 || lista.d16_12_3 ){
+html +=`<tr>
             <td>`+ lista.d16_1_3 +`</td>
             <td>`+ lista.d16_2_3 +`</td>
             <td>`+ lista.d16_3_3 +`</td>
@@ -1298,8 +1365,9 @@ html +=`</tbody>
             <td>`+ lista.d16_10_3 +`</td>
             <td>`+ lista.d16_11_3 +`</td>
             <td>`+ lista.d16_12_3 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d16_1_4  || lista.d16_2_4  || lista.d16_3_4  || lista.d16_4_4  || lista.d16_5_4  || lista.d16_6_4  || lista.d16_7_4  || lista.d16_8_4  || lista.d16_9_4  || lista.d16_10_4 || lista.d16_11_4 || lista.d16_12_4 ){
+html +=`<tr>
             <td>`+ lista.d16_1_4 +`</td>
             <td>`+ lista.d16_2_4 +`</td>
             <td>`+ lista.d16_3_4 +`</td>
@@ -1312,8 +1380,9 @@ html +=`</tbody>
             <td>`+ lista.d16_10_4 +`</td>
             <td>`+ lista.d16_11_4 +`</td>
             <td>`+ lista.d16_12_4 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d16_1_5  || lista.d16_2_5  || lista.d16_3_5  || lista.d16_4_5  || lista.d16_5_5  || lista.d16_6_5  || lista.d16_7_5  || lista.d16_8_5  || lista.d16_9_5  || lista.d16_10_5 || lista.d16_11_5 || lista.d16_12_5 ){
+html +=`<tr>
             <td>`+ lista.d16_1_5 +`</td>
             <td>`+ lista.d16_2_5 +`</td>
             <td>`+ lista.d16_3_5 +`</td>
@@ -1326,8 +1395,8 @@ html +=`</tbody>
             <td>`+ lista.d16_10_5 +`</td>
             <td>`+ lista.d16_11_5 +`</td>
             <td>`+ lista.d16_12_5 +`</td>
-        </tr>
-    </tbody>
+            </tr>`;}
+            html +=`</tbody>
 </table>
 <h4>D.1.7 CUADRO Nº 7: Otros gastos elegibles</h4>
 <br>
@@ -1346,8 +1415,9 @@ html +=`</tbody>
             <th>Entidad Aportante</th>
         </tr>
     </thead>
-    <tbody>
-        <tr> 
+    <tbody>`;
+if ( lista.d17_1_1 || lista.d17_2_1 || lista.d17_3_1 || lista.d17_4_1 || lista.d17_5_1 || lista.d17_6_1 || lista.d17_7_1 || lista.d17_8_1 || lista.d17_9_1 || lista.d17_10_1 ){
+html +=`<tr>
             <td>`+ lista.d17_1_1 +`</td>
             <td>`+ lista.d17_2_1 +`</td>
             <td>`+ lista.d17_3_1 +`</td>
@@ -1358,8 +1428,9 @@ html +=`</tbody>
             <td>`+ lista.d17_8_1 +`</td>
             <td>`+ lista.d17_9_1 +`</td>
             <td>`+ lista.d17_10_1 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d17_1_2 || lista.d17_2_2 || lista.d17_3_2 || lista.d17_4_2 || lista.d17_5_2 || lista.d17_6_2 || lista.d17_7_2 || lista.d17_8_2 || lista.d17_9_2 || lista.d17_10_2 ){
+html +=`<tr>
             <td>`+ lista.d17_1_2 +`</td>
             <td>`+ lista.d17_2_2 +`</td>
             <td>`+ lista.d17_3_2 +`</td>
@@ -1370,8 +1441,9 @@ html +=`</tbody>
             <td>`+ lista.d17_8_2 +`</td>
             <td>`+ lista.d17_9_2 +`</td>
             <td>`+ lista.d17_10_2 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d17_1_3 || lista.d17_2_3 || lista.d17_3_3 || lista.d17_4_3 || lista.d17_5_3 || lista.d17_6_3 || lista.d17_7_3 || lista.d17_8_3 || lista.d17_9_3 || lista.d17_10_3 ){
+html +=`<tr>
             <td>`+ lista.d17_1_3 +`</td>
             <td>`+ lista.d17_2_3 +`</td>
             <td>`+ lista.d17_3_3 +`</td>
@@ -1382,8 +1454,9 @@ html +=`</tbody>
             <td>`+ lista.d17_8_3 +`</td>
             <td>`+ lista.d17_9_3 +`</td>
             <td>`+ lista.d17_10_3 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d17_1_4 || lista.d17_2_4 || lista.d17_3_4 || lista.d17_4_4 || lista.d17_5_4 || lista.d17_6_4 || lista.d17_7_4 || lista.d17_8_4 || lista.d17_9_4 || lista.d17_10_4 ){
+html +=`<tr>
             <td>`+ lista.d17_1_4 +`</td>
             <td>`+ lista.d17_2_4 +`</td>
             <td>`+ lista.d17_3_4 +`</td>
@@ -1394,8 +1467,9 @@ html +=`</tbody>
             <td>`+ lista.d17_8_4 +`</td>
             <td>`+ lista.d17_9_4 +`</td>
             <td>`+ lista.d17_10_4 +`</td>
-        </tr>
-        <tr> 
+        </tr>`;}
+if ( lista.d17_1_5 || lista.d17_2_5 || lista.d17_3_5 || lista.d17_4_5 || lista.d17_5_5 || lista.d17_6_5 || lista.d17_7_5 || lista.d17_8_5 || lista.d17_9_5 || lista.d17_10_5 ){
+html +=`<tr>
             <td>`+ lista.d17_1_5 +`</td>
             <td>`+ lista.d17_2_5 +`</td>
             <td>`+ lista.d17_3_5 +`</td>
@@ -1406,8 +1480,8 @@ html +=`</tbody>
             <td>`+ lista.d17_8_5 +`</td>
             <td>`+ lista.d17_9_5 +`</td>
             <td>`+ lista.d17_10_5 +`</td>
-        </tr>
-    </tbody>
+</tr>`;}
+html +=`</tbody>
 </table>
 <h4>D.1.8 CUADRO Nº8: Gastos de gestión</h4>
 <br>
@@ -1425,8 +1499,9 @@ html +=`</tbody>
             <th>Entidad Aportante </th>
         </tr>
     </thead>
-    <tbody>
-        <tr>      
+    <tbody>`;
+if ( lista.d18_1_1 || lista.d18_2_1 || lista.d18_3_1 || lista.d18_4_1 || lista.d18_5_1 || lista.d18_6_1 || lista.d18_7_1 || lista.d18_8_1 || lista.d18_9_1 ){
+html +=`<tr>     
             <td>`+ lista.d18_1_1 +`</td>
             <td>`+ lista.d18_2_1 +`</td>
             <td>`+ lista.d18_3_1 +`</td>
@@ -1436,8 +1511,9 @@ html +=`</tbody>
             <td>`+ lista.d18_7_1 +`</td>
             <td>`+ lista.d18_8_1 +`</td>
             <td>`+ lista.d18_9_1 +`</td>
-        </tr>
-        <tr>      
+        </tr>`;}
+if ( lista.d18_1_2 || lista.d18_2_2 || lista.d18_3_2 || lista.d18_4_2 || lista.d18_5_2 || lista.d18_6_2 || lista.d18_7_2 || lista.d18_8_2 || lista.d18_9_2 ){
+html +=`<tr>   
             <td>`+ lista.d18_1_2 +`</td>
             <td>`+ lista.d18_2_2 +`</td>
             <td>`+ lista.d18_3_2 +`</td>
@@ -1447,8 +1523,9 @@ html +=`</tbody>
             <td>`+ lista.d18_7_2 +`</td>
             <td>`+ lista.d18_8_2 +`</td>
             <td>`+ lista.d18_9_2 +`</td>
-        </tr>
-        <tr>      
+        </tr>`;}
+if ( lista.d18_1_3 || lista.d18_2_3 || lista.d18_3_3 || lista.d18_4_3 || lista.d18_5_3 || lista.d18_6_3 || lista.d18_7_3 || lista.d18_8_3 || lista.d18_9_3 ){
+html +=`<tr>    
             <td>`+ lista.d18_1_3 +`</td>
             <td>`+ lista.d18_2_3 +`</td>
             <td>`+ lista.d18_3_3 +`</td>
@@ -1458,8 +1535,9 @@ html +=`</tbody>
             <td>`+ lista.d18_7_3 +`</td>
             <td>`+ lista.d18_8_3 +`</td>
             <td>`+ lista.d18_9_3 +`</td>
-        </tr>
-        <tr>      
+        </tr>`;}
+if ( lista.d18_1_4 || lista.d18_2_4 || lista.d18_3_4 || lista.d18_4_4 || lista.d18_5_4 || lista.d18_6_4 || lista.d18_7_4 || lista.d18_8_4 || lista.d18_9_4 ){
+html +=`<tr>  
             <td>`+ lista.d18_1_4 +`</td>
             <td>`+ lista.d18_2_4 +`</td>
             <td>`+ lista.d18_3_4 +`</td>
@@ -1469,8 +1547,9 @@ html +=`</tbody>
             <td>`+ lista.d18_7_4 +`</td>
             <td>`+ lista.d18_8_4 +`</td>
             <td>`+ lista.d18_9_4 +`</td>
-        </tr>
-        <tr>      
+        </tr>`;}
+if ( lista.d18_1_5 || lista.d18_2_5 || lista.d18_3_5 || lista.d18_4_5 || lista.d18_5_5 || lista.d18_6_5 || lista.d18_7_5 || lista.d18_8_5 || lista.d18_9_5 ){
+html +=`<tr>   
             <td>`+ lista.d18_1_5 +`</td>
             <td>`+ lista.d18_2_5 +`</td>
             <td>`+ lista.d18_3_5 +`</td>
@@ -1480,8 +1559,8 @@ html +=`</tbody>
             <td>`+ lista.d18_7_5 +`</td>
             <td>`+ lista.d18_8_5 +`</td>
             <td>`+ lista.d18_9_5 +`</td>
-        </tr>
-    </tbody>
+            </tr>`;}
+            html +=`</tbody>
 </table>
 <h4>D.1.9 Equipo Formulador del Proyecto</h4>
 <br>
@@ -1497,8 +1576,9 @@ html +=`</tbody>
             <th>Celular </th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
+    <tbody>`;
+if ( lista.d19_1_1 || lista.d19_2_1 || lista.d19_3_1 || lista.d19_4_1 || lista.d19_5_1 || lista.d19_6_1 || lista.d19_7_1 ){
+html +=`<tr>
             <td>`+ lista.d19_1_1 +`</td>
             <td>`+ lista.d19_2_1 +`</td>
             <td>`+ lista.d19_3_1 +`</td>
@@ -1506,8 +1586,9 @@ html +=`</tbody>
             <td>`+ lista.d19_5_1 +`</td>
             <td>`+ lista.d19_6_1 +`</td>
             <td>`+ lista.d19_7_1 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d19_1_2 || lista.d19_2_2 || lista.d19_3_2 || lista.d19_4_2 || lista.d19_5_2 || lista.d19_6_2 || lista.d19_7_2 ){
+html +=`<tr>
             <td>`+ lista.d19_1_2 +`</td>
             <td>`+ lista.d19_2_2 +`</td>
             <td>`+ lista.d19_3_2 +`</td>
@@ -1515,8 +1596,9 @@ html +=`</tbody>
             <td>`+ lista.d19_5_2 +`</td>
             <td>`+ lista.d19_6_2 +`</td>
             <td>`+ lista.d19_7_2 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d19_1_3 || lista.d19_2_3 || lista.d19_3_3 || lista.d19_4_3 || lista.d19_5_3 || lista.d19_6_3 || lista.d19_7_3 ){
+html +=`<tr>
             <td>`+ lista.d19_1_3 +`</td>
             <td>`+ lista.d19_2_3 +`</td>
             <td>`+ lista.d19_3_3 +`</td>
@@ -1524,8 +1606,9 @@ html +=`</tbody>
             <td>`+ lista.d19_5_3 +`</td>
             <td>`+ lista.d19_6_3 +`</td>
             <td>`+ lista.d19_7_3 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d19_1_4 || lista.d19_2_4 || lista.d19_3_4 || lista.d19_4_4 || lista.d19_5_4 || lista.d19_6_4 || lista.d19_7_4 ){
+html +=`<tr>
             <td>`+ lista.d19_1_4 +`</td>
             <td>`+ lista.d19_2_4 +`</td>
             <td>`+ lista.d19_3_4 +`</td>
@@ -1533,8 +1616,9 @@ html +=`</tbody>
             <td>`+ lista.d19_5_4 +`</td>
             <td>`+ lista.d19_6_4 +`</td>
             <td>`+ lista.d19_7_4 +`</td>
-        </tr>
-        <tr>
+        </tr>`;}
+if ( lista.d19_1_5 || lista.d19_2_5 || lista.d19_3_5 || lista.d19_4_5 || lista.d19_5_5 || lista.d19_6_5 || lista.d19_7_5 ){
+html +=`<tr>
             <td>`+ lista.d19_1_5 +`</td>
             <td>`+ lista.d19_2_5 +`</td>
             <td>`+ lista.d19_3_5 +`</td>
@@ -1542,8 +1626,8 @@ html +=`</tbody>
             <td>`+ lista.d19_5_5 +`</td>
             <td>`+ lista.d19_6_5 +`</td>
             <td>`+ lista.d19_7_5 +`</td>
-        </tr>
-    </tbody>
+        </tr>`;}
+html +=`</tbody>
 </table>
 </body>
 </html>`;
