@@ -188,14 +188,14 @@ router.get('/administrar' ,function(req, res, next) {
     }
 });
 
-/*** EN PROCESO ******************************************************************************************************/
+/*** EN PROCESO *** solo faltan los adjuntos ***************************************************************************************************/
 router.post('/editar-proyecto' ,function(req, res, next) {
     if(req.session.user){
         
         if (con) con.destroy();
         var con = mysql.createConnection(config());
 
-        var sql = ` SELECT 
+        var sql = `SELECT 
         usuario.*
       , proyecto.*
       , datos_generales.*
@@ -209,6 +209,7 @@ router.post('/editar-proyecto' ,function(req, res, next) {
       , caracateristicas.*
       , antecedentes.*
       , objetivos.*
+      , cronograma.*
       , impactos.*
       , recursos_necesarios.*
       , equipos_bienes.*
@@ -233,6 +234,7 @@ router.post('/editar-proyecto' ,function(req, res, next) {
       INNER JOIN caracateristicas ON caracateristicas.id_proyecto = proyecto.id_proyecto
       INNER JOIN antecedentes ON antecedentes.id_proyecto = proyecto.id_proyecto
       INNER JOIN objetivos ON objetivos.id_proyecto = proyecto.id_proyecto
+      INNER JOIN cronograma ON cronograma.id_proyecto = proyecto.id_proyecto
       INNER JOIN impactos ON impactos.id_proyecto = proyecto.id_proyecto
       INNER JOIN recursos_necesarios ON recursos_necesarios.id_proyecto = proyecto.id_proyecto
       INNER JOIN equipos_bienes ON equipos_bienes.id_proyecto = proyecto.id_proyecto
@@ -361,7 +363,7 @@ router.post("/validation/new-user", function (req,res) {
     });
 });
 
-/*** EN PROCESO *******************************************************************************************************/
+/*** EN PROCESO *** solo faltan los adjuntos ****************************************************************************************************/
 router.post('/validation/nuevo', function(req, res) {
     if(req.session.user){
         if (req.body.titulo){
@@ -422,9 +424,8 @@ router.post('/validation/nuevo', function(req, res) {
                 con.query(objetivos, function (err, result) { if (err) { console.log(err); return; } });
 
                 /* 13 CRONOGRAMA */
-                /*
-                var X = `INSERT INTO unjfsc.X (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
-                con.query(X, function (err, result) { if (err) { console.log(err); return; } });
+                var cronograma = `INSERT INTO unjfsc.cronograma (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
+                con.query(cronograma, function (err, result) { if (err) { console.log(err); return; } });
 
                 /* 14 IMPACTOS */
                 var impactos = `INSERT INTO unjfsc.impactos (id_proyecto) VALUES ( (SELECT MAX(id_proyecto) FROM proyecto) )`;
@@ -486,7 +487,7 @@ router.post('/validation/nuevo', function(req, res) {
     }
 });
 
-/*** EN PROCESO ********************************************************************************************************/
+/*** EN PROCESO *** solo faltan los adjuntos *****************************************************************************************************/
 router.post('/validation/editar-proyecto', function(req, res) {
     if(req.session.user){
 
@@ -560,10 +561,9 @@ router.post('/validation/editar-proyecto', function(req, res) {
             con.query(objetivos_sql, objetivos, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 13 CRONOGRAMA */
-            /* 
-            var cronograma_sql = ``;
-            var cronograma = [ id ];
-            con.query(_sql, cronograma, function (err, result) { if (err) { console.log(err); return; } });
+            var cronograma_sql = `UPDATE unjfsc.cronograma SET c42_1_1= ? , c42_2_1= ? , c42_3_1= ? , c42_4_1= ? , c42_5_1= ? , c42_6_1= ? , c42_7_1= ? , c42_8_1= ? , c42_9_1= ? , c42_1_2= ? , c42_2_2= ? , c42_3_2= ? , c42_4_2= ? , c42_5_2= ? , c42_6_2= ? , c42_7_2= ? , c42_8_2= ? , c42_9_2= ? , c42_1_3= ? , c42_2_3= ? , c42_3_3= ? , c42_4_3= ? , c42_5_3= ? , c42_6_3= ? , c42_7_3= ? , c42_8_3= ? , c42_9_3= ? , c42_1_4= ? , c42_2_4= ? , c42_3_4= ? , c42_4_4= ? , c42_5_4= ? , c42_6_4= ? , c42_7_4= ? , c42_8_4= ? , c42_9_4= ? , c42_1_5= ? , c42_2_5= ? , c42_3_5= ? , c42_4_5= ? , c42_5_5= ? , c42_6_5= ? , c42_7_5= ? , c42_8_5= ? , c42_9_5= ? , c42_1_6= ? , c42_2_6= ? , c42_3_6= ? , c42_4_6= ? , c42_5_6= ? , c42_6_6= ? , c42_7_6= ? , c42_8_6= ? , c42_9_6= ? , c42_1_7= ? , c42_2_7= ? , c42_3_7= ? , c42_4_7= ? , c42_5_7= ? , c42_6_7= ? , c42_7_7= ? , c42_8_7= ? , c42_9_7= ? , c42_1_8= ? , c42_2_8= ? , c42_3_8= ? , c42_4_8= ? , c42_5_8= ? , c42_6_8= ? , c42_7_8= ? , c42_8_8= ? , c42_9_8= ? , c42_1_9= ? , c42_2_9= ? , c42_3_9= ? , c42_4_9= ? , c42_5_9= ? , c42_6_9= ? , c42_7_9= ? , c42_8_9= ? , c42_9_9= ? , c42_1_10= ? , c42_2_10= ? , c42_3_10= ? , c42_4_10= ? , c42_5_10= ? , c42_6_10= ? , c42_7_10= ? , c42_8_10= ? , c42_9_10= ?  where  id_proyecto = ?;`;
+            var cronograma = [req.body.c42_1_1, req.body.c42_2_1, req.body.c42_3_1, req.body.c42_4_1, req.body.c42_5_1, req.body.c42_6_1, req.body.c42_7_1, req.body.c42_8_1, req.body.c42_9_1, req.body.c42_1_2, req.body.c42_2_2, req.body.c42_3_2, req.body.c42_4_2, req.body.c42_5_2, req.body.c42_6_2, req.body.c42_7_2, req.body.c42_8_2, req.body.c42_9_2, req.body.c42_1_3, req.body.c42_2_3, req.body.c42_3_3, req.body.c42_4_3, req.body.c42_5_3, req.body.c42_6_3, req.body.c42_7_3, req.body.c42_8_3, req.body.c42_9_3, req.body.c42_1_4, req.body.c42_2_4, req.body.c42_3_4, req.body.c42_4_4, req.body.c42_5_4, req.body.c42_6_4, req.body.c42_7_4, req.body.c42_8_4, req.body.c42_9_4, req.body.c42_1_5, req.body.c42_2_5, req.body.c42_3_5, req.body.c42_4_5, req.body.c42_5_5, req.body.c42_6_5, req.body.c42_7_5, req.body.c42_8_5, req.body.c42_9_5, req.body.c42_1_6, req.body.c42_2_6, req.body.c42_3_6, req.body.c42_4_6, req.body.c42_5_6, req.body.c42_6_6, req.body.c42_7_6, req.body.c42_8_6, req.body.c42_9_6, req.body.c42_1_7, req.body.c42_2_7, req.body.c42_3_7, req.body.c42_4_7, req.body.c42_5_7, req.body.c42_6_7, req.body.c42_7_7, req.body.c42_8_7, req.body.c42_9_7, req.body.c42_1_8, req.body.c42_2_8, req.body.c42_3_8, req.body.c42_4_8, req.body.c42_5_8, req.body.c42_6_8, req.body.c42_7_8, req.body.c42_8_8, req.body.c42_9_8, req.body.c42_1_9, req.body.c42_2_9, req.body.c42_3_9, req.body.c42_4_9, req.body.c42_5_9, req.body.c42_6_9, req.body.c42_7_9, req.body.c42_8_9, req.body.c42_9_9, req.body.c42_1_10, req.body.c42_2_10, req.body.c42_3_10, req.body.c42_4_10, req.body.c42_5_10, req.body.c42_6_10, req.body.c42_7_10, req.body.c42_8_10, req.body.c42_9_10, id];
+            con.query(cronograma_sql, cronograma, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 14 IMPACTOS */
             var impactos_sql = `UPDATE unjfsc.impactos SET impactos_economicos = ?, impactos_sociales = ?, impactos_formacion = ?, potencialidad = ?, impactos_tecnologico = ?, impactos_ambientales = ?, medidas_mitigacion = ?, impactos_empresa = ? WHERE id_proyecto = ?`;
@@ -670,7 +670,7 @@ router.get('/validation/new-user', function(req,res){
     res.redirect("/");
 });
 
-/*** EN PROCESO ***********************************************************************************************************/
+/*** EN PROCESO *** solo faltan los adjuntos *****************************************************************************************************/
 router.post('/visualizar', function(req, res, next) {
     if(req.session.user){
         
@@ -694,6 +694,7 @@ router.post('/visualizar', function(req, res, next) {
       , caracateristicas.*
       , antecedentes.*
       , objetivos.*
+      , cronograma.*
       , impactos.*
       , recursos_necesarios.*
       , equipos_bienes.*
@@ -718,6 +719,7 @@ router.post('/visualizar', function(req, res, next) {
       INNER JOIN caracateristicas ON caracateristicas.id_proyecto = proyecto.id_proyecto
       INNER JOIN antecedentes ON antecedentes.id_proyecto = proyecto.id_proyecto
       INNER JOIN objetivos ON objetivos.id_proyecto = proyecto.id_proyecto
+      INNER JOIN cronograma ON cronograma.id_proyecto = proyecto.id_proyecto
       INNER JOIN impactos ON impactos.id_proyecto = proyecto.id_proyecto
       INNER JOIN recursos_necesarios ON recursos_necesarios.id_proyecto = proyecto.id_proyecto
       INNER JOIN equipos_bienes ON equipos_bienes.id_proyecto = proyecto.id_proyecto
@@ -744,7 +746,8 @@ router.post('/visualizar', function(req, res, next) {
                     console.log(req.session.user);
                     res.redirect("/");
                 } else {
-                    conversion({ html: pdf(result[0]) }, 
+                    lista=result[0]
+                    conversion({ html: pdf(lista) }, 
                     function(err, pdf) {
                         if  (err) console.log(err);
                         console.log("Documento generado con " + pdf.numberOfPages+ " paginas.");

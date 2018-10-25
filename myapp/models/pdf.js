@@ -143,10 +143,19 @@ html+=`<h2>SECCIÓN A: IDENTIFICACIÓN DE LAS ENTIDADES PARTICIPANTES</h2>
 
 <h4>A.1.8 - Datos del coordinador general del proyecto</h4>
 
-<h5>Tipo de documento</h5>
-<p>  `+   lista.cgp_tipo_documento  +`   </p>
+<h5>Tipo de documento</h5>`;
 
-<h5>Numero de documento</h5>
+if (lista.cgp_tipo_documento == 1) {
+    html+=`<p>CARNÉ DE EXTRANJERIA</p>`;
+} else if (lista.cgp_tipo_documento == 2) {
+    html+=`<p>DOCUMENTO NACIONAL DE IDENTIDAD</p>`;
+} else if (lista.cgp_tipo_documento == 3) {
+    html+=`<p>PASAPORTE</p>`;
+}else{
+    html+=`<p>aun no indicado</p>`;
+}
+
+html+=`<h5>Numero de documento</h5>
 <p>  `+   lista.cgp_nro_documento  +`   </p>
 
 <h5>RUC</h5>
@@ -158,10 +167,17 @@ html+=`<h2>SECCIÓN A: IDENTIFICACIÓN DE LAS ENTIDADES PARTICIPANTES</h2>
 <h5>fecha de nacimiento</h5>
 <p>  `+   fecha(lista.cgp_fecha_nac)  +`   </p>
 
-<h5>sexo</h5>
-<p>  `+   lista.cgp_sexo  +`   </p>
+<h5>sexo</h5>`;
 
-<h5>Correo electronico</h5>
+if (lista.cgp_sexo == 1) {
+    html+=`<p>FEMENINO</p>`;
+} else if (lista.cgp_sexo == 2) {
+    html+=`<p>MASCULINO</p>`;
+}else{
+    html+=`<p>aun no indicado</p>`;
+}
+
+html+=`<h5>Correo electronico</h5>
 <p>  `+   lista.cgp_email  +`   </p>
 
 <h5>Telefono</h5>
@@ -173,10 +189,19 @@ html+=`<h2>SECCIÓN A: IDENTIFICACIÓN DE LAS ENTIDADES PARTICIPANTES</h2>
 
 <h4>A.1.9 - Datos del coordinador administrativo del proyecto</h4>
 
-<h5>Tipo de documento</h5>
-<p>  `+   lista.cap_tipo_documento  +`   </p>
+<h5>Tipo de documento</h5>`;
 
-<h5>Numero de documento</h5>
+if (lista.cap_tipo_documento == 1) {
+    html+=`<p>CARNÉ DE EXTRANJERIA</p>`;
+} else if (lista.cap_tipo_documento == 2) {
+    html+=`<p>DOCUMENTO NACIONAL DE IDENTIDAD</p>`;
+} else if (lista.cap_tipo_documento == 3) {
+    html+=`<p>PASAPORTE</p>`;
+}else{
+    html+=`<p>aun no indicado</p>`;
+}
+
+html+=`<h5>Numero de documento</h5>
 <p>  `+   lista.cap_nro_documento  +`   </p>
 
 <h5>RUC</h5>
@@ -188,10 +213,17 @@ html+=`<h2>SECCIÓN A: IDENTIFICACIÓN DE LAS ENTIDADES PARTICIPANTES</h2>
 <h5>fecha de nacimiento</h5>
 <p>  `+   fecha(lista.cap_fecha_nac)  +`   </p>
 
-<h5>sexo</h5>
-<p>  `+   lista.cap_sexo  +`   </p>
+<h5>sexo</h5>`;
 
-<h5>Correo electronico</h5>
+if (lista.cap_sexo == 1) {
+    html+=`<p>FEMENINO</p>`;
+} else if (lista.cap_sexo == 2) {
+    html+=`<p>MASCULINO</p>`;
+}else{
+    html+=`<p>aun no indicado</p>`;
+}
+
+html+=`<h5>Correo electronico</h5>
 <p>  `+   lista.cap_email  +`   </p>
 
 <h5>Telefono</h5>
@@ -205,10 +237,19 @@ html+=`<h2>SECCIÓN A: IDENTIFICACIÓN DE LAS ENTIDADES PARTICIPANTES</h2>
 
 <h4>A.2.1 - Entidad solicitante</h4>
 
-<h5>Tipo de entidad</h5>
-<p>  `+   lista.es_tipo  +`   </p>
+<h5>Tipo de entidad</h5>`;
 
-<h5>Tamaño de la empresa</h5>
+if (lista.es_tipo == 1) {
+    html+=`<p>ASOCIACIÓN CIVIL DE PRODUCTORES</p>`;
+} else if (lista.es_tipo == 2) {
+    html+=`<p>EMPRESA</p>`;
+} else if (lista.es_tipo == 3) {
+    html+=`<p>PERSONA NATURAL CON NEGOCIO</p>`;
+}else{
+    html+=`<p>aun no indicado</p>`;
+}
+
+html+=`<h5>Tamaño de la empresa</h5>
 <p>  `+   lista.es_tamano  +`   </p>
 
 <h5>Numero de Trabajadores</h5>
@@ -252,10 +293,19 @@ html+=`<h2>SECCIÓN A: IDENTIFICACIÓN DE LAS ENTIDADES PARTICIPANTES</h2>
 
 <h4>Representante legal</h4>
 
-<h5>Tipo de documento</h5>
-<p>  `+   lista.rl_tipo_documento  +`   </p>
+<h5>Tipo de documento</h5>`;
 
-<h5>Numero de documento</h5>
+if (lista.rl_tipo_documento == 1) {
+    html+=`<p>CARNÉ DE EXTRANJERIA</p>`;
+} else if (lista.rl_tipo_documento == 2) {
+    html+=`<p>DOCUMENTO NACIONAL DE IDENTIDAD</p>`;
+} else if (lista.rl_tipo_documento == 3) {
+    html+=`<p>PASAPORTE</p>`;
+}else{
+    html+=`<p>aun no indicado</p>`;
+}
+
+html+=`<h5>Numero de documento</h5>
 <p>  `+   lista.rl_nro_documento  +`   </p>
 
 <h5>RUC</h5>
@@ -264,10 +314,17 @@ html+=`<h2>SECCIÓN A: IDENTIFICACIÓN DE LAS ENTIDADES PARTICIPANTES</h2>
 <h5>Nombres y Apellidos</h5>
 <p>  `+   lista.rl_nombre  +`   </p>
 
-<h5>sexo</h5>
-<p>  `+   lista.rl_sexo  +`   </p>
+<h5>sexo</h5>`;
 
-<h5>Correo electronico</h5>
+if (lista.rl_sexo == 1) {
+    html+=`<p>FEMENINO</p>`;
+} else if (lista.rl_sexo == 2) {
+    html+=`<p>MASCULINO</p>`;
+}else{
+    html+=`<p>aun no indicado</p>`;
+}
+
+html+=`<h5>Correo electronico</h5>
 <p>  `+   lista.rl_email  +`   </p>
 
 <h5>Telefonos</h5>
@@ -549,11 +606,21 @@ html +=`<h2>SECCIÓN B: MERCADO - COMPETITIVIDAD EMPRESARIAL</h2>
 <p>  `+   lista.consecuencias_efectos  +`   </p>
 <h4>C.1.3 Causas</h4>
 <p>  `+   lista.causas  +`   </p>
-<h4>C.1.4. Tipo de innovación y descripción</h4>
-<p>  `+   lista.tipo_innovacion  +`   </p>
+<h4>C.1.4. Tipo de innovación y descripción</h4>`;
 
+if (lista.tipo_innovacion == 1) {
+    html+=`<p>UN NUEVO PROCESO</p>`;
+} else if (lista.tipo_innovacion == 2) {
+    html+=`<p>UN NUEVO PRODUCTO (BIEN O SERVICIO)</p>`;
+} else if (lista.tipo_innovacion == 2) {
+    html+=`<p>UN PROCESO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)</p>`;
+} else if (lista.tipo_innovacion == 2) {
+    html+=`<p>UN PRODUCTO YA EXISTENTE CON CARACTERISTICAS DIFERENTES (SIGNIFICATIVAMENTE MEJORADO)</p>`;
+}else{
+    html+=`<p>aun no indicado</p>`;
+}
 
-<h5>Tipo de Innovación</h5>
+html+=`<h5>Tipo de Innovación</h5>
 <h5>1. Describir la función que realizará la innovación</h5>
 <p>  `+   lista.funcion_innovacion  +`   </p>
 <h5>2. Describir la tecnología que se empleará para construir la innovación</h5>
@@ -649,31 +716,31 @@ html +=`</tbody>
         </tr>
     </thead>
     <tbody>`;
-if( lista.c8_1_2 || lista.c8_2_2 || lista.c8_3_2 ){
+if( lista.c41oe_1_1 || lista.c41oe_2_1 || lista.c41oe_3_1 ){
 html +=`<tr>
             <td>`+ lista.c41oe_1_1 +`</td>
             <td>`+ lista.c41oe_2_1 +`</td>
             <td>`+ lista.c41oe_3_1 +`</td>
         </tr>`;}
-if( lista.c8_1_2 || lista.c8_2_2 || lista.c8_3_2 ){
+if( lista.c41oe_1_2 || lista.c41oe_2_2 || lista.c41oe_3_2 ){
 html +=`<tr>
             <td>`+ lista.c41oe_1_2 +`</td>
             <td>`+ lista.c41oe_2_2 +`</td>
             <td>`+ lista.c41oe_3_2 +`</td>
         </tr>`;}
-if( lista.c8_1_2 || lista.c8_2_2 || lista.c8_3_2 ){
+if( lista.c41oe_1_3 || lista.c41oe_2_3 || lista.c41oe_3_3 ){
 html +=`<tr>
             <td>`+ lista.c41oe_1_3 +`</td>
             <td>`+ lista.c41oe_2_3 +`</td>
             <td>`+ lista.c41oe_3_3 +`</td>
         </tr>`;}
-if( lista.c8_1_2 || lista.c8_2_2 || lista.c8_3_2 ){
+if( lista.c41oe_1_4 || lista.c41oe_2_4 || lista.c41oe_3_4 ){
 html +=`<tr>
             <td>`+ lista.c41oe_1_4 +`</td>
             <td>`+ lista.c41oe_2_4 +`</td>
             <td>`+ lista.c41oe_3_4 +`</td>
         </tr>`;}
-if( lista.c8_1_2 || lista.c8_2_2 || lista.c8_3_2 ){
+if( lista.c41oe_1_5 || lista.c41oe_2_5 || lista.c41oe_3_5 ){
 html +=`<tr>
             <td>`+ lista.c41oe_1_5 +`</td>
             <td>`+ lista.c41oe_2_5 +`</td>
@@ -701,19 +768,273 @@ html +=`</tbody>
             <th>6</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>atributo</td>
-            <td>competidor 1</td>
-            <td>competidor 2</td>
-            <td>X</td>
-            <td>X</td>
-            <td>X</td>
-            <td>X</td>
-            <td>X</td>
-            <td>X</td>
-        </tr>
-    </tbody>
+    <tbody> `;
+if( lista.c41oe_1_1 ){
+html +=`<tr>
+            <td colspan="9">`+ lista.c41oe_1_1 +`</td>
+        </tr>`;}
+if( lista.c42_1_1 || lista.c42_2_1 || lista.c42_3_1 || lista.c42_4_1 || lista.c42_5_1 || lista.c42_6_1 || lista.c42_7_1 || lista.c42_8_1 || lista.c42_9_1 ){
+    
+    var c42_1_1 = lista.c42_1_1 ? lista.c42_1_1 : " ";
+    var c42_2_1 = lista.c42_2_1 ? lista.c42_2_1 : " ";
+    var c42_3_1 = lista.c42_3_1 ? lista.c42_3_1 : " ";
+    var c42_4_1 = lista.c42_4_1 ? lista.c42_4_1 : " ";
+    var c42_5_1 = lista.c42_5_1 ? lista.c42_5_1 : " ";
+    var c42_6_1 = lista.c42_6_1 ? lista.c42_6_1 : " ";
+    var c42_7_1 = lista.c42_7_1 ? lista.c42_7_1 : " ";
+    var c42_8_1 = lista.c42_8_1 ? lista.c42_8_1 : " ";
+    var c42_9_1 = lista.c42_9_1 ? lista.c42_9_1 : " ";
+
+html +=`<tr>
+            <td>` + c42_1_1 + `</td>
+            <td>` + c42_2_1 + `</td>
+            <td>` + c42_3_1 + `</td>
+            <td>` + c42_4_1 + `</td>
+            <td>` + c42_5_1 + `</td>
+            <td>` + c42_6_1 + `</td>
+            <td>` + c42_7_1 + `</td>
+            <td>` + c42_8_1 + `</td>
+            <td>` + c42_9_1 + `</td>
+        </tr>`;}
+
+if( lista.c42_1_2 || lista.c42_2_2 || lista.c42_3_2 || lista.c42_4_2 || lista.c42_5_2 || lista.c42_6_2 || lista.c42_7_2 || lista.c42_8_2 || lista.c42_9_2 ){
+    
+    var c42_1_2 = lista.c42_1_2 ? lista.c42_1_2 : " ";
+    var c42_2_2 = lista.c42_2_2 ? lista.c42_2_2 : " ";
+    var c42_3_2 = lista.c42_3_2 ? lista.c42_3_2 : " ";
+    var c42_4_2 = lista.c42_4_2 ? lista.c42_4_2 : " ";
+    var c42_5_2 = lista.c42_5_2 ? lista.c42_5_2 : " ";
+    var c42_6_2 = lista.c42_6_2 ? lista.c42_6_2 : " ";
+    var c42_7_2 = lista.c42_7_2 ? lista.c42_7_2 : " ";
+    var c42_8_2 = lista.c42_8_2 ? lista.c42_8_2 : " ";
+    var c42_9_2 = lista.c42_9_2 ? lista.c42_9_2 : " ";
+
+html +=`<tr>
+            <td>` + c42_1_2 + `</td>
+            <td>` + c42_2_2 + `</td>
+            <td>` + c42_3_2 + `</td>
+            <td>` + c42_4_2 + `</td>
+            <td>` + c42_5_2 + `</td>
+            <td>` + c42_6_2 + `</td>
+            <td>` + c42_7_2 + `</td>
+            <td>` + c42_8_2 + `</td>
+            <td>` + c42_9_2 + `</td>
+        </tr>`;}
+
+if( lista.c41oe_1_2 ){
+
+html +=`<tr>
+            <td colspan="9">`+ lista.c41oe_1_2 +`</td>
+        </tr>`;}
+
+if( lista.c42_1_3 || lista.c42_2_3 || lista.c42_3_3 || lista.c42_4_3 || lista.c42_5_3 || lista.c42_6_3 || lista.c42_7_3 || lista.c42_8_3 || lista.c42_9_3 ){
+    
+    var c42_1_3 = lista.c42_1_3 ? lista.c42_1_3 : " ";
+    var c42_2_3 = lista.c42_2_3 ? lista.c42_2_3 : " ";
+    var c42_3_3 = lista.c42_3_3 ? lista.c42_3_3 : " ";
+    var c42_4_3 = lista.c42_4_3 ? lista.c42_4_3 : " ";
+    var c42_5_3 = lista.c42_5_3 ? lista.c42_5_3 : " ";
+    var c42_6_3 = lista.c42_6_3 ? lista.c42_6_3 : " ";
+    var c42_7_3 = lista.c42_7_3 ? lista.c42_7_3 : " ";
+    var c42_8_3 = lista.c42_8_3 ? lista.c42_8_3 : " ";
+    var c42_9_3 = lista.c42_9_3 ? lista.c42_9_3 : " ";
+
+html +=`<tr>
+            <td>` + c42_1_3 + `</td>
+            <td>` + c42_2_3 + `</td>
+            <td>` + c42_3_3 + `</td>
+            <td>` + c42_4_3 + `</td>
+            <td>` + c42_5_3 + `</td>
+            <td>` + c42_6_3 + `</td>
+            <td>` + c42_7_3 + `</td>
+            <td>` + c42_8_3 + `</td>
+            <td>` + c42_9_3 + `</td>
+        </tr>`;}
+
+if( lista.c42_1_4 || lista.c42_2_4 || lista.c42_3_4 || lista.c42_4_4 || lista.c42_5_4 || lista.c42_6_4 || lista.c42_7_4 || lista.c42_8_4 || lista.c42_9_4 ){
+
+    var c42_1_4 = lista.c42_1_4 ? lista.c42_1_4 : " ";
+    var c42_2_4 = lista.c42_2_4 ? lista.c42_2_4 : " ";
+    var c42_3_4 = lista.c42_3_4 ? lista.c42_3_4 : " ";
+    var c42_4_4 = lista.c42_4_4 ? lista.c42_4_4 : " ";
+    var c42_5_4 = lista.c42_5_4 ? lista.c42_5_4 : " ";
+    var c42_6_4 = lista.c42_6_4 ? lista.c42_6_4 : " ";
+    var c42_7_4 = lista.c42_7_4 ? lista.c42_7_4 : " ";
+    var c42_8_4 = lista.c42_8_4 ? lista.c42_8_4 : " ";
+    var c42_9_4 = lista.c42_9_4 ? lista.c42_9_4 : " ";
+
+
+    html +=`<tr>
+            <td>` + c42_1_4 + `</td>
+            <td>` + c42_2_4 + `</td>
+            <td>` + c42_3_4 + `</td>
+            <td>` + c42_4_4 + `</td>
+            <td>` + c42_5_4 + `</td>
+            <td>` + c42_6_4 + `</td>
+            <td>` + c42_7_4 + `</td>
+            <td>` + c42_8_4 + `</td>
+            <td>` + c42_9_4 + `</td>
+        </tr>`;}
+
+if( lista.c41oe_1_3 ){
+html +=`<tr>
+            <td colspan="9">`+ lista.c41oe_1_3 +`</td>
+        </tr>`;}
+
+if( lista.c42_1_5 || lista.c42_2_5 || lista.c42_3_5 || lista.c42_4_5 || lista.c42_5_5 || lista.c42_6_5 || lista.c42_7_5 || lista.c42_8_5 || lista.c42_9_5 ){
+
+    var c42_1_5 = lista.c42_1_5 ? lista.c42_1_5 : " ";
+    var c42_2_5 = lista.c42_2_5 ? lista.c42_2_5 : " ";
+    var c42_3_5 = lista.c42_3_5 ? lista.c42_3_5 : " ";
+    var c42_4_5 = lista.c42_4_5 ? lista.c42_4_5 : " ";
+    var c42_5_5 = lista.c42_5_5 ? lista.c42_5_5 : " ";
+    var c42_6_5 = lista.c42_6_5 ? lista.c42_6_5 : " ";
+    var c42_7_5 = lista.c42_7_5 ? lista.c42_7_5 : " ";
+    var c42_8_5 = lista.c42_8_5 ? lista.c42_8_5 : " ";
+    var c42_9_5 = lista.c42_9_5 ? lista.c42_9_5 : " ";
+
+    html +=`<tr>
+            <td>` + c42_1_5 + `</td>
+            <td>` + c42_2_5 + `</td>
+            <td>` + c42_3_5 + `</td>
+            <td>` + c42_4_5 + `</td>
+            <td>` + c42_5_5 + `</td>
+            <td>` + c42_6_5 + `</td>
+            <td>` + c42_7_5 + `</td>
+            <td>` + c42_8_5 + `</td>
+            <td>` + c42_9_5 + `</td>
+        </tr>`;}
+
+if( lista.c42_1_6 || lista.c42_2_6 || lista.c42_3_6 || lista.c42_4_6 || lista.c42_5_6 || lista.c42_6_6 || lista.c42_7_6 || lista.c42_8_6 || lista.c42_9_6 ){
+
+    var c42_1_6 = lista.c42_1_6 ? lista.c42_1_6 : " ";
+    var c42_2_6 = lista.c42_2_6 ? lista.c42_2_6 : " ";
+    var c42_3_6 = lista.c42_3_6 ? lista.c42_3_6 : " ";
+    var c42_4_6 = lista.c42_4_6 ? lista.c42_4_6 : " ";
+    var c42_5_6 = lista.c42_5_6 ? lista.c42_5_6 : " ";
+    var c42_6_6 = lista.c42_6_6 ? lista.c42_6_6 : " ";
+    var c42_7_6 = lista.c42_7_6 ? lista.c42_7_6 : " ";
+    var c42_8_6 = lista.c42_8_6 ? lista.c42_8_6 : " ";
+    var c42_9_6 = lista.c42_9_6 ? lista.c42_9_6 : " ";
+
+    html +=`<tr>
+            <td>` + c42_1_6 + `</td>
+            <td>` + c42_2_6 + `</td>
+            <td>` + c42_3_6 + `</td>
+            <td>` + c42_4_6 + `</td>
+            <td>` + c42_5_6 + `</td>
+            <td>` + c42_6_6 + `</td>
+            <td>` + c42_7_6 + `</td>
+            <td>` + c42_8_6 + `</td>
+            <td>` + c42_9_6 + `</td>
+        </tr>`;}
+
+if( lista.c41oe_1_4 ){
+html +=`<tr>
+            <td colspan="9">`+ lista.c41oe_1_4 +`</td>
+        </tr>`;}
+
+if( lista.c42_1_7 || lista.c42_2_7 || lista.c42_3_7 || lista.c42_4_7 || lista.c42_5_7 || lista.c42_6_7 || lista.c42_7_7 || lista.c42_8_7 || lista.c42_9_7 ){
+
+    var c42_1_7 = lista.c42_1_7 ? lista.c42_1_7 : " ";
+    var c42_2_7 = lista.c42_2_7 ? lista.c42_2_7 : " ";
+    var c42_3_7 = lista.c42_3_7 ? lista.c42_3_7 : " ";
+    var c42_4_7 = lista.c42_4_7 ? lista.c42_4_7 : " ";
+    var c42_5_7 = lista.c42_5_7 ? lista.c42_5_7 : " ";
+    var c42_6_7 = lista.c42_6_7 ? lista.c42_6_7 : " ";
+    var c42_7_7 = lista.c42_7_7 ? lista.c42_7_7 : " ";
+    var c42_8_7 = lista.c42_8_7 ? lista.c42_8_7 : " ";
+    var c42_9_7 = lista.c42_9_7 ? lista.c42_9_7 : " ";
+
+    html +=`<tr>
+            <td>` + c42_1_7 + `</td>
+            <td>` + c42_2_7 + `</td>
+            <td>` + c42_3_7 + `</td>
+            <td>` + c42_4_7 + `</td>
+            <td>` + c42_5_7 + `</td>
+            <td>` + c42_6_7 + `</td>
+            <td>` + c42_7_7 + `</td>
+            <td>` + c42_8_7 + `</td>
+            <td>` + c42_9_7 + `</td>
+        </tr>`;}
+
+if( lista.c42_1_8 || lista.c42_2_8 || lista.c42_3_8 || lista.c42_4_8 || lista.c42_5_8 || lista.c42_6_8 || lista.c42_7_8 || lista.c42_8_8 || lista.c42_9_8 ){
+
+    var c42_1_8 = lista.c42_1_8 ? lista.c42_1_8 : " ";
+    var c42_2_8 = lista.c42_2_8 ? lista.c42_2_8 : " ";
+    var c42_3_8 = lista.c42_3_8 ? lista.c42_3_8 : " ";
+    var c42_4_8 = lista.c42_4_8 ? lista.c42_4_8 : " ";
+    var c42_5_8 = lista.c42_5_8 ? lista.c42_5_8 : " ";
+    var c42_6_8 = lista.c42_6_8 ? lista.c42_6_8 : " ";
+    var c42_7_8 = lista.c42_7_8 ? lista.c42_7_8 : " ";
+    var c42_8_8 = lista.c42_8_8 ? lista.c42_8_8 : " ";
+    var c42_9_8 = lista.c42_9_8 ? lista.c42_9_8 : " ";
+
+html +=`<tr>
+            <td>` + c42_1_8 + `</td>
+            <td>` + c42_2_8 + `</td>
+            <td>` + c42_3_8 + `</td>
+            <td>` + c42_4_8 + `</td>
+            <td>` + c42_5_8 + `</td>
+            <td>` + c42_6_8 + `</td>
+            <td>` + c42_7_8 + `</td>
+            <td>` + c42_8_8 + `</td>
+            <td>` + c42_9_8 + `</td>
+        </tr>`;}
+
+if( lista.c41oe_1_5 ){
+html +=`<tr>
+            <td colspan="9">`+ lista.c41oe_1_5 +`</td>
+        </tr>`;}
+
+if( lista.c42_1_9 || lista.c42_2_9 || lista.c42_3_9 || lista.c42_4_9 || lista.c42_5_9 || lista.c42_6_9 || lista.c42_7_9 || lista.c42_8_9 || lista.c42_9_9 ){
+
+    var c42_1_9 = lista.c42_1_9 ? lista.c42_1_9 : " ";
+    var c42_2_9 = lista.c42_2_9 ? lista.c42_2_9 : " ";
+    var c42_3_9 = lista.c42_3_9 ? lista.c42_3_9 : " ";
+    var c42_4_9 = lista.c42_4_9 ? lista.c42_4_9 : " ";
+    var c42_5_9 = lista.c42_5_9 ? lista.c42_5_9 : " ";
+    var c42_6_9 = lista.c42_6_9 ? lista.c42_6_9 : " ";
+    var c42_7_9 = lista.c42_7_9 ? lista.c42_7_9 : " ";
+    var c42_8_9 = lista.c42_8_9 ? lista.c42_8_9 : " ";
+    var c42_9_9 = lista.c42_9_9 ? lista.c42_9_9 : " ";
+
+html +=`<tr>
+            <td>` + c42_1_9 + `</td>
+            <td>` + c42_2_9 + `</td>
+            <td>` + c42_3_9 + `</td>
+            <td>` + c42_4_9 + `</td>
+            <td>` + c42_5_9 + `</td>
+            <td>` + c42_6_9 + `</td>
+            <td>` + c42_7_9 + `</td>
+            <td>` + c42_8_9 + `</td>
+            <td>` + c42_9_9 + `</td>
+        </tr>`;}
+
+if( lista.c42_1_10 || lista.c42_2_10 || lista.c42_3_10 || lista.c42_4_10 || lista.c42_5_10 || lista.c42_6_10 || lista.c42_7_10 || lista.c42_8_10 || lista.c42_9_10 ){
+
+    var c42_1_10 = lista.c42_1_10 ? lista.c42_1_10 : " ";
+    var c42_2_10 = lista.c42_2_10 ? lista.c42_2_10 : " ";
+    var c42_3_10 = lista.c42_3_10 ? lista.c42_3_10 : " ";
+    var c42_4_10 = lista.c42_4_10 ? lista.c42_4_10 : " ";
+    var c42_5_10 = lista.c42_5_10 ? lista.c42_5_10 : " ";
+    var c42_6_10 = lista.c42_6_10 ? lista.c42_6_10 : " ";
+    var c42_7_10 = lista.c42_7_10 ? lista.c42_7_10 : " ";
+    var c42_8_10 = lista.c42_8_10 ? lista.c42_8_10 : " ";
+    var c42_9_10 = lista.c42_9_10 ? lista.c42_9_10 : " ";
+
+html +=`<tr>
+            <td>` + c42_1_10 + `</td>
+            <td>` + c42_2_10 + `</td>
+            <td>` + c42_3_10 + `</td>
+            <td>` + c42_4_10 + `</td>
+            <td>` + c42_5_10 + `</td>
+            <td>` + c42_6_10 + `</td>
+            <td>` + c42_7_10 + `</td>
+            <td>` + c42_8_10 + `</td>
+            <td>` + c42_9_10 + `</td>
+        </tr>`;}
+html +=`</tbody>
 </table>
 
 <h3>C.5 Descripción de la Metodología</h3>
@@ -855,10 +1176,17 @@ html +=`</tbody>
 <h2>SECCIÓN D: PRESUPUESTO DEL PROYECTO</h2>
 
 <h3>D.1 Moneda y Presupuesto del Proyecto</h3>
-<h5>Moneda del Proyecto</h5>
-<p>  `+   lista.tipo_moneda  +`   </p>
+<h5>Moneda del Proyecto</h5>`;
 
-<h4>D.1.1 CUADRO Nº 1: Equipos y Bienes duraderos</h4>
+if (lista.tipo_moneda == 0) {
+    html+=`<p>SOLES</p>`;
+} else if (lista.tipo_moneda == 1) {
+    html+=`<p>DOLARES</p>`;
+}else{
+    html+=`<p>aun no indicado</p>`;
+}
+
+html+=`<h4>D.1.1 CUADRO Nº 1: Equipos y Bienes duraderos</h4>
 <br>
 <table border="1">
     <thead>
