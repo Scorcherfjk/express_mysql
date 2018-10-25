@@ -374,7 +374,7 @@ router.post('/validation/nuevo', function(req, res) {
                 if (err) console.log(err);
                 
                 /* 1 PROYECTO */
-                var proyecto =  `INSERT INTO unjfsc.proyecto (id_usuario, titulo) VALUES ( ? , ? )`;
+                var proyecto =  `INSERT INTO unjfsc.proyecto (id_usuario, titulo, enviado) VALUES ( ? , ?, 0 )`;
                 var values = [ req.session.user.id , req.body.titulo ];
                 con.query(proyecto, values, function (err, result) { if (err) { console.log(err); return; } });
 

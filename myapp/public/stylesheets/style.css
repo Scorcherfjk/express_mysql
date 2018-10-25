@@ -64,3 +64,9 @@ td{
   max-width: 30px!important;
   min-width: 30px!important;
 }
+
+.none{
+  min-width: 100px!important;
+  text-align: center;
+  font-size: 1em!important;
+}

@@ -1,0 +1,213 @@
+extends navbarAdmin
+
+block content
+  - function addZero(i) { if (i < 10) { i = '0' + i; } return i; }
+  - function fecha(i){ if (i != null) { var dd = i.getDate(); var mm = i.getMonth()+1; var yyyy = i.getFullYear(); dd = addZero(dd); mm = addZero(mm); return yyyy+'-'+mm+'-'+dd; }else { return i;} }
+  .container
+    form(action="/userAdmin/docentes/modificar/change-data", method="post")
+      input(type="hidden", name="id" value=datos.id_docente)
+      .card.rounded.border-secondary
+        h5.card-header.text-capitalize.bg-danger.text-white
+          | Registro de Docente
+        .card-body
+          .row
+            .col-sm-6
+              .form-group
+                label.h6(for='tipo_documento') Tipo Documento
+                  span.text-danger  (*)
+                if datos.tipo_documento == 1
+                  select#tipo_documento.form-control(name="tipo_documento")
+                    option(value="0" ) -----
+                    option(value='1' selected) CARNÉ DE EXTRANJERIA
+                    option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                    option(value='3') PASAPORTE
+                else if datos.tipo_documento == 2
+                  select#tipo_documento.form-control(name="tipo_documento")
+                    option(value="0" ) -----
+                    option(value='1') CARNÉ DE EXTRANJERIA
+                    option(value='2' selected) DOCUMENTO NACIONAL DE IDENTIDAD
+                    option(value='3') PASAPORTE
+                else if datos.tipo_documento == 3
+                  select#tipo_documento.form-control(name="tipo_documento")
+                    option(value="0" ) -----
+                    option(value='1') CARNÉ DE EXTRANJERIA
+                    option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                    option(value='3' selected) PASAPORTE
+                else
+                  select#tipo_documento.form-control(name="tipo_documento")
+                    option(value="0" selected) -----
+                    option(value='1') CARNÉ DE EXTRANJERIA
+                    option(value='2') DOCUMENTO NACIONAL DE IDENTIDAD
+                    option(value='3') PASAPORTE
+            .col-sm-6
+              .form-group
+                label.h6(for='documento_identidad') Documento de Identidad
+                  span.text-danger  (*)
+                input#documento_identidad.form-control(type='text' name="documento_identidad" value=datos.documento_identidad required)
+          .row
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='nombres') Nombres
+                  span.text-danger  (*)
+                input#nombres.form-control(type='text' name="nombres" value=datos.nombres required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='apellidos') Apellidos
+                  span.text-danger  (*)
+                input#apellidos.form-control(type='text' name="apellidos" value=datos.apellidos required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='genero') G&eacutenero
+                  span.text-danger  (*)
+                if datos.genero == 1
+                  select#genero.form-control(name="genero")
+                    option(value="0" ) -----
+                    option(value='1' selected) Femenino
+                    option(value='2') Masculino
+                else if datos.genero == 2
+                  select#genero.form-control(name="genero")
+                    option(value="0" ) -----
+                    option(value='1') Femenino
+                    option(value='2' selected) Masculino
+                else
+                  select#genero.form-control(name="genero")
+                    option(value="0" selected) -----
+                    option(value='1') Femenino
+                    option(value='2') Masculino
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='fecha_nacimiento') Fecha de Nacimiento
+                  span.text-danger  (*)
+                input#fechaNacimiento.form-control(type='date' name="fecha_nacimiento" value=fecha(datos.fecha_nacimiento) required)
+          .row
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='categoria') Categoria
+                  span.text-danger  (*)
+                if datos.categoria == 1
+                  select#categoria.form-control(name="categoria")
+                    option(value="0" ) -----
+                    option(value='1' selected) Principal
+                    option(value='2') Auxiliar
+                    option(value='3') Asociado
+                else if datos.categoria == 2
+                  select#categoria.form-control(name="categoria")
+                    option(value="0" ) -----
+                    option(value='1') Principal
+                    option(value='2' selected) Auxiliar
+                    option(value='3') Asociado
+                else if datos.categoria == 3
+                  select#categoria.form-control(name="categoria")
+                    option(value="0" ) -----
+                    option(value='1') Principal
+                    option(value='2') Auxiliar
+                    option(value='3' selected) Asociado
+                else
+                  select#categoria.form-control(name="categoria")
+                    option(value="0" selected) -----
+                    option(value='1') Principal
+                    option(value='2') Auxiliar
+                    option(value='3') Asociado
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='dedicacion') Dedicación
+                  span.text-danger  (*)
+                if datos.dedicacion == 1
+                  select#dedicacion.form-control(name="dedicacion")
+                    option(value="0" ) -----
+                    option(value='1' selected) Tiempo Completo
+                    option(value='2') Tiempo Parcial
+                    option(value='3') Dedicación Exclusiva
+                else if datos.dedicacion == 2
+                  select#dedicacion.form-control(name="dedicacion")
+                    option(value="0" ) -----
+                    option(value='1') Tiempo Completo
+                    option(value='2' selected) Tiempo Parcial
+                    option(value='3') Dedicación Exclusiva
+                else if datos.dedicacion == 3
+                  select#dedicacion.form-control(name="dedicacion")
+                    option(value="0" ) -----
+                    option(value='1') Tiempo Completo
+                    option(value='2') Tiempo Parcial
+                    option(value='3' selected) Dedicación Exclusiva
+                else
+                  select#dedicacion.form-control(name="dedicacion")
+                    option(value="0" selected) -----
+                    option(value='1') Tiempo Completo
+                    option(value='2') Tiempo Parcial
+                    option(value='3') Dedicación Exclusiva
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='registro') Registro
+                  span.text-danger  (*)
+                br
+                .form-check.form-check-inline
+                  if datos.facultad != null
+                    input#facultad.form-check-input(type="checkbox", name="facultad" value="1" checked)
+                    label.form-check-label(for='facultad') Facultad   
+                  else  
+                    input#facultad.form-check-input(type="checkbox", name="facultad" value="1")
+                    label.form-check-label(for='facultad') Facultad
+                .form-check.form-check-inline
+                  if datos.dina != null
+                    input#dina.form-check-input(type="checkbox", name="dina" value="1" checked)
+                    label.form-check-label(for='facultad') Dina   
+                  else  
+                    input#dina.form-check-input(type="checkbox", name="dina" value="1")
+                    label.form-check-label(for='dina') Dina
+                .form-check.form-check-inline
+                  if datos.regina != null
+                    input#regina.form-check-input(type="checkbox", name="regina" value="1" checked)
+                    label.form-check-label(for='regina') Regina   
+                  else  
+                    input#regina.form-check-input(type="checkbox", name="regina" value="1")
+                    label.form-check-label(for='regina') Regina
+          .row
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='pais') Pa&iacutes
+                  span.text-danger  (*)
+                input#pais.form-control(type='text' name="pais" value=datos.pais required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='departamento') Departamento
+                  span.text-danger  (*)
+                input#departamento.form-control(type='text' name="departamento" value=datos.departamento required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='provincia') Provincia
+                  span.text-danger  (*)
+                input#provincia.form-control(type='text' name="provincia" value=datos.provincia required)
+            .col-sm-6.col-md-3
+              .form-group
+                label.h6(for='distrito') Distrito
+                  span.text-danger  (*)
+                input#distrito.form-control(type='text' name="distrito" value=datos.distrito required)
+          .row
+            .col
+              .form-group
+                label.h6(for='direccion') Direcci&oacuten
+                  span.text-danger  (*)
+                input#direccion.form-control(type='text' name="direccion" value=datos.direccion required)
+          .row
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='email') Correo Electr&oacutenico
+                  span.text-danger  (*)
+                input#email.form-control(type='email' name="email" value=datos.email required)
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='telefono_movil') Tel&eacutefono M&oacutevil
+                  span.text-danger  (*)
+                input#telefonoMovil.form-control(type='number' name="telefono_movil" value=datos.telefono_movil required)
+            .col-sm-6.col-md-4
+              .form-group
+                label.h6(for='telefono_fijo') Tel&eacutefono  Fijo
+                  span.text-danger  (*)
+                input#telefonoFijo.form-control(type='number' name="telefono_fijo" value=datos.telefono_fijo required)
+          .row
+            .col-sm-12.col-md-6
+              input#carga.btn.btn-outline-primary.float-right.btn-lg.btn-block(type="submit", value="Guardar")
+            .col-sm-12.col-md-6
+              a.btn.btn-outline-danger.float-right.btn-lg.btn-block(href="/userAdmin/inicio" role="button") Cancelar
+  script(src="/javascripts/jquery-3.3.1.min.js")

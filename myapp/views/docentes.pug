@@ -8,29 +8,32 @@ block content
             .card-body
                 .table-responsive#contenido
                     table.table.table-bordered.table-hover
-                        thead.thead-light.text-capitalize
+                        thead.thead-light.text-capitalize.none
                             tr
-                                th Nombre
-                                th Categoria
-                                th Dedicación
-                                th CV
-                                th Modificar
-                        tbody
+                                th.none Nombre
+                                th.none Categoria
+                                th.none Dedicación
+                                th.none CV
+                                th.none Modificar
+                        tbody.text-capitalize.none
                             for docente in docentes
                                 tr
-                                    th #{docente.nombre}
+                                    td.align-middle.none #{docente.nombre}
                                     if ( docente.categoria == 0)
-                                        th Principal
+                                        td.align-middle.none Principal
                                     else if ( docente.categoria == 1)
-                                        th Auxiliar
+                                        td.align-middle.none Auxiliar
                                     else if ( docente.categoria == 2)
-                                        th Asociado
+                                        td.align-middle.none Asociado
                                     if (docente.dedicacion == 0)
-                                        th Tiempo Completo
+                                        td.align-middle.none Tiempo Completo
                                     else if (docente.dedicacion == 1)
-                                        th Tiempo Parcial
+                                        td.align-middle.none Tiempo Parcial
                                     else if (docente.dedicacion == 2)
-                                        th Dedicación Exclusiva
-                                    th #{docente.cv}
-                                    th: a(href="http://", target="_blank", rel="noopener noreferrer") modificar datos
+                                        td.align-middle.none Dedicación Exclusiva
+                                    td.align-middle.none #{docente.cv}
+                                    td.align-middle.none
+                                        form(action="/userAdmin/docentes/modificar", method="post")
+                                            input(type="hidden", name="id_docente" value=docente.id)
+                                            input.btn.btn-primary(type="submit", value="Modificar")
     script(src="/javascripts/jquery-3.3.1.min.js")

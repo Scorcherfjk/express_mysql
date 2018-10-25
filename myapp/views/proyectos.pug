@@ -12,27 +12,36 @@ block content
                     table.table.table-bordered.table-hover
                         thead.thead-light.text-capitalize
                             tr
-                                th Código
-                                th Título Del Proyecto
-                                th Nombre
-                                th status
-                                th fecha
-                                th Descargar
-                        tbody
+                                th.none.align-middle Código
+                                th.none.align-middle Título Del Proyecto
+                                th.none.align-middle Estado Del Proyecto
+                                th.none.align-middle Nombre
+                                th.none.align-middle status
+                                th.none.align-middle fecha
+                                th.none.align-middle Descargar
+                        tbody.text-capitalize
                             for proyecto in proyectos
                                 tr
-                                    th #{proyecto.codigo}
-                                    th #{proyecto.titulo}
-                                    th #{proyecto.nombre}
+                                    th.align-middle #{proyecto.codigo}
+                                    td.align-middle #{proyecto.titulo}
+                                    if proyecto.enviado == 1
+                                        td.align-middle Terminado
+                                    else
+                                        td.align-middle En Proceso
+                                    td.align-middle #{proyecto.nombre}
                                     if (proyecto.status == 0)
-                                        th Profesor
+                                        td.align-middle Profesor
                                     else if (proyecto.status == 1)
-                                        th Estudiante
+                                        td.align-middle Estudiante
                                     else if (proyecto.status == 2)
-                                        th Egresado
+                                        td.align-middle Egresado
                                     else if (proyecto.status == 3)
-                                        th Invg. Externo
-                                    th #{fecha(proyecto.fecha)}
-                                    th #{proyecto.descarga}
+                                        td.align-middle Invg. Externo
+                                    td.align-middle #{fecha(proyecto.fecha)}
+                                    td.align-middle 
+                                        form(action="/userAdmin/visualizar", method="post") 
+                                            input(type="hidden", name="id_proyecto" value=proyecto.codigo) 
+                                            input(type="hidden", name="id_usuario" value=proyecto.id_usuario)
+                                            input.btn.btn-primary(type="submit" value="Visualizar") 
     script(src="/javascripts/jquery-3.3.1.min.js")
     script(src="/javascripts/valida.js")
