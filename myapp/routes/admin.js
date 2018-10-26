@@ -27,19 +27,43 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    
+
+    if (con) con.destroy();
+    var con = mysql.createConnection(config());
+
     var user = req.body.user;
     var passwd = req.body.passwd;
 
-    if( user == "admin" && passwd == 1){
-        req.session.user = { nombre: "user" , apellido: "admin" , id: 1 };
-        console.log("Acceso concedido");
-    }
-    if(!req.session.user){
-        res.redirect("/useradmin");
-    } else {
-        res.redirect("inicio");
-    }
+    con.connect(function(err) {
+        if (err) console.log(err);
+    
+        var sql = 'SELECT id_admin, nombres, apellido, usuario, clave from admin';
+
+        con.query(sql, function (err, result) {
+            if (err) {
+                console.log(err);
+                return;
+            }else{
+                var resultado = result;
+                if(resultado.length > 0){
+                    for (let i = 0; i < resultado.length; i++) {
+                        var valor = resultado[i];
+                        if( user == valor.usuario && bcrypt.compareSync(passwd, valor.clave)){
+                            req.session.user = { nombre: valor.nombres , apellido: valor.apellido , id: valor.id_admin };
+                            console.log("Acceso concedido");
+                        }
+                    }
+                }
+                if(!req.session.user){
+                    res.redirect("/useradmin");
+                } else {
+                    res.redirect("inicio");
+                }
+            }
+        });
+        con.end();
+    });
+
 });
 
 router.get('/inicio', function(req, res) {
@@ -283,6 +307,8 @@ router.post('/docentes/ingresar', function(req, res) {
 });
 
 
+
+
 router.get('/docentes/modificar', function(req, res) {
     if(req.session.user){
         
@@ -356,6 +382,74 @@ router.post('/docentes/modificar/change-data' ,function(req, res, next) {
             con.query(sql, campos, function (err, result) {
                 if (err) console.log(err);
                 res.redirect('/useradmin/inicio');
+            });
+            con.end();
+        });
+    } else {
+        res.redirect("/useradmin");
+    }
+});
+
+
+
+
+router.get('/change' ,function(req, res, next) {
+    if(req.session.user){
+        res.render('changePasswordAdmin', { 
+            title: "Cambio de Clave", 
+            usuario: req.session.user 
+        });
+    } else {
+        res.redirect("/useradmin");
+  }
+});
+
+router.post('/change-access' ,function(req, res, next) {
+    if(req.session.user){
+
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
+
+        con.connect(function(err) {
+            if (err) throw err;
+    
+            var sql = `UPDATE admin SET usuario = ? WHERE id_admin = ?`;
+            var newuser = req.body.usuario;
+            var usuario = req.session.user.id
+
+            con.query(sql, [newuser, usuario], function (err, result) {
+                if (err) {
+                    console.log(err);
+                }else{
+                    res.redirect('/useradmin/inicio');
+                }
+            });
+            con.end();
+        });
+    } else {
+        res.redirect("/useradmin");
+    }
+});
+
+router.post('/change-password' ,function(req, res, next) {
+    if(req.session.user){
+
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
+
+        con.connect(function(err) {
+            if (err) throw err;
+    
+            var sql = `UPDATE admin SET clave = ? WHERE id_admin = ?`;
+            var clave = bcrypt.hashSync(req.body.clave,10)
+            var usuario = req.session.user.id
+
+            con.query(sql, [clave, usuario], function (err, result) {
+                if (err) {
+                    console.log(err);
+                }else{
+                    res.redirect('/useradmin/inicio');
+                }
             });
             con.end();
         });
