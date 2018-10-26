@@ -1,0 +1,43 @@
+doctype html
+html(lang='es')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    link(rel="stylesheet", href="/stylesheets/bootstrap.min.css")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="shortcut icon", href="/images/favicon.ico", type="image/x-icon")
+    title #{title}
+  body
+    .container
+        img(src="/images/port.jpg", alt="portada", srcset="")
+        hr
+        .card.mx-auto.rounded.border-secondary
+            h5.card-header.text-capitalize.bg-danger.text-white
+                | Docentes #{tipoDocente}
+            .card-body
+                .table-responsive#contenido
+                    table.table.table-bordered.table-hover
+                        thead.thead-light.text-capitalize.none
+                            tr
+                                th.none Nombre
+                                th.none Categoria
+                                th.none Dedicación
+                                th.none CV
+                        tbody.text-capitalize.none
+                            for docente in docentes
+                                tr
+                                    td.align-middle.none #{docente.nombre}
+                                    if ( docente.categoria == 0)
+                                        td.align-middle.none Principal
+                                    else if ( docente.categoria == 1)
+                                        td.align-middle.none Auxiliar
+                                    else if ( docente.categoria == 2)
+                                        td.align-middle.none Asociado
+                                    if (docente.dedicacion == 0)
+                                        td.align-middle.none Tiempo Completo
+                                    else if (docente.dedicacion == 1)
+                                        td.align-middle.none Tiempo Parcial
+                                    else if (docente.dedicacion == 2)
+                                        td.align-middle.none Dedicación Exclusiva
+                                    td.align-middle.none #{docente.cv}
+    script(src="/javascripts/jquery-3.3.1.min.js")
