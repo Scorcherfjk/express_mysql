@@ -3,6 +3,9 @@ var router = express.Router();
 var config = require('../models/database').config;
 var mysql = require('mysql');
 
+
+
+
 router.get('/docentes/facultad', function(req, res) {
         
     if (con) con.destroy();
