@@ -635,6 +635,33 @@ router.post('/validation/editar-proyecto', function(req, res) {
     }
 });
 
+
+/*** EN PROCESO ***/
+router.post('/enviar', function(req, res) {
+    if(req.session.user){
+
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
+
+        con.connect(function(err) {
+            if (err) console.log(err);
+    
+            var id = req.body.id_proyecto;
+
+            var proyecto_sql = `UPDATE unjfsc.proyecto SET enviado = ? WHERE id_proyecto = ?`;
+            var proyecto = [ req.body.enviado, id ]
+            con.query(proyecto_sql, proyecto, function (err, result) { 
+                if (err) { console.log(err); return; } 
+                res.redirect('/administrar'); 
+            });
+
+            con.end();
+        });
+    } else {
+        res.redirect("/");
+    }
+});
+
 /*** LISTO NO MODIFICADO ***/
 router.get('/validation/change-password' ,function(req, res, next) {
     res.redirect("/");
