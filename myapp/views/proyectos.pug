@@ -49,9 +49,15 @@ block content
                                             input.btn.btn-primary(type="submit" value="Visualizar") 
                                     td.align-middle
                                         if (proyecto.aprobado == 1)
-                                            input#aprobado(type="checkbox", name="aprobado" checked )
+                                            form(action="/userAdmin/aprobar", method="post") 
+                                                input(type="hidden", name="id_proyecto" value=proyecto.codigo) 
+                                                input(type="hidden", name="aprobacion" value="0")
+                                                input.btn.btn-danger(type="submit" value="No aprobar")
                                         else
-                                            input#aprobado(type="checkbox", name="aprobado")
+                                            form(action="/userAdmin/aprobar", method="post") 
+                                                input(type="hidden", name="id_proyecto" value=proyecto.codigo) 
+                                                input(type="hidden", name="aprobacion" value="1")
+                                                input.btn.btn-primary(type="submit" value="Aprobar")
 
     script(src="/javascripts/jquery-3.3.1.min.js")
     script(src="/javascripts/main.js")

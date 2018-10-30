@@ -6,6 +6,9 @@ var mysql = require('mysql');
 
 var con = mysql.createConnection(config());
 
+
+
+
 router.get('/', function(req, res, next) {
     
     if (con){
@@ -72,6 +75,76 @@ router.get('/inicio', function(req, res) {
         res.render('inicioAdmin', { title: 'Universidad jfsc', usuario:req.session.user });
     }
 });
+
+
+
+
+router.get('/change' ,function(req, res, next) {
+    if(req.session.user){
+        res.render('changePasswordAdmin', { 
+            title: "Cambio de Clave", 
+            usuario: req.session.user 
+        });
+    } else {
+        res.redirect("/useradmin");
+  }
+});
+
+router.post('/change-access' ,function(req, res, next) {
+    if(req.session.user){
+
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
+
+        con.connect(function(err) {
+            if (err) throw err;
+    
+            var sql = `UPDATE admin SET usuario = ? WHERE id_admin = ?`;
+            var newuser = req.body.usuario;
+            var usuario = req.session.user.id
+
+            con.query(sql, [newuser, usuario], function (err, result) {
+                if (err) {
+                    console.log(err);
+                }else{
+                    res.redirect('/useradmin/inicio');
+                }
+            });
+            con.end();
+        });
+    } else {
+        res.redirect("/useradmin");
+    }
+});
+
+router.post('/change-password' ,function(req, res, next) {
+    if(req.session.user){
+
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
+
+        con.connect(function(err) {
+            if (err) throw err;
+    
+            var sql = `UPDATE admin SET clave = ? WHERE id_admin = ?`;
+            var clave = bcrypt.hashSync(req.body.clave,10)
+            var usuario = req.session.user.id
+
+            con.query(sql, [clave, usuario], function (err, result) {
+                if (err) {
+                    console.log(err);
+                }else{
+                    res.redirect('/useradmin/inicio');
+                }
+            });
+            con.end();
+        });
+    } else {
+        res.redirect("/useradmin");
+    }
+});
+
+
 
 
 
@@ -150,6 +223,126 @@ router.get('/docentes/regina', function(req, res) {
         res.redirect("/useradmin");
     }
 });
+
+
+
+
+router.get('/docentes/ingresar', function(req, res) {
+
+    if(!req.session.user){
+        res.redirect("/useradmin");
+    } else {
+        res.render('ingresarAdmin', { title: 'Universidad jfsc', usuario:req.session.user });
+    }
+});
+
+router.post('/docentes/ingresar', function(req, res) {
+
+    if(!req.session.user){
+        res.redirect("/useradmin");
+    } else {
+        var con = mysql.createConnection(config());
+        
+        con.connect(function(err) {
+            if (err) throw err;
+
+            var sql = "INSERT INTO unjfsc.docente (tipo_documento, documento_identidad, nombres, apellidos, genero, fecha_nacimiento, categoria, dedicacion, facultad, dina, regina, pais, departamento, provincia, distrito, direccion, email, telefono_movil, telefono_fijo) VALUES (?)";
+            var values = [ req.body.tipo_documento, req.body.documento_identidad, req.body.nombres, req.body.apellidos, req.body.genero, req.body.fecha_nacimiento, req.body.categoria, req.body.dedicacion, req.body.facultad, req.body.dina, req.body.regina, req.body.pais, req.body.departamento, req.body.provincia, req.body.distrito, req.body.direccion, req.body.email, req.body.telefono_movil, req.body.telefono_fijo ];
+
+            con.query(sql, [values], function (err, result) {
+                if (err) console.log(err);
+                res.redirect("/useradmin/inicio");
+            });
+            con.end();
+        });
+    }
+});
+
+
+
+
+router.get('/docentes/modificar', function(req, res) {
+    if(req.session.user){
+        
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
+
+        var sql = `SELECT concat(nombres," ",apellidos) as nombre, categoria, dedicacion, id_docente as id from docente`;
+
+        con.connect(function(err) {
+            if (err) console.log(err);
+
+            con.query(sql, function (err, result) {
+                if (err) console.log(err);
+                res.render('docentes', 
+                    { title: 'Universidad jfsc', 
+                    docentes: result ,
+                    usuario:req.session.user });
+            });
+        });
+    } else {
+        res.redirect("/useradmin");
+    }
+});
+
+router.post('/docentes/modificar', function(req, res) {
+    if(req.session.user){
+        
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
+
+        con.connect(function(err) {
+            if (err) console.log(err);
+
+            var sql = 'SELECT  * from docente WHERE id_docente = ? LIMIT 1';
+    
+            con.query(sql, [req.body.id_docente], function (err, result) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                if(!req.session.user){
+                    console.log(req.session.user);
+                    res.redirect("/useradmin");
+                } else {
+                    res.render('changeDataAdmin', { 
+                        title: "Cambio de Datos", 
+                        usuario: req.session.user,
+                        datos: result[0]
+                    });
+                }
+            });
+            con.end();
+        });
+    } else {
+        res.redirect("/useradmin");
+    }
+});
+
+router.post('/docentes/modificar/change-data' ,function(req, res, next) {
+    if(req.session.user){
+
+        if (con) con.destroy();
+        var con = mysql.createConnection(config());
+
+        con.connect(function(err) {
+            if (err) throw err;
+    
+            var sql = `UPDATE unjfsc.docente SET  tipo_documento=? , documento_identidad=? , nombres=? , apellidos=? , genero=? , fecha_nacimiento=? , categoria=? , dedicacion=? , facultad=? , dina=? , regina=? , pais=? , departamento=? , provincia=? , distrito=? , direccion=? , email=? , telefono_movil=? , telefono_fijo=? WHERE id_docente=?;`;
+            var campos = [ req.body.tipo_documento, req.body.documento_identidad, req.body.nombres, req.body.apellidos, req.body.genero, req.body.fecha_nacimiento, req.body.categoria, req.body.dedicacion, req.body.facultad, req.body.dina, req.body.regina, req.body.pais, req.body.departamento, req.body.provincia, req.body.distrito, req.body.direccion, req.body.email, req.body.telefono_movil, req.body.telefono_fijo, req.body.id ];
+
+            con.query(sql, campos, function (err, result) {
+                if (err) console.log(err);
+                res.redirect('/useradmin/inicio');
+            });
+            con.end();
+        });
+    } else {
+        res.redirect("/useradmin");
+    }
+});
+
+
 
 
 
@@ -280,186 +473,28 @@ router.get('/proyectos/2020', function(req, res) {
 
 
 
-router.get('/docentes/ingresar', function(req, res) {
-
-    if(!req.session.user){
-        res.redirect("/useradmin");
-    } else {
-        res.render('ingresarAdmin', { title: 'Universidad jfsc', usuario:req.session.user });
-    }
-});
-
-router.post('/docentes/ingresar', function(req, res) {
-
-    if(!req.session.user){
-        res.redirect("/useradmin");
-    } else {
-        var con = mysql.createConnection(config());
-        
-        con.connect(function(err) {
-            if (err) throw err;
-
-            var sql = "INSERT INTO unjfsc.docente (tipo_documento, documento_identidad, nombres, apellidos, genero, fecha_nacimiento, categoria, dedicacion, facultad, dina, regina, pais, departamento, provincia, distrito, direccion, email, telefono_movil, telefono_fijo) VALUES (?)";
-            var values = [ req.body.tipo_documento, req.body.documento_identidad, req.body.nombres, req.body.apellidos, req.body.genero, req.body.fecha_nacimiento, req.body.categoria, req.body.dedicacion, req.body.facultad, req.body.dina, req.body.regina, req.body.pais, req.body.departamento, req.body.provincia, req.body.distrito, req.body.direccion, req.body.email, req.body.telefono_movil, req.body.telefono_fijo ];
-
-            con.query(sql, [values], function (err, result) {
-                if (err) console.log(err);
-                res.redirect("/useradmin/inicio");
-            });
-            con.end();
-        });
-    }
-});
-
-
-
-
-router.get('/docentes/modificar', function(req, res) {
+router.post('/aprobar', function(req, res) {
     if(req.session.user){
-        
-        if (con) con.destroy();
-        var con = mysql.createConnection(config());
 
-        var sql = `SELECT concat(nombres," ",apellidos) as nombre, categoria, dedicacion, id_docente as id from docente`;
-
-        con.connect(function(err) {
-            if (err) console.log(err);
-
-            con.query(sql, function (err, result) {
-                if (err) console.log(err);
-                res.render('docentes', 
-                    { title: 'Universidad jfsc', 
-                    docentes: result ,
-                    usuario:req.session.user });
-            });
-        });
-    } else {
-        res.redirect("/useradmin");
-    }
-});
-
-router.post('/docentes/modificar', function(req, res) {
-    if(req.session.user){
-        
         if (con) con.destroy();
         var con = mysql.createConnection(config());
 
         con.connect(function(err) {
             if (err) console.log(err);
-
-            var sql = 'SELECT  * from docente WHERE id_docente = ? LIMIT 1';
     
-            con.query(sql, [req.body.id_docente], function (err, result) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                if(!req.session.user){
-                    console.log(req.session.user);
-                    res.redirect("/useradmin");
-                } else {
-                    res.render('changeDataAdmin', { 
-                        title: "Cambio de Datos", 
-                        usuario: req.session.user,
-                        datos: result[0]
-                    });
-                }
+            var id = req.body.id_proyecto;
+
+            var proyecto_sql = `UPDATE unjfsc.proyecto SET aprobado = ? WHERE id_proyecto = ?`;
+            var proyecto = [ req.body.aprobacion, id ]
+            con.query(proyecto_sql, proyecto, function (err, result) { 
+                if (err) { console.log(err); return; } 
+                res.redirect('/userAdmin/proyectos/2018'); 
             });
+
             con.end();
         });
     } else {
-        res.redirect("/useradmin");
-    }
-});
-
-router.post('/docentes/modificar/change-data' ,function(req, res, next) {
-    if(req.session.user){
-
-        if (con) con.destroy();
-        var con = mysql.createConnection(config());
-
-        con.connect(function(err) {
-            if (err) throw err;
-    
-            var sql = `UPDATE unjfsc.docente SET  tipo_documento=? , documento_identidad=? , nombres=? , apellidos=? , genero=? , fecha_nacimiento=? , categoria=? , dedicacion=? , facultad=? , dina=? , regina=? , pais=? , departamento=? , provincia=? , distrito=? , direccion=? , email=? , telefono_movil=? , telefono_fijo=? WHERE id_docente=?;`;
-            var campos = [ req.body.tipo_documento, req.body.documento_identidad, req.body.nombres, req.body.apellidos, req.body.genero, req.body.fecha_nacimiento, req.body.categoria, req.body.dedicacion, req.body.facultad, req.body.dina, req.body.regina, req.body.pais, req.body.departamento, req.body.provincia, req.body.distrito, req.body.direccion, req.body.email, req.body.telefono_movil, req.body.telefono_fijo, req.body.id ];
-
-            con.query(sql, campos, function (err, result) {
-                if (err) console.log(err);
-                res.redirect('/useradmin/inicio');
-            });
-            con.end();
-        });
-    } else {
-        res.redirect("/useradmin");
-    }
-});
-
-
-
-
-router.get('/change' ,function(req, res, next) {
-    if(req.session.user){
-        res.render('changePasswordAdmin', { 
-            title: "Cambio de Clave", 
-            usuario: req.session.user 
-        });
-    } else {
-        res.redirect("/useradmin");
-  }
-});
-
-router.post('/change-access' ,function(req, res, next) {
-    if(req.session.user){
-
-        if (con) con.destroy();
-        var con = mysql.createConnection(config());
-
-        con.connect(function(err) {
-            if (err) throw err;
-    
-            var sql = `UPDATE admin SET usuario = ? WHERE id_admin = ?`;
-            var newuser = req.body.usuario;
-            var usuario = req.session.user.id
-
-            con.query(sql, [newuser, usuario], function (err, result) {
-                if (err) {
-                    console.log(err);
-                }else{
-                    res.redirect('/useradmin/inicio');
-                }
-            });
-            con.end();
-        });
-    } else {
-        res.redirect("/useradmin");
-    }
-});
-
-router.post('/change-password' ,function(req, res, next) {
-    if(req.session.user){
-
-        if (con) con.destroy();
-        var con = mysql.createConnection(config());
-
-        con.connect(function(err) {
-            if (err) throw err;
-    
-            var sql = `UPDATE admin SET clave = ? WHERE id_admin = ?`;
-            var clave = bcrypt.hashSync(req.body.clave,10)
-            var usuario = req.session.user.id
-
-            con.query(sql, [clave, usuario], function (err, result) {
-                if (err) {
-                    console.log(err);
-                }else{
-                    res.redirect('/useradmin/inicio');
-                }
-            });
-            con.end();
-        });
-    } else {
-        res.redirect("/useradmin");
+        res.redirect("/userAdmin");
     }
 });
 

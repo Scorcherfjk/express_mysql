@@ -636,7 +636,7 @@ router.post('/validation/editar-proyecto', function(req, res) {
 });
 
 
-/*** EN PROCESO ***/
+/*** LISTO ***/
 router.post('/enviar', function(req, res) {
     if(req.session.user){
 
