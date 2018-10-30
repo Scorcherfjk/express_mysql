@@ -9,7 +9,7 @@ block content
                 | Proyectos #{anoProyecto}
             .card-body
                 .table-responsive#contenido
-                    table.table.table-bordered.table-hover
+                    table#tabla.table.table-bordered.table-hover
                         thead.thead-light.text-capitalize
                             tr
                                 th.none.align-middle Código
@@ -19,6 +19,10 @@ block content
                                 th.none.align-middle status
                                 th.none.align-middle fecha
                                 th.none.align-middle Descargar
+                                th.none.align-middle Aprobar
+                            tr
+                                th(colspan="8")
+                                    input#buscar.form-control.mr-sm-2(type='text', placeholder='Buscar')
                         tbody.text-capitalize
                             for proyecto in proyectos
                                 tr
@@ -43,5 +47,11 @@ block content
                                             input(type="hidden", name="id_proyecto" value=proyecto.codigo) 
                                             input(type="hidden", name="id_usuario" value=proyecto.id_usuario)
                                             input.btn.btn-primary(type="submit" value="Visualizar") 
+                                    td.align-middle
+                                        if (proyecto.aprobado == 1)
+                                            input#aprobado(type="checkbox", name="aprobado" checked )
+                                        else
+                                            input#aprobado(type="checkbox", name="aprobado")
+
     script(src="/javascripts/jquery-3.3.1.min.js")
-    script(src="/javascripts/valida.js")
+    script(src="/javascripts/main.js")

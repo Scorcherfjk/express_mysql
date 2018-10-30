@@ -7,7 +7,7 @@ block content
                 | Docentes #{tipoDocente}
             .card-body
                 .table-responsive#contenido
-                    table.table.table-bordered.table-hover
+                    table#tabla.table.table-bordered.table-hover
                         thead.thead-light.text-capitalize.none
                             tr
                                 th.none Nombre
@@ -15,6 +15,9 @@ block content
                                 th.none Dedicación
                                 th.none CV
                                 th.none Modificar
+                            tr
+                                th(colspan="5")
+                                    input#buscar.form-control.mr-sm-2(type='text', placeholder='Buscar')
                         tbody.text-capitalize.none
                             for docente in docentes
                                 tr
@@ -37,3 +40,4 @@ block content
                                             input(type="hidden", name="id_docente" value=docente.id)
                                             input.btn.btn-primary(type="submit", value="Modificar")
     script(src="/javascripts/jquery-3.3.1.min.js")
+    script(src="/javascripts/main.js")
