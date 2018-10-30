@@ -6,7 +6,6 @@ var mysql = require('mysql');
 
 var con = mysql.createConnection(config());
 
-/*** LISTO NO MODIFICADO ***/
 router.get('/', function(req, res, next) {
     
     if (con){
@@ -170,11 +169,13 @@ router.get('/proyectos/2018', function(req, res) {
         , concat(usuario.nombres," ",usuario.apellido_paterno) as nombre
         , usuario.estatus as status
         , proyecto.fecha_creacion as fecha
+        , proyecto.aprobado as aprobado
         from proyecto
         inner join usuario
         on usuario.id_usuario = proyecto.id_usuario
         where proyecto.fecha_creacion < '2019-01-01 00:00:00'
-        and proyecto.fecha_creacion > '2018-01-01 00:00:00'`;
+        and proyecto.fecha_creacion > '2018-01-01 00:00:00'
+        and proyecto.enviado = 1`;
 
         con.connect(function(err) {
             if (err) console.log(err);
@@ -209,11 +210,13 @@ router.get('/proyectos/2019', function(req, res) {
         , concat(usuario.nombres," ",usuario.apellido_paterno) as nombre
         , usuario.estatus as status
         , proyecto.fecha_creacion as fecha
+        , proyecto.aprobado as aprobado
         from proyecto
         inner join usuario
         on usuario.id_usuario = proyecto.id_usuario
         where proyecto.fecha_creacion < '2020-01-01 00:00:00'
-        and proyecto.fecha_creacion > '2019-01-01 00:00:00'`;
+        and proyecto.fecha_creacion > '2019-01-01 00:00:00'
+        and proyecto.enviado = 1`;
 
         con.connect(function(err) {
             if (err) console.log(err);
@@ -248,11 +251,13 @@ router.get('/proyectos/2020', function(req, res) {
         , concat(usuario.nombres," ",usuario.apellido_paterno) as nombre
         , usuario.estatus as status
         , proyecto.fecha_creacion as fecha
+        , proyecto.aprobado as aprobado
         from proyecto
         inner join usuario
         on usuario.id_usuario = proyecto.id_usuario
         where proyecto.fecha_creacion < '2021-01-01 00:00:00'
-        and proyecto.fecha_creacion > '2020-01-01 00:00:00'`;
+        and proyecto.fecha_creacion > '2020-01-01 00:00:00'
+        and proyecto.enviado = 1`;
 
         con.connect(function(err) {
             if (err) console.log(err);

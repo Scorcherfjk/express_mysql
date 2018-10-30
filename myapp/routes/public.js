@@ -1,10 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var config = require('../models/database').config;
-var bcrypt = require('bcrypt');
 var mysql = require('mysql');
-
-var con = mysql.createConnection(config());
 
 router.get('/docentes/facultad', function(req, res) {
         
@@ -89,7 +86,8 @@ router.get('/proyectos/2018', function(req, res) {
     inner join usuario
     on usuario.id_usuario = proyecto.id_usuario
     where proyecto.fecha_creacion < '2019-01-01 00:00:00'
-    and proyecto.fecha_creacion > '2018-01-01 00:00:00'`;
+    and proyecto.fecha_creacion > '2018-01-01 00:00:00'
+    and proyecto.aprobado = 1`;
 
     con.connect(function(err) {
         if (err) console.log(err);
@@ -123,7 +121,8 @@ router.get('/proyectos/2019', function(req, res) {
     inner join usuario
     on usuario.id_usuario = proyecto.id_usuario
     where proyecto.fecha_creacion < '2020-01-01 00:00:00'
-    and proyecto.fecha_creacion > '2019-01-01 00:00:00'`;
+    and proyecto.fecha_creacion > '2019-01-01 00:00:00'
+    and proyecto.aprobado = 1`;
 
     con.connect(function(err) {
         if (err) console.log(err);
@@ -157,7 +156,8 @@ router.get('/proyectos/2020', function(req, res) {
     inner join usuario
     on usuario.id_usuario = proyecto.id_usuario
     where proyecto.fecha_creacion < '2021-01-01 00:00:00'
-    and proyecto.fecha_creacion > '2020-01-01 00:00:00'`;
+    and proyecto.fecha_creacion > '2020-01-01 00:00:00'
+    and proyecto.aprobado = 1`;
 
     con.connect(function(err) {
         if (err) console.log(err);
@@ -173,6 +173,9 @@ router.get('/proyectos/2020', function(req, res) {
         });
     });
 });
+
+
+
 
 router.post('/visualizar', function(req, res, next) {
         
