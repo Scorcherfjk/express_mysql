@@ -99,6 +99,17 @@ block content
                   span.text-danger  (*)
                 input#email2.form-control(type='email' name="email2" value=lista.email2)
           .row
+            .col
+              .form-group
+                label.h6(for='cv') Hoja de Vida
+                  span.text-danger  (*)
+                br
+                input#cv(type='file' name='cv' accept=".pdf" required)
+                input#nombre_cv(type="hidden", name="nombre_cv" value=lista.cv)
+                br
+                a(href=`/descargar/`+ lista.cv) #{lista.cv}
+
+          .row
             .col-sm-12.col-md-6
               input#carga.btn.btn-outline-primary.float-right.btn-lg.btn-block(type="submit", value="Guardar")
             .col-sm-12.col-md-6

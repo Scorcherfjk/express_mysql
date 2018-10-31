@@ -241,14 +241,20 @@ router.post('/docentes/ingresar', function(req, res) {
     if(!req.session.user){
         res.redirect("/useradmin");
     } else {
+
+        if (con) con.destroy();
         var con = mysql.createConnection(config());
+
+        console.log(req.files.hojadevida)
+        
+        var dirhojadevida = './public/upload/proyecto/hoja_de_vida/hoja_de_vida_'+req.body.documento_identidad+'.pdf';
+        req.files.hojadevida.mv(dirhojadevida, function(err) { if (err) console.log(err); });
         
         con.connect(function(err) {
             if (err) throw err;
 
-            var sql = "INSERT INTO unjfsc.docente (tipo_documento, documento_identidad, nombres, apellidos, genero, fecha_nacimiento, categoria, dedicacion, facultad, dina, regina, pais, departamento, provincia, distrito, direccion, email, telefono_movil, telefono_fijo) VALUES (?)";
-            var values = [ req.body.tipo_documento, req.body.documento_identidad, req.body.nombres, req.body.apellidos, req.body.genero, req.body.fecha_nacimiento, req.body.categoria, req.body.dedicacion, req.body.facultad, req.body.dina, req.body.regina, req.body.pais, req.body.departamento, req.body.provincia, req.body.distrito, req.body.direccion, req.body.email, req.body.telefono_movil, req.body.telefono_fijo ];
-
+            var sql = "INSERT INTO docente (tipo_documento, documento_identidad, nombres, apellidos, genero, fecha_nacimiento, categoria, dedicacion, facultad, dina, regina, pais, departamento, provincia, distrito, direccion, email, telefono_movil, telefono_fijo, cv) VALUES (?)";
+            var values = [ req.body.tipo_documento, req.body.documento_identidad, req.body.nombres, req.body.apellidos, req.body.genero, req.body.fecha_nacimiento, req.body.categoria, req.body.dedicacion, req.body.facultad, req.body.dina, req.body.regina, req.body.pais, req.body.departamento, req.body.provincia, req.body.distrito, req.body.direccion, req.body.email, req.body.telefono_movil, req.body.telefono_fijo, 'hoja_de_vida_'+req.body.documento_identidad+'.pdf' ];
             con.query(sql, [values], function (err, result) {
                 if (err) console.log(err);
                 res.redirect("/useradmin/inicio");
@@ -499,7 +505,13 @@ router.post('/aprobar', function(req, res) {
 });
 
 
-
+/*** LISTO ***/
+router.get('/descargar/:id', function(req,res){
+    res.download('./public/upload/hoja_de_vida/'+req.params.id,
+    req.params.id,function(err){
+        if(err) console.log(err);
+    });
+});
 
 router.post('/visualizar', function(req, res, next) {
     if(req.session.user){

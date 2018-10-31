@@ -119,9 +119,16 @@ block content
                 input#telefonoMovil.form-control(type='number' name="telefono_movil" required)
             .col-sm-6.col-md-4
               .form-group
-                label.h6(for='telefono_fijo') Tel&eacutefono  Fijo
+                label.h6(for='telefono_fijo') Tel&eacutefono Fijo
                   span.text-danger  (*)
                 input#telefonoFijo.form-control(type='number' name="telefono_fijo" required)
+          .row
+            .col
+              .form-group
+                label.h6(for='hojadevida') Hoja de Vida
+                  span.text-danger  (*)
+                br
+                input#hojadevida(type='file' name='hojadevida' accept=".pdf" required)
           .row
             .col-sm-12.col-md-6
               input#carga.btn.btn-outline-primary.float-right.btn-lg.btn-block(type="submit", value="Guardar")
