@@ -23,15 +23,23 @@ block content
                 tbody
                   each valor in lista
                     tr
-                      td: input#titulo.form-control(type="text", name="titulo" disabled value=valor.titulo style="min-width: 200px;")
-                      td: input#fecha.form-control(type="date", name="fecha" disabled value=fecha(valor.fecha_creacion))
                       td
-                        form(action="/editar-proyecto", method="post")
-                          input(type="hidden", name="idproyecto" value=valor.id_proyecto)
-                          button.btn.btn-primary(type="submit"  style="width:100%;" ) Editar
-                      td 
-                        form(action="/visualizar", method="post")
-                          input(type="hidden", name="idproyecto" value=valor.id_proyecto)
-                          button.btn.btn-primary(type="submit" style="width:100%;") Visualizar
+                        input#titulo.form-control(type="text", name="titulo" disabled value=valor.titulo style="min-width: 200px;")
+                      td
+                        input#fecha.form-control(type="date", name="fecha" disabled value=fecha(valor.fecha_creacion))
+                      if valor.enviado == 1
+                        td(colspan="2")
+                          form(action="/visualizar", method="post")
+                            input(type="hidden", name="idproyecto" value=valor.id_proyecto)
+                            button.btn.btn-primary(type="submit" style="width:100%;") Visualizar
+                      else
+                        td
+                          form(action="/editar-proyecto", method="post")
+                            input(type="hidden", name="idproyecto" value=valor.id_proyecto)
+                            button.btn.btn-primary(type="submit"  style="width:100%;" ) Editar
+                        td 
+                          form(action="/visualizar", method="post")
+                            input(type="hidden", name="idproyecto" value=valor.id_proyecto)
+                            button.btn.btn-primary(type="submit" style="width:100%;") Visualizar
             br
             a.btn.btn-primary.btn-lg.btn-block(href="/nuevo" role="button") Crear Proyecto
