@@ -646,7 +646,10 @@ block B
           | B.6.1 Adjuntar un archivo obligatorio con el flujo de caja proyectado
           span.text-danger  (*)
         br
-        input#flujoDeCaja(type='file', name='flujoDeCaja')
+        input#flujoDeCaja(type='file' name='flujoDeCaja' accept=".pdf")
+        input#nombre_flujodecaja(type="hidden", name="nombre_flujodecaja" value=lista.nombre_flujodecaja)
+        br
+        a(href=`/descargar/`+ lista.nombre_flujodecaja) #{lista.nombre_flujodecaja}
 block C
   - function addZero(i) { if (i < 10) { i = '0' + i; } return i; }
   - function fecha(i){ if (i != null) { var dd = i.getDate(); var mm = i.getMonth()+1; var yyyy = i.getFullYear(); dd = addZero(dd); mm = addZero(mm); return yyyy+'-'+mm+'-'+dd; }else { return i;} }
@@ -1141,7 +1144,11 @@ block C
           | Adjunto Plan Metodológico
           span.text-danger  (*)
         br
-        input#planAdjunto(type='file', name='planAdjunto')
+        input#planAdjunto(type='file' name='planAdjunto' accept=".pdf")
+        input#nombre_planadjunto(type="hidden", name="nombre_planadjunto" value=lista.nombre_planadjunto)
+        br
+        a(href=`/descargar/`+lista.nombre_planadjunto) #{lista.nombre_planadjunto}
+        
   br
   .card.rounded.border-secondary
     h5.card-header.text-capitalize.bg-danger.text-white C.6. Propiedad Intelectual

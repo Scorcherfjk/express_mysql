@@ -2,7 +2,7 @@ extends navbar
 
 block content
   .container-fluid
-    form(action="/validation/editar-proyecto", method="post")      
+    form(action="/validation/editar-proyecto" method="post" enctype="multipart/form-data")      
       ul.nav.nav-pills.nav-fill
         li.nav-item
           a.nav-link.active.show(href='#A', data-toggle='tab') SECCIÓN A: IDENTIFICACIÓN DE LAS ENTIDADES PARTICIPANTES
@@ -34,8 +34,8 @@ block content
           button.close(type='button', data-dismiss='modal', aria-label='Cerrar')
             span(aria-hidden='true') x
         .modal-body
-          p desea finalizar el proyecto y enviarlo?
-          small Debe guardarlo antes de proceder a enviarlo y sea finalizado
+          p desea finalizar el proyecto y enviarlo?*
+          small *Debe guardarlo antes de proceder a enviarlo y sea finalizado
         .modal-footer
           form(action="/enviar", method="post")
             input(type="hidden", name="id_proyecto" value=lista.id_proyecto)

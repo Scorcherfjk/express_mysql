@@ -3,7 +3,6 @@ var router = express.Router();
 var config = require('../models/database').config;
 var bcrypt = require('bcrypt');
 var mysql = require('mysql');
-var fs=require('fs');
 
 var con = mysql.createConnection(config());
 
@@ -164,7 +163,7 @@ router.get('/administrar' ,function(req, res, next) {
         con.connect(function(err) {
             if (err) console.log(err);
 
-            var sql = 'SELECT id_proyecto, titulo, fecha_creacion from proyecto WHERE id_usuario = ?';
+            var sql = 'SELECT id_proyecto, titulo, fecha_creacion, enviado from proyecto WHERE id_usuario = ?';
             var id = [req.session.user.id];
 
             con.query(sql, id, function (err, result) {
@@ -188,7 +187,7 @@ router.get('/administrar' ,function(req, res, next) {
     }
 });
 
-/*** EN PROCESO *** solo faltan los adjuntos ***************************************************************************************************/
+/*** LISTO ***/
 router.post('/editar-proyecto' ,function(req, res, next) {
     if(req.session.user){
         
@@ -221,6 +220,7 @@ router.post('/editar-proyecto' ,function(req, res, next) {
       , otros_gastos.*
       , gastos_de_gestion.*
       , equipo_formulador.*
+      , adjunto.*
       FROM proyecto 
       INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
       INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
@@ -245,7 +245,8 @@ router.post('/editar-proyecto' ,function(req, res, next) {
       INNER JOIN materiales ON materiales.id_proyecto = proyecto.id_proyecto
       INNER JOIN otros_gastos ON otros_gastos.id_proyecto = proyecto.id_proyecto
       INNER JOIN gastos_de_gestion ON gastos_de_gestion.id_proyecto = proyecto.id_proyecto
-      INNER JOIN equipo_formulador ON equipo_formulador.id_proyecto = proyecto.id_proyecto`;
+      INNER JOIN equipo_formulador ON equipo_formulador.id_proyecto = proyecto.id_proyecto
+      INNER JOIN adjunto ON adjunto.id_proyecto = proyecto.id_proyecto`;
         
         var values = [ req.session.user.id, req.body.idproyecto, req.body.idproyecto];
 
@@ -363,7 +364,7 @@ router.post("/validation/new-user", function (req,res) {
     });
 });
 
-/*** EN PROCESO *** solo faltan los adjuntos ****************************************************************************************************/
+/*** LISTO ***/
 router.post('/validation/nuevo', function(req, res) {
     if(req.session.user){
         if (req.body.titulo){
@@ -487,7 +488,7 @@ router.post('/validation/nuevo', function(req, res) {
     }
 });
 
-/*** EN PROCESO *** solo faltan los adjuntos *****************************************************************************************************/
+/*** LISTO ***/
 router.post('/validation/editar-proyecto', function(req, res) {
     if(req.session.user){
 
@@ -621,13 +622,22 @@ router.post('/validation/editar-proyecto', function(req, res) {
             con.query(equipo_formulador_sql, equipo_formulador, function (err, result) { if (err) { console.log(err); return; } });
 
             /* 25 ADJUNTO */
-            var adjunto_sql = `UPDATE adjunto SET flujoDeCaja = ? , planAdjunto = ? WHERE id_proyecto = ?`;
-            var adjunto = [req.body.flujoDeCaja ? req.body.flujoDeCaja : null, req.body.planAdjunto ? req.body.planAdjunto : null, id];
+            if (req.files.flujoDeCaja) {
+                var dirflujoDeCaja = './public/upload/proyecto/flujo_de_caja_'+id+'.pdf';
+                req.files.flujoDeCaja.mv(dirflujoDeCaja , function(err) { if (err) console.log(err); });
+            }
+
+            if (req.files.planAdjunto) {
+                var dirplanAdjunto = './public/upload/proyecto/plan_adjunto_'+id+'.pdf';
+                req.files.planAdjunto.mv(dirplanAdjunto , function(err) { if (err) console.log(err); });
+            }
+
+            var adjunto_sql = `UPDATE adjunto SET nombre_flujoDeCaja = ? , nombre_planAdjunto = ? WHERE id_proyecto = ?`;
+            var adjunto = [ req.files.flujoDeCaja ? 'flujo_de_caja_'+id+'.pdf' : req.body.nombre_flujodecaja ? req.body.nombre_flujodecaja : null , req.files.planadjunto ? 'plan_adjunto_'+id+'.pdf' : req.body.nombre_planadjunto ? req.body.nombre_planAdjunto : null , id];  
             con.query(adjunto_sql, adjunto, function (err, result) { 
                 if (err) { console.log(err); return; } 
                 res.redirect('/administrar'); 
             });
-
             con.end();
         });
     } else {
@@ -696,7 +706,15 @@ router.get('/validation/new-user', function(req,res){
     res.redirect("/");
 });
 
-/*** EN PROCESO *** solo faltan los adjuntos *****************************************************************************************************/
+/*** LISTO ***/
+router.get('/descargar/:id', function(req,res){
+    res.download('./public/upload/proyecto/'+req.params.id,
+    req.params.id,function(err){
+        if(err) console.log(err);
+    });
+});
+
+/*** LISTO ***/
 router.post('/visualizar', function(req, res, next) {
     if(req.session.user){
         
@@ -732,6 +750,7 @@ router.post('/visualizar', function(req, res, next) {
       , otros_gastos.*
       , gastos_de_gestion.*
       , equipo_formulador.*
+      , adjunto.*
       FROM proyecto 
       INNER JOIN usuario ON usuario.id_usuario = ? AND proyecto.id_proyecto = ?
       INNER JOIN datos_generales ON datos_generales.id_proyecto = proyecto.id_proyecto
@@ -756,7 +775,8 @@ router.post('/visualizar', function(req, res, next) {
       INNER JOIN materiales ON materiales.id_proyecto = proyecto.id_proyecto
       INNER JOIN otros_gastos ON otros_gastos.id_proyecto = proyecto.id_proyecto
       INNER JOIN gastos_de_gestion ON gastos_de_gestion.id_proyecto = proyecto.id_proyecto
-      INNER JOIN equipo_formulador ON equipo_formulador.id_proyecto = proyecto.id_proyecto`;
+      INNER JOIN equipo_formulador ON equipo_formulador.id_proyecto = proyecto.id_proyecto
+      INNER JOIN adjunto ON adjunto.id_proyecto = proyecto.id_proyecto`;
         
         var values = [ req.session.user.id, req.body.idproyecto];
 

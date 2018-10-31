@@ -4,6 +4,8 @@ var session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var fileUpload = require('express-fileupload');
+
 
 /*************************Archivos de rutas*******************************/
 var indexRouter = require('./routes/index');
@@ -29,6 +31,11 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
+}));
+app.use(fileUpload({
+  safeFileNames: true,
+  preserveExtension: true,
+  limits: { fileSize: 50 * 1024 * 1024 },
 }));
 
 /*****************************uso de las rutas*******************************/
