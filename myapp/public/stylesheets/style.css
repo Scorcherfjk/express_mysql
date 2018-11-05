@@ -1,6 +1,4 @@
-body {
-  padding: 50px;
-}
+
 .nav-tabs .nav-link{
   background-color: #016FC6;
   color: #ffffff;
@@ -47,6 +45,7 @@ th{
 }
 td{
   vertical-align:center ;
+  padding: 0px!important;
 }
 #fondo1 {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/m1.jpg') fixed center center;
