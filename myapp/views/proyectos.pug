@@ -26,28 +26,28 @@ block content
                         tbody.text-capitalize
                             for proyecto in proyectos
                                 tr
-                                    th.align-middle #{proyecto.codigo}
-                                    td.align-middle #{proyecto.titulo}
+                                    th.align-middle.none #{proyecto.codigo}
+                                    td.align-middle.none #{proyecto.titulo}
                                     if proyecto.enviado == 1
-                                        td.align-middle Terminado
+                                        td.align-middle.none Terminado
                                     else
-                                        td.align-middle En Proceso
-                                    td.align-middle #{proyecto.nombre}
+                                        td.align-middle.none En Proceso
+                                    td.align-middle.none #{proyecto.nombre}
                                     if (proyecto.status == 0)
-                                        td.align-middle Profesor
+                                        td.align-middle.none Profesor
                                     else if (proyecto.status == 1)
-                                        td.align-middle Estudiante
+                                        td.align-middle.none Estudiante
                                     else if (proyecto.status == 2)
-                                        td.align-middle Egresado
+                                        td.align-middle.none Egresado
                                     else if (proyecto.status == 3)
-                                        td.align-middle Invg. Externo
-                                    td.align-middle #{fecha(proyecto.fecha)}
-                                    td.align-middle 
+                                        td.align-middle.none Invg. Externo
+                                    td.align-middle.none #{fecha(proyecto.fecha)}
+                                    td.align-middle.none 
                                         form(action="/userAdmin/visualizar", method="post") 
                                             input(type="hidden", name="id_proyecto" value=proyecto.codigo) 
                                             input(type="hidden", name="id_usuario" value=proyecto.id_usuario)
                                             input.btn.btn-primary(type="submit" value="Visualizar") 
-                                    td.align-middle
+                                    td.align-middle.none
                                         if (proyecto.aprobado == 1)
                                             form(action="/userAdmin/aprobar", method="post") 
                                                 input(type="hidden", name="id_proyecto" value=proyecto.codigo) 

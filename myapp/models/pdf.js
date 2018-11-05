@@ -595,6 +595,10 @@ html +=`<h2>SECCIÓN B: MERCADO - COMPETITIVIDAD EMPRESARIAL</h2>
 <h4>B.5.1 Rentabilidad Económica y Financiera</h4>
 <p>  `+   lista.rentabilidad_economica  +`   </p>
 
+<h3>B.6 Archivos Adjuntos para la Sección B: Mercado</h3>
+<h4>B.6.1 Adjuntar un archivo obligatorio con el flujo de caja proyectado</h4>
+<p>  `+   lista.flujoDeCaja  +`   </p>
+
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <h2>SECCIÓN C: MEMORIA TÉCNICA</h2>
