@@ -19,7 +19,7 @@ block content
                     th T&iacutetulo De Proyecto 
                     th Fecha de Registro
                     th Editar
-                    th Previsualizar
+                    th Visualizar
                 tbody
                   each valor in lista
                     tr
@@ -31,7 +31,7 @@ block content
                         td(colspan="2")
                           form(action="/visualizar", method="post")
                             input(type="hidden", name="idproyecto" value=valor.id_proyecto)
-                            button.btn.btn-primary(type="submit" style="width:100%;") Visualizar
+                            button.btn.btn-primary(type="submit" style="width:100%;") Visualizar proyecto terminado
                       else
                         td
                           form(action="/editar-proyecto", method="post")
@@ -40,6 +40,6 @@ block content
                         td 
                           form(action="/visualizar", method="post")
                             input(type="hidden", name="idproyecto" value=valor.id_proyecto)
-                            button.btn.btn-primary(type="submit" style="width:100%;") Visualizar
+                            button.btn.btn-primary(type="submit" style="width:100%;") Vista previa
             br
             a.btn.btn-primary.btn-lg.btn-block(href="/nuevo" role="button") Crear Proyecto
