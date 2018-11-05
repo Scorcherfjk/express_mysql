@@ -632,8 +632,8 @@ router.post('/validation/editar-proyecto', function(req, res) {
                 req.files.planAdjunto.mv(dirplanAdjunto , function(err) { if (err) console.log(err); });
             }
 
-            var adjunto_sql = `UPDATE adjunto SET nombre_flujoDeCaja = ? , nombre_planAdjunto = ? WHERE id_proyecto = ?`;
-            var adjunto = [ req.files.flujoDeCaja ? 'flujo_de_caja_'+id+'.pdf' : req.body.nombre_flujodecaja ? req.body.nombre_flujodecaja : null , req.files.planadjunto ? 'plan_adjunto_'+id+'.pdf' : req.body.nombre_planadjunto ? req.body.nombre_planAdjunto : null , id];  
+            var adjunto_sql = `UPDATE adjunto SET nombre_flujodecaja = ? , nombre_planadjunto = ? WHERE id_proyecto = ?`;
+            var adjunto = [ req.files.flujoDeCaja ? 'flujo_de_caja_'+id+'.pdf' : req.body.nombre_flujodecaja ? req.body.nombre_flujodecaja : null , req.files.planAdjunto ? 'plan_adjunto_'+id+'.pdf' : req.body.nombre_planadjunto ? req.body.nombre_planAdjunto : null , id];  
             con.query(adjunto_sql, adjunto, function (err, result) { 
                 if (err) { console.log(err); return; } 
                 res.redirect('/administrar'); 
