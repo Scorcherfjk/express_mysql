@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
         }
     });
 
-    res.render('indexAdmin', { title: 'Universidad jfsc' });
+    res.render('indexAdmin', { title: 'Inicio de sesión' });
 
 });
 
@@ -72,7 +72,7 @@ router.get('/inicio', function(req, res) {
     if(!req.session.user){
         res.redirect("/useradmin");
     } else {
-        res.render('inicioAdmin', { title: 'Universidad jfsc', usuario:req.session.user });
+        res.render('inicioAdmin', { title: 'Bienvenido', usuario:req.session.user });
     }
 });
 
@@ -82,7 +82,7 @@ router.get('/inicio', function(req, res) {
 router.get('/change' ,function(req, res, next) {
     if(req.session.user){
         res.render('changePasswordAdmin', { 
-            title: "Cambio de Clave", 
+            title: "Cambio de Datos de Acceso", 
             usuario: req.session.user 
         });
     } else {
@@ -163,7 +163,7 @@ router.get('/docentes/facultad', function(req, res) {
             con.query(sql, function (err, result) {
                 if (err) console.log(err);
                 res.render('docentes', 
-                    { title: 'Universidad jfsc',
+                    { title: 'Docentes de la Facultad',
                     tipoDocente: "Facultad", 
                     docentes: result ,
                     usuario:req.session.user });
@@ -188,7 +188,7 @@ router.get('/docentes/dina', function(req, res) {
             con.query(sql, function (err, result) {
                 if (err) console.log(err);
                 res.render('docentes', 
-                    { title: 'Universidad jfsc',
+                    { title: 'Docentes Dina',
                     tipoDocente: "Dina", 
                     docentes: result ,
                     usuario:req.session.user });
@@ -213,7 +213,7 @@ router.get('/docentes/regina', function(req, res) {
             con.query(sql, function (err, result) {
                 if (err) console.log(err);
                 res.render('docentes', 
-                    { title: 'Universidad jfsc',
+                    { title: 'Docentes Regina',
                     tipoDocente: "Regina", 
                     docentes: result ,
                     usuario:req.session.user });
@@ -232,7 +232,7 @@ router.get('/docentes/ingresar', function(req, res) {
     if(!req.session.user){
         res.redirect("/useradmin");
     } else {
-        res.render('ingresarAdmin', { title: 'Universidad jfsc', usuario:req.session.user });
+        res.render('ingresarAdmin', { title: 'Ingresar Nuevo Docente', usuario:req.session.user });
     }
 });
 
@@ -280,8 +280,8 @@ router.get('/docentes/modificar', function(req, res) {
 
             con.query(sql, function (err, result) {
                 if (err) console.log(err);
-                res.render('docentes', 
-                    { title: 'Universidad jfsc', 
+                res.render('docentes',
+                    { title: 'Modificar Datos de Docente', 
                     docentes: result ,
                     usuario:req.session.user });
             });
@@ -382,7 +382,7 @@ router.get('/proyectos/2018', function(req, res) {
             con.query(sql, function (err, result) {
                 if (err) console.log(err);
                 res.render('proyectos', 
-                { title: 'Universidad jfsc', 
+                { title: 'Proyectos del 2018', 
                 anoProyecto: 2018, 
                 proyectos: result, 
                 usuario:req.session.user });
@@ -423,7 +423,7 @@ router.get('/proyectos/2019', function(req, res) {
             con.query(sql, function (err, result) {
                 if (err) console.log(err);
                 res.render('proyectos', 
-                { title: 'Universidad jfsc', 
+                { title: 'Proyectos del 2019', 
                 anoProyecto: 2019, 
                 proyectos: result, 
                 usuario:req.session.user });
@@ -464,7 +464,7 @@ router.get('/proyectos/2020', function(req, res) {
             con.query(sql, function (err, result) {
                 if (err) console.log(err);
                 res.render('proyectos', 
-                { title: 'Universidad jfsc', 
+                { title: 'Proyectos del 2020', 
                 anoProyecto: 2020, 
                 proyectos: result, 
                 usuario:req.session.user });

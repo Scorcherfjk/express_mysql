@@ -62,7 +62,7 @@ exports.pdf = (lista) => {
 </style>
 </head>`;
 
-html += `<body><img src="http://127.0.0.1:3000/images/presentacion.png" alt="logo de la universidad">
+html += `<body><img src="http://127.0.0.1:3000/images/presentacion_udep.png" alt="logo de la universidad">
 <h2 class="centrado">FORMATO DEL PROYECTO</h2>
 <h3 class="centrado"> `+   fecha(hoy)  +`  </h3>
 <hr>
@@ -1952,6 +1952,95 @@ html +=`<tr>
 if ( lista.d19_1_5 || lista.d19_2_5 || lista.d19_3_5 || lista.d19_4_5 || lista.d19_5_5 || lista.d19_6_5 || lista.d19_7_5 ){
 html +=`<tr>
             <td>`+ lista.d19_1_5 +`</td>
+            <td>`+ lista.d19_2_5 +`</td>
+            <td>`+ lista.d19_3_5 +`</td>
+            <td>`+ lista.d19_4_5 +`</td>
+            <td>`+ lista.d19_5_5 +`</td>
+            <td>`+ lista.d19_6_5 +`</td>
+            <td>`+ lista.d19_7_5 +`</td>
+        </tr>`;}
+html +=`</tbody>
+</table>
+
+<h2>PRESUPUESTO</h2>
+<br>
+<table border="1">
+    <thead>
+        <tr>          
+            <th>partida </th>
+            <th>Aporte Monetario RNR</th>
+            <th>Aporte Monetario Entidad Solicitante</th>
+            <th>Aporte Monetario Entidad Asociada</th>
+            <th>Aporte NO Monetario Entidad Solicitante</th>
+            <th>Aporte NO Monetario Entidad Asociada</th>
+            <th>Total</th>
+            <th>% de Aporte</th>
+        </tr>
+    </thead>
+    <tbody>`;
+if ( lista.d19_1_1 || lista.d19_2_1 || lista.d19_3_1 || lista.d19_4_1 || lista.d19_5_1 || lista.d19_6_1 || lista.d19_7_1 ){
+html +=`<tr>
+            <td> CONSULTORIAS </td>
+            <td>`+ lista.d19_2_1 +`</td>
+            <td>`+ lista.d19_3_1 +`</td>
+            <td>`+ lista.d19_4_1 +`</td>
+            <td>`+ lista.d19_5_1 +`</td>
+            <td>`+ lista.d19_6_1 +`</td>
+            <td>`+ lista.d19_7_1 +`</td>
+        </tr>`;}
+if ( lista.d19_1_2 || lista.d19_2_2 || lista.d19_3_2 || lista.d19_4_2 || lista.d19_5_2 || lista.d19_6_2 || lista.d19_7_2 ){
+html +=`<tr>
+            <td> EQUIPOS Y BIENES DURADEROS </td>
+            <td>`+ lista.d19_2_2 +`</td>
+            <td>`+ lista.d19_3_2 +`</td>
+            <td>`+ lista.d19_4_2 +`</td>
+            <td>`+ lista.d19_5_2 +`</td>
+            <td>`+ lista.d19_6_2 +`</td>
+            <td>`+ lista.d19_7_2 +`</td>
+        </tr>`;}
+if ( lista.d19_1_3 || lista.d19_2_3 || lista.d19_3_3 || lista.d19_4_3 || lista.d19_5_3 || lista.d19_6_3 || lista.d19_7_3 ){
+html +=`<tr>
+            <td> GASTOA DE GESTION </td>
+            <td>`+ lista.d19_2_3 +`</td>
+            <td>`+ lista.d19_3_3 +`</td>
+            <td>`+ lista.d19_4_3 +`</td>
+            <td>`+ lista.d19_5_3 +`</td>
+            <td>`+ lista.d19_6_3 +`</td>
+            <td>`+ lista.d19_7_3 +`</td>
+        </tr>`;}
+if ( lista.d19_1_4 || lista.d19_2_4 || lista.d19_3_4 || lista.d19_4_4 || lista.d19_5_4 || lista.d19_6_4 || lista.d19_7_4 ){
+html +=`<tr>
+            <td> MATERIALES E INSUMOS </td>
+            <td>`+ lista.d19_2_4 +`</td>
+            <td>`+ lista.d19_3_4 +`</td>
+            <td>`+ lista.d19_4_4 +`</td>
+            <td>`+ lista.d19_5_4 +`</td>
+            <td>`+ lista.d19_6_4 +`</td>
+            <td>`+ lista.d19_7_4 +`</td>
+        </tr>`;}
+if ( lista.d19_1_5 || lista.d19_2_5 || lista.d19_3_5 || lista.d19_4_5 || lista.d19_5_5 || lista.d19_6_5 || lista.d19_7_5 ){
+html +=`<tr>
+            <td> RECURSOS HUMANOS </td>
+            <td>`+ lista.d19_2_5 +`</td>
+            <td>`+ lista.d19_3_5 +`</td>
+            <td>`+ lista.d19_4_5 +`</td>
+            <td>`+ lista.d19_5_5 +`</td>
+            <td>`+ lista.d19_6_5 +`</td>
+            <td>`+ lista.d19_7_5 +`</td>
+        </tr>`;}
+if ( lista.d19_1_5 || lista.d19_2_5 || lista.d19_3_5 || lista.d19_4_5 || lista.d19_5_5 || lista.d19_6_5 || lista.d19_7_5 ){
+html +=`<tr>
+            <td> SERVICIOS DE TERCEROS </td>
+            <td>`+ lista.d19_2_5 +`</td>
+            <td>`+ lista.d19_3_5 +`</td>
+            <td>`+ lista.d19_4_5 +`</td>
+            <td>`+ lista.d19_5_5 +`</td>
+            <td>`+ lista.d19_6_5 +`</td>
+            <td>`+ lista.d19_7_5 +`</td>
+        </tr>`;}
+if ( lista.d19_1_5 || lista.d19_2_5 || lista.d19_3_5 || lista.d19_4_5 || lista.d19_5_5 || lista.d19_6_5 || lista.d19_7_5 ){
+html +=`<tr>
+            <td> PASAJES Y VIATICOS </td>
             <td>`+ lista.d19_2_5 +`</td>
             <td>`+ lista.d19_3_5 +`</td>
             <td>`+ lista.d19_4_5 +`</td>

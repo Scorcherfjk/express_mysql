@@ -1,3 +1,4 @@
+use unjfsc;
 DELETE FROM entidades_participantes;
 DELETE FROM proyecto;
 DELETE FROM datos_generales;
