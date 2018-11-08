@@ -27,6 +27,11 @@ router.get('/register', function(req, res, next) {
     res.render('register', { title: 'Registro de usuario' });
 });
 
+/*** LISTO ***/
+router.get('/registrado', function(req, res, next) {
+    res.render('registrado', { title: 'usuario registrado' });
+});
+
 /*** LISTO NO MODIFICADO ***/
 router.get('/inicio' ,function(req, res, next) {
     if(req.session.user){
@@ -357,7 +362,7 @@ router.post("/validation/new-user", function (req,res) {
                 console.log(req.session.user);
                 res.redirect("/");
             } else {
-                res.redirect('/inicio');
+                res.redirect('/registrado');
             }
         });
         con.end();
