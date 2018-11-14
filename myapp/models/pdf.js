@@ -62,7 +62,7 @@ exports.pdf = (lista) => {
 </style>
 </head>`;
 
-html += `<body><img src="http://127.0.0.1:3000/images/presentacion_udep.png" alt="logo de la universidad">
+html += `<body><img src="http://127.0.0.1:3000/images/presentacion_unalm.png" alt="logo de la universidad">
 <h2 class="centrado">FORMATO DEL PROYECTO</h2>
 <h3 class="centrado"> `+   fecha(hoy)  +`  </h3>
 <hr>
@@ -1961,8 +1961,22 @@ html +=`<tr>
         </tr>`;}
 html +=`</tbody>
 </table>
+<br>`;
 
-<h2>PRESUPUESTO</h2>
+var rnr_e_y_bd = parseFloat(lista.d11_9_1) + parseFloat(lista.d11_9_2) + parseFloat(lista.d11_9_3) + parseFloat(lista.d11_9_4) + parseFloat(lista.d11_9_5);
+var ea_e_y_bd = parseFloat(lista.d11_10_1) + parseFloat(lista.d11_10_2) + parseFloat(lista.d11_10_3) + parseFloat(lista.d11_10_4) + parseFloat(lista.d11_10_5);
+var es_e_y_bd = null;
+var eano_e_y_bd = lista.d11_11_1 + lista.d11_11_2 + lista.d11_11_3 + lista.d11_11_4 + lista.d11_11_5;
+var esno_e_y_bd = null;
+
+var rnr_consul = lista.d11_7_1 + lista.d11_7_2 + lista.d11_7_3 + lista.d11_7_4 + lista.d11_7_5;
+var ea_consul = lista.d11_8_1 + lista.d11_8_2 + lista.d11_8_3 + lista.d11_8_4 + lista.d11_8_5;
+var es_consul = null;
+var eano_consul = lista.d11_9_1 + lista.d11_11_2 + lista.d11_9_3 + lista.d11_9_4 + lista.d11_9_5;
+var esno_consul = null;
+
+
+html +=`<h2>PRESUPUESTO</h2>
 <br>
 <table border="1">
     <thead>
@@ -1977,39 +1991,38 @@ html +=`</tbody>
             <th>% de Aporte</th>
         </tr>
     </thead>
-    <tbody>`;
-if ( lista.d19_1_1 || lista.d19_2_1 || lista.d19_3_1 || lista.d19_4_1 || lista.d19_5_1 || lista.d19_6_1 || lista.d19_7_1 ){
-html +=`<tr>
+    <tbody>
+    <tr>
             <td> CONSULTORIAS </td>
-            <td>`+ lista.d19_2_1 +`</td>
-            <td>`+ lista.d19_3_1 +`</td>
-            <td>`+ lista.d19_4_1 +`</td>
-            <td>`+ lista.d19_5_1 +`</td>
-            <td>`+ lista.d19_6_1 +`</td>
+            <td>`+ rnr_consul +`</td>
+            <td>`+ ea_consul +`</td>
+            <td>`+ es_consul +`</td>
+            <td>`+ eano_consul +`</td>
+            <td>`+ esno_consul +`</td>
+            <td>`+ parseFloat(rnr_consul) + parseFloat(ea_consul) + parseFloat(es_consul) + parseFloat(eano_consul) + parseFloat(esno_consul) +`</td>
             <td>`+ lista.d19_7_1 +`</td>
-        </tr>`;}
-if ( lista.d19_1_2 || lista.d19_2_2 || lista.d19_3_2 || lista.d19_4_2 || lista.d19_5_2 || lista.d19_6_2 || lista.d19_7_2 ){
-html +=`<tr>
+        </tr>
+        <tr>
             <td> EQUIPOS Y BIENES DURADEROS </td>
-            <td>`+ lista.d19_2_2 +`</td>
-            <td>`+ lista.d19_3_2 +`</td>
-            <td>`+ lista.d19_4_2 +`</td>
-            <td>`+ lista.d19_5_2 +`</td>
-            <td>`+ lista.d19_6_2 +`</td>
-            <td>`+ lista.d19_7_2 +`</td>
-        </tr>`;}
-if ( lista.d19_1_3 || lista.d19_2_3 || lista.d19_3_3 || lista.d19_4_3 || lista.d19_5_3 || lista.d19_6_3 || lista.d19_7_3 ){
-html +=`<tr>
-            <td> GASTOA DE GESTION </td>
+            <td>`+ rnr_e_y_bd +`</td>
+            <td>`+ ea_e_y_bd +`</td>
+            <td>`+ es_e_y_bd +`</td>
+            <td>`+ eano_e_y_bd +`</td>
+            <td>`+ esno_e_y_bd +`</td>
+            <td>`+ rnr_e_y_bd + ea_e_y_bd + es_e_y_bd + eano_e_y_bd + esno_e_y_bd +`</td>
+            <td>`+ lista.d19_7_1 +`</td>
+        </tr>
+        <tr>
+        <td> GASTOS DE GESTION </td>
             <td>`+ lista.d19_2_3 +`</td>
             <td>`+ lista.d19_3_3 +`</td>
             <td>`+ lista.d19_4_3 +`</td>
             <td>`+ lista.d19_5_3 +`</td>
             <td>`+ lista.d19_6_3 +`</td>
             <td>`+ lista.d19_7_3 +`</td>
-        </tr>`;}
-if ( lista.d19_1_4 || lista.d19_2_4 || lista.d19_3_4 || lista.d19_4_4 || lista.d19_5_4 || lista.d19_6_4 || lista.d19_7_4 ){
-html +=`<tr>
+            <td>`+ lista.d19_7_1 +`</td>
+        </tr>
+        <tr>
             <td> MATERIALES E INSUMOS </td>
             <td>`+ lista.d19_2_4 +`</td>
             <td>`+ lista.d19_3_4 +`</td>
@@ -2017,9 +2030,9 @@ html +=`<tr>
             <td>`+ lista.d19_5_4 +`</td>
             <td>`+ lista.d19_6_4 +`</td>
             <td>`+ lista.d19_7_4 +`</td>
-        </tr>`;}
-if ( lista.d19_1_5 || lista.d19_2_5 || lista.d19_3_5 || lista.d19_4_5 || lista.d19_5_5 || lista.d19_6_5 || lista.d19_7_5 ){
-html +=`<tr>
+            <td>`+ lista.d19_7_1 +`</td>
+        </tr>
+        <tr>
             <td> RECURSOS HUMANOS </td>
             <td>`+ lista.d19_2_5 +`</td>
             <td>`+ lista.d19_3_5 +`</td>
@@ -2027,9 +2040,9 @@ html +=`<tr>
             <td>`+ lista.d19_5_5 +`</td>
             <td>`+ lista.d19_6_5 +`</td>
             <td>`+ lista.d19_7_5 +`</td>
-        </tr>`;}
-if ( lista.d19_1_5 || lista.d19_2_5 || lista.d19_3_5 || lista.d19_4_5 || lista.d19_5_5 || lista.d19_6_5 || lista.d19_7_5 ){
-html +=`<tr>
+            <td>`+ lista.d19_7_1 +`</td>
+        </tr>
+        <tr>
             <td> SERVICIOS DE TERCEROS </td>
             <td>`+ lista.d19_2_5 +`</td>
             <td>`+ lista.d19_3_5 +`</td>
@@ -2037,9 +2050,9 @@ html +=`<tr>
             <td>`+ lista.d19_5_5 +`</td>
             <td>`+ lista.d19_6_5 +`</td>
             <td>`+ lista.d19_7_5 +`</td>
-        </tr>`;}
-if ( lista.d19_1_5 || lista.d19_2_5 || lista.d19_3_5 || lista.d19_4_5 || lista.d19_5_5 || lista.d19_6_5 || lista.d19_7_5 ){
-html +=`<tr>
+            <td>`+ lista.d19_7_1 +`</td>
+        </tr>
+        <tr>
             <td> PASAJES Y VIATICOS </td>
             <td>`+ lista.d19_2_5 +`</td>
             <td>`+ lista.d19_3_5 +`</td>
@@ -2047,8 +2060,9 @@ html +=`<tr>
             <td>`+ lista.d19_5_5 +`</td>
             <td>`+ lista.d19_6_5 +`</td>
             <td>`+ lista.d19_7_5 +`</td>
-        </tr>`;}
-html +=`</tbody>
+            <td>`+ lista.d19_7_1 +`</td>
+        </tr>
+        </tbody>
 </table>
 </body>
 </html>`;

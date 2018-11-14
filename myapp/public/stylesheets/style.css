@@ -2,15 +2,16 @@
 
   unjfsc #016FC6
   udep #00497E 
+  unalm #155C8F
   
   */
 
 .nav-tabs .nav-link{
-  background-color: #00497E;
+  background-color: #155C8F;
   color: #ffffff;
 }
 .bg-danger, .btn-primary {
-  background-color: #00497E!important;
+  background-color: #155C8F!important;
 }
 thead{
   font-size: 0.7em;
@@ -31,7 +32,7 @@ tbody{
 .nav-pills .nav-link.active,
 .show>.nav-pills .nav-link{
   color: #fff!important;
-  background: #00497E!important;
+  background: #155C8F!important;
     
 }
 #fondo {
